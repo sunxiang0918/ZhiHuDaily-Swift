@@ -14,11 +14,13 @@
 @property (nonatomic,strong) UIImageView *fromImageView;
 @property (nonatomic,strong) UIImageView *toImageView;
 @property (nonatomic,strong) UIImageView *maskImageView;
+@property (nonatomic,strong) UILabel * sourceLabel;
 
 @end
 
 @implementation KCLaunchImageViewController
 @synthesize myImage = _myImage;
+@synthesize sourceLabel = _sourceLabel;
 
 + (instancetype)addTransitionToViewController:(id)viewController
                          modalTransitionStyle:(UIModalTransitionStyle)theStyle
@@ -28,6 +30,19 @@
     return [[self alloc] initWithViewController:viewController
                            modalTransitionStyle:theStyle
                                           image:imageName
+                                      taskBlock:block];
+}
+
++ (instancetype)addTransitionToViewController:(id)viewController
+                         modalTransitionStyle:(UIModalTransitionStyle)theStyle
+                                withImageData:(UIImage *)image
+                                withSourceName:(NSString *)name
+                                    taskBlock:(void (^)(void))block
+{
+    return [[self alloc] initWithViewController:viewController
+                           modalTransitionStyle:theStyle
+                                          imageData:image
+                                          sourceName:name
                                       taskBlock:block];
 }
 
@@ -41,6 +56,28 @@
     if (self) {
         [viewController setModalTransitionStyle:theStyle];
         self.myImage = [UIImage imageNamed:imageName];
+        self.viewController = viewController;
+        block();
+    }
+    return self;
+}
+
+- (instancetype)initWithViewController:(id)viewController
+                  modalTransitionStyle:(UIModalTransitionStyle)theStyle
+                                 imageData:(UIImage *)image
+                                 sourceName:(NSString *)name
+                             taskBlock:(void (^)(void))block
+
+{
+    self = [super init];
+    if (self) {
+        [viewController setModalTransitionStyle:theStyle];
+        self.myImage = image;
+        self.sourceLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 620, 300, 50)];
+        self.sourceLabel.text = name;
+        self.sourceLabel.textColor = [UIColor whiteColor];
+        self.sourceLabel.backgroundColor = [UIColor clearColor];
+        
         self.viewController = viewController;
         block();
     }
@@ -73,6 +110,8 @@
     self.fromImageView.image = [UIImage imageNamed:@"FakeLaunchImage"];
     [self.view addSubview:self.fromImageView];
     
+    [self.view insertSubview:self.sourceLabel aboveSubview:self.fromImageView];
+    
     self.maskImageView.image = [UIImage imageNamed:@"MaskImage"];
     [self.view insertSubview:self.maskImageView belowSubview:self.fromImageView];
     
@@ -83,6 +122,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:4];
+    [self.sourceLabel setAlpha:0.0f];
+    [UIView commitAnimations];
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:TRANSITION_DURATION];

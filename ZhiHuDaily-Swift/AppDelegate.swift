@@ -8,25 +8,61 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
+import Haneke
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    //获取开始图片的URL
+    let url = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
+    
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //获取到原来的根视图的Controller
         let target = self.window?.rootViewController
-
-        //修改窗体的根视图的Controller为启动Image的Controller.
-        //这里使用了KCLaunchImageViewController框架, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.taskBlock表示的是动画结束后的回调动作
-        self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target, modalTransitionStyle:UIModalTransitionStyle.CrossDissolve, withImage: "DisplayImage", taskBlock: { () -> Void in
+        
+        //同步加载开始图片
+        loadStartImage(url, onSuccess: {(name,image) in
+            //回调闭包
+            //修改窗体的根视图的Controller为启动Image的Controller.
+            //这里使用了KCLaunchImageViewController框架, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.taskBlock表示的是动画结束后的回调动作
+            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target, modalTransitionStyle:UIModalTransitionStyle.CrossDissolve, withImageData: image,withSourceName:name, taskBlock: { () -> Void in
                 //这里不需要什么回调动作.空实现
+            })
         })
-
+        
         return true
+    }
+    
+    func loadStartImage(url:String,onSuccess:(String,UIImage)->Void){
+        //同步调用URL,获取开始图片的JSON结果
+        var data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: url)!), returningResponse: nil, error: nil)
+        
+        if let temp = data {
+            //把结果NSData 转换成JSON
+            let json = JSON(data:temp)
+            //获取结果中得img,也就是真正的图片的URL
+            let imageUrl = json["img"].string
+            //获取版权人
+            let name = json["text"].string
+            
+            if  var iu = imageUrl {
+                //获取图片的NSData
+                data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
+                
+                if var d  = data {
+                    //把NSData转换成必要的UIImage对象
+                    let image = UIImage(data: d)
+                    
+                    //调用成功的回调
+                    onSuccess(name!,image!)
+                }
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
