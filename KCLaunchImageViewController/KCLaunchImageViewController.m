@@ -73,9 +73,19 @@
     if (self) {
         [viewController setModalTransitionStyle:theStyle];
         self.myImage = image;
-        self.sourceLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 620, 300, 50)];
+        
+        //获取目标viewController,也就是屏幕的大小
+        CGRect rect = ((UIViewController *)viewController).view.frame;
+
+        //通过屏幕的大小,计算出sourceLabel的大小与位置
+        self.sourceLabel = [[UILabel alloc] initWithFrame:CGRectMake((rect.size.width-200)/2, (rect.size.height-50), 200, 50)];
+        //设置显示值
         self.sourceLabel.text = name;
+        //设置文字水平居中
+        self.sourceLabel.textAlignment = NSTextAlignmentCenter;
+        //设置文字的颜色为白色
         self.sourceLabel.textColor = [UIColor whiteColor];
+        //设置背景透明
         self.sourceLabel.backgroundColor = [UIColor clearColor];
         
         self.viewController = viewController;
@@ -124,7 +134,7 @@
     [super viewDidAppear:animated];
     
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:4];
+    [UIView setAnimationDuration:6];
     [self.sourceLabel setAlpha:0.0f];
     [UIView commitAnimations];
     
