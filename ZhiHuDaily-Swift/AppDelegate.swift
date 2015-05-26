@@ -17,7 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // Override point for customization after application launch.
+        //获取到原来的根视图的Controller
+        let target = self.window?.rootViewController
+
+        //修改窗体的根视图的Controller为启动Image的Controller.
+        //这里使用了KCLaunchImageViewController框架, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.taskBlock表示的是动画结束后的回调动作
+        self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target, modalTransitionStyle:UIModalTransitionStyle.CrossDissolve, withImage: "DisplayImage", taskBlock: { () -> Void in
+                //这里不需要什么回调动作.空实现
+        })
+
         return true
     }
 
