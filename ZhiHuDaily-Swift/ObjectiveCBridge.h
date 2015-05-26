@@ -7,6 +7,7 @@
 //
 
 #import "KCLaunchImageViewController.h"
+#import "PKRevealController.h"
 
 #ifndef ZhiHuDaily_Swift_ObjectiveCBridge_h
 #define ZhiHuDaily_Swift_ObjectiveCBridge_h

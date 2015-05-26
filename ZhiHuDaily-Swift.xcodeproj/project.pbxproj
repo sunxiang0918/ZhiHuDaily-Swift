@@ -16,6 +16,17 @@
 		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
 		A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F121B1494A100E041C4 /* HttpControl.swift */; };
+		A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F141B14C71C00E041C4 /* SlideScrollView.swift */; };
+		A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */; };
+		A4939FC41B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA81B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m */; };
+		A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FAA1B14D66800E041C4 /* NSObject+PKBlocks.m */; };
+		A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FAC1B14D66800E041C4 /* UIViewController+PKRevealController.m */; };
+		A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FAF1B14D66800E041C4 /* PKRevealControllerView.m */; };
+		A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FB41B14D66800E041C4 /* PKAnimation.m */; };
+		A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FB61B14D66800E041C4 /* PKLayerAnimator.m */; };
+		A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FB81B14D66800E041C4 /* PKSequentialAnimation.m */; };
+		A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBB1B14D66800E041C4 /* PKLog.m */; };
+		A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBF1B14D66800E041C4 /* PKRevealController.m */; };
 		A4FB843E1B147D2E00603073 /* KCLaunchImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FB843D1B147D2E00603073 /* KCLaunchImageViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +37,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A432D3191B147B9F006D2B0E;
 			remoteInfo = "ZhiHuDaily-Swift";
+		};
+		A4939FCE1B14D66800E041C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F9621E7B1815246000469E41;
+			remoteInfo = PKRevealController;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -44,6 +62,30 @@
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
 		A4939F121B1494A100E041C4 /* HttpControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpControl.swift; sourceTree = "<group>"; };
+		A4939F141B14C71C00E041C4 /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
+		A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
+		A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+PKIdentifier.m"; sourceTree = "<group>"; };
+		A4939FA71B14D66800E041C4 /* CALayer+PKConvenienceAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+PKConvenienceAnimations.h"; sourceTree = "<group>"; };
+		A4939FA81B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+PKConvenienceAnimations.m"; sourceTree = "<group>"; };
+		A4939FA91B14D66800E041C4 /* NSObject+PKBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PKBlocks.h"; sourceTree = "<group>"; };
+		A4939FAA1B14D66800E041C4 /* NSObject+PKBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PKBlocks.m"; sourceTree = "<group>"; };
+		A4939FAB1B14D66800E041C4 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
+		A4939FAC1B14D66800E041C4 /* UIViewController+PKRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PKRevealController.m"; sourceTree = "<group>"; };
+		A4939FAE1B14D66800E041C4 /* PKRevealControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRevealControllerView.h; sourceTree = "<group>"; };
+		A4939FAF1B14D66800E041C4 /* PKRevealControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRevealControllerView.m; sourceTree = "<group>"; };
+		A4939FB21B14D66800E041C4 /* PKAnimating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAnimating.h; sourceTree = "<group>"; };
+		A4939FB31B14D66800E041C4 /* PKAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAnimation.h; sourceTree = "<group>"; };
+		A4939FB41B14D66800E041C4 /* PKAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAnimation.m; sourceTree = "<group>"; };
+		A4939FB51B14D66800E041C4 /* PKLayerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKLayerAnimator.h; sourceTree = "<group>"; };
+		A4939FB61B14D66800E041C4 /* PKLayerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKLayerAnimator.m; sourceTree = "<group>"; };
+		A4939FB71B14D66800E041C4 /* PKSequentialAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSequentialAnimation.h; sourceTree = "<group>"; };
+		A4939FB81B14D66800E041C4 /* PKSequentialAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSequentialAnimation.m; sourceTree = "<group>"; };
+		A4939FBA1B14D66800E041C4 /* PKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKLog.h; sourceTree = "<group>"; };
+		A4939FBB1B14D66800E041C4 /* PKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKLog.m; sourceTree = "<group>"; };
+		A4939FBD1B14D66800E041C4 /* PKRevealController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKRevealController-Prefix.pch"; sourceTree = "<group>"; };
+		A4939FBE1B14D66800E041C4 /* PKRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRevealController.h; sourceTree = "<group>"; };
+		A4939FBF1B14D66800E041C4 /* PKRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRevealController.m; sourceTree = "<group>"; };
+		A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PKRevealController.xcodeproj; sourceTree = "<group>"; };
 		A4FB843C1B147D2E00603073 /* KCLaunchImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCLaunchImageViewController.h; sourceTree = "<group>"; };
 		A4FB843D1B147D2E00603073 /* KCLaunchImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCLaunchImageViewController.m; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
@@ -151,9 +193,104 @@
 		A4939F111B14947500E041C4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		A4939FA21B14D66800E041C4 /* PKRevealController */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FA31B14D66800E041C4 /* PKRevealController */,
+				A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */,
+			);
+			path = PKRevealController;
+			sourceTree = "<group>";
+		};
+		A4939FA31B14D66800E041C4 /* PKRevealController */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FA41B14D66800E041C4 /* Categories */,
+				A4939FAD1B14D66800E041C4 /* Classes */,
+				A4939FB01B14D66800E041C4 /* Modules */,
+				A4939FBC1B14D66800E041C4 /* Other Sources */,
+				A4939FBE1B14D66800E041C4 /* PKRevealController.h */,
+				A4939FBF1B14D66800E041C4 /* PKRevealController.m */,
+			);
+			path = PKRevealController;
+			sourceTree = "<group>";
+		};
+		A4939FA41B14D66800E041C4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */,
+				A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */,
+				A4939FA71B14D66800E041C4 /* CALayer+PKConvenienceAnimations.h */,
+				A4939FA81B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m */,
+				A4939FA91B14D66800E041C4 /* NSObject+PKBlocks.h */,
+				A4939FAA1B14D66800E041C4 /* NSObject+PKBlocks.m */,
+				A4939FAB1B14D66800E041C4 /* UIViewController+PKRevealController.h */,
+				A4939FAC1B14D66800E041C4 /* UIViewController+PKRevealController.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		A4939FAD1B14D66800E041C4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FAE1B14D66800E041C4 /* PKRevealControllerView.h */,
+				A4939FAF1B14D66800E041C4 /* PKRevealControllerView.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A4939FB01B14D66800E041C4 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FB11B14D66800E041C4 /* PKLayerAnimator */,
+				A4939FB91B14D66800E041C4 /* PKLog */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A4939FB11B14D66800E041C4 /* PKLayerAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FB21B14D66800E041C4 /* PKAnimating.h */,
+				A4939FB31B14D66800E041C4 /* PKAnimation.h */,
+				A4939FB41B14D66800E041C4 /* PKAnimation.m */,
+				A4939FB51B14D66800E041C4 /* PKLayerAnimator.h */,
+				A4939FB61B14D66800E041C4 /* PKLayerAnimator.m */,
+				A4939FB71B14D66800E041C4 /* PKSequentialAnimation.h */,
+				A4939FB81B14D66800E041C4 /* PKSequentialAnimation.m */,
+			);
+			path = PKLayerAnimator;
+			sourceTree = "<group>";
+		};
+		A4939FB91B14D66800E041C4 /* PKLog */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FBA1B14D66800E041C4 /* PKLog.h */,
+				A4939FBB1B14D66800E041C4 /* PKLog.m */,
+			);
+			path = PKLog;
+			sourceTree = "<group>";
+		};
+		A4939FBC1B14D66800E041C4 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FBD1B14D66800E041C4 /* PKRevealController-Prefix.pch */,
+			);
+			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		A4939FC11B14D66800E041C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4939FCF1B14D66800E041C4 /* libPKRevealController.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A4FB843B1B147D2E00603073 /* KCLaunchImageViewController */ = {
@@ -168,6 +305,7 @@
 		A4FB843F1B147D4700603073 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				A4939FA21B14D66800E041C4 /* PKRevealController */,
 				A4FB843B1B147D2E00603073 /* KCLaunchImageViewController */,
 			);
 			name = FrameWorks;
@@ -243,6 +381,12 @@
 			mainGroup = A432D3111B147B9F006D2B0E;
 			productRefGroup = A432D31B1B147B9F006D2B0E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A4939FC11B14D66800E041C4 /* Products */;
+					ProjectRef = A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A432D3191B147B9F006D2B0E /* ZhiHuDaily-Swift */,
@@ -250,6 +394,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A4939FCF1B14D66800E041C4 /* libPKRevealController.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPKRevealController.a;
+			remoteRef = A4939FCE1B14D66800E041C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A432D3181B147B9F006D2B0E /* Resources */ = {
@@ -324,11 +478,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
+				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
+				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
+				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
+				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,
+				A4939FC41B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m in Sources */,
 				A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */,
 				A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */,
+				A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */,
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
+				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4FB843E1B147D2E00603073 /* KCLaunchImageViewController.m in Sources */,
+				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
+				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
+				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
