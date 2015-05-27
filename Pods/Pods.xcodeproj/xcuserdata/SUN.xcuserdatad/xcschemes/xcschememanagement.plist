@@ -8,49 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>32D0CDB7A70FBBC74DBD69CA</key>
+		<key>8EC313CE1D0A250C8ED7B8D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9ECA5557075B136AC3D59BA9</key>
+		<key>A4E2159DB45BCA9F0D3D32D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC61A27476022D88DA93C0A9</key>
+		<key>C8A910E7E09CB4F198284B86</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7DC9C81492EB1BBFB367A01</key>
+		<key>D1C8CE4C40A5354397E81BB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

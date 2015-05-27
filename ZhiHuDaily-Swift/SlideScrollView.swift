@@ -62,7 +62,8 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             imgView.frame = CGRect(origin: CGPoint(x: viewWidth,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
 
-            imgView.hnk_setImageFromURL(NSURL(string: imgURL)!, placeholder: UIImage(named: "avatar.png"))
+//            imgView.hnk_setImageFromURL(NSURL(string: imgURL)!, placeholder: UIImage(named: "avatar.png"))
+            imgView.hnk_setImageFromURL(NSURL(string: imgURL)!)
             
             imgView.contentMode = UIViewContentMode.ScaleToFill
             imgView.userInteractionEnabled = true

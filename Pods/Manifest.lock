@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (1.2.0)
-  - HanekeSwift (0.9.1)
+  - HanekeSwift (0.9.1.1)
   - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
@@ -10,7 +10,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: d765c5c1713aa64106b0228aaa600a1e6851f68d
-  HanekeSwift: c7772774db743ef11be67db026bc59baf6bc4aaa
+  HanekeSwift: 40dc1993e03a4c0dde599e7426c0c05dd82624b4
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.36.3

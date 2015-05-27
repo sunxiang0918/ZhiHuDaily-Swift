@@ -51,16 +51,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let name = json["text"].string
             
             if  var iu = imageUrl {
-                //获取图片的NSData
-                data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
                 
-                if var d  = data {
-                    //把NSData转换成必要的UIImage对象
-                    let image = UIImage(data: d)
-                    
+                //这个使用的是异步加载的,所以界面可能就会有闪烁
+                let imageCache=Shared.imageCache
+                imageCache.fetch(URL: NSURL(string: iu)!,success: {image in
                     //调用成功的回调
-                    onSuccess(name!,image!)
-                }
+                    onSuccess(name!,image)
+                })
+                
+                //这个是同步加载的,所以界面不会有闪烁
+//                //获取图片的NSData
+//                data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
+//                
+//                if var d  = data {
+//                    //把NSData转换成必要的UIImage对象
+//                    let image = UIImage(data: d)
+//                    
+//                    //调用成功的回调
+//                    onSuccess(name!,image!)
+//                }
             }
         }
     }

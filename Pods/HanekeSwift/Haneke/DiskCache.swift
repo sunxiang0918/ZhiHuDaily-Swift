@@ -21,6 +21,8 @@ public class DiskCache {
     public let path : String
 
     public var size : UInt64 = 0
+    
+    public var fileCount : UInt64 = 0
 
     public var capacity : UInt64 = 0 {
         didSet {
@@ -121,14 +123,16 @@ public class DiskCache {
     
     // MARK: Private
     
-    private func calculateSize() {
+    public func calculateSize() {
         let fileManager = NSFileManager.defaultManager()
         size = 0
+        fileCount = 0
         let cachePath = self.path
         var error : NSError?
         if let contents = fileManager.contentsOfDirectoryAtPath(cachePath, error: &error) as? [String] {
             for pathComponent in contents {
                 let path = cachePath.stringByAppendingPathComponent(pathComponent)
+                fileCount++
                 if let attributes : NSDictionary = fileManager.attributesOfItemAtPath(path, error: &error) {
                     size += attributes.fileSize()
                 } else {
@@ -166,8 +170,10 @@ public class DiskCache {
         }
         if let attributes = previousAttributes {
             self.size -= attributes.fileSize()
+            self.fileCount--
         }
         self.size += UInt64(data.length)
+        self.fileCount++
         self.controlCapacity()
     }
     
@@ -189,6 +195,7 @@ public class DiskCache {
             let fileSize = attributes.fileSize()
             if fileManager.removeItemAtPath(path, error: &error) {
                 self.size -= fileSize
+                self.fileCount--
             } else {
                 Log.error("Failed to remove file", error)
             }
