@@ -17,7 +17,7 @@
 // This library does not follow semantic-versioning,
 // so we were not able to define version macros.
 // Please contact the author.
-// Version: 0.9.1.1.
+// Version: 0.9.1.2.
 
 // SwiftyJSON
 #define COCOAPODS_POD_AVAILABLE_SwiftyJSON

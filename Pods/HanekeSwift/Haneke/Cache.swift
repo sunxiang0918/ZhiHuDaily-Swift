@@ -75,6 +75,34 @@ public class Cache<T : DataConvertible where T.Result == T, T : DataRepresentabl
         }
     }
     
+    public func get(#key:String,formatName:String = HanekeGlobals.Cache.OriginalFormatName) -> T? {
+        
+        if let (format,memoryCache,diskCache) = self.formats[formatName] {
+            //  从内存缓存中查询是否存在
+            if  let wrapper = memoryCache.objectForKey(key) as? ObjectWrapper, let result = wrapper.value as? T {
+                diskCache.updateAccessDate(self.dataFromValue(result, format: format), key: key)
+                return result
+            }else{
+                // 说明不在内存缓存中,那么就在Disk缓存中查询
+                if let data = diskCache.getData(key) {
+                    var value = T.convertFromData(data)
+                    if let value = value {
+                        let descompressedValue = self.decompressedImageIfNeeded(value)
+                        
+                        let wrapper = ObjectWrapper(value: descompressedValue)
+                        memoryCache.setObject(wrapper, forKey: key)
+                        
+                        return descompressedValue
+                    }
+                }
+            }
+            return nil
+        }else{
+            //说明没有名为formatName的缓存
+            return nil
+        }
+    }
+    
     public func fetch(#key : String, formatName : String = HanekeGlobals.Cache.OriginalFormatName, failure fail : Fetch<T>.Failer? = nil, success succeed : Fetch<T>.Succeeder? = nil) -> Fetch<T> {
         let fetch = Cache.buildFetch(failure: fail, success: succeed)
         if let (format, memoryCache, diskCache) = self.formats[formatName] {

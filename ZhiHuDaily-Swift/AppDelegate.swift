@@ -54,22 +54,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 //这个使用的是异步加载的,所以界面可能就会有闪烁
                 let imageCache=Shared.imageCache
-                imageCache.fetch(URL: NSURL(string: iu)!,success: {image in
-                    //调用成功的回调
-                    onSuccess(name!,image)
-                })
                 
-                //这个是同步加载的,所以界面不会有闪烁
-//                //获取图片的NSData
-//                data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
-//                
-//                if var d  = data {
-//                    //把NSData转换成必要的UIImage对象
-//                    let image = UIImage(data: d)
-//                    
-//                    //调用成功的回调
-//                    onSuccess(name!,image!)
-//                }
+                if  let image = imageCache.get(key: iu) {
+                    //在缓存中找到了图片,直接返回
+                    onSuccess(name!,image)
+                }else{
+                    //在缓存中没有找到图片,那么就需要请求一次获取图片
+                    //这个是同步加载的,所以界面不会有闪烁
+                    //获取图片的NSData
+                    data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
+                    
+                    //把NSData转换成必要的UIImage对象
+                    if let d  = data, let image = UIImage(data: d) {
+                        //把图片放入缓存
+                        imageCache.set(value: image, key: iu)
+                        //调用成功的回调
+                        onSuccess(name!,image)
+                    }
+
+                }
+                
             }
         }
     }

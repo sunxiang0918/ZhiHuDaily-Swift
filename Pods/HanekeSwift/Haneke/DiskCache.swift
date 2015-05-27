@@ -57,6 +57,17 @@ public class DiskCache {
         })
     }
     
+    public func getData(key : String) -> NSData? {
+        let path = self.pathForKey(key)
+        var error : NSError? = nil
+        if let data = NSData(contentsOfFile: path, options: NSDataReadingOptions.allZeros, error: &error) {
+            return data
+        }else{
+            return nil
+        }
+        
+    }
+    
     public func fetchData(key : String, failure fail : ((NSError?) -> ())? = nil, success succeed : (NSData) -> ()) {
         dispatch_async(cacheQueue, {
             let path = self.pathForKey(key)
