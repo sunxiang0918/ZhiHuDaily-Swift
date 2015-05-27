@@ -151,6 +151,7 @@
 		A432D31C1B147B9F006D2B0E /* ZhiHuDaily-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				A4391E541B160EB500A27DA5 /* view */,
 				A4939F111B14947500E041C4 /* utils */,
 				A432D31F1B147B9F006D2B0E /* AppDelegate.swift */,
 				A432D3241B147B9F006D2B0E /* ViewController.swift */,
@@ -187,6 +188,13 @@
 				A432D3371B147B9F006D2B0E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4391E541B160EB500A27DA5 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		A4939F111B14947500E041C4 /* utils */ = {

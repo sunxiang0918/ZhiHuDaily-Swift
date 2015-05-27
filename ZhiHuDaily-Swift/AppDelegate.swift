@@ -22,15 +22,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        //获取到原来的根视图的Controller
-        let target = self.window?.rootViewController
+        //获取到原来的根视图的Controller作为主的Controller
+        let rightController = self.window?.rootViewController as! ViewController
+        
+        //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
+        let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as? UIViewController
+        
+        rightController.leftViewController = leftController
+        
+        //实例化一个PKRevealController 也就是能左右滑动的视图
+        let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         
         //同步加载开始图片
         loadStartImage(url, onSuccess: {(name,image) in
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
             //这里自定义了一个启动的ViewController, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.
-            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
+            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(revealController!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
             //UIModalTransitionStyle转场动画效果   CrossDissolve渐变  PartialCurl翻页  FlipHorizontal上下翻转  CoverVertical上下平移(默认值)
         })
         

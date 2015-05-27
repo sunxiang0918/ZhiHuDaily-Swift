@@ -5,6 +5,50 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="iKm-UA-PmI">
+            <objects>
+                <viewController storyboardIdentifier="leftViewController" id="JsO-fA-3ao" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lWt-gM-1Bd"/>
+                        <viewControllerLayoutGuide type="bottom" id="NFr-GS-1cR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o8c-hg-NNo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx0-Eq-aXV">
+                                <rect key="frame" x="16" y="130" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-Gi-vfP">
+                                <rect key="frame" x="16" y="168" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctO-Cf-w5x">
+                                <rect key="frame" x="16" y="206" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkP-6w-to9">
+                                <rect key="frame" x="16" y="244" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BXA-Ym-bAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="437" y="1314"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +60,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-GD-mHO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-GD-mHO">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -47,8 +91,31 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JMM-s6-3n1"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="showleftButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1o-V4-nDz">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="teA-35-2YJ"/>
+                                    <constraint firstAttribute="height" constant="30" id="tq1-SW-6mQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="≣">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLeftAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eki-08-gTK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7FM-MW-oQ4"/>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="DTj-BU-sw5"/>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="leading" secondItem="Z1o-V4-nDz" secondAttribute="trailing" constant="-62" id="KjO-iI-65A"/>
+                            <constraint firstAttribute="trailing" secondItem="zcx-GD-mHO" secondAttribute="trailing" id="Pvo-2y-lPd"/>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="YnA-mu-DIu"/>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="top" secondItem="Z1o-V4-nDz" secondAttribute="bottom" constant="-50" id="qT6-A7-NR1"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mainTableView" destination="zcx-GD-mHO" id="ERN-ZR-g3j"/>

@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
+    var leftViewController : UIViewController?
+    
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
     
@@ -41,6 +43,11 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }else {
             return 106
         }
+    }
+    
+    //显示左边界面
+    @IBAction func showLeftAction(sender: UIButton) {
+        self.revealController.showViewController(leftViewController!)
     }
     
     //配置tableView 的单元格
