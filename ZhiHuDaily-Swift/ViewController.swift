@@ -21,6 +21,15 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //初始化顶部左侧的按钮
+        let leftButton = UIBarButtonItem();
+        leftButton.title = "≣"
+        leftButton.tintColor = UIColor.whiteColor()
+        leftButton.style = UIBarButtonItemStyle.Plain
+        leftButton.target = self
+        leftButton.action = Selector("showLeftAction")
+        self.navigationItem.leftBarButtonItem = leftButton
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -46,7 +55,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     //显示左边界面
-    @IBAction func showLeftAction(sender: UIButton) {
+    func showLeftAction() {
         self.revealController.showViewController(leftViewController!)
     }
     

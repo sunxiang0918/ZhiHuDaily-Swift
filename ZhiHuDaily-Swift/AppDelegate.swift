@@ -23,7 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //获取到原来的根视图的Controller作为主的Controller
-        let rightController = self.window?.rootViewController as! ViewController
+        let navigationController = self.window?.rootViewController as! UINavigationController
+        
+        //使用UINavigationController.topViewController 可以获取最上面的视图Controller
+        let rightController = navigationController.topViewController as! ViewController
+        
         
         //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
         let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as? UIViewController
@@ -31,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rightController.leftViewController = leftController
         
         //实例化一个PKRevealController 也就是能左右滑动的视图
-        let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
+        let revealController = PKRevealController(frontViewController: navigationController, leftViewController: leftController)
         
         //同步加载开始图片
         loadStartImage(url, onSuccess: {(name,image) in
