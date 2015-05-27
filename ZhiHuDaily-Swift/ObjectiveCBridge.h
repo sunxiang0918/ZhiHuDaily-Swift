@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 SUN. All rights reserved.
 //
 
-#import "KCLaunchImageViewController.h"
 #import "PKRevealController.h"
 
 #ifndef ZhiHuDaily_Swift_ObjectiveCBridge_h

@@ -16,7 +16,7 @@ import Haneke
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //获取开始图片的URL
-    let url = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
+    private let url = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
     
     var window: UIWindow?
 
@@ -29,15 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loadStartImage(url, onSuccess: {(name,image) in
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
-            //这里使用了KCLaunchImageViewController框架, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.taskBlock表示的是动画结束后的回调动作
-            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target, modalTransitionStyle:UIModalTransitionStyle.CrossDissolve, withImageData: image,withSourceName:name, taskBlock: { () -> Void in
-                //这里不需要什么回调动作.空实现
-            })
+            //这里自定义了一个启动的ViewController, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.
+            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(target!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
+            //UIModalTransitionStyle转场动画效果   CrossDissolve渐变  PartialCurl翻页  FlipHorizontal上下翻转  CoverVertical上下平移(默认值)
         })
         
         return true
     }
     
+    //从网络上加载开始图片
     func loadStartImage(url:String,onSuccess:(String,UIImage)->Void){
         //同步调用URL,获取开始图片的JSON结果
         var data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: url)!), returningResponse: nil, error: nil)

@@ -27,7 +27,7 @@
 		A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FB81B14D66800E041C4 /* PKSequentialAnimation.m */; };
 		A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBB1B14D66800E041C4 /* PKLog.m */; };
 		A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBF1B14D66800E041C4 /* PKRevealController.m */; };
-		A4FB843E1B147D2E00603073 /* KCLaunchImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FB843D1B147D2E00603073 /* KCLaunchImageViewController.m */; };
+		A4939FD11B1553D400E041C4 /* KCLaunchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,8 +86,7 @@
 		A4939FBE1B14D66800E041C4 /* PKRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRevealController.h; sourceTree = "<group>"; };
 		A4939FBF1B14D66800E041C4 /* PKRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRevealController.m; sourceTree = "<group>"; };
 		A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PKRevealController.xcodeproj; sourceTree = "<group>"; };
-		A4FB843C1B147D2E00603073 /* KCLaunchImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCLaunchImageViewController.h; sourceTree = "<group>"; };
-		A4FB843D1B147D2E00603073 /* KCLaunchImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCLaunchImageViewController.m; sourceTree = "<group>"; };
+		A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCLaunchImageViewController.swift; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
 		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -195,6 +194,7 @@
 			children = (
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
+				A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -293,20 +293,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A4FB843B1B147D2E00603073 /* KCLaunchImageViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A4FB843C1B147D2E00603073 /* KCLaunchImageViewController.h */,
-				A4FB843D1B147D2E00603073 /* KCLaunchImageViewController.m */,
-			);
-			path = KCLaunchImageViewController;
-			sourceTree = "<group>";
-		};
 		A4FB843F1B147D4700603073 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
 				A4939FA21B14D66800E041C4 /* PKRevealController */,
-				A4FB843B1B147D2E00603073 /* KCLaunchImageViewController */,
 			);
 			name = FrameWorks;
 			sourceTree = "<group>";
@@ -478,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4939FD11B1553D400E041C4 /* KCLaunchImageViewController.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
@@ -490,7 +481,6 @@
 				A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */,
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
-				A4FB843E1B147D2E00603073 /* KCLaunchImageViewController.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
