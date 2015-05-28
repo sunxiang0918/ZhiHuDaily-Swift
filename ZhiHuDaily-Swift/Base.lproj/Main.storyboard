@@ -111,19 +111,38 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="n8L-Ci-DeQ">
+                                        <rect key="frame" x="244" y="19" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pa-d7-kOX" customClass="KYCircularProgress" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                                        <rect key="frame" x="244" y="19" width="20" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="1Kf-sb-cI8"/>
+                                            <constraint firstAttribute="width" constant="20" id="CK4-Xg-CzX"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="oOC-hQ-YWk" firstAttribute="top" secondItem="7Pa-d7-kOX" secondAttribute="bottom" constant="-27" id="05G-Ca-SVl"/>
+                                    <constraint firstItem="n8L-Ci-DeQ" firstAttribute="top" secondItem="TTY-oi-A98" secondAttribute="top" constant="19" id="3AM-ra-Y27"/>
+                                    <constraint firstItem="GbT-2d-zr6" firstAttribute="leading" secondItem="7Pa-d7-kOX" secondAttribute="trailing" constant="8" id="48w-B0-PuZ"/>
+                                    <constraint firstItem="GbT-2d-zr6" firstAttribute="leading" secondItem="n8L-Ci-DeQ" secondAttribute="trailing" constant="8" id="CqR-Mp-rXy"/>
                                     <constraint firstAttribute="bottom" secondItem="oOC-hQ-YWk" secondAttribute="bottom" constant="-2" id="JCf-7m-bQd"/>
                                     <constraint firstAttribute="bottom" secondItem="GbT-2d-zr6" secondAttribute="bottom" constant="5" id="OgE-KJ-q8I"/>
+                                    <constraint firstItem="7Pa-d7-kOX" firstAttribute="leading" secondItem="oOC-hQ-YWk" secondAttribute="trailing" constant="204" id="Pzw-t6-OPU"/>
                                     <constraint firstAttribute="centerX" secondItem="GbT-2d-zr6" secondAttribute="centerX" id="Tn2-sz-UMl"/>
                                     <constraint firstAttribute="centerY" secondItem="GbT-2d-zr6" secondAttribute="centerY" id="Z1s-Ax-4ME"/>
+                                    <constraint firstItem="7Pa-d7-kOX" firstAttribute="top" secondItem="TTY-oi-A98" secondAttribute="top" constant="19" id="eSE-dg-h0A"/>
                                     <constraint firstAttribute="height" constant="44" id="lBo-JQ-WFq"/>
                                     <constraint firstItem="oOC-hQ-YWk" firstAttribute="leading" secondItem="TTY-oi-A98" secondAttribute="leading" constant="10" id="zC2-Au-bnb"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="05G-Ca-SVl"/>
+                                        <exclude reference="Pzw-t6-OPU"/>
                                         <exclude reference="Z1s-Ax-4ME"/>
                                     </mask>
                                 </variation>
@@ -148,6 +167,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG"/>
                     <connections>
+                        <outlet property="arcProgressView" destination="7Pa-d7-kOX" id="2dF-vr-00l"/>
                         <outlet property="mainTableView" destination="zcx-GD-mHO" id="ERN-ZR-g3j"/>
                         <outlet property="titleView" destination="TTY-oi-A98" id="nJh-cW-Ugz"/>
                     </connections>

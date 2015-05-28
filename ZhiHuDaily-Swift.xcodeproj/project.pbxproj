@@ -15,6 +15,7 @@
 		A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A432D3291B147B9F006D2B0E /* Images.xcassets */; };
 		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
+		A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545721B176728001CC98F /* KYCircularProgress.swift */; };
 		A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F121B1494A100E041C4 /* HttpControl.swift */; };
 		A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F141B14C71C00E041C4 /* SlideScrollView.swift */; };
 		A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */; };
@@ -61,6 +62,7 @@
 		A432D3321B147B9F006D2B0E /* ZhiHuDaily-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZhiHuDaily-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
+		A48545721B176728001CC98F /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
 		A4939F121B1494A100E041C4 /* HttpControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpControl.swift; sourceTree = "<group>"; };
 		A4939F141B14C71C00E041C4 /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
 		A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		A4939F111B14947500E041C4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A48545721B176728001CC98F /* KYCircularProgress.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 			);
@@ -490,6 +493,7 @@
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
+				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);

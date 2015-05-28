@@ -20,11 +20,15 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var arcProgressView: KYCircularProgress!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        arcProgressView.lineWidth = 2.0
+        arcProgressView.colors = [0xFFFFFF,0xFFFFFF]
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,10 +40,37 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
+//            mainTableView.contentSize = CGSizeMake(375, 747)
+//            scrollView.contentInset.top = -80
+            println("\(scrollView.contentInset.top) \(scrollView.contentInset.bottom)")
+            if -Float(scrollView.contentOffset.y)>scrollHeight{
+                //表示到顶了,不能再让他滑动了
+//                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(scrollHeight)), animated: true)
+//                return
+            }
+            
             //只有是在上下滑动TableView的时候进行处理
             changeTitleViewAlpha(Float(scrollView.contentOffset.y))
             
+            //用来显示重新加载的进度条
+            showRefeshProgress(Float(scrollView.contentOffset.y))
+            
+//            println("\(scrollView)")
         }
+    }
+    
+    func showRefeshProgress(offsetY:Float){
+        
+        //计算出透明度
+        var result=(0-offsetY)/scrollHeight
+        
+        if result>1 {
+            result = 1.0
+        }else if result<0 {
+            result = 0.0
+        }
+        
+        arcProgressView.progress = Double(result)
     }
     
     //这部分是用来根据TableView的滑动来调整TitleView的透明度的
@@ -50,7 +81,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //计算出透明度
         var result =  offsetY/needY
         
-        if result>1{
+        if result>1 {
             result = 1.0
         }else if result<0 {
             result = 0.0
@@ -58,7 +89,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         //这里使用的是修改他得背景颜色的透明度来实现的.不直接使用titleView.alpha = CGFloat(result)是因为, 这样修改会导致这个View上面的所有的subView都会透明
         titleView.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: CGFloat(result))
-
+        
     }
     
     //================UITableViewDataSource的实现================================
