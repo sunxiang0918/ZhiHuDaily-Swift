@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ccf-iI-d12">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -48,22 +49,6 @@
             </objects>
             <point key="canvasLocation" x="627" y="1519"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Fox-0b-jA7">
-            <objects>
-                <navigationController id="ccf-iI-d12" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PKd-KO-TJa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="JhP-kn-Ebv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w6c-NQ-ZVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="27" y="807"/>
-        </scene>
         <!--今日热闻-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -89,7 +74,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oM3-Bu-11V">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RrP-CD-Xuo">
@@ -107,14 +92,59 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JMM-s6-3n1"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTY-oi-A98">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOC-hQ-YWk">
+                                        <rect key="frame" x="10" y="12" width="30" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="≣">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLeftButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Pc-rz-cOw"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日热闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbT-2d-zr6">
+                                        <rect key="frame" x="272" y="22" width="56" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18585021669999999" green="0.57548766220000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="oOC-hQ-YWk" secondAttribute="bottom" constant="-2" id="JCf-7m-bQd"/>
+                                    <constraint firstAttribute="bottom" secondItem="GbT-2d-zr6" secondAttribute="bottom" constant="5" id="OgE-KJ-q8I"/>
+                                    <constraint firstAttribute="centerX" secondItem="GbT-2d-zr6" secondAttribute="centerX" id="Tn2-sz-UMl"/>
+                                    <constraint firstAttribute="centerY" secondItem="GbT-2d-zr6" secondAttribute="centerY" id="Z1s-Ax-4ME"/>
+                                    <constraint firstAttribute="height" constant="44" id="lBo-JQ-WFq"/>
+                                    <constraint firstItem="oOC-hQ-YWk" firstAttribute="leading" secondItem="TTY-oi-A98" secondAttribute="leading" constant="10" id="zC2-Au-bnb"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Z1s-Ax-4ME"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="TTY-oi-A98" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="4Kt-UI-QY1"/>
+                            <constraint firstItem="TTY-oi-A98" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="54b-5k-huC"/>
                             <constraint firstItem="zcx-GD-mHO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7FM-MW-oQ4"/>
                             <constraint firstItem="zcx-GD-mHO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="DTj-BU-sw5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TTY-oi-A98" secondAttribute="trailing" constant="-16" id="Ic3-8s-1Ka"/>
                             <constraint firstAttribute="trailing" secondItem="zcx-GD-mHO" secondAttribute="trailing" id="Pvo-2y-lPd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TTY-oi-A98" secondAttribute="bottom" constant="556" id="Wuv-YV-zWA"/>
                             <constraint firstItem="zcx-GD-mHO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="YnA-mu-DIu"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Wuv-YV-zWA"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG"/>
                     <connections>
@@ -123,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="787"/>
+            <point key="canvasLocation" x="575" y="803"/>
         </scene>
     </scenes>
 </document>
