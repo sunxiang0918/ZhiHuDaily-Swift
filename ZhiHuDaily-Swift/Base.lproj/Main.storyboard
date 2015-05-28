@@ -62,7 +62,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-GD-mHO">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="-80" width="600" height="680"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelViewCell" textLabel="oM3-Bu-11V" detailTextLabel="RrP-CD-Xuo" style="IBUITableViewCellStyleValue1" id="TrZ-lC-eMk">
@@ -92,7 +92,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JMM-s6-3n1"/>
                                 </connections>
                             </tableView>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTY-oi-A98">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTY-oi-A98">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOC-hQ-YWk">
@@ -112,7 +112,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.18585021669999999" green="0.57548766220000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="oOC-hQ-YWk" secondAttribute="bottom" constant="-2" id="JCf-7m-bQd"/>
@@ -134,7 +134,7 @@
                             <constraint firstItem="TTY-oi-A98" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="4Kt-UI-QY1"/>
                             <constraint firstItem="TTY-oi-A98" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="54b-5k-huC"/>
                             <constraint firstItem="zcx-GD-mHO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7FM-MW-oQ4"/>
-                            <constraint firstItem="zcx-GD-mHO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="DTj-BU-sw5"/>
+                            <constraint firstItem="zcx-GD-mHO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-80" id="DTj-BU-sw5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TTY-oi-A98" secondAttribute="trailing" constant="-16" id="Ic3-8s-1Ka"/>
                             <constraint firstAttribute="trailing" secondItem="zcx-GD-mHO" secondAttribute="trailing" id="Pvo-2y-lPd"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TTY-oi-A98" secondAttribute="bottom" constant="556" id="Wuv-YV-zWA"/>
@@ -149,6 +149,7 @@
                     <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG"/>
                     <connections>
                         <outlet property="mainTableView" destination="zcx-GD-mHO" id="ERN-ZR-g3j"/>
+                        <outlet property="titleView" destination="TTY-oi-A98" id="nJh-cW-Ugz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
