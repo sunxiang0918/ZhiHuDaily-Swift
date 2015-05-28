@@ -193,6 +193,7 @@
 		A4391E541B160EB500A27DA5 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -202,7 +203,6 @@
 			children = (
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
-				A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";

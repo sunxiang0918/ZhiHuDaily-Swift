@@ -29,16 +29,20 @@ class KCLaunchImageViewController: UIViewController {
     
     private let maskImageView:UIImageView = UIImageView(frame: UIScreen.mainScreen().bounds)        //遮罩图片View
     
+    private var logoImageView:UIImageView?
+    
     //本视图加载
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //设置关闭状态栏
         if self.respondsToSelector("setNeedsStatusBarAppearanceUpdate") {
             self.prefersStatusBarHidden()
             self.setNeedsStatusBarAppearanceUpdate()
         }
         
+        
+        logoImageView = UIImageView(frame: CGRectMake(0, UIScreen.mainScreen().bounds.height-185, UIScreen.mainScreen().bounds.width, 185))   //LOGO图片View
     }
     
     //本视图显示前
@@ -49,9 +53,6 @@ class KCLaunchImageViewController: UIViewController {
         self.fromImageView.image = UIImage(named:"FakeLaunchImage")
         self.view.addSubview(self.fromImageView)
         
-        //加入版权Label到view中
-        self.view.insertSubview(self.sourceLabel, aboveSubview: self.fromImageView)
-        
         //加载图片,并加入view中
         self.maskImageView.image = UIImage(named: "MaskImage")
         self.view.insertSubview(self.maskImageView, belowSubview:self.fromImageView)
@@ -60,17 +61,18 @@ class KCLaunchImageViewController: UIViewController {
         self.toImageView.image = self.myImage
         self.view.insertSubview(self.toImageView, belowSubview: self.maskImageView)
         
+        self.logoImageView!.image = UIImage(named: "Splash_Logo_Plus")
+//        self.logoImageView!.alpha = 0.7
+        self.view.insertSubview(self.logoImageView!, aboveSubview: toImageView)
+//        self.view.addSubview(self.logoImageView)
+        
+        //加入版权Label到view中
+        self.view.addSubview(self.sourceLabel)
     }
     
     //本视图显示后动作
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //开始设置动画,这个动画是渐变透明
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(TIME_DURATION)
-        self.sourceLabel.alpha = ALPHA
-        UIView.commitAnimations()
         
         //开始设置动画,这个动画是渐变透明
         UIView.beginAnimations(nil, context: nil)
@@ -133,8 +135,10 @@ class KCLaunchImageViewController: UIViewController {
         let rect = viewController.view.frame
         
         //初始化版权Label
-        self.sourceLabel = UILabel(frame: CGRectMake((rect.size.width-200)/2, (rect.size.height-50), 200, 50))
+        self.sourceLabel = UILabel(frame: CGRectMake((rect.size.width-200)/2, (rect.size.height-30), 200, 30))
         self.sourceLabel.text = name        //设置版权Label的内容
+        self.sourceLabel.textColor = UIColor.grayColor()     //颜色
+        self.sourceLabel.font = UIFont.systemFontOfSize(10) //字体大小
         self.sourceLabel.textAlignment = NSTextAlignment.Center     //文字居中对齐
         self.sourceLabel.textColor = UIColor.whiteColor()   //字体颜色为白色
         self.sourceLabel.backgroundColor = UIColor.clearColor() //背景色为透明
