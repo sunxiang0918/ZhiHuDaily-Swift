@@ -115,8 +115,8 @@ class RefreshControl:NSObject {
             //如果是scrollView进行了滑动
             
             if  self.refreshingDirection == .RefreshingDirectionNone {
-                //如果是用户的滑动松开命令, 那就开始激活刷新事件
-                
+                //如果是Offset正在滑动 并且当前没有其他的刷新事件
+                self.drogForChange(change)
             }
         }
     }
@@ -126,8 +126,10 @@ class RefreshControl:NSObject {
     
     :param: topView 头部视图
     */
-    func registeTopView<T:UIView,RefreshViewDelegate>(topView:T){
+    func registeTopView<T where T:UIView,T:RefreshViewDelegate>(topView:T){
+        self.topView = topView
         
+        self.topView?.refreshControl = self
     }
     
     /**
@@ -135,12 +137,14 @@ class RefreshControl:NSObject {
     
     :param: topView 底部视图
     */
-    func registeBottomView<T:UIView,RefreshViewDelegate>(bottomView:T){
+    func registeBottomView<T where T:UIView,T:RefreshViewDelegate>(bottomView:T){
+        self.bottomView = bottomView
         
+        self.bottomView?.refreshControl = self
     }
     
     /**
-    开始刷新
+    通过程序调用 开始刷新
     
     :param: direction 刷新的方向事件
     */
@@ -149,7 +153,7 @@ class RefreshControl:NSObject {
     }
     
     /**
-    完成刷新
+    通过程序调用 完成刷新
     
     :param: direction 刷新的方向事件
     */
@@ -168,13 +172,15 @@ class RefreshControl:NSObject {
         
         if self.topEnabled && self.scrollView.contentOffset.y<0 {
             
-            if Float(self.scrollView.contentOffset.y) < -self.enableInsetTop {
+            if -Float(self.scrollView.contentOffset.y) >= self.enableInsetTop {
+                //这个地方是 已经满足刷新的条件了.要开始刷新了
                 if  self.autoRefreshTop || (self.scrollView.decelerating && !self.scrollView.dragging) {
-                    //[self _engageRefreshDirection:RefreshDirectionTop];
+                    self.engageRefreshDirection(.RefreshDirectionTop)
                 }else {
                     self.canEngageRefreshDirection(.RefreshDirectionTop)
                 }
             }else{
+                //这个是 还没有满足刷新条件的时候, 触发 topView的 动画
                 self.didDisengageRefreshDirection(.RefreshDirectionTop)
             }
         }
@@ -185,7 +191,7 @@ class RefreshControl:NSObject {
             
             if Float(self.scrollView.contentOffset.y) > result {
                 if  self.autoRefreshBottom || (self.scrollView.decelerating && !self.scrollView.dragging){
-                    //[self _engageRefreshDirection:RefreshDirectionBottom];
+                     self.engageRefreshDirection(.RefreshDirectionBottom)
                 }else {
                     self.canEngageRefreshDirection(.RefreshDirectionBottom)
                 }
@@ -196,49 +202,75 @@ class RefreshControl:NSObject {
         }
     }
 
+    /**
+    允许开始刷新
+    
+    :param: direction 事件类型
+    */
     private func canEngageRefreshDirection(direction:RefreshDirection) {
         
         if  direction == .RefreshDirectionTop {
             if  let top = self.topView {
-                top.canEngageRefresh()
+                top.canEngageRefresh(self.scrollView)
             }
         }else if direction == .RefreshDirectionBottom {
             if  let bottom = self.bottomView {
-                bottom.canEngageRefresh()
+                bottom.canEngageRefresh(self.scrollView)
             }
         }
-        
     }
 
+    /**
+    执行还没有进行刷新的时候,view的动画效果
+    
+    :param: direction 事件类型
+    */
     private func didDisengageRefreshDirection(direction:RefreshDirection) {
         if  direction == .RefreshDirectionTop {
             if  let top = self.topView {
-                top.didDisengageRefresh()
+                top.didDisengageRefresh(self.scrollView)
             }
         }else if direction == .RefreshDirectionBottom {
             if  let bottom = self.bottomView {
-                bottom.didDisengageRefresh()
+                bottom.didDisengageRefresh(self.scrollView)
             }
         }
     }
     
+    /**
+    开始真正的执行刷新命令
+    
+    :param: direction 事件类型
+    */
     private func engageRefreshDirection(direction:RefreshDirection) {
         var edge:UIEdgeInsets = UIEdgeInsetsZero
         
         if  direction == .RefreshDirectionTop {
+            //修改事件类型为 正在执行下滑刷新
             self._refreshingDirection = .RefreshingDirectionTop
+            //获取下滑的距离
             let topH = self.enableInsetTop < 45 ? 45:self.enableInsetTop
+            
+            //配置scroll的偏移等待的位置
             edge = UIEdgeInsetsMake(CGFloat(topH), 0, 0, 0)
         }else if direction == .RefreshDirectionBottom {
             let bottomH = self.enableInsetBottom < 45 ? 45:self.enableInsetBottom
             edge = UIEdgeInsetsMake(0, 0, CGFloat(bottomH), 0)
             self._refreshingDirection = .RefreshingDirectionBottom
         }
-        self.scrollView.contentInset = edge
         
+        //设置scrollView的contentInset
+//        self.scrollView.contentInset = edge
+        
+        //执行刷新操作
         self.didEngageRefreshDirection(direction)
     }
     
+    /**
+    开始执行View的刷新事件
+    
+    :param: direction 刷新事件
+    */
     private func didEngageRefreshDirection(direction:RefreshDirection){
         if  direction == .RefreshDirectionTop {
             if  let top = self.topView {
@@ -270,7 +302,8 @@ class RefreshControl:NSObject {
         self.scrollView.setContentOffset(point, animated: true)
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(0.25 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            //[strongSelf _engageRefreshDirection:direction];
+
+            self.engageRefreshDirection(direction)
         })
     }
     

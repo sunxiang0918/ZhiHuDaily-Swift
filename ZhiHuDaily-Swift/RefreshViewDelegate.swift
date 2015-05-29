@@ -10,28 +10,30 @@ import Foundation
 
 protocol RefreshViewDelegate {
     
+    var refreshControl:RefreshControl? {get set}
+    
     /**
     重新设置Layout
     */
     func resetLayoutSubViews()
     
     /**
-    松开可刷新
+    松开可刷新的动画
     */
-    func canEngageRefresh()
+    func canEngageRefresh(scrollView:UIScrollView)
     
     /**
-    松开返回
+    松开返回的动画
     */
-    func didDisengageRefresh()
+    func didDisengageRefresh(scrollView:UIScrollView)
     
     /**
-    开始刷新
+    开始刷新的动画
     */
     func startRefreshing()
     
     /**
-    结束刷新
+    结束刷新的动画
     */
     func finishRefreshing()
     

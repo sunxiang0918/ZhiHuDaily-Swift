@@ -167,6 +167,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="n8L-Ci-DeQ" id="kHl-e3-Ykf"/>
                         <outlet property="arcProgressView" destination="7Pa-d7-kOX" id="2dF-vr-00l"/>
                         <outlet property="mainTableView" destination="zcx-GD-mHO" id="ERN-ZR-g3j"/>
                         <outlet property="titleView" destination="TTY-oi-A98" id="nJh-cW-Ugz"/>

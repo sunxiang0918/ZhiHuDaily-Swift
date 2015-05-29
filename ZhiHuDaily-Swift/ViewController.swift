@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate {
     
     var leftViewController : UIViewController?
     
@@ -17,12 +17,20 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     let kInWindowHeight:Float = 200
     let titleHeight:Float = 44
     
+    var refreshControl : RefreshControl!
+    
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var arcProgressView: KYCircularProgress!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
+        
+        refreshControl = RefreshControl(scrollView: mainTableView, delegate: self)
+        refreshControl.topEnabled = true
+        refreshControl.enableInsetTop = 80
+        
         super.viewDidLoad()
         
         arcProgressView.lineWidth = 2.0
@@ -40,6 +48,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
+//            println("\(scrollView)")
             
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>scrollHeight{
@@ -54,7 +63,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             //用来显示重新加载的进度条
             showRefeshProgress(Float(scrollView.contentOffset.y))
             
-//            println("\(scrollView)")
         }
     }
     
@@ -144,8 +152,24 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     //================UITableViewDataSource的实现================================
     
+    //================RefreshControlDelegate的实现===============================
+    func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
+        println("开始刷新!!")
+        arcProgressView.alpha = 0
+        activityIndicator.startAnimating()
+        activityIndicator.alpha = 1
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            println("结束刷新!!")
+            self.activityIndicator.stopAnimating()
+            self.arcProgressView.alpha = 1
+            self.activityIndicator.alpha = 0
+            refreshControl.finishRefreshingDirection(direction)
+        })
+        
+    }
     
-
 
 }
 
