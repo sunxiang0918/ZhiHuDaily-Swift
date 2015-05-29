@@ -40,13 +40,12 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
-//            mainTableView.contentSize = CGSizeMake(375, 747)
-//            scrollView.contentInset.top = -80
-            println("\(scrollView.contentInset.top) \(scrollView.contentInset.bottom)")
+            
+            //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>scrollHeight{
-                //表示到顶了,不能再让他滑动了
-//                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(scrollHeight)), animated: true)
-//                return
+                //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
+                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(-scrollHeight)), animated: false)
+                return
             }
             
             //只有是在上下滑动TableView的时候进行处理
