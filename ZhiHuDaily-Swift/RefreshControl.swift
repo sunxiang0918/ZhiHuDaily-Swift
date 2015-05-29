@@ -126,7 +126,7 @@ class RefreshControl:NSObject {
     
     :param: topView 头部视图
     */
-    func registeTopView<T where T:UIView,T:RefreshViewDelegate>(topView:T){
+    func registeTopView<T where T:UIViewController,T:RefreshViewDelegate>(topView:T){
         self.topView = topView
         
         self.topView?.refreshControl = self
@@ -137,7 +137,7 @@ class RefreshControl:NSObject {
     
     :param: topView 底部视图
     */
-    func registeBottomView<T where T:UIView,T:RefreshViewDelegate>(bottomView:T){
+    func registeBottomView<T where T:UIViewController,T:RefreshViewDelegate>(bottomView:T){
         self.bottomView = bottomView
         
         self.bottomView?.refreshControl = self
@@ -170,7 +170,7 @@ class RefreshControl:NSObject {
     */
     private func drogForChange(change:[NSObject : AnyObject]){
         
-        if self.topEnabled && self.scrollView.contentOffset.y<0 {
+        if self.scrollView.contentOffset.y<0 {
             
             if -Float(self.scrollView.contentOffset.y) >= self.enableInsetTop {
                 //这个地方是 已经满足刷新的条件了.要开始刷新了
@@ -185,7 +185,7 @@ class RefreshControl:NSObject {
             }
         }
         
-        if  self.bottomEnabled && self.scrollView.contentOffset.y>0 {
+        if  self.scrollView.contentOffset.y>0 {
             
             let result = Float(self.scrollView.contentSize.height) + self.enableInsetBottom - Float(self.scrollView.bounds.height)
             
@@ -209,14 +209,12 @@ class RefreshControl:NSObject {
     */
     private func canEngageRefreshDirection(direction:RefreshDirection) {
         
-        if  direction == .RefreshDirectionTop {
-            if  let top = self.topView {
-                top.canEngageRefresh(self.scrollView)
-            }
-        }else if direction == .RefreshDirectionBottom {
-            if  let bottom = self.bottomView {
-                bottom.canEngageRefresh(self.scrollView)
-            }
+        if  let top = self.topView {
+            top.canEngageRefresh(self.scrollView,direction: direction)
+        }
+        
+        if  let bottom = self.bottomView {
+            bottom.canEngageRefresh(self.scrollView,direction: direction)
         }
     }
 
@@ -226,15 +224,15 @@ class RefreshControl:NSObject {
     :param: direction 事件类型
     */
     private func didDisengageRefreshDirection(direction:RefreshDirection) {
-        if  direction == .RefreshDirectionTop {
-            if  let top = self.topView {
-                top.didDisengageRefresh(self.scrollView)
-            }
-        }else if direction == .RefreshDirectionBottom {
-            if  let bottom = self.bottomView {
-                bottom.didDisengageRefresh(self.scrollView)
-            }
+        
+        if  let top = self.topView {
+            top.didDisengageRefresh(self.scrollView,direction:direction)
         }
+        
+        if  let bottom = self.bottomView {
+            bottom.didDisengageRefresh(self.scrollView,direction:direction)
+        }
+        
     }
     
     /**
@@ -272,14 +270,12 @@ class RefreshControl:NSObject {
     :param: direction 刷新事件
     */
     private func didEngageRefreshDirection(direction:RefreshDirection){
-        if  direction == .RefreshDirectionTop {
-            if  let top = self.topView {
-                top.startRefreshing()
-            }
-        }else if direction == .RefreshDirectionBottom {
-            if  let bottom = self.bottomView {
-                bottom.startRefreshing()
-            }
+        if  let top = self.topView {
+            top.startRefreshing(direction)
+        }
+        
+        if  let bottom = self.bottomView {
+            bottom.startRefreshing(direction)
         }
         
         self.delegate.refreshControl(self, didEngageRefreshDirection: direction)
@@ -309,20 +305,18 @@ class RefreshControl:NSObject {
     
     private func finishRefreshingDirection(direction:RefreshDirection,animation:Bool) {
         
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
-            self.scrollView.contentInset = UIEdgeInsetsZero
-        })
+//        UIView.animateWithDuration(0.25, animations: { () -> Void in
+//            self.scrollView.contentInset = UIEdgeInsetsZero
+//        })
         
         self._refreshingDirection = .RefreshingDirectionNone
         
-        if  direction == .RefreshDirectionTop {
-            if  let top = self.topView {
-                top.finishRefreshing()
-            }
-        }else if direction == .RefreshDirectionBottom {
-            if  let bottom = self.bottomView {
-                bottom.finishRefreshing()
-            }
+        if  let top = self.topView {
+            top.finishRefreshing(direction)
+        }
+        
+        if  let bottom = self.bottomView {
+            bottom.finishRefreshing(direction)
         }
         
     }

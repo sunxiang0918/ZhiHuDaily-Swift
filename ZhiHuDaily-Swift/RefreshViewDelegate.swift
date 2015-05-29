@@ -20,21 +20,21 @@ protocol RefreshViewDelegate {
     /**
     松开可刷新的动画
     */
-    func canEngageRefresh(scrollView:UIScrollView)
+    func canEngageRefresh(scrollView:UIScrollView,direction:RefreshDirection)
     
     /**
     松开返回的动画
     */
-    func didDisengageRefresh(scrollView:UIScrollView)
+    func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection)
     
     /**
     开始刷新的动画
     */
-    func startRefreshing()
+    func startRefreshing(direction:RefreshDirection)
     
     /**
     结束刷新的动画
     */
-    func finishRefreshing()
+    func finishRefreshing(direction:RefreshDirection)
     
 }
