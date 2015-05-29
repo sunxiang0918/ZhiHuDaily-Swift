@@ -197,7 +197,6 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="activityIndicator" destination="fEh-MZ-QmF" id="2Lu-n9-bnL"/>
-                        <outlet property="backgroundView" destination="jIZ-DU-SYn" id="SRg-rG-Shi"/>
                         <outlet property="circularProgress" destination="B57-Ll-CTv" id="RhI-9v-03V"/>
                         <outlet property="leftButton" destination="ZU9-Oe-Ugo" id="sUg-kS-Lfs"/>
                         <outlet property="titleLabel" destination="n5q-7h-ed1" id="VQa-Xe-0TJ"/>

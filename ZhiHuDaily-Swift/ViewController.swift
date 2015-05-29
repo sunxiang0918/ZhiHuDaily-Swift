@@ -53,7 +53,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
-            
+            println("\(scrollView)")
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>scrollHeight{
                 //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
@@ -79,7 +79,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         if  indexPath.row == 0 {
             return CGFloat(self.kInWindowHeight)
         }else {
-            return 106
+            return 100
         }
     }
     
@@ -114,6 +114,37 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     //================UITableViewDataSource的实现================================
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if  section == 0 {
+            return 0
+        }
+        return 24
+    }
+    
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "你妹的:\(section)"
+//    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let myView = UIView()
+        myView.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
+        
+        let view = UILabel(frame:CGRectMake(0, 0, tableView.frame.width, 24))
+        view.font = UIFont.boldSystemFontOfSize(14)
+        view.text = "05月28日 星期四"
+        view.textAlignment = NSTextAlignment.Center
+        view.textColor = UIColor.whiteColor()
+        myView.addSubview(view)
+        
+        return myView
+    }
+
+
     //================RefreshControlDelegate的实现===============================
     func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
         println("开始刷新!!")
