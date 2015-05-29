@@ -25,6 +25,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     let titleHeight:Float = 44
     
     //View上的 各种组件
+    @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -108,6 +109,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
             var result =  Float(scrollView.contentOffset.y)/needY
             
             if  result > 1 {
+                topHeaderView.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
                 let tableView = scrollView as! UITableView
                 
                 let number = tableView.numberOfRowsInSection(0)
@@ -115,14 +117,15 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
                 let aaa = (number-1) * 100 + Int(24) + Int(needY)
                 
                 if Float(scrollView.contentOffset.y)>Float(aaa){
-                    self.view.alpha = 0
+                    titleLabel.alpha = 0
+                    self.view.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 0)
                 }else {
-                    self.view.alpha = 1
+                    titleLabel.alpha = 1
                 }
                 
                 scrollView.contentInset = UIEdgeInsetsMake(CGFloat(100), 0, 0, 0)
             }else {
-                
+                topHeaderView.backgroundColor = UIColor.clearColor()
                 scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             }
             

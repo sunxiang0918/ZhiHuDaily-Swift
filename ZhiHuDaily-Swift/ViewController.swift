@@ -136,7 +136,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         let view = UILabel(frame:CGRectMake(0, 0, tableView.frame.width, 24))
         view.font = UIFont.boldSystemFontOfSize(14)
-        view.text = "05月28日 星期四"
+        view.text = "05月2\(section)日 星期\(section)"
         view.textAlignment = NSTextAlignment.Center
         view.textColor = UIColor.whiteColor()
         myView.addSubview(view)
