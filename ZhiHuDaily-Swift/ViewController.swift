@@ -10,13 +10,10 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate,MainTitleViewDelegate {
     
+    private let BACKGROUND_COLOR = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
+    
     var leftViewController : UIViewController?
     weak var mainTitleViewController : MainTitleViewController?
-    
-    let scrollHeight:Float = 80
-    let kImageHeight:Float = 400
-    let kInWindowHeight:Float = 200
-    let titleHeight:Float = 44
     
     var refreshControl : RefreshControl!
     
@@ -55,9 +52,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         if  scrollView is UITableView {
             println("\(scrollView)")
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
-            if -Float(scrollView.contentOffset.y)>scrollHeight{
+            if -Float(scrollView.contentOffset.y)>SCROLL_HEIGHT{
                 //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
-                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(-scrollHeight)), animated: false)
+                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(-SCROLL_HEIGHT)), animated: false)
                 return
             }
         }
@@ -77,9 +74,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         if  indexPath.row == 0 {
-            return CGFloat(self.kInWindowHeight)
+            return CGFloat(IN_WINDOW_HEIGHT)
         }else {
-            return 100
+            return CGFloat(TABLE_CELL_HEIGHT)
         }
     }
     
@@ -95,7 +92,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             cell.clipsToBounds = true
             
-            var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(self.kImageHeight)))
+            var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(IMAGE_HEIGHT)))
             var slideView = SlideScrollView(frame: slideRect)
             slideView.initWithFrameRect(slideRect,imgArr:["http://pic1.zhimg.com/42207cef5d8621be6a1106a2d46d58f0.jpg","http://pic2.zhimg.com/272834eb23f278f907cf6ca200be5d7d.jpg"],titArr:["苏轼果然不是神，苏轼着凉也会感冒","年年都有「隔夜西瓜」的谣言跳出来，吓唬谁呢？"])
             cell.addSubview(slideView)
@@ -114,36 +111,67 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     //================UITableViewDataSource的实现================================
     
+    //================UITableViewDelegate的实现==================================
+    
+    /**
+    返回有多少个Sections
+    
+    :param: tableView
+    
+    :returns:
+    */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
+    /**
+    返回每一个Sections的Ttitle的高度
+    
+    :param: tableView
+    :param: section   section的序号, 从0开始
+    
+    :returns:
+    */
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if  section == 0 {
+            //由于第一个section是不要的,所以直接设置高度为0
             return 0
         }
-        return 24
+        
+        return CGFloat(SECTION_HEIGHT)
     }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "你妹的:\(section)"
-//    }
+    /**
+    设置每一个Section的样子
     
+    :param: tableView
+    :param: section
+    
+    :returns: 自定义的View
+    */
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        //自定义一个View
         let myView = UIView()
-        myView.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
         
-        let view = UILabel(frame:CGRectMake(0, 0, tableView.frame.width, 24))
-        view.font = UIFont.boldSystemFontOfSize(14)
-        view.text = "05月2\(section)日 星期\(section)"
-        view.textAlignment = NSTextAlignment.Center
-        view.textColor = UIColor.whiteColor()
-        myView.addSubview(view)
+        myView.backgroundColor = BACKGROUND_COLOR
+        
+        //实例化一个标签
+        let titleView = UILabel(frame:CGRectMake(0, 0, tableView.frame.width, CGFloat(SECTION_HEIGHT)))
+        
+        titleView.font = UIFont.boldSystemFontOfSize(14)        //设置字体
+        titleView.textAlignment = NSTextAlignment.Center        //设置居中
+        titleView.textColor = UIColor.whiteColor()      //设置字体颜色
+        
+        //设置文字内容
+        titleView.text = "05月2\(section)日 星期\(section)"
+        
+        myView.addSubview(titleView)
         
         return myView
     }
-
+    //================UITableViewDelegate的实现==================================
+    
 
     //================RefreshControlDelegate的实现===============================
     func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {

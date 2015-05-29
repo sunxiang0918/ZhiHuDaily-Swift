@@ -33,6 +33,7 @@
 		A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBB1B14D66800E041C4 /* PKLog.m */; };
 		A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBF1B14D66800E041C4 /* PKRevealController.m */; };
 		A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */; };
+		A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5507D1B18C3E2000E9526 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		A4939FBF1B14D66800E041C4 /* PKRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRevealController.m; sourceTree = "<group>"; };
 		A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PKRevealController.xcodeproj; sourceTree = "<group>"; };
 		A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchImageViewController.swift; sourceTree = "<group>"; };
+		A4C5507D1B18C3E2000E9526 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
 		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 				A48545721B176728001CC98F /* KYCircularProgress.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
+				A4C5507D1B18C3E2000E9526 /* Constant.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
 				A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */,
+				A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);

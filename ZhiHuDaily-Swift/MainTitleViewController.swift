@@ -13,16 +13,13 @@ import UIKit
 */
 class MainTitleViewController: UIViewController,RefreshViewDelegate {
 
+    private let BACKGROUND_COLOR_1 = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
+    private let BACKGROUND_COLOR_0 = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 0)
+    
     private var _refreshControl:RefreshControl?     //关联的刷新Control
     
     //主页面上部Title上得 按键的事件委托
     var mainTitleViewDelegate:MainTitleViewDelegate?
-    
-    //各种常量
-    let scrollHeight:Float = 80
-    let kImageHeight:Float = 400
-    let kInWindowHeight:Float = 200
-    let titleHeight:Float = 44
     
     //View上的 各种组件
     @IBOutlet weak var topHeaderView: UIView!
@@ -103,31 +100,8 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
             //只有是在上下滑动TableView的时候进行处理
             changeTitleViewAlpha(Float(scrollView.contentOffset.y))
             
-            let needY=kInWindowHeight-scrollHeight-titleHeight
-            
-            //计算出透明度
-            var result =  Float(scrollView.contentOffset.y)/needY
-            
-            if  result > 1 {
-                topHeaderView.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
-                let tableView = scrollView as! UITableView
-                
-                let number = tableView.numberOfRowsInSection(0)
-                
-                let aaa = (number-1) * 100 + Int(24) + Int(needY)
-                
-                if Float(scrollView.contentOffset.y)>Float(aaa){
-                    titleLabel.alpha = 0
-                    self.view.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 0)
-                }else {
-                    titleLabel.alpha = 1
-                }
-                
-                scrollView.contentInset = UIEdgeInsetsMake(CGFloat(100), 0, 0, 0)
-            }else {
-                topHeaderView.backgroundColor = UIColor.clearColor()
-                scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-            }
+            //只有是在下滑动TableView的时候进行处理
+            changeTitleAndTableHeader(Float(scrollView.contentOffset.y), scrollView: scrollView)
             
             //用来显示重新加载的进度条
             showRefeshProgress(Float(scrollView.contentOffset.y))
@@ -135,10 +109,56 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
         }
     }
     
+    /**
+    这部分是用来处理表格的第二个section和试图的titleView 之间的动画效果的
+    
+    :param: offsetY
+    :param: scrollView 
+    */
+    func changeTitleAndTableHeader(offsetY:Float,scrollView:UIScrollView) {
+        
+        let needY=IN_WINDOW_HEIGHT-SCROLL_HEIGHT-TITLE_HEIGHT
+        
+        //计算出透明度
+        var result =  offsetY/needY
+        
+        if  result > 1 {
+            //只有当上划的距离已经大于needY了后,才开始做进一步的处理
+            //设置最顶上得HeaderView的背景色
+            topHeaderView.backgroundColor = BACKGROUND_COLOR_1
+            
+            //获取tableView
+            let tableView = scrollView as! UITableView
+            
+            //获取第一个section有多少行数据
+            var cellNumber = tableView.numberOfRowsInSection(0)
+            
+            //用于隐藏titleView的伐值, 算法是: (表格第一个section的行数-1)*每一个cell的高度+一个section的高度+上面的needY
+            let hiddenHeight = Float(cellNumber-1) * TABLE_CELL_HEIGHT + SECTION_HEIGHT + needY
+            
+            //当当前拖动的距离大于了hiddenHeight, 就说明进入了第二个section了.那么就要把titleView隐藏了
+            if Float(scrollView.contentOffset.y)>hiddenHeight{
+                titleLabel.alpha = 0    //把今日热闻几个字隐藏了
+                self.view.backgroundColor = BACKGROUND_COLOR_0      //隐藏titleView的背景色
+            }else {
+                //表示拖动距离小于第二个section了,进入了第一个section了.那么就要显示东西了
+                titleLabel.alpha = 1
+            }
+            
+            //设置表格的滑动的contentInset 为top偏移100. 这样 第二个,第三个section的标题就会自动的在 屏幕头上悬浮
+            scrollView.contentInset = UIEdgeInsetsMake(CGFloat(100), 0, 0, 0)
+        }else {
+            //表明已经进入了图片轮播区了,恢复初始值
+            topHeaderView.backgroundColor = UIColor.clearColor()
+            scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+        
+    }
+    
     //这部分是用来根据TableView的滑动来调整TitleView的透明度的
     func changeTitleViewAlpha(offsetY:Float){
         //计算出最大上划大小. 当上划到此处后, title就全部显示
-        let needY=kInWindowHeight-scrollHeight-titleHeight
+        let needY=IN_WINDOW_HEIGHT-SCROLL_HEIGHT-TITLE_HEIGHT
         
         //计算出透明度
         var result =  offsetY/needY
@@ -162,7 +182,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     func showRefeshProgress(offsetY:Float){
         
         //计算出透明度
-        var result=(0-offsetY)/scrollHeight
+        var result=(0-offsetY)/SCROLL_HEIGHT
         
         if result>1 {
             result = 1.0
