@@ -1,5 +1,5 @@
 //  自定义的启动图片的ViewController. 实现了显示放大一个图片,然后定时后消失
-//  KCLaunchImageViewController.swift
+//  LaunchImageViewController.swift
 //  ZhiHuDaily-Swift
 //
 //  Created by SUN on 15/5/27.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KCLaunchImageViewController: UIViewController {
+class LaunchImageViewController: UIViewController {
 
     //常量
     private let TIME_DURATION = 4.0     //动画的时间
@@ -113,7 +113,7 @@ class KCLaunchImageViewController: UIViewController {
     //类方法, 初始化本View.
     class func addTransitionToViewController(viewController : UIViewController,modalTransitionStyle theStyle:UIModalTransitionStyle,withImageDate imageDate:UIImage,withSourceName name:String) -> UIViewController? {
         
-        let instance = KCLaunchImageViewController()
+        let instance = LaunchImageViewController()
         
         instance.initWithTargetView(viewController, modalTransitionStyle: theStyle, withImageDate: imageDate, withSourceName: name)
         

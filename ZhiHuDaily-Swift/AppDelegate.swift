@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
             //这里自定义了一个启动的ViewController, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.
-            self.window?.rootViewController = KCLaunchImageViewController.addTransitionToViewController(revealController!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
+            self.window?.rootViewController = LaunchImageViewController.addTransitionToViewController(revealController!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
             //UIModalTransitionStyle转场动画效果   CrossDissolve渐变  PartialCurl翻页  FlipHorizontal上下翻转  CoverVertical上下平移(默认值)
         })
         

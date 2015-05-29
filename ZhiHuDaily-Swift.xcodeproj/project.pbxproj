@@ -31,7 +31,7 @@
 		A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FB81B14D66800E041C4 /* PKSequentialAnimation.m */; };
 		A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBB1B14D66800E041C4 /* PKLog.m */; };
 		A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBF1B14D66800E041C4 /* PKRevealController.m */; };
-		A4939FD11B1553D400E041C4 /* KCLaunchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */; };
+		A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +94,7 @@
 		A4939FBE1B14D66800E041C4 /* PKRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRevealController.h; sourceTree = "<group>"; };
 		A4939FBF1B14D66800E041C4 /* PKRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRevealController.m; sourceTree = "<group>"; };
 		A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PKRevealController.xcodeproj; sourceTree = "<group>"; };
-		A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KCLaunchImageViewController.swift; sourceTree = "<group>"; };
+		A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchImageViewController.swift; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
 		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -201,7 +201,7 @@
 		A4391E541B160EB500A27DA5 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				A4939FD01B1553D400E041C4 /* KCLaunchImageViewController.swift */,
+				A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -496,7 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4939FD11B1553D400E041C4 /* KCLaunchImageViewController.swift in Sources */,
+				A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
