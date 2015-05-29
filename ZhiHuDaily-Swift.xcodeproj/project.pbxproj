@@ -16,6 +16,9 @@
 		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
 		A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545721B176728001CC98F /* KYCircularProgress.swift */; };
+		A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A485458F1B1809BA001CC98F /* RefreshControl.swift */; };
+		A48545921B1809BA001CC98F /* RefreshControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */; };
+		A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */; };
 		A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F121B1494A100E041C4 /* HttpControl.swift */; };
 		A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F141B14C71C00E041C4 /* SlideScrollView.swift */; };
 		A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */; };
@@ -63,6 +66,9 @@
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
 		A48545721B176728001CC98F /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
+		A485458F1B1809BA001CC98F /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
+		A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlDelegate.swift; sourceTree = "<group>"; };
+		A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewDelegate.swift; sourceTree = "<group>"; };
 		A4939F121B1494A100E041C4 /* HttpControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpControl.swift; sourceTree = "<group>"; };
 		A4939F141B14C71C00E041C4 /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
 		A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
@@ -200,9 +206,20 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		A485458D1B18099D001CC98F /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				A485458F1B1809BA001CC98F /* RefreshControl.swift */,
+				A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */,
+				A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */,
+			);
+			name = RefreshControl;
+			sourceTree = "<group>";
+		};
 		A4939F111B14947500E041C4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A485458D1B18099D001CC98F /* RefreshControl */,
 				A48545721B176728001CC98F /* KYCircularProgress.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
@@ -484,16 +501,19 @@
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
+				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,
 				A4939FC41B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m in Sources */,
 				A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */,
 				A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */,
 				A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */,
+				A48545921B1809BA001CC98F /* RefreshControlDelegate.swift in Sources */,
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
+				A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);
