@@ -73,7 +73,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        if  indexPath.row == 0 {
+        if  indexPath.section==0&&indexPath.row == 0 {
             return CGFloat(IN_WINDOW_HEIGHT)
         }else {
             return CGFloat(TABLE_CELL_HEIGHT)
@@ -84,7 +84,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell
-        if  indexPath.row == 0 {
+        if  indexPath.section==0 && indexPath.row == 0 {
             //如果是第一行,就需要构建热门条目
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
             cell.backgroundColor = UIColor.clearColor()
