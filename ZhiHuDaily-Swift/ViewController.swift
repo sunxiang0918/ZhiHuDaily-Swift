@@ -73,8 +73,26 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     //设置tableView的数据行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-        return 10
+        if  section == 0 {
+            if  let newsList = newsListControl.todayNews {
+                if let news = newsList.news {
+                   return news.count+1
+                }
+            }
+            
+            return 1
+        }else {
+            
+            if newsListControl.news.count > section {
+                let newsList = newsListControl.news[section-1]
+                
+                if let news = newsList.news {
+                    return news.count
+                }
+            }
+            
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -112,6 +130,21 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             return cell
         }else{
             cell = tableView.dequeueReusableCellWithIdentifier("channelViewCell") as! UITableViewCell
+            
+            if  indexPath.section==0{
+                //这个是今天的新闻
+                if let news = newsListControl.todayNews?.news{
+                    cell.textLabel?.text = news[indexPath.row-1].title
+                }
+            }else {
+                let newsList = newsListControl.news[indexPath.section-1]
+                
+                if let news = newsList.news {
+                    cell.textLabel?.text = news[indexPath.row-1].title
+                }
+                
+            }
+            
             return cell
         }
         

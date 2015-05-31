@@ -98,12 +98,12 @@ class MainNewsListControl {
         
         //使用Alamofire框架 获取最新的新闻列表
         
-        let data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: LATEST_NEWS_URL)!), returningResponse: nil, error: nil)
+//        let data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: LATEST_NEWS_URL)!), returningResponse: nil, error: nil)
         
-//        Alamofire.Manager.sharedInstance.request(Method.GET, LATEST_NEWS_URL, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if let result: NSData = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET, LATEST_NEWS_URL, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+            if let result: AnyObject = data {
                 //转换成JSON
-                let json = JSON(data:result)
+                let json = JSON(result)
                 
                 let date = json["date"].string!.toInt()
                 
@@ -139,7 +139,7 @@ class MainNewsListControl {
                     self.todayNews?.topNews = topNews
                 }
             }
-//        }
+        }
     }
     
     /**
