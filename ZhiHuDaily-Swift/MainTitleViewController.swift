@@ -163,11 +163,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
         //计算出透明度
         var result =  offsetY/needY
         
-        if result>1 {
-            result = 1.0
-        }else if result<0 {
-            result = 0.0
-        }
+        result = max(min(result,1.0),0.0)
         
         
         //这里使用的是修改他得背景颜色的透明度来实现的.不直接使用titleView.alpha = CGFloat(result)是因为, 这样修改会导致这个View上面的所有的subView都会透明
@@ -184,11 +180,8 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
         //计算出透明度
         var result=(0-offsetY)/SCROLL_HEIGHT
         
-        if result>1 {
-            result = 1.0
-        }else if result<0 {
-            result = 0.0
-        }
+        result = max(min(result,1.0),0.0)
+        
         
         circularProgress.progress = Double(result)
     }

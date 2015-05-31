@@ -15,21 +15,12 @@ import Haneke
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    //获取开始图片的URL
-    private let url = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
-    
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        //获取到原来的根视图的Controller作为主的Controller
-//        let navigationController = self.window?.rootViewController as! UINavigationController
-        
-        //使用UINavigationController.topViewController 可以获取最上面的视图Controller
-//        let rightController = navigationController.topViewController as! ViewController
         
         let rightController = self.window?.rootViewController as! ViewController
-        
         
         //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
         let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as? UIViewController
@@ -40,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         
         //同步加载开始图片
-        loadStartImage(url, onSuccess: {(name,image) in
+        loadStartImage(LAUNCH_IMAGE_URL, onSuccess: {(name,image) in
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
             //这里自定义了一个启动的ViewController, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.

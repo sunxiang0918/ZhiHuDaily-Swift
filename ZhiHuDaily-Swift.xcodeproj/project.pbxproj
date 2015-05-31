@@ -20,6 +20,8 @@
 		A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A485458F1B1809BA001CC98F /* RefreshControl.swift */; };
 		A48545921B1809BA001CC98F /* RefreshControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */; };
 		A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */; };
+		A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486F0871B1A0E2900F75621 /* NewsListVO.swift */; };
+		A486F08B1B1B113600F75621 /* MainNewsListControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486F08A1B1B113600F75621 /* MainNewsListControl.swift */; };
 		A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F121B1494A100E041C4 /* HttpControl.swift */; };
 		A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F141B14C71C00E041C4 /* SlideScrollView.swift */; };
 		A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */; };
@@ -72,6 +74,8 @@
 		A485458F1B1809BA001CC98F /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlDelegate.swift; sourceTree = "<group>"; };
 		A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewDelegate.swift; sourceTree = "<group>"; };
+		A486F0871B1A0E2900F75621 /* NewsListVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListVO.swift; sourceTree = "<group>"; };
+		A486F08A1B1B113600F75621 /* MainNewsListControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNewsListControl.swift; sourceTree = "<group>"; };
 		A4939F121B1494A100E041C4 /* HttpControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpControl.swift; sourceTree = "<group>"; };
 		A4939F141B14C71C00E041C4 /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
 		A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		A432D31C1B147B9F006D2B0E /* ZhiHuDaily-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				A486F0891B1B111400F75621 /* control */,
+				A486F0851B1A0DF000F75621 /* model */,
 				A4391E541B160EB500A27DA5 /* view */,
 				A4939F111B14947500E041C4 /* utils */,
 				A432D31F1B147B9F006D2B0E /* AppDelegate.swift */,
@@ -205,6 +211,8 @@
 		A4391E541B160EB500A27DA5 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A48545721B176728001CC98F /* KYCircularProgress.swift */,
+				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */,
 				A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */,
 			);
@@ -221,12 +229,26 @@
 			name = RefreshControl;
 			sourceTree = "<group>";
 		};
+		A486F0851B1A0DF000F75621 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A486F0871B1A0E2900F75621 /* NewsListVO.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		A486F0891B1B111400F75621 /* control */ = {
+			isa = PBXGroup;
+			children = (
+				A486F08A1B1B113600F75621 /* MainNewsListControl.swift */,
+			);
+			name = control;
+			sourceTree = "<group>";
+		};
 		A4939F111B14947500E041C4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
 				A485458D1B18099D001CC98F /* RefreshControl */,
-				A48545721B176728001CC98F /* KYCircularProgress.swift */,
-				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 				A4C5507D1B18C3E2000E9526 /* Constant.swift */,
 			);
@@ -506,12 +528,14 @@
 				A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
+				A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
 				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,
 				A4939FC41B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m in Sources */,
+				A486F08B1B1B113600F75621 /* MainNewsListControl.swift in Sources */,
 				A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */,
 				A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */,
 				A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */,

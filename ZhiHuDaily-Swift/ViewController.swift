@@ -17,6 +17,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     var refreshControl : RefreshControl!
     
+    var newsListControl:MainNewsListControl!
+    
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
     
@@ -28,6 +30,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         refreshControl.topEnabled = true
         refreshControl.registeTopView(mainTitleViewController!)
         refreshControl.enableInsetTop = 80
+        
+        newsListControl = MainNewsListControl()
+        newsListControl.refreshNews()
         
         super.viewDidLoad()
         
@@ -94,7 +99,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(IMAGE_HEIGHT)))
             var slideView = SlideScrollView(frame: slideRect)
-            slideView.initWithFrameRect(slideRect,imgArr:["http://pic1.zhimg.com/42207cef5d8621be6a1106a2d46d58f0.jpg","http://pic2.zhimg.com/272834eb23f278f907cf6ca200be5d7d.jpg"],titArr:["苏轼果然不是神，苏轼着凉也会感冒","年年都有「隔夜西瓜」的谣言跳出来，吓唬谁呢？"])
+
+            let todayNews = newsListControl.todayNews
+            if let _todayNews = todayNews {
+                let topNews = _todayNews.topNews
+                
+                slideView.initWithFrameRect(slideRect, topNewsArray: topNews)
+            }
+            
             cell.addSubview(slideView)
             
             return cell
