@@ -26,8 +26,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     override func viewDidLoad() {
         
-//        let nib=UINib(nibName: "NewsListTableViewCell", bundle: nil)
-//        mainTableView.registerNib(nib, forCellReuseIdentifier: "newsListTableViewCell")
+        let nib=UINib(nibName: "NewsListTableViewCell", bundle: nil)
+        mainTableView.registerNib(nib, forCellReuseIdentifier: "newsListTableViewCell")
         
         refreshControl = RefreshControl(scrollView: mainTableView, delegate: self)
         refreshControl.topEnabled = true
@@ -135,27 +135,25 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as? UITableViewCell
             cell = tmp!
             
-            cell.imageView?.backgroundColor = UIColor.blackColor()
-            cell.imageView?.frame = CGRectMake(100, 0, 80, 64)
-//            if  tmp == nil {
-//                cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")
-//            }else {
-//                cell = tmp!
-//            }
-//            
-//            let c = cell as! NewsListTableViewCell
+//            cell.imageView?.backgroundColor = UIColor.blackColor()
+//            cell.imageView?.frame = CGRectMake(150, 0, 80, 64)
+            if  tmp == nil {
+                cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")
+            }else {
+                cell = tmp!
+            }
+            
+            let c = cell as! NewsListTableViewCell
             
             if  indexPath.section==0{
                 //这个是今天的新闻
                 if let news = newsListControl.todayNews?.news{
                     
-                    tmp?.textLabel?.text = news[indexPath.row-1].title
-                    
-//                    c.titleLabel.text = news[indexPath.row-1].title
+                    c.titleLabel.text = news[indexPath.row-1].title
                     let images = news[indexPath.row-1].images
                     if  let _img = images {
-                        tmp?.imageView!.hnk_setImageFromURL(NSURL(string:_img[0] ?? "")!, placeholder: UIImage(named: "Image_Preview"))
-//                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!)
+                        
+                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
                     }
                 }
             }else {

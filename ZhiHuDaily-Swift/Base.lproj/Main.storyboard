@@ -65,19 +65,11 @@
                                 <rect key="frame" x="0.0" y="-80" width="600" height="680"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="newsListTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsListTableViewCell" textLabel="GQh-Xp-gib" style="IBUITableViewCellStyleDefault" id="TrZ-lC-eMk" userLabel="newsListTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="newsListTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsListTableViewCell" id="TrZ-lC-eMk" userLabel="newsListTableViewCell" customClass="NewsListTableViewCell" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TrZ-lC-eMk" id="cEf-jf-XG1">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GQh-Xp-gib">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
