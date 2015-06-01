@@ -28,6 +28,11 @@ protocol RefreshViewDelegate {
     func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection)
     
     /**
+    *  是否修改他的 ContentInset
+    */
+    func needContentInset(direction:RefreshDirection) -> Bool
+    
+    /**
     开始刷新的动画
     */
     func startRefreshing(direction:RefreshDirection)

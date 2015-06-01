@@ -13,11 +13,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     private let BACKGROUND_COLOR = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
     
     var leftViewController : UIViewController?
+    
     weak var mainTitleViewController : MainTitleViewController?
+
+    var refreshBottomView : RefreshBottomView?
     
     var refreshControl : RefreshControl!
     
-    var newsListControl:MainNewsListControl!
+    var newsListControl : MainNewsListControl!
     
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
@@ -31,8 +34,15 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         refreshControl = RefreshControl(scrollView: mainTableView, delegate: self)
         refreshControl.topEnabled = true
+        refreshControl.bottomEnabled = true
         refreshControl.registeTopView(mainTitleViewController!)
-        refreshControl.enableInsetTop = 80
+        refreshControl.enableInsetTop = SCROLL_HEIGHT
+        refreshControl.enableInsetBottom = 65
+        
+        let y=max(self.mainTableView.bounds.size.height, self.mainTableView.contentSize.height);
+        refreshBottomView = RefreshBottomView(frame: CGRectMake(CGFloat(0),y , self.mainTableView!.bounds.size.width, CGFloat(refreshControl.enableInsetBottom+45)))
+        refreshControl.registeBottomView(refreshBottomView!)
+        refreshBottomView?.resetLayoutSubViews()
         
         newsListControl = MainNewsListControl()
         newsListControl.refreshNews()
@@ -135,8 +145,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as? UITableViewCell
             cell = tmp!
             
-//            cell.imageView?.backgroundColor = UIColor.blackColor()
-//            cell.imageView?.frame = CGRectMake(150, 0, 80, 64)
             if  tmp == nil {
                 cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")
             }else {
@@ -152,20 +160,19 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                     c.titleLabel.text = news[indexPath.row-1].title
                     let images = news[indexPath.row-1].images
                     if  let _img = images {
-                        
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
                     }
                 }
             }else {
                 let newsList = newsListControl.news[indexPath.section-1]
                 
-//                if let news = newsList.news {
-//                    c.titleLabel.text = news[indexPath.row-1].title
-//                    let images = news[indexPath.row-1].images
-//                    if  let _img = images {
-//                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!)
-//                    }
-//                }
+                if let news = newsList.news {
+                    c.titleLabel.text = news[indexPath.row-1].title
+                    let images = news[indexPath.row-1].images
+                    if  let _img = images {
+                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
+                    }
+                }
                 
             }
             
@@ -244,11 +251,17 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     //================RefreshControlDelegate的实现===============================
     func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
-        println("开始刷新!!")
+        println("开始刷新!!\(direction.hashValue)")
         
+        if  direction == RefreshDirection.RefreshDirectionTop {
+            //是下拉刷新
+            self.newsListControl.refreshNews()
+            self.mainTableView.reloadData()
+//            refreshControl.finishRefreshingDirection(direction)
+        }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            println("结束刷新!!")
+            println("结束刷新!!\(direction.hashValue)")
             refreshControl.finishRefreshingDirection(direction)
         })
         

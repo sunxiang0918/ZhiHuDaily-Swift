@@ -91,6 +91,10 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
         
     }
     
+    func needContentInset(direction:RefreshDirection) -> Bool {
+        return false
+    }
+    
     /**
     松开返回的动画
     */

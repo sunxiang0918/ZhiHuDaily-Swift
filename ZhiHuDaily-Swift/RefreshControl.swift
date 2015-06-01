@@ -126,7 +126,7 @@ class RefreshControl:NSObject {
     
     :param: topView 头部视图
     */
-    func registeTopView<T where T:UIViewController,T:RefreshViewDelegate>(topView:T){
+    func registeTopView<T where T:RefreshViewDelegate>(topView:T){
         self.topView = topView
         
         self.topView?.refreshControl = self
@@ -137,7 +137,7 @@ class RefreshControl:NSObject {
     
     :param: topView 底部视图
     */
-    func registeBottomView<T where T:UIViewController,T:RefreshViewDelegate>(bottomView:T){
+    func registeBottomView<T where T:RefreshViewDelegate>(bottomView:T){
         self.bottomView = bottomView
         
         self.bottomView?.refreshControl = self
@@ -188,7 +188,7 @@ class RefreshControl:NSObject {
         if  self.scrollView.contentOffset.y>0 {
             
             let result = Float(self.scrollView.contentSize.height) + self.enableInsetBottom - Float(self.scrollView.bounds.height)
-            
+            println("result:\(result)")
             if Float(self.scrollView.contentOffset.y) > result {
                 if  self.autoRefreshBottom || (self.scrollView.decelerating && !self.scrollView.dragging){
                      self.engageRefreshDirection(.RefreshDirectionBottom)
@@ -251,14 +251,26 @@ class RefreshControl:NSObject {
             
             //配置scroll的偏移等待的位置
             edge = UIEdgeInsetsMake(CGFloat(topH), 0, 0, 0)
+            
+            //设置scrollView的contentInset
+            if let t = self.topView {
+                if  t.needContentInset(direction) {
+                    self.scrollView.contentInset = edge
+                }
+            }
+            
         }else if direction == .RefreshDirectionBottom {
             let bottomH = self.enableInsetBottom < 45 ? 45:self.enableInsetBottom
             edge = UIEdgeInsetsMake(0, 0, CGFloat(bottomH), 0)
             self._refreshingDirection = .RefreshingDirectionBottom
+            
+            //设置scrollView的contentInset
+            if let t = self.bottomView {
+                if  t.needContentInset(direction) {
+                    self.scrollView.contentInset = edge
+                }
+            }
         }
-        
-        //设置scrollView的contentInset
-//        self.scrollView.contentInset = edge
         
         //执行刷新操作
         self.didEngageRefreshDirection(direction)

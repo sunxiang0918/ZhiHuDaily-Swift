@@ -24,6 +24,8 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         promptLabel = UILabel(frame: CGRectZero)
         
         super.init(frame: frame)
+        
+        self.initView()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -32,6 +34,8 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         promptLabel = UILabel(frame: CGRectZero)
         
         super.init(coder: aDecoder)
+        
+        self.initView()
     }
     
     func initView() {
@@ -73,6 +77,10 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
     //==================RefreshViewDelegate实现===============================
     
     var refreshControl:RefreshControl? {
@@ -111,7 +119,7 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
 
             self.addConstraints([tLeft,tTop,tRight,tHeight])
             
-            let viewsDictionary = ["promptLabel":self.promptLabel]
+            let viewsDictionary = [NSString(string:"promptLabel"):self.promptLabel]
             
             let pHList = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[promptLabel]-0-|", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: viewsDictionary)
             let pVList = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[promptLabel(==45)]", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: viewsDictionary)
@@ -120,6 +128,10 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
             self.addConstraints(pVList)
         })
         
+    }
+    
+    func needContentInset(direction:RefreshDirection) -> Bool{
+        return false
     }
     
     /**
