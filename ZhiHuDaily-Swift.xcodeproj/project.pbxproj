@@ -15,6 +15,7 @@
 		A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A432D3291B147B9F006D2B0E /* Images.xcassets */; };
 		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
+		A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */; };
 		A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */; };
 		A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */; };
 		A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */; };
@@ -71,6 +72,7 @@
 		A432D3321B147B9F006D2B0E /* ZhiHuDaily-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZhiHuDaily-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
+		A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshBottomView.swift; sourceTree = "<group>"; };
 		A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTableViewCell.xib; sourceTree = "<group>"; };
 		A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTitleViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */,
 				A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */,
 				A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */,
+				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
 				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
+				A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,
 				A4939FC41B14D66800E041C4 /* CALayer+PKConvenienceAnimations.m in Sources */,
