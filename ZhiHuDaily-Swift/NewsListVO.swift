@@ -11,7 +11,7 @@ import Foundation
 /**
 *  用于保存新闻列表中的一条信息的Model
 */
-struct NewsVO {
+class NewsVO {
     
     /// 列表缩略图, 可能没有
     let images : [String]?
@@ -28,8 +28,11 @@ struct NewsVO {
     /// 无用
     let gaPrefix : Int?
     
+    /// 多图的标志
     let multipic : Bool
 
+    /// 是否已读的标志
+    var alreadyRead = false
     
     init(id:Int,title:String,images:[String]? = nil,multipic:Bool? = false,gaPrefix:Int? = nil) {
         self.id = id

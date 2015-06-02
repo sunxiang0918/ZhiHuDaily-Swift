@@ -108,6 +108,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
     }
     
+    //返回单元格的高
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         if  indexPath.section==0&&indexPath.row == 0 {
             return CGFloat(IN_WINDOW_HEIGHT)
@@ -156,8 +157,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             if  indexPath.section==0{
                 //这个是今天的新闻
                 if let news = newsListControl.todayNews?.news{
-                    
                     c.titleLabel.text = news[indexPath.row-1].title
+                    
+                    if  news[indexPath.row-1].alreadyRead {
+                        c.titleLabel.textColor = UIColor.grayColor()
+                    }else {
+                        c.titleLabel.textColor = UIColor.blackColor()
+                    }
+                    
                     let images = news[indexPath.row-1].images
                     if  let _img = images {
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
@@ -170,6 +177,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 
                 if let news = newsList.news {
                     c.titleLabel.text = news[indexPath.row].title
+                    
+                    if  news[indexPath.row].alreadyRead {
+                        c.titleLabel.textColor = UIColor.grayColor()
+                    }else {
+                        c.titleLabel.textColor = UIColor.blackColor()
+                    }
+                    
                     let images = news[indexPath.row].images
                     if  let _img = images {
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
@@ -181,11 +195,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             return cell
         }
-        
-//        let rowData = self.channelData[indexPath.row]
-        
-        //设置cell的标题
-//        cell.textLabel?.text = rowData["name"].string
         
     }
     //================UITableViewDataSource的实现================================
@@ -265,6 +274,44 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         myView.addSubview(titleView)
         
         return myView
+    }
+    
+    // 当点击选择Row了以后的 动作
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if  indexPath.section==0 {
+            //如果选择的是当天的新闻
+            
+            if let newsListVO=self.newsListControl.todayNews {
+                //获取选择的对象
+                let new=newsListVO.news![indexPath.row-1]
+                
+                new.alreadyRead = true
+                
+                let cell = tableView.cellForRowAtIndexPath(indexPath)
+                
+                let c = cell as! NewsListTableViewCell
+                
+                c.titleLabel.textColor = UIColor.grayColor()
+            }
+            
+        }else{
+            //选择的是今天之前的新闻
+            
+            let newsListVO=self.newsListControl.news[indexPath.section-1]
+            //获取选择的对象
+            let new=newsListVO.news![indexPath.row-1]
+                
+            new.alreadyRead = true
+            
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            
+            let c = cell as! NewsListTableViewCell
+            
+            c.titleLabel.textColor = UIColor.grayColor()
+        }
+        
+//        tableView.reloadData()
     }
     //================UITableViewDelegate的实现==================================
     
