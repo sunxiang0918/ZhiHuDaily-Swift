@@ -162,6 +162,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                     if  let _img = images {
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
                     }
+                    
+                    c.multipicLabel.hidden = !news[indexPath.row-1].multipic
                 }
             }else {
                 let newsList = newsListControl.news[indexPath.section-1]
@@ -172,6 +174,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                     if  let _img = images {
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
                     }
+                    c.multipicLabel.hidden = !news[indexPath.row-1].multipic
                 }
                 
             }

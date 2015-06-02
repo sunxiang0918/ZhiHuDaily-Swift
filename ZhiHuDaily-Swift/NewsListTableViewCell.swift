@@ -14,6 +14,8 @@ class NewsListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var newsImageView: UIImageView!
     
+    @IBOutlet weak var multipicLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

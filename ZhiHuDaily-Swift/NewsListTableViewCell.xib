@@ -31,15 +31,29 @@
                             <constraint firstAttribute="width" constant="80" id="qSe-aO-ULE"/>
                         </constraints>
                     </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❏多图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-bI-CRL">
+                        <rect key="frame" x="333" y="58.5" width="34" height="12.5"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12.5" id="2TY-qE-6GO"/>
+                            <constraint firstAttribute="width" constant="34" id="bJU-UY-Pxl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="bSd-Lv-BYj" secondAttribute="centerY" id="2Qx-dE-2g2"/>
                     <constraint firstAttribute="centerY" secondItem="UAH-5K-KM6" secondAttribute="centerY" constant="0.75" id="GvL-lr-gfn"/>
+                    <constraint firstItem="sgm-bI-CRL" firstAttribute="bottom" secondItem="UAH-5K-KM6" secondAttribute="bottom" id="M9C-cj-gJW"/>
                     <constraint firstItem="bSd-Lv-BYj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Y2C-an-Rby"/>
+                    <constraint firstItem="sgm-bI-CRL" firstAttribute="trailing" secondItem="UAH-5K-KM6" secondAttribute="trailing" id="c9q-DJ-LDR"/>
                     <constraint firstItem="UAH-5K-KM6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="quo-kn-Pel"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="multipicLabel" destination="sgm-bI-CRL" id="L0U-K2-OzG"/>
                 <outlet property="newsImageView" destination="UAH-5K-KM6" id="OGK-xi-q8I"/>
                 <outlet property="titleLabel" destination="bSd-Lv-BYj" id="Gnx-cG-QeS"/>
             </connections>

@@ -28,10 +28,14 @@ struct NewsVO {
     /// 无用
     let gaPrefix : Int?
     
-    init(id:Int,title:String,images:[String]? = nil,gaPrefix:Int? = nil) {
+    let multipic : Bool
+
+    
+    init(id:Int,title:String,images:[String]? = nil,multipic:Bool? = false,gaPrefix:Int? = nil) {
         self.id = id
         self.title = title
         self.images = images
+        self.multipic = multipic ?? false
         self.gaPrefix = gaPrefix
     }
     

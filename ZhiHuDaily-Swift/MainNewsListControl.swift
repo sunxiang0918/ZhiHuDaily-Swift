@@ -200,7 +200,9 @@ class MainNewsListControl {
             }
         }
         
-        return NewsVO(id: id, title: title, images: image, gaPrefix: gaPrefix)
+        let multipic = json["multipic"].bool
+        
+        return NewsVO(id: id, title: title, images: image, multipic:multipic, gaPrefix: gaPrefix)
     }
     
     
