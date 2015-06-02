@@ -96,7 +96,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             return 1
         }else {
             
-            if newsListControl.news.count > section {
+            if newsListControl.news.count+1 >= section {
                 let newsList = newsListControl.news[section-1]
                 
                 if let news = newsList.news {
@@ -200,7 +200,10 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     :returns:
     */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        
+        let newsCount = self.newsListControl.news.count
+        
+        return newsCount+1
     }
     
     /**
