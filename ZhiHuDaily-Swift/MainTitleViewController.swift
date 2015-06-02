@@ -13,8 +13,8 @@ import UIKit
 */
 class MainTitleViewController: UIViewController,RefreshViewDelegate {
 
-    private let BACKGROUND_COLOR_1 = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
-    private let BACKGROUND_COLOR_0 = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 0)
+    private let BACKGROUND_COLOR_1 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
+    private let BACKGROUND_COLOR_0 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 0)
     
     private var _refreshControl:RefreshControl?     //关联的刷新Control
     
@@ -171,7 +171,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
         
         
         //这里使用的是修改他得背景颜色的透明度来实现的.不直接使用titleView.alpha = CGFloat(result)是因为, 这样修改会导致这个View上面的所有的subView都会透明
-        self.view.backgroundColor = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: CGFloat(result))
+        self.view.backgroundColor = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: CGFloat(result))
     }
     
     /**

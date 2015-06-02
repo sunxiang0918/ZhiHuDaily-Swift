@@ -124,7 +124,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-a6-owA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="bih-8Y-JXL"/>
                                 </constraints>

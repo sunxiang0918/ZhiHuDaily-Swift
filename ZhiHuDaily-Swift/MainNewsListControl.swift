@@ -208,11 +208,46 @@ class MainNewsListControl {
     
     
     /**
-    用于加载某一天的新闻,并加入到缓存中去
+    用于新加载下一天的新闻,并加入到缓存中去
     
-    :param: date 日期. 格式是 yyyyMMdd
     */
-    func loadSomeDayNews(date:Int){
+    func loadNewDayNews(block:()->Void){
+        
+        var day = 0
+        if news.isEmpty {
+            //表示新的,需要加载的是 昨天的新闻
+            let today = NSDate()
+            let formatter:NSDateFormatter = NSDateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            day = formatter.stringFromDate(today).toInt()!
+        }else {
+            let lastestNews = news.last
+            day = (lastestNews?.date)!
+        }
+        
+        Alamofire.Manager.sharedInstance.request(Method.GET, SOMEDAY_NEWS_URL+"\(day)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+            if  let result:AnyObject = data {
+                let json = JSON(result)
+                
+                let news = NewsListVO()
+                
+                let date = json["date"].string!.toInt()
+                
+                news.date = date
+                
+                //最新新闻
+                let stories = json["stories"].array
+                
+                //遍历最新的新闻
+                let lastestNews : [NewsVO]? = self.convertStoriesJson2Vo(stories, type: .NEWS)
+                
+                news.news = lastestNews
+                
+                self.news.append(news)
+                
+                block()
+            }
+        }
         
     }
     

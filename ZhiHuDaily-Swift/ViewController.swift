@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate,MainTitleViewDelegate {
     
-    private let BACKGROUND_COLOR = UIColor(red: 0.125, green: 0.471, blue: 1.000, alpha: 1)
+    private let BACKGROUND_COLOR = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
     
     var leftViewController : UIViewController?
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         refreshControl.bottomEnabled = true
         refreshControl.registeTopView(mainTitleViewController!)
         refreshControl.enableInsetTop = SCROLL_HEIGHT
-        refreshControl.enableInsetBottom = 65
+        refreshControl.enableInsetBottom = 30
         
         let y=max(self.mainTableView.bounds.size.height, self.mainTableView.contentSize.height);
         refreshBottomView = RefreshBottomView(frame: CGRectMake(CGFloat(0),y , self.mainTableView!.bounds.size.width, CGFloat(refreshControl.enableInsetBottom+45)))
@@ -169,12 +169,12 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 let newsList = newsListControl.news[indexPath.section-1]
                 
                 if let news = newsList.news {
-                    c.titleLabel.text = news[indexPath.row-1].title
-                    let images = news[indexPath.row-1].images
+                    c.titleLabel.text = news[indexPath.row].title
+                    let images = news[indexPath.row].images
                     if  let _img = images {
                         c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
                     }
-                    c.multipicLabel.hidden = !news[indexPath.row-1].multipic
+                    c.multipicLabel.hidden = !news[indexPath.row].multipic
                 }
                 
             }
@@ -246,7 +246,21 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         titleView.textColor = UIColor.whiteColor()      //设置字体颜色
         
         //设置文字内容
-        titleView.text = "05月2\(section)日 星期\(section)"
+        
+        var news:NewsListVO
+        if  section == 0 {
+            news = self.newsListControl.todayNews!
+        }else {
+            news = self.newsListControl.news[section-1]
+        }
+        let date = news.date
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "zh_CN")
+        formatter.dateFormat = "yyyyMMdd"
+        let today = formatter.dateFromString("\(date)")
+        formatter.dateFormat = "MM月d日 cccc"
+        
+        titleView.text = formatter.stringFromDate(today!)
         
         myView.addSubview(titleView)
         
@@ -264,9 +278,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             self.newsListControl.refreshNews()
             self.mainTableView.reloadData()
 //            refreshControl.finishRefreshingDirection(direction)
+        }else{
+            self.newsListControl.loadNewDayNews({ () -> Void in
+                self.mainTableView.reloadData()
+            })
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
             println("结束刷新!!\(direction.hashValue)")
             refreshControl.finishRefreshingDirection(direction)
         })
