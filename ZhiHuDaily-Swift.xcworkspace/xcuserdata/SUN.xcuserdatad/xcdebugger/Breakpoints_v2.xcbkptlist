@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZhiHuDaily-Swift/ViewController.swift"
-            timestampString = "454944928.389399"
+            filePath = "ZhiHuDaily-Swift/CustomPushSegue.swift"
+            timestampString = "454953179.693513"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuDaily-Swift/ViewController.swift"
-            timestampString = "454945028.565346"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "perform()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

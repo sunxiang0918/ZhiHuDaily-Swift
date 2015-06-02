@@ -311,6 +311,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             c.titleLabel.textColor = UIColor.grayColor()
         }
         
+        
+        self.performSegueWithIdentifier("pushSegue", sender: nil)
 //        tableView.reloadData()
     }
     //================UITableViewDelegate的实现==================================
