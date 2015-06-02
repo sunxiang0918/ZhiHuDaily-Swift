@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         rightController.leftViewController = leftController
         
+        //开始异步的读取新闻数据
+        rightController.newsListControl.refreshNews()
+        
         let navController = self.window?.rootViewController as? UINavigationController
         
         //实例化一个PKRevealController 也就是能左右滑动的视图

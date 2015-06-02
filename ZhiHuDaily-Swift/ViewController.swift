@@ -20,7 +20,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     var refreshControl : RefreshControl!
     
-    var newsListControl : MainNewsListControl!
+    var newsListControl : MainNewsListControl = MainNewsListControl()
     
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
@@ -43,9 +43,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         refreshBottomView = RefreshBottomView(frame: CGRectMake(CGFloat(0),y , self.mainTableView!.bounds.size.width, CGFloat(refreshControl.enableInsetBottom+45)))
         refreshControl.registeBottomView(refreshBottomView!)
         refreshBottomView?.resetLayoutSubViews()
-        
-        newsListControl = MainNewsListControl()
-        newsListControl.refreshNews()
         
         super.viewDidLoad()
         
