@@ -53,10 +53,21 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+    界面切换传值的方法
+    
+    :param: segue
+    :param: sender
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "mainTitleView") {
+        if segue.identifier == "mainTitleView" {
             mainTitleViewController = segue.destinationViewController as? MainTitleViewController
             mainTitleViewController?.mainTitleViewDelegate = self
+        }else if segue.identifier == "pushSegue" {
+            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
+            
+            newsDetailViewController?.news = sender as! NewsVO
+            
         }
     }
     
@@ -282,21 +293,21 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     // 当点击选择Row了以后的 动作
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        var news:NewsVO!
+        
         if  indexPath.section==0 {
             //如果选择的是当天的新闻
-            
             if let newsListVO=self.newsListControl.todayNews {
-                doAlreadyRead(newsListVO, indexPath: indexPath)
+                news=doAlreadyRead(newsListVO, indexPath: indexPath)
             }
         }else{
             //选择的是今天之前的新闻
-            
             let newsListVO=self.newsListControl.news[indexPath.section-1]
-            doAlreadyRead(newsListVO, indexPath: indexPath)
+            news=doAlreadyRead(newsListVO, indexPath: indexPath)
         }
         
         // 跳转到详细页面
-        self.performSegueWithIdentifier("pushSegue", sender: nil)
+        self.performSegueWithIdentifier("pushSegue", sender: news)
     }
     
     /**
@@ -305,7 +316,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     :param: newsListVO
     :param: indexPath
     */
-    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) {
+    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) -> NewsVO {
         
         //获取选择的对象
         let new=newsListVO.news![indexPath.row-1]
@@ -318,6 +329,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         c.titleLabel.textColor = UIColor.grayColor()
         
+        return new
     }
     
     //================UITableViewDelegate的实现==================================
@@ -344,6 +356,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         })
         
     }
+    
+    //================RefreshControlDelegate的实现===============================
+    
     
 
 }

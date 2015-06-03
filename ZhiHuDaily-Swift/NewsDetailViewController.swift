@@ -13,6 +13,8 @@ import UIKit
 */
 class NewsDetailViewController: UIViewController{
 
+    var news:NewsVO!
+    
     /**
     响应整个View的 慢拖动事件
     
@@ -85,6 +87,15 @@ class NewsDetailViewController: UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /**
+    页面重新加载的时候调用的方法
+    
+    :param: animated
+    */
+    override func viewWillAppear(animated: Bool) {
+        println("news:\(news)")
     }
     
 }
