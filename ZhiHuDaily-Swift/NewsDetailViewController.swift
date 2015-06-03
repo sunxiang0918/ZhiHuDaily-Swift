@@ -8,26 +8,41 @@
 
 import UIKit
 
+/**
+*  新闻详细页面的 controller
+*/
 class NewsDetailViewController: UIViewController{
 
+    /**
+    响应整个View的 慢拖动事件
+    
+    :param: sender
+    */
     @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
         
         let view = self.view
         
         if  sender.state == UIGestureRecognizerState.Began {
+            //当拖动事件开始的时候
+            
+            //获取拖动事件的开始点坐标
             let location = sender.locationInView(view)
             
+            //获取拖动事件的偏移坐标
             let translation = sender.translationInView(view!)
             
-            let b = (view?.bounds)!
-            let c = self.navigationController?.viewControllers
-            
+            //当偏移坐标的x轴大于0,也就是向右滑动的时候.开始做真正的动作
             if  translation.x > 0 && self.navigationController?.viewControllers.count == 2 {
-                //只有向右滑动的时候才起作用
+                //开启新的转场动画控制器
                 interactionController = UIPercentDrivenInteractiveTransition.new()
+                
+                //开始调用navigation的POP转场
                 self.navigationController?.popToRootViewControllerAnimated(true)
             }
         }else if  sender.state == UIGestureRecognizerState.Changed {
+            //当拖动事件进行时
+            
+            //获取到事件的偏移坐标
             let translation = sender.translationInView(view!)
             
             if translation.x<0 {
@@ -35,24 +50,29 @@ class NewsDetailViewController: UIViewController{
                 return
             }
             
+            //获取view的CGRect
             let b = (view?.bounds)!
             
+            //计算百分比
             let d = fabs(translation.x / CGRectGetWidth(b))
             
+            //设置转场动画的百分比
             interactionController?.updateInteractiveTransition(d)
-            
         }else if sender.state == UIGestureRecognizerState.Ended {
-            
-            let location = sender.locationInView(view)
+            //当拖动事件结束时
             
             let translation = sender.translationInView(view!)
             
+            //判断速率向量是否大于0, 并且拉动的距离已经过半了
             if  sender.velocityInView(view).x > 0 && translation.x > CGRectGetMidX(view.bounds)-20  {
+                //完成整个动画
                 interactionController?.finishInteractiveTransition()
             }else {
+                //停止转场
                 interactionController?.cancelInteractiveTransition()
             }
             
+            //这个地方必须设置成nil. 避免两次之间的转场冲突了
             interactionController = nil;
         }
         
@@ -66,16 +86,5 @@ class NewsDetailViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 }

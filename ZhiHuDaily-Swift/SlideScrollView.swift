@@ -70,7 +70,6 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
                 imgView.userInteractionEnabled = true
                 
                 imgView.transform = CGAffineTransformMakeTranslation(0, -100);
-//                imgView.center = CGPointMake(320, 320)
                 
                 imgView.tag = i
                 

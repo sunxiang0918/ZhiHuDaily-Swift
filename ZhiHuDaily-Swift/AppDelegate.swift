@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //实例化一个PKRevealController 也就是能左右滑动的视图
         let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         
+        //放入rootView
         navController?.pushViewController(revealController, animated: false)
         
         loadStartImage(LAUNCH_IMAGE_URL, onSuccess: {(name,image) in

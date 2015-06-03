@@ -15,8 +15,10 @@ class NavigationControllerDelegate: NSObject,UINavigationControllerDelegate {
     
     @IBOutlet weak var navigationController: UINavigationController!
     
-    var popAnimation : NormalPopAnimation = NormalPopAnimation()
+    //实例化一个 自定义的Pop 转场动画
+    let popAnimation : NormalPopAnimation = NormalPopAnimation()
     
+    //====================UINavigationControllerDelegate协议的实现======================================================
     //返回动画
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -32,5 +34,7 @@ class NavigationControllerDelegate: NSObject,UINavigationControllerDelegate {
     func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
     }
+    
+     //====================UINavigationControllerDelegate协议的实现======================================================
     
 }
