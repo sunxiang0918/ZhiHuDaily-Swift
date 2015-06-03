@@ -32,10 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = self.window?.rootViewController as? UINavigationController
         
-        let newsDetailController=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("newsDetailViewController") as? NewsDetailViewController
-        newsDetailController?.delegate = navController as? NewsDetailHandleGestureDelegate
-        
-        
         //实例化一个PKRevealController 也就是能左右滑动的视图
         let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         

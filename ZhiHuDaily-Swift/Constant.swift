@@ -21,3 +21,5 @@ let TITLE_HEIGHT:Float = 44
 let LAUNCH_IMAGE_URL="http://news-at.zhihu.com/api/4/start-image/1080*1776"
 let LATEST_NEWS_URL="http://news-at.zhihu.com/api/4/news/latest"
 let SOMEDAY_NEWS_URL = "http://news.at.zhihu.com/api/4/news/before/"
+
+var interactionController : UIPercentDrivenInteractiveTransition?
