@@ -10,8 +10,6 @@ import UIKit
 
 class NewsDetailViewController: UIViewController{
 
-//    var interactionController : UIPercentDrivenInteractiveTransition?
-    
     @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
         
         let view = self.view
@@ -20,8 +18,6 @@ class NewsDetailViewController: UIViewController{
             let location = sender.locationInView(view)
             
             let translation = sender.translationInView(view!)
-            println("translation:\(translation) location:\(location)")
-            
             
             let b = (view?.bounds)!
             let c = self.navigationController?.viewControllers
@@ -41,10 +37,7 @@ class NewsDetailViewController: UIViewController{
             
             let b = (view?.bounds)!
             
-            // fabs() 求浮点数的绝对值
             let d = fabs(translation.x / CGRectGetWidth(b))
-            
-//            println("translation:\(translation) d:\(d)")
             
             interactionController?.updateInteractiveTransition(d)
             
@@ -53,11 +46,8 @@ class NewsDetailViewController: UIViewController{
             let location = sender.locationInView(view)
             
             let translation = sender.translationInView(view!)
-            println("END translation:\(translation) location:\(location)")
             
-            interactionController?.cancelInteractiveTransition()
-            
-            if  sender.velocityInView(view).x < 0 {
+            if  sender.velocityInView(view).x > 0 && translation.x > CGRectGetMidX(view.bounds)-20  {
                 interactionController?.finishInteractiveTransition()
             }else {
                 interactionController?.cancelInteractiveTransition()

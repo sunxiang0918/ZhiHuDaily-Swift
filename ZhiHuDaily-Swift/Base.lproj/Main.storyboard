@@ -237,7 +237,6 @@
                         <action selector="panGestureAction:" destination="lOs-R4-ra9" id="wna-eq-RWw"/>
                     </connections>
                 </panGestureRecognizer>
-                <customObject id="urh-Hs-Zgk" customClass="NewsDetailHandleGestureDelegate"/>
             </objects>
             <point key="canvasLocation" x="1397" y="1163"/>
         </scene>

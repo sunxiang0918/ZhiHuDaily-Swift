@@ -41,6 +41,7 @@
 		A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5507D1B18C3E2000E9526 /* Constant.swift */; };
 		A4D80C741B1E9BE600247226 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */; };
 		A4D80C781B1EAC4D00247226 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */; };
+		A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		A4C5507D1B18C3E2000E9526 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
+		A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalPopAnimation.swift; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
 		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -266,6 +268,7 @@
 				A485458D1B18099D001CC98F /* RefreshControl */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 				A4C5507D1B18C3E2000E9526 /* Constant.swift */,
+				A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */,
+				A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */,
 				A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */,
 				A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
