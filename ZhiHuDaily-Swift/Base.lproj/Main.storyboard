@@ -215,7 +215,7 @@
         <!--News Detail View Controller-->
         <scene sceneID="WyP-9r-GIu">
             <objects>
-                <viewController id="lOs-R4-ra9" customClass="NewsDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newsDetailViewController" id="lOs-R4-ra9" customClass="NewsDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gn7-qk-YbZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Kaj-Ph-IpD"/>
@@ -224,10 +224,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="JAR-gT-Jy5" appends="YES" id="FOD-yd-0gC"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="XXy-VR-Oy5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UxP-Mw-tGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="JAR-gT-Jy5">
+                    <connections>
+                        <action selector="panGestureAction:" destination="lOs-R4-ra9" id="wna-eq-RWw"/>
+                    </connections>
+                </panGestureRecognizer>
+                <customObject id="urh-Hs-Zgk" customClass="NewsDetailHandleGestureDelegate"/>
             </objects>
             <point key="canvasLocation" x="1397" y="1163"/>
         </scene>
@@ -239,8 +249,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <outlet property="delegate" destination="ztj-RE-he5" id="9gH-rf-Af0"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYb-PE-VKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ztj-RE-he5" userLabel="Navigation Controller Delegate" customClass="NavigationControllerDelegate" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                    <connections>
+                        <outlet property="navigationController" destination="gHq-w5-EYn" id="wu8-Qk-aZa"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-356" y="650"/>
         </scene>

@@ -8,12 +8,72 @@
 
 import UIKit
 
-class NewsDetailViewController: UIViewController {
+class NewsDetailViewController: UIViewController{
 
+    var delegate:NewsDetailHandleGestureDelegate?
+    
+//    var interactionController : UIPercentDrivenInteractiveTransition?
+    
+    @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
+        
+        delegate?.handleGesture(sender)
+        
+//        let view = self.view
+//        
+//        if  sender.state == UIGestureRecognizerState.Began {
+//            let location = sender.locationInView(view)
+//            
+//            let translation = sender.translationInView(view!)
+//            println("translation:\(translation) location:\(location)")
+//            
+//            
+//            let b = (view?.bounds)!
+//            let c = self.navigationController?.viewControllers
+//            
+//            if  translation.x > 0 && self.navigationController?.viewControllers.count == 2 {
+//                //只有向右滑动的时候才起作用
+//                interactionController = UIPercentDrivenInteractiveTransition.new()
+//                self.navigationController?.popToRootViewControllerAnimated(true)
+//            }
+//        }else if  sender.state == UIGestureRecognizerState.Changed {
+//            let translation = sender.translationInView(view!)
+//            
+//            if translation.x<0 {
+//                //如果是向左移动,就不采取动作
+//                return
+//            }
+//            
+//            let b = (view?.bounds)!
+//            
+//            // fabs() 求浮点数的绝对值
+//            let d = fabs(translation.x / CGRectGetWidth(b))
+//            
+////            println("translation:\(translation) d:\(d)")
+//            
+//            interactionController?.updateInteractiveTransition(d)
+//            
+//        }else if sender.state == UIGestureRecognizerState.Ended {
+//            
+//            let location = sender.locationInView(view)
+//            
+//            let translation = sender.translationInView(view!)
+//            println("END translation:\(translation) location:\(location)")
+//            
+//            interactionController?.cancelInteractiveTransition()
+//            
+//            if  sender.velocityInView(view).x < 0 {
+//                interactionController?.finishInteractiveTransition()
+//            }else {
+//                interactionController?.cancelInteractiveTransition()
+//            }
+//            
+//            interactionController = nil;
+//        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,5 +91,10 @@ class NewsDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+}
 
+
+protocol NewsDetailHandleGestureDelegate {
+    func handleGesture(sender: UIPanGestureRecognizer)
 }
