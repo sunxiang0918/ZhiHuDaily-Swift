@@ -212,10 +212,10 @@
             </objects>
             <point key="canvasLocation" x="1350" y="597"/>
         </scene>
-        <!--View Controller-->
+        <!--News Detail View Controller-->
         <scene sceneID="WyP-9r-GIu">
             <objects>
-                <viewController id="lOs-R4-ra9" sceneMemberID="viewController">
+                <viewController id="lOs-R4-ra9" customClass="NewsDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gn7-qk-YbZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Kaj-Ph-IpD"/>
