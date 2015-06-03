@@ -153,40 +153,15 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             if  indexPath.section==0{
                 //这个是今天的新闻
-                if let news = newsListControl.todayNews?.news{
-                    c.titleLabel.text = news[indexPath.row-1].title
-                    
-                    if  news[indexPath.row-1].alreadyRead {
-                        c.titleLabel.textColor = UIColor.grayColor()
-                    }else {
-                        c.titleLabel.textColor = UIColor.blackColor()
-                    }
-                    
-                    let images = news[indexPath.row-1].images
-                    if  let _img = images {
-                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
-                    }
-                    
-                    c.multipicLabel.hidden = !news[indexPath.row-1].multipic
-                }
+                
+                let newsList = newsListControl.todayNews!
+                
+                cell = self.doReturnCell(newsList, row: indexPath.row-1)
+                
             }else {
                 let newsList = newsListControl.news[indexPath.section-1]
                 
-                if let news = newsList.news {
-                    c.titleLabel.text = news[indexPath.row].title
-                    
-                    if  news[indexPath.row].alreadyRead {
-                        c.titleLabel.textColor = UIColor.grayColor()
-                    }else {
-                        c.titleLabel.textColor = UIColor.blackColor()
-                    }
-                    
-                    let images = news[indexPath.row].images
-                    if  let _img = images {
-                        c.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
-                    }
-                    c.multipicLabel.hidden = !news[indexPath.row].multipic
-                }
+                cell = self.doReturnCell(newsList, row: indexPath.row)
                 
             }
             
@@ -194,6 +169,38 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         
     }
+    
+    /**
+    返回视图Cell
+    
+    :param: newsList
+    :param: row
+    
+    :returns:
+    */
+    private func doReturnCell(newsList:NewsListVO,row:Int) -> UITableViewCell {
+        
+        let cell = mainTableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as! NewsListTableViewCell
+        
+        if let news = newsList.news {
+            cell.titleLabel.text = news[row].title
+            
+            if  news[row].alreadyRead {
+                cell.titleLabel.textColor = UIColor.grayColor()
+            }else {
+                cell.titleLabel.textColor = UIColor.blackColor()
+            }
+            
+            let images = news[row].images
+            if  let _img = images {
+                cell.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
+            }
+            cell.multipicLabel.hidden = !news[row].multipic
+        }
+        
+        return cell
+    }
+    
     //================UITableViewDataSource的实现================================
     
     //================UITableViewDelegate的实现==================================
@@ -280,38 +287,40 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             //如果选择的是当天的新闻
             
             if let newsListVO=self.newsListControl.todayNews {
-                //获取选择的对象
-                let new=newsListVO.news![indexPath.row-1]
-                
-                new.alreadyRead = true
-                
-                let cell = tableView.cellForRowAtIndexPath(indexPath)
-                
-                let c = cell as! NewsListTableViewCell
-                
-                c.titleLabel.textColor = UIColor.grayColor()
+                doAlreadyRead(newsListVO, indexPath: indexPath)
             }
-            
         }else{
             //选择的是今天之前的新闻
             
             let newsListVO=self.newsListControl.news[indexPath.section-1]
-            //获取选择的对象
-            let new=newsListVO.news![indexPath.row-1]
-                
-            new.alreadyRead = true
-            
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            
-            let c = cell as! NewsListTableViewCell
-            
-            c.titleLabel.textColor = UIColor.grayColor()
+            doAlreadyRead(newsListVO, indexPath: indexPath)
         }
         
-        
+        // 跳转到详细页面
         self.performSegueWithIdentifier("pushSegue", sender: nil)
-//        tableView.reloadData()
     }
+    
+    /**
+    标记 已点击的 单元格
+    
+    :param: newsListVO
+    :param: indexPath
+    */
+    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) {
+        
+        //获取选择的对象
+        let new=newsListVO.news![indexPath.row-1]
+        
+        new.alreadyRead = true
+        
+        let cell = mainTableView.cellForRowAtIndexPath(indexPath)
+        
+        let c = cell as! NewsListTableViewCell
+        
+        c.titleLabel.textColor = UIColor.grayColor()
+        
+    }
+    
     //================UITableViewDelegate的实现==================================
     
 
