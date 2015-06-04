@@ -306,6 +306,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             news=doAlreadyRead(newsListVO, indexPath: indexPath)
         }
         
+        //这个地方开始异步的获取新闻详细.然后再进行跳转
+        
         // 跳转到详细页面
         self.performSegueWithIdentifier("pushSegue", sender: news)
     }
