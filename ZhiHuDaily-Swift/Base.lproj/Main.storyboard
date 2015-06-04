@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Left View Controller-->
         <scene sceneID="iKm-UA-PmI">
             <objects>
-                <viewController storyboardIdentifier="leftViewController" id="JsO-fA-3ao" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftViewController" id="JsO-fA-3ao" customClass="LeftViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lWt-gM-1Bd"/>
                         <viewControllerLayoutGuide type="bottom" id="NFr-GS-1cR"/>
@@ -41,9 +41,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnF-9w-5y2">
+                                <rect key="frame" x="18" y="101" width="318" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="318" id="XLv-kn-pdc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JnF-9w-5y2" firstAttribute="top" secondItem="lWt-gM-1Bd" secondAttribute="bottom" constant="81" id="Yxu-Po-DWA"/>
+                            <constraint firstItem="JnF-9w-5y2" firstAttribute="leading" secondItem="o8c-hg-NNo" secondAttribute="leadingMargin" constant="2" id="qsc-rE-LCo"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="usedSizeLabel" destination="JnF-9w-5y2" id="MRE-bo-x0I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXA-Ym-bAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

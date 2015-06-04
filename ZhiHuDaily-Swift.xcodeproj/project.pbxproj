@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D6CBCBAC47A08E63F4FDC80 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
@@ -66,6 +67,7 @@
 /* Begin PBXFileReference section */
 		6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6FB894871E29411B4B980961 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */,
 				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 				A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */,
+				A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
 				A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */,
 				A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */,
+				A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);
