@@ -20,7 +20,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     var refreshControl : RefreshControl!
     
-    var newsListControl : MainNewsListControl = MainNewsListControl()
+    let newsListControl : MainNewsListControl = MainNewsListControl()
+    
+    let newsDetailControl : NewsDetailControl = NewsDetailControl()
     
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
@@ -66,7 +68,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }else if segue.identifier == "pushSegue" {
             let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
             
-            newsDetailViewController?.news = sender as! NewsVO
+            newsDetailViewController?.news = sender as! NewsDetailVO
             
         }
     }
@@ -308,8 +310,11 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         //这个地方开始异步的获取新闻详细.然后再进行跳转
         
-        // 跳转到详细页面
-        self.performSegueWithIdentifier("pushSegue", sender: news)
+        newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
+            // 跳转到详细页面
+            self.performSegueWithIdentifier("pushSegue", sender: newsDetail)
+        })
+        
     }
     
     /**

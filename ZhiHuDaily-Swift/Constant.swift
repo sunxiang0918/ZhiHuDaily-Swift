@@ -21,6 +21,7 @@ let TITLE_HEIGHT:Float = 44
 let LAUNCH_IMAGE_URL="http://news-at.zhihu.com/api/4/start-image/1080*1776"
 let LATEST_NEWS_URL="http://news-at.zhihu.com/api/4/news/latest"
 let SOMEDAY_NEWS_URL = "http://news.at.zhihu.com/api/4/news/before/"
+let NEWS_DETAIL_URL = "http://news-at.zhihu.com/api/4/news/"
 
 //由于NewsDetailViewController和NavigationControllerDelegate 都需要访问这个转场控制器,而且两个的关系差太远,所以只能写到这作为全局变量了
 var interactionController : UIPercentDrivenInteractiveTransition?

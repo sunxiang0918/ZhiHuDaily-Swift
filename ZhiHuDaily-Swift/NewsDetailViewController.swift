@@ -13,7 +13,7 @@ import UIKit
 */
 class NewsDetailViewController: UIViewController{
 
-    var news:NewsVO!
+    var news:NewsDetailVO!
     
     /**
     响应整个View的 慢拖动事件

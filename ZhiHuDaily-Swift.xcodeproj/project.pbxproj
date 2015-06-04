@@ -39,6 +39,7 @@
 		A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FBF1B14D66800E041C4 /* PKRevealController.m */; };
 		A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */; };
 		A4B3A7C51B1FE79500F3C1C1 /* NewsDetailControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B3A7C41B1FE79500F3C1C1 /* NewsDetailControl.swift */; };
+		A4B3A7CB1B1FE85C00F3C1C1 /* NewsDetailVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B3A7CA1B1FE85C00F3C1C1 /* NewsDetailVO.swift */; };
 		A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5507D1B18C3E2000E9526 /* Constant.swift */; };
 		A4D80C741B1E9BE600247226 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */; };
 		A4D80C781B1EAC4D00247226 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */; };
@@ -113,6 +114,7 @@
 		A4939FC01B14D66800E041C4 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PKRevealController.xcodeproj; sourceTree = "<group>"; };
 		A4939FD01B1553D400E041C4 /* LaunchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchImageViewController.swift; sourceTree = "<group>"; };
 		A4B3A7C41B1FE79500F3C1C1 /* NewsDetailControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailControl.swift; sourceTree = "<group>"; };
+		A4B3A7CA1B1FE85C00F3C1C1 /* NewsDetailVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailVO.swift; sourceTree = "<group>"; };
 		A4C5507D1B18C3E2000E9526 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				A486F0871B1A0E2900F75621 /* NewsListVO.swift */,
+				A4B3A7CA1B1FE85C00F3C1C1 /* NewsDetailVO.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
 				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
+				A4B3A7CB1B1FE85C00F3C1C1 /* NewsDetailVO.swift in Sources */,
 				A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,

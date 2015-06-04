@@ -7,7 +7,118 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
+import Haneke
 
 class NewsDetailControl {
+    
+    /**
+    加载新闻详细的方法
+    
+    :param: id       新闻的id
+    :param: complate 当加载完成后,调用的回调
+    :param: block 当加载失败后,调用的回调
+    */
+    func loadNewsDetail(id:Int,complate:(newsDetail:NewsDetailVO?)->Void,block:((error:NSError)->Void)? = nil){
+
+        let stringCache = Shared.stringCache
+        
+        if  let string = stringCache.get(key: "\(id)") {
+            //在缓存中找到了新闻的详细信息,直接返回
+            let json = JSON(string)
+            
+            let newsDetailVO=self.convertJSON2VO(json)
+            //执行完成的方法回调
+            complate(newsDetail: newsDetailVO)
+            
+        }else{
+            //没有找到新闻的详细,从网络上读取
+            //调用HTTP请求 获取新闻详细
+            Alamofire.Manager.sharedInstance.request(Method.GET, NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+                if let result: AnyObject = data {
+                    //转换成JSON
+                    let json = JSON(result)
+                    
+                    let newsDetailVO=self.convertJSON2VO(json)
+                    //执行完成的方法回调
+                    complate(newsDetail: newsDetailVO)
+                    
+                    //放入缓存中
+                    stringCache.set(value: json.stringValue, key: "\(id)")
+                }else{
+                    if let b = block {
+                        b(error: error!)
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+    把JSON转换成为VO 对象
+    
+    :param: json json
+    
+    :returns: VO对象
+    */
+    private func convertJSON2VO(json:SwiftyJSON.JSON) -> NewsDetailVO {
+        let id = json["id"].int!
+        
+        let body = json["body"].string
+        
+        let image_source = json["image_source"].string
+        
+        let title = json["title"].string!
+        
+        let image = json["image"].string
+        
+        let share_url = json["share_url"].string
+        
+        let js = json["js"].array
+        
+        let recommenders = json["recommenders"].array
+        
+        let section = json["section"]
+        
+        let type = json["type"].int!
+        
+        let css = json["css"].array
+        
+        var jss:[String]=[]
+        if let _js = js {
+            for s in _js {
+                jss.append(s.string!)
+            }
+        }
+        
+        var csss:[String]=[]
+        if let _css = css {
+            for s in _css {
+                csss.append(s.string!)
+            }
+        }
+        
+        var recomms:[String]=[]
+        if let _recommenders = recommenders {
+            for r in _recommenders {
+                recomms.append(r["avatar"].string!)
+            }
+        }
+        
+        var _section:Section? = nil
+        if  section.error == nil {
+            var sect:Section?
+            let thumbnail = section["thumbnail"].string!
+            let i = section["id"].int!
+            let sectionName = section["name"].string!
+            _section = Section(thumbnail: thumbnail, id: i, name: sectionName)
+        }
+        
+        
+        let newsDetailVO = NewsDetailVO(id: id, title: title, body: body, image: image, imageSource: image_source, type: type, css: csss, section: _section, recommenders: recomms, js: jss, shareUrl: share_url)
+        
+        return newsDetailVO
+    }
     
 }
