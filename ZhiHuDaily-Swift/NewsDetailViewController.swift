@@ -17,6 +17,7 @@ class NewsDetailViewController: UIViewController{
     
     @IBOutlet weak var webView: UIWebView!
     let topImage = UIImageView(frame: CGRectZero)
+    let maskImage = UIImageView(frame: CGRectZero)
     
     /**
     响应整个View的 慢拖动事件
@@ -91,6 +92,9 @@ class NewsDetailViewController: UIViewController{
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
         
+        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
+        self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
+        self.webView.scrollView.addSubview(self.maskImage)
     }
 
     override func didReceiveMemoryWarning() {
