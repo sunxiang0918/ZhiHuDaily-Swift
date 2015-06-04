@@ -22,12 +22,12 @@ class NewsDetailControl {
     */
     func loadNewsDetail(id:Int,complate:(newsDetail:NewsDetailVO?)->Void,block:((error:NSError)->Void)? = nil){
 
-        let stringCache = Shared.stringCache
+        let cache = Shared.dataCache
         
-        if  let string = stringCache.get(key: "\(id)") {
+        if  let data = cache.get(key: "\(id)") {
             //在缓存中找到了新闻的详细信息,直接返回
-            let json = JSON(string)
-            
+            let json = JSON(data: data)
+                
             let newsDetailVO=self.convertJSON2VO(json)
             //执行完成的方法回调
             complate(newsDetail: newsDetailVO)
@@ -35,23 +35,26 @@ class NewsDetailControl {
         }else{
             //没有找到新闻的详细,从网络上读取
             //调用HTTP请求 获取新闻详细
-            Alamofire.Manager.sharedInstance.request(Method.GET, NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-                if let result: AnyObject = data {
-                    //转换成JSON
-                    let json = JSON(result)
-                    
-                    let newsDetailVO=self.convertJSON2VO(json)
-                    //执行完成的方法回调
-                    complate(newsDetail: newsDetailVO)
-                    
-                    //放入缓存中
-                    stringCache.set(value: json.stringValue, key: "\(id)")
-                }else{
+            Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseString(encoding: NSUTF8StringEncoding){ (_, _, data, error) -> Void in
+                if  let result = data {
+                    if let dataFromString = result.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                        let json = JSON(data: dataFromString)
+                        
+                        let newsDetailVO=self.convertJSON2VO(json)
+                        //执行完成的方法回调
+                        complate(newsDetail: newsDetailVO)
+                        
+                        //放入缓存中
+                        cache.set(value: dataFromString, key: "\(id)")
+                    }
+                }else {
                     if let b = block {
                         b(error: error!)
                     }
                 }
+            
             }
+            
         }
     }
     
