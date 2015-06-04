@@ -47,7 +47,7 @@
                                     <constraint firstAttribute="width" constant="318" id="XLv-kn-pdc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -239,13 +239,49 @@
                     <view key="view" contentMode="scaleToFill" id="zQc-TK-6Dn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2U-QX-wo2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="558"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLZ-A7-Q1V">
+                                <rect key="frame" x="0.0" y="558" width="600" height="42"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ToolBar_Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="Vgp-hE-Cng">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="U1g-5d-iSJ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="G8a-DP-zSd"/>
+                                    <constraint firstItem="Vgp-hE-Cng" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" id="NyT-xV-W8z"/>
+                                    <constraint firstItem="Vgp-hE-Cng" firstAttribute="leading" secondItem="qLZ-A7-Q1V" secondAttribute="leading" id="WvF-yI-njv"/>
+                                    <constraint firstAttribute="width" secondItem="Vgp-hE-Cng" secondAttribute="width" id="tfz-Bc-EYE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="M2U-QX-wo2" secondAttribute="trailing" constant="-16" id="84g-gw-3xH"/>
+                            <constraint firstItem="M2U-QX-wo2" firstAttribute="leading" secondItem="zQc-TK-6Dn" secondAttribute="leadingMargin" constant="-16" id="SaX-Kp-OHR"/>
+                            <constraint firstItem="Kaj-Ph-IpD" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="bottom" id="efd-bw-Qxk"/>
+                            <constraint firstItem="M2U-QX-wo2" firstAttribute="top" secondItem="Gn7-qk-YbZ" secondAttribute="bottom" constant="-20" id="oh0-j3-owE"/>
+                            <constraint firstItem="qLZ-A7-Q1V" firstAttribute="leading" secondItem="zQc-TK-6Dn" secondAttribute="leadingMargin" constant="-16" id="s72-wo-JO2"/>
+                            <constraint firstItem="qLZ-A7-Q1V" firstAttribute="width" secondItem="zQc-TK-6Dn" secondAttribute="width" id="xfn-op-IIy"/>
+                            <constraint firstItem="Kaj-Ph-IpD" firstAttribute="top" secondItem="M2U-QX-wo2" secondAttribute="bottom" constant="42" id="zSF-kb-Q4A"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="JAR-gT-Jy5" appends="YES" id="FOD-yd-0gC"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="XXy-VR-Oy5"/>
+                    <connections>
+                        <outlet property="webView" destination="M2U-QX-wo2" id="uxq-Km-w5U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UxP-Mw-tGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="JAR-gT-Jy5">
@@ -278,4 +314,7 @@
             <point key="canvasLocation" x="-356" y="650"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ToolBar_Shadow" width="320" height="2"/>
+    </resources>
 </document>

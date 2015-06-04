@@ -15,6 +15,9 @@ class NewsDetailViewController: UIViewController{
 
     var news:NewsDetailVO!
     
+    @IBOutlet weak var webView: UIWebView!
+    let topImage = UIImageView(frame: CGRectZero)
+    
     /**
     响应整个View的 慢拖动事件
     
@@ -82,6 +85,12 @@ class NewsDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(IN_WINDOW_HEIGHT)))
+        self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
+        self.topImage.clipsToBounds = true
+        self.webView.scrollView.addSubview(self.topImage)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +104,28 @@ class NewsDetailViewController: UIViewController{
     :param: animated
     */
     override func viewWillAppear(animated: Bool) {
+        
+        let body = news.body
+        let css = news.css
+        let image = news.image
+        
+        if  var _body = body {
+            if let _css = css {
+                for c in _css {
+                    _body = "<link href='\(c)' rel='stylesheet' type='text/css' />\(_body)"
+                }
+            }
+            
+            webView.loadHTMLString(_body, baseURL: nil)
+        }
+        
+        if  let _image = image {
+            self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
+            self.webView.scrollView.contentInset = UIEdgeInsetsMake(-100, 0, 0, 0)
+        }else {
+            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+        
         println("news:\(news)")
     }
     
