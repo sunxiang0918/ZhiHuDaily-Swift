@@ -59,6 +59,33 @@ class NewsDetailControl {
     }
     
     /**
+    加载新闻扩展信息的
+    
+    :param: id       新闻ID
+    :param: complate 扩展信息
+    */
+    func loadNewsExtraInfo(id:Int,complate:(newsExtra:NewsExtraVO?)->Void,block:((error:NSError)->Void)? = nil){
+        
+        //由于新闻额外信息 是随时可能变的,所以不能做缓存
+        Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_EXTRA_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+            if let result: AnyObject = data {
+                //转换成JSON
+                let json = JSON(result)
+                
+                let long_comments = json["long_comments"].int!
+                let popularity = json["popularity"].int!
+                let short_comments = json["short_comments"].int!
+                let comments = json["comments"].int!
+                
+                let newsExtra = NewsExtraVO(longComments: long_comments, popularity: popularity, shortComments: short_comments, comments: comments)
+                
+                complate(newsExtra: newsExtra)
+            }
+            
+        }
+    }
+    
+    /**
     把JSON转换成为VO 对象
     
     :param: json json

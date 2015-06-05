@@ -76,3 +76,20 @@ struct Section {
         self.name = name
     }
 }
+
+/**
+*  新闻的扩展信息
+*/
+struct NewsExtraVO {
+    let longComments : Int
+    let popularity : Int
+    let shortComments : Int
+    let comments : Int
+    
+    init(longComments:Int,popularity:Int,shortComments:Int,comments:Int) {
+        self.comments = comments
+        self.longComments = longComments
+        self.shortComments = shortComments
+        self.popularity = popularity
+    }
+}

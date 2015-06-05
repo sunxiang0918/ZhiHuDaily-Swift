@@ -20,6 +20,7 @@ class NewsDetailViewController: UIViewController{
     var newsLocation: (Int,Int)!
     
     var news:NewsDetailVO!
+    var newsExtral:NewsExtraVO!
     
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var backButton: UIButton!
@@ -154,6 +155,12 @@ class NewsDetailViewController: UIViewController{
             self.loadDetailView(newsDetail!)
         })
         
+        //加载新闻扩展信息
+        newsDetailControl.loadNewsExtraInfo(news.id, complate: { (newsExtra) -> Void in
+            self.newsExtral = newsExtra
+            self.voteNumberLabel.text = "\(self.newsExtral.popularity)"
+            self.commonNumberLabel.text = "\(self.newsExtral.comments)"
+        })
     }
     
     /**
