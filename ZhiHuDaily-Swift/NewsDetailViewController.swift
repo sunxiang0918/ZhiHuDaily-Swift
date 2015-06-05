@@ -21,6 +21,7 @@ class NewsDetailViewController: UIViewController{
     
     var news:NewsDetailVO!
     var newsExtral:NewsExtraVO!
+    var mainViewController : UIViewController!
     
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var backButton: UIButton!
@@ -55,7 +56,7 @@ class NewsDetailViewController: UIViewController{
             let translation = sender.translationInView(view!)
             
             //当偏移坐标的x轴大于0,也就是向右滑动的时候.开始做真正的动作
-            if  translation.x > 0 && self.navigationController?.viewControllers.count == 2 {
+            if  translation.x > 0 && self.navigationController?.viewControllers.count >= 2 {
                 //开启新的转场动画控制器
                 interactionController = UIPercentDrivenInteractiveTransition.new()
                 
@@ -150,6 +151,36 @@ class NewsDetailViewController: UIViewController{
         
         let news = getNewsVO(self.newsLocation)
         
+        //控制下一页不能进行点击  TODO 这个地方和原版的不同, 如果要按照原版的做的话,需要在点击下一页的时候开始动态的加载新的新闻,这个过程又是动态的.比较复杂,所以这里采取了简单的实现
+        let currentRow = self.newsLocation.1
+        let currentSection = self.newsLocation.0
+        
+        if  currentSection == 0 {
+            //当天的新闻
+            if  self.newsListControl.todayNews?.news?.count <= currentRow {
+                //表示当天的新闻已经完了,不允许再点击了
+                if  self.newsListControl.news.count==0{
+                    self.nextButton.enabled = false
+                }else{
+                    self.nextButton.enabled = true
+                }
+            }else {
+                self.nextButton.enabled = true
+            }
+        }else{
+            //今天前的新闻
+            if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
+                //表示当天的新闻已经完了,不允许再点击了
+                if  self.newsListControl.news.count > currentSection {
+                    self.nextButton.enabled = true
+                }else {
+                  self.nextButton.enabled = false
+                }
+            }else {
+               self.nextButton.enabled = true
+            }
+        }
+        
         //加载详细页面
         newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
             self.loadDetailView(newsDetail!)
@@ -235,5 +266,56 @@ class NewsDetailViewController: UIViewController{
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    /**
+    界面切换传值的方法
+    
+    :param: segue
+    :param: sender
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showNextNewsSegue" {
+            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
+            
+            if  newsDetailViewController?.newsListControl == nil {
+                newsDetailViewController?.newsListControl = self.newsListControl
+                newsDetailViewController?.mainViewController = self.mainViewController
+                newsDetailViewController?.navigationController
+            }
+            
+            //这个地方要计算下一条新闻的index
+            let currentRow = self.newsLocation.1
+            let currentSection = self.newsLocation.0
+            
+            var indexPath:(Int,Int)!
+            
+            if  currentSection == 0 {
+                //当天的新闻
+                if  self.newsListControl.todayNews?.news?.count <= currentRow {
+                    //表示当天的新闻已经完了,就需要加载下一天的新闻了
+                    
+                    //TODO 这个地方还需要判断 有没有下一天的新闻
+                    indexPath = (self.newsLocation.0+1,0)
+                }else {
+                    //表示当天的新闻还有剩,那么就返回下一天的就好了
+                    indexPath = (self.newsLocation.0,self.newsLocation.1+1)
+                }
+            }else{
+                //今天前的新闻
+                if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
+                    //表示当天的新闻已经完了,就需要加载下一天的新闻了
+                    
+                    //TODO 这个地方还需要判断 有没有下一天的新闻
+                    indexPath = (self.newsLocation.0+1,0)
+                }else {
+                    //表示当天的新闻还有剩,那么就返回下一天的就好了
+                    indexPath = (self.newsLocation.0,self.newsLocation.1+1)
+                }
+            }
+            
+            newsDetailViewController?.newsLocation = indexPath
+            
+        }
+    }
+
     
 }

@@ -284,6 +284,9 @@
                                         <state key="normal" image="News_Navigation_Next">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="lOs-R4-ra9" kind="show" identifier="showNextNewsSegue" id="pCJ-qN-EUG"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf7-TR-zNc">
                                         <rect key="frame" x="202" y="-1" width="66" height="43"/>
@@ -448,7 +451,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1397" y="1163"/>
+            <point key="canvasLocation" x="1418" y="1158"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8SC-gy-fGe">
@@ -480,4 +483,7 @@
         <image name="News_Navigation_Vote" width="64" height="43"/>
         <image name="ToolBar_Shadow" width="320" height="2"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xgX-9P-cE8"/>
+    </inferredMetricsTieBreakers>
 </document>

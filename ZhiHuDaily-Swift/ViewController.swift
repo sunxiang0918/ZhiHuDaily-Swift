@@ -68,6 +68,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             if  newsDetailViewController?.newsListControl == nil {
                 newsDetailViewController?.newsListControl = self.newsListControl
+                newsDetailViewController?.mainViewController = self
             }
             
             let index = sender as! NSIndexPath
@@ -312,9 +313,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         //这个地方开始异步的获取新闻详细.然后再进行跳转
         self.performSegueWithIdentifier("pushSegue", sender: indexPath)
-//        newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
-//            // 跳转到详细页面
-//        })
         
     }
     
