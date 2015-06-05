@@ -16,6 +16,14 @@ class NewsDetailViewController: UIViewController{
     var news:NewsDetailVO!
     
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var voteButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var commonButton: UIButton!
+    @IBOutlet weak var voteNumberLabel: UILabel!
+    @IBOutlet weak var commonNumberLabel: UILabel!
+    
     let topImage = UIImageView(frame: CGRectZero)
     let maskImage = UIImageView(frame: CGRectZero)
     let imageSourceLabel = UILabel(frame: CGRectZero)
