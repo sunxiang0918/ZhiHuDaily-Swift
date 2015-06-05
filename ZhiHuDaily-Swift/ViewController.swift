@@ -22,8 +22,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     let newsListControl : MainNewsListControl = MainNewsListControl()
     
-    let newsDetailControl : NewsDetailControl = NewsDetailControl()
-    
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
     
@@ -68,7 +66,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }else if segue.identifier == "pushSegue" {
             let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
             
-            newsDetailViewController?.news = sender as! NewsDetailVO
+            if  newsDetailViewController?.newsListControl == nil {
+                newsDetailViewController?.newsListControl = self.newsListControl
+            }
+            
+            let index = sender as! NSIndexPath
+            
+            newsDetailViewController?.newsLocation = (index.section,index.row)
             
         }
     }
@@ -295,25 +299,22 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     // 当点击选择Row了以后的 动作
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var news:NewsVO!
-        
         if  indexPath.section==0 {
             //如果选择的是当天的新闻
             if let newsListVO=self.newsListControl.todayNews {
-                news=doAlreadyRead(newsListVO, indexPath: indexPath)
+                doAlreadyRead(newsListVO, indexPath: indexPath)
             }
         }else{
             //选择的是今天之前的新闻
             let newsListVO=self.newsListControl.news[indexPath.section-1]
-            news=doAlreadyRead(newsListVO, indexPath: indexPath)
+            doAlreadyRead(newsListVO, indexPath: indexPath)
         }
         
         //这个地方开始异步的获取新闻详细.然后再进行跳转
-        
-        newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
-            // 跳转到详细页面
-            self.performSegueWithIdentifier("pushSegue", sender: newsDetail)
-        })
+        self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+//        newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
+//            // 跳转到详细页面
+//        })
         
     }
     
@@ -323,12 +324,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     :param: newsListVO
     :param: indexPath
     */
-    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) -> NewsVO {
-        
-        //获取选择的对象
-        let new=newsListVO.news![indexPath.row-1]
-        
-        new.alreadyRead = true
+    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) {
         
         let cell = mainTableView.cellForRowAtIndexPath(indexPath)
         
@@ -336,7 +332,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         c.titleLabel.textColor = UIColor.grayColor()
         
-        return new
     }
     
     //================UITableViewDelegate的实现==================================

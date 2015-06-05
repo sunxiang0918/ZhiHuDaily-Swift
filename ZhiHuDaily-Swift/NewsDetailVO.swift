@@ -49,7 +49,6 @@ class NewsDetailVO {
     ///栏目对象
     let section: Section?
 
-
     init(id: Int, title: String, body: String?, image: String?, imageSource: String?, type: Int = 0, css: [String]?, section: Section?, recommenders: [String]?, js: [String]?, shareUrl: String?) {
         self.id = id
         self.title = title

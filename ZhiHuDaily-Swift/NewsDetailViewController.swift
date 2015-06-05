@@ -13,6 +13,12 @@ import UIKit
 */
 class NewsDetailViewController: UIViewController{
 
+    let newsDetailControl : NewsDetailControl = NewsDetailControl()
+    
+    var newsListControl : MainNewsListControl!
+    
+    var newsLocation: (Int,Int)!
+    
     var news:NewsDetailVO!
     
     @IBOutlet weak var webView: UIWebView!
@@ -141,6 +147,21 @@ class NewsDetailViewController: UIViewController{
     */
     override func viewWillAppear(animated: Bool) {
         
+        let news = getNewsVO(self.newsLocation)
+        
+        //加载详细页面
+        newsDetailControl.loadNewsDetail(news.id, complate: { (newsDetail) -> Void in
+            self.loadDetailView(newsDetail!)
+        })
+        
+    }
+    
+    /**
+    根据读取的数据,加载页面
+    
+    :param: news
+    */
+    private func loadDetailView(news:NewsDetailVO) {
         if  var body = news.body {
             if let css = news.css {
                 for c in css {
@@ -163,14 +184,44 @@ class NewsDetailViewController: UIViewController{
         }
         
         self.titleLabel.text = news.title
+    }
+    
+    /**
+    获取新闻VO
+    
+    :param: location
+    
+    :returns:
+    */
+    private func getNewsVO(location:(Int,Int)) -> NewsVO {
+        let section = location.0
+        let row = location.1
         
-        println("news:\(news)")
+        var news:NewsVO!
+        
+        if  section == 0 {
+            //如果选择的是当天的新闻
+            //如果是第0行
+            if  row <= 0 {
+                //这个选择的是topView的新闻
+                news = self.newsListControl.todayNews?.topNews![abs(row)]
+            }else{
+                news = self.newsListControl.todayNews?.news![row-1]
+            }
+        }else {
+            //选择的是今天前的新闻
+            news = self.newsListControl.news[section-1].news![row]
+        }
+        
+        news.alreadyRead = true
+        
+        return news
     }
     
     /**
     返回上一界面的Action
     
-    :param: sender 
+    :param: sender
     */
     @IBAction func backButtonAction(sender: UIButton) {
         //开始调用navigation的POP转场
