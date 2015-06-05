@@ -263,6 +263,9 @@
                                         <state key="normal" image="News_Navigation_Arrow">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="lOs-R4-ra9" eventType="touchUpInside" id="hlh-b3-aEx"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9D-g2-2rT">
                                         <rect key="frame" x="72" y="-1" width="66" height="43"/>

@@ -167,4 +167,15 @@ class NewsDetailViewController: UIViewController{
         println("news:\(news)")
     }
     
+    /**
+    返回上一界面的Action
+    
+    :param: sender 
+    */
+    @IBAction func backButtonAction(sender: UIButton) {
+        //开始调用navigation的POP转场
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
 }
