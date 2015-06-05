@@ -18,6 +18,8 @@ class NewsDetailViewController: UIViewController{
     @IBOutlet weak var webView: UIWebView!
     let topImage = UIImageView(frame: CGRectZero)
     let maskImage = UIImageView(frame: CGRectZero)
+    let imageSourceLabel = UILabel(frame: CGRectZero)
+    let titleLabel = UILabel(frame: CGRectZero)
     
     /**
     响应整个View的 慢拖动事件
@@ -87,14 +89,36 @@ class NewsDetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //顶部图片
         self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(IN_WINDOW_HEIGHT)))
         self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
         
+        //图片阴影遮罩
         self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
         self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
         self.webView.scrollView.addSubview(self.maskImage)
+        
+        //图片版权
+        self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(self.view.bounds.width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
+        self.imageSourceLabel.backgroundColor = UIColor.clearColor()
+        self.imageSourceLabel.textColor = UIColor.whiteColor()
+        self.imageSourceLabel.textAlignment = NSTextAlignment.Right
+        self.imageSourceLabel.font = UIFont.systemFontOfSize(8)
+        self.webView.scrollView.addSubview(self.imageSourceLabel)
+        
+        //标题的label
+        //CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
+        self.titleLabel.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
+        self.titleLabel.backgroundColor = UIColor.clearColor()
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.titleLabel.textAlignment = NSTextAlignment.Left
+        self.titleLabel.font = UIFont.boldSystemFontOfSize(16)
+        self.titleLabel.numberOfLines = 0
+        self.titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        self.webView.scrollView.addSubview(self.titleLabel)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,26 +133,28 @@ class NewsDetailViewController: UIViewController{
     */
     override func viewWillAppear(animated: Bool) {
         
-        let body = news.body
-        let css = news.css
-        let image = news.image
-        
-        if  var _body = body {
-            if let _css = css {
-                for c in _css {
-                    _body = "<link href='\(c)' rel='stylesheet' type='text/css' />\(_body)"
+        if  var body = news.body {
+            if let css = news.css {
+                for c in css {
+                    body = "<link href='\(c)' rel='stylesheet' type='text/css' />\(body)"
                 }
             }
             
-            webView.loadHTMLString(_body, baseURL: nil)
+            webView.loadHTMLString(body, baseURL: nil)
         }
         
-        if  let _image = image {
+        if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(-100, 0, 0, 0)
         }else {
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
+        
+        if let imageSource = news.imageSource {
+            self.imageSourceLabel.text = "图片:\(imageSource)"
+        }
+        
+        self.titleLabel.text = news.title
         
         println("news:\(news)")
     }
