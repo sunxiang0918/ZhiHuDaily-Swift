@@ -13,18 +13,29 @@ import UIKit
 */
 class NewsDetailViewController: UIViewController{
 
+    /// 用于获取新闻详细的Control
     let newsDetailControl : NewsDetailControl = NewsDetailControl()
     
+    /// 用于获取新闻list的Control
     var newsListControl : MainNewsListControl!
     
+    /// 记录本条新闻位置的变量
     var newsLocation: (Int,Int)!
     
-    var news:NewsDetailVO!
-    var newsExtral:NewsExtraVO!
+    /// 记录新闻详细的VO
+    private var news:NewsDetailVO!
+    
+    /// 记录新闻扩展信息的VO
+    private var newsExtral:NewsExtraVO!
+    
+    /// 主视图的Controller
     var mainViewController : UIViewController!
     
+    /// 用于记录POP动画状态的变量
     private var popstate = PopActionState.NONE
     
+    
+    /// 界面上的 各种组件
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -34,6 +45,7 @@ class NewsDetailViewController: UIViewController{
     @IBOutlet weak var voteNumberLabel: UILabel!
     @IBOutlet weak var commonNumberLabel: UILabel!
     
+    /// title上的各种组件
     let topImage = UIImageView(frame: CGRectZero)
     let maskImage = UIImageView(frame: CGRectZero)
     let imageSourceLabel = UILabel(frame: CGRectZero)
@@ -133,7 +145,6 @@ class NewsDetailViewController: UIViewController{
         self.webView.scrollView.addSubview(self.imageSourceLabel)
         
         //标题的label
-        //CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
         self.titleLabel.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
         self.titleLabel.backgroundColor = UIColor.clearColor()
         self.titleLabel.textColor = UIColor.whiteColor()
@@ -226,11 +237,6 @@ class NewsDetailViewController: UIViewController{
         
         if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
-//            self.webView.scrollView.contentOffset = CGPointMake(0, 20)
-//            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        }else {
-//            self.webView.scrollView.contentOffset = CGPointMake(0, 20)
-//            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
         if let imageSource = news.imageSource {

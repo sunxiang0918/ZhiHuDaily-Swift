@@ -75,7 +75,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             newsDetailViewController?.newsLocation = (index.section,index.row)
             
-            println("newsDetailViewController:\(newsDetailViewController)")
         }
     }
     
@@ -84,7 +83,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
-            println(scrollView)
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>SCROLL_HEIGHT{
                 //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
@@ -330,13 +328,11 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     //================RefreshControlDelegate的实现===============================
     func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
-//        println("开始刷新!!\(direction.hashValue)")
         
         if  direction == RefreshDirection.RefreshDirectionTop {
             //是下拉刷新
             self.newsListControl.refreshNews()
             self.mainTableView.reloadData()
-//            refreshControl.finishRefreshingDirection(direction)
         }else{
             self.newsListControl.loadNewDayNews({ () -> Void in
                 self.mainTableView.reloadData()
@@ -344,7 +340,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-//            println("结束刷新!!\(direction.hashValue)")
             refreshControl.finishRefreshingDirection(direction)
         })
         
