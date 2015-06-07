@@ -37,6 +37,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     /// 用于记录POP动画状态的变量
     private var popstate = PopActionState.NONE
     
+    private var topRefreshState = TopRefreshState.NONE
     
     /// 界面上的 各种组件
     @IBOutlet weak var webView: UIWebView!
@@ -57,6 +58,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     let titleLabel = UILabel(frame: CGRectZero)
     
     let topRefreshImage = UIImageView(frame: CGRectZero)
+    let topRefreshLabel = UILabel(frame: CGRectZero)
     
     /**
     响应整个View的 慢拖动事件
@@ -138,12 +140,19 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
         
-//        topRefreshImage
-        
         //图片上阴影遮罩
         self.topMaskImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: 75))
         self.topMaskImage.image = UIImage(named: "News_Image_Mask")
         self.webView.scrollView.addSubview(self.topMaskImage)
+        
+        topRefreshImage.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-60,y: 40),size: CGSize(width: 15,height: 20))
+        topRefreshImage.image = UIImage(named: "ZHAnswerViewBack")
+        self.webView.scrollView.addSubview(self.topRefreshImage)
+
+        topRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: 40),size: CGSize(width: 95,height: 20))
+        topRefreshLabel.font = UIFont.systemFontOfSize(12)
+        topRefreshLabel.textColor = UIColor.whiteColor()
+        self.webView.scrollView.addSubview(self.topRefreshLabel)
         
         //图片阴影遮罩
         self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
@@ -201,6 +210,15 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         let currentSection = self.newsLocation.0
         
         if  currentSection == 0 {
+            
+            if  currentRow == 1{
+                topRefreshImage.hidden = true
+                topRefreshLabel.text = "已经是第一篇了"
+            }else {
+                topRefreshImage.hidden = false
+                topRefreshLabel.text = "载入上一篇"
+            }
+            
             //当天的新闻
             if  self.newsListControl.todayNews?.news?.count <= currentRow {
                 //表示当天的新闻已经完了,不允许再点击了
@@ -213,6 +231,10 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
                 self.nextButton.enabled = true
             }
         }else{
+            
+            topRefreshImage.hidden = false
+            topRefreshLabel.text = "载入上一篇"
+            
             //今天前的新闻
             if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
                 //表示当天的新闻已经完了,不允许再点击了
@@ -399,7 +421,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
         
         if  direction == RefreshDirection.RefreshDirectionBottom {
-            println("scrollView:\(scrollView)")
+            //上滑处理状态栏的背景色和样式
             if  scrollView.contentOffset.y > 120 {
                 statusBarView.backgroundColor = UIColor.whiteColor()
                 UIApplication.sharedApplication().statusBarStyle = .Default
@@ -407,7 +429,40 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
                 statusBarView.backgroundColor = UIColor.clearColor()
                 UIApplication.sharedApplication().statusBarStyle = .LightContent
             }
+        }else if direction == RefreshDirection.RefreshDirectionTop {
             
+            //下拉处理 上一条 的 动画. 思路是 当下拉了60后, 开始判断动画状态, 如果是没有执行动画, 就开始下拉动画并设置状态为doing. 动画完成后,设置状态为finish.
+            if scrollView.contentOffset.y < -60 {
+                if topRefreshState == TopRefreshState.NONE {
+                    topRefreshState = TopRefreshState.DOING
+                    /**
+                    *  这个就是 执行UI动画的方法. 第一个方法就是持续时间  第二个参数是动画效果  第三个参数是完成后做的事情
+                    */
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.topRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                        }, completion: { (finished) -> Void in
+                            if  finished {
+                                self.topRefreshState = TopRefreshState.FINISH
+                            }else {
+                                self.topRefreshState = TopRefreshState.NONE
+                            }
+                    })
+                }
+            } else {
+                //当下拉小于60后,就需要反向的执行动画. 
+                if  self.topRefreshState == TopRefreshState.FINISH {
+                    topRefreshState = TopRefreshState.DOING
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.topRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                        }, completion: { (finished) -> Void in
+                            if  finished {
+                                self.topRefreshState = TopRefreshState.NONE
+                            }else {
+                                self.topRefreshState = TopRefreshState.FINISH
+                            }
+                    })
+                }
+            }
         }
         
     }
@@ -442,4 +497,10 @@ private enum PopActionState {
     case NONE
     case FINISH
     case CANCEL
+}
+
+private enum TopRefreshState {
+    case NONE
+    case DOING
+    case FINISH
 }
