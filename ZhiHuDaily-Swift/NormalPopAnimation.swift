@@ -40,6 +40,10 @@ class NormalPopAnimation: NSObject,UIViewControllerAnimatedTransitioning {
             fromViewController?.view.frame = finalFrame
         }) { (finished) -> Void in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+            
+            if  !transitionContext.transitionWasCancelled() {
+                UIApplication.sharedApplication().statusBarStyle = .LightContent
+            }
         }
         
     }

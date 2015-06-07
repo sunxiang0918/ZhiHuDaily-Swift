@@ -402,8 +402,10 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
             println("scrollView:\(scrollView)")
             if  scrollView.contentOffset.y > 120 {
                 statusBarView.backgroundColor = UIColor.whiteColor()
+                UIApplication.sharedApplication().statusBarStyle = .Default
             }else {
                 statusBarView.backgroundColor = UIColor.clearColor()
+                UIApplication.sharedApplication().statusBarStyle = .LightContent
             }
             
         }
