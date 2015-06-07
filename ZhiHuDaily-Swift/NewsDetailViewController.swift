@@ -378,7 +378,40 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
             }
             
             newsDetailViewController?.newsLocation = indexPath
+        } else if segue.identifier == "showPreNewsSegue" {
+            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
             
+            if  newsDetailViewController?.newsListControl == nil {
+                newsDetailViewController?.newsListControl = self.newsListControl
+                newsDetailViewController?.mainViewController = self.mainViewController
+                newsDetailViewController?.navigationController
+            }
+            
+            //这个地方要计算下一条新闻的index
+            let currentRow = self.newsLocation.1
+            let currentSection = self.newsLocation.0
+            
+            var indexPath:(Int,Int)!
+            
+            if  currentSection == 0 {
+                if currentRow <= 1 {
+                    //没有了
+                }else {
+                    indexPath = (self.newsLocation.0,self.newsLocation.1-1)
+                }
+            }else{
+                //今天前的新闻
+                if  currentRow == 0 {
+                    //表示当天的新闻已经完了,就需要加载前一天的新闻了
+                    let a = self.newsListControl.news[self.newsLocation.0-1].news
+                    indexPath = (self.newsLocation.0-1,a?.count ?? 0)
+                }else {
+                    //表示当天的新闻还有剩,那么就返回下一天的就好了
+                    indexPath = (self.newsLocation.0,self.newsLocation.1-1)
+                }
+            }
+            
+            newsDetailViewController?.newsLocation = indexPath
         }
     }
 
@@ -391,6 +424,16 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     */
     func refreshControl(refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection){
         println("refreshControl:\(refreshControl)  direction:\(direction)")
+        
+        
+        if  direction == RefreshDirection.RefreshDirectionTop {
+            //是下拉 加载上一条 
+            //这个地方开始异步的获取新闻详细.然后再进行跳转
+            self.performSegueWithIdentifier("showPreNewsSegue", sender: nil)
+            
+            self.finishRefreshing(direction)
+        }
+        
     }
     //========================RefreshControlDelegate的实现================================================
     
@@ -449,7 +492,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
                     })
                 }
             } else {
-                //当下拉小于60后,就需要反向的执行动画. 
+                //当下拉小于60后,就需要反向的执行动画.
                 if  self.topRefreshState == TopRefreshState.FINISH {
                     topRefreshState = TopRefreshState.DOING
                     UIView.animateWithDuration(0.3, animations: { () -> Void in
