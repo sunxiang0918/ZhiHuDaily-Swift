@@ -11,13 +11,16 @@ import UIKit
 /**
 *  新闻详细页面的 controller
 */
-class NewsDetailViewController: UIViewController{
+class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshViewDelegate{
 
     /// 用于获取新闻详细的Control
     let newsDetailControl : NewsDetailControl = NewsDetailControl()
     
     /// 用于获取新闻list的Control
     var newsListControl : MainNewsListControl!
+    
+    /// 上下拉动的 Control
+    var _refreshControl : RefreshControl!
     
     /// 记录本条新闻位置的变量
     var newsLocation: (Int,Int)!
@@ -154,6 +157,13 @@ class NewsDetailViewController: UIViewController{
         self.titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
         self.webView.scrollView.addSubview(self.titleLabel)
 
+        
+        _refreshControl = RefreshControl(scrollView: webView.scrollView, delegate: self)
+        _refreshControl.topEnabled = true
+//        refreshControl.bottomEnabled = true
+        _refreshControl.registeTopView(self)
+        _refreshControl.enableInsetTop = SCROLL_HEIGHT
+//        refreshControl.enableInsetBottom = 30
     }
 
     override func didReceiveMemoryWarning() {
@@ -339,6 +349,69 @@ class NewsDetailViewController: UIViewController{
         }
     }
 
+    //========================RefreshControlDelegate的实现================================================
+    
+    /**
+    *  响应回调事件
+    *  @param refreshControl 响应的控件
+    *  @param direction 事件类型
+    */
+    func refreshControl(refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection){
+        println("refreshControl:\(refreshControl)  direction:\(direction)")
+    }
+    //========================RefreshControlDelegate的实现================================================
+    
+    //========================RefreshViewDelegate的实现================================================
+    var refreshControl:RefreshControl? {
+        get{ return _refreshControl}
+        set{ _refreshControl = newValue}
+    }
+    
+    /**
+    重新设置Layout
+    */
+    func resetLayoutSubViews() {
+        
+    }
+    
+    /**
+    松开可刷新的动画
+    */
+    func canEngageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
+        
+    }
+    
+    /**
+    松开返回的动画
+    */
+    func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
+        
+    }
+    
+    /**
+    *  是否修改他的 ContentInset
+    */
+    func needContentInset(direction:RefreshDirection) -> Bool {
+        
+        return false
+    }
+    
+    /**
+    开始刷新的动画
+    */
+    func startRefreshing(direction:RefreshDirection) {
+        
+    }
+    
+    /**
+    结束刷新的动画
+    */
+    func finishRefreshing(direction:RefreshDirection) {
+        
+    }
+
+    //========================RefreshViewDelegate的实现================================================
+    
 }
 
 private enum PopActionState {
