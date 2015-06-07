@@ -244,6 +244,13 @@
                                 <rect key="frame" x="0.0" y="-80" width="600" height="638"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1w1-yo-Jjs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="CXq-65-el9"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLZ-A7-Q1V">
                                 <rect key="frame" x="0.0" y="558" width="600" height="42"/>
                                 <subviews>
@@ -420,14 +427,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="1w1-yo-Jjs" secondAttribute="width" id="4gA-Oq-Kth"/>
+                            <constraint firstItem="1w1-yo-Jjs" firstAttribute="leading" secondItem="zQc-TK-6Dn" secondAttribute="leadingMargin" constant="-16" id="7z9-Dc-m7O"/>
                             <constraint firstAttribute="trailingMargin" secondItem="M2U-QX-wo2" secondAttribute="trailing" constant="-16" id="84g-gw-3xH"/>
                             <constraint firstItem="Kaj-Ph-IpD" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="bottom" id="BAu-H8-2a1"/>
                             <constraint firstItem="M2U-QX-wo2" firstAttribute="leading" secondItem="zQc-TK-6Dn" secondAttribute="leadingMargin" constant="-16" id="SaX-Kp-OHR"/>
                             <constraint firstItem="Kaj-Ph-IpD" firstAttribute="top" secondItem="M2U-QX-wo2" secondAttribute="bottom" constant="42" id="TBc-B9-mTg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1w1-yo-Jjs" secondAttribute="trailing" constant="-16" id="VYC-Ux-XtW"/>
                             <constraint firstItem="M2U-QX-wo2" firstAttribute="top" secondItem="zQc-TK-6Dn" secondAttribute="topMargin" constant="-80" id="ZiO-eE-9rz"/>
+                            <constraint firstItem="Gn7-qk-YbZ" firstAttribute="top" secondItem="1w1-yo-Jjs" secondAttribute="bottom" id="fJH-hu-ncQ"/>
                             <constraint firstItem="qLZ-A7-Q1V" firstAttribute="leading" secondItem="zQc-TK-6Dn" secondAttribute="leadingMargin" constant="-16" id="s72-wo-JO2"/>
                             <constraint firstItem="qLZ-A7-Q1V" firstAttribute="width" secondItem="zQc-TK-6Dn" secondAttribute="width" id="xfn-op-IIy"/>
+                            <constraint firstItem="1w1-yo-Jjs" firstAttribute="top" secondItem="zQc-TK-6Dn" secondAttribute="topMargin" id="yJi-cL-OVj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fJH-hu-ncQ"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="JAR-gT-Jy5" appends="YES" id="FOD-yd-0gC"/>
                         </connections>
@@ -439,6 +456,7 @@
                         <outlet property="commonNumberLabel" destination="7Gi-VI-uty" id="J0O-Fa-4ja"/>
                         <outlet property="nextButton" destination="4nT-Fy-EQt" id="AE2-QR-KdO"/>
                         <outlet property="shareButton" destination="bqH-9z-ip2" id="GE6-ak-Ha9"/>
+                        <outlet property="statusBarView" destination="1w1-yo-Jjs" id="Etd-Ta-CB3"/>
                         <outlet property="voteButton" destination="dFy-ln-Eay" id="OFI-sj-5dW"/>
                         <outlet property="voteNumberLabel" destination="5S3-hf-QYK" id="GrL-LC-nDX"/>
                         <outlet property="webView" destination="M2U-QX-wo2" id="uxq-Km-w5U"/>

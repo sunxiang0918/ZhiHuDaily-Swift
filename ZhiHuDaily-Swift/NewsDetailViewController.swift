@@ -47,12 +47,16 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     @IBOutlet weak var commonButton: UIButton!
     @IBOutlet weak var voteNumberLabel: UILabel!
     @IBOutlet weak var commonNumberLabel: UILabel!
-    
+    @IBOutlet weak var statusBarView: UIView!
+
     /// title上的各种组件
     let topImage = UIImageView(frame: CGRectZero)
     let maskImage = UIImageView(frame: CGRectZero)
+    let topMaskImage = UIImageView(frame: CGRectZero)
     let imageSourceLabel = UILabel(frame: CGRectZero)
     let titleLabel = UILabel(frame: CGRectZero)
+    
+    let topRefreshImage = UIImageView(frame: CGRectZero)
     
     /**
     响应整个View的 慢拖动事件
@@ -133,6 +137,13 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
+        
+//        topRefreshImage
+        
+        //图片上阴影遮罩
+        self.topMaskImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: 75))
+        self.topMaskImage.image = UIImage(named: "News_Image_Mask")
+        self.webView.scrollView.addSubview(self.topMaskImage)
         
         //图片阴影遮罩
         self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
@@ -362,6 +373,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     //========================RefreshControlDelegate的实现================================================
     
     //========================RefreshViewDelegate的实现================================================
+    
     var refreshControl:RefreshControl? {
         get{ return _refreshControl}
         set{ _refreshControl = newValue}
@@ -385,6 +397,16 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     松开返回的动画
     */
     func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
+        
+        if  direction == RefreshDirection.RefreshDirectionBottom {
+            println("scrollView:\(scrollView)")
+            if  scrollView.contentOffset.y > 120 {
+                statusBarView.backgroundColor = UIColor.whiteColor()
+            }else {
+                statusBarView.backgroundColor = UIColor.clearColor()
+            }
+            
+        }
         
     }
     
