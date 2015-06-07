@@ -23,6 +23,8 @@ class NewsDetailViewController: UIViewController{
     var newsExtral:NewsExtraVO!
     var mainViewController : UIViewController!
     
+    private var popstate = PopActionState.NONE
+    
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -48,6 +50,8 @@ class NewsDetailViewController: UIViewController{
         
         if  sender.state == UIGestureRecognizerState.Began {
             //当拖动事件开始的时候
+            
+            popstate = PopActionState.NONE
             
             //获取拖动事件的开始点坐标
             let location = sender.locationInView(view)
@@ -89,9 +93,11 @@ class NewsDetailViewController: UIViewController{
             
             //判断速率向量是否大于0, 并且拉动的距离已经过半了
             if  sender.velocityInView(view).x > 0 && translation.x > CGRectGetMidX(view.bounds)-20  {
+                popstate = PopActionState.FINISH
                 //完成整个动画
                 interactionController?.finishInteractiveTransition()
             }else {
+                popstate = PopActionState.CANCEL
                 //停止转场
                 interactionController?.cancelInteractiveTransition()
             }
@@ -104,6 +110,8 @@ class NewsDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         
         //顶部图片
         self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(IN_WINDOW_HEIGHT)))
@@ -148,6 +156,11 @@ class NewsDetailViewController: UIViewController{
     :param: animated
     */
     override func viewWillAppear(animated: Bool) {
+        
+        if  popstate == PopActionState.CANCEL {
+            //如果是 pop动画 一半而取消的, 虽然还是会触发viewWillAppear这个方法, 但是就不让他做事情了
+            return
+        }
         
         let news = getNewsVO(self.newsLocation)
         
@@ -194,6 +207,7 @@ class NewsDetailViewController: UIViewController{
         })
     }
     
+    
     /**
     根据读取的数据,加载页面
     
@@ -212,9 +226,11 @@ class NewsDetailViewController: UIViewController{
         
         if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
-            self.webView.scrollView.contentInset = UIEdgeInsetsMake(-100, 0, 0, 0)
+//            self.webView.scrollView.contentOffset = CGPointMake(0, 20)
+//            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }else {
-            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+//            self.webView.scrollView.contentOffset = CGPointMake(0, 20)
+//            self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
         if let imageSource = news.imageSource {
@@ -317,5 +333,10 @@ class NewsDetailViewController: UIViewController{
         }
     }
 
-    
+}
+
+private enum PopActionState {
+    case NONE
+    case FINISH
+    case CANCEL
 }

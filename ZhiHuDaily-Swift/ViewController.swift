@@ -75,6 +75,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             newsDetailViewController?.newsLocation = (index.section,index.row)
             
+            println("newsDetailViewController:\(newsDetailViewController)")
         }
     }
     
@@ -83,6 +84,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
+            println(scrollView)
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>SCROLL_HEIGHT{
                 //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
@@ -300,16 +302,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     // 当点击选择Row了以后的 动作
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if  indexPath.section==0 {
-            //如果选择的是当天的新闻
-            if let newsListVO=self.newsListControl.todayNews {
-                doAlreadyRead(newsListVO, indexPath: indexPath)
-            }
-        }else{
-            //选择的是今天之前的新闻
-            let newsListVO=self.newsListControl.news[indexPath.section-1]
-            doAlreadyRead(newsListVO, indexPath: indexPath)
-        }
+        doAlreadyRead(indexPath)
         
         //这个地方开始异步的获取新闻详细.然后再进行跳转
         self.performSegueWithIdentifier("pushSegue", sender: indexPath)
@@ -322,7 +315,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     :param: newsListVO
     :param: indexPath
     */
-    private func doAlreadyRead(newsListVO:NewsListVO,indexPath:NSIndexPath) {
+    private func doAlreadyRead(indexPath:NSIndexPath) {
         
         let cell = mainTableView.cellForRowAtIndexPath(indexPath)
         
