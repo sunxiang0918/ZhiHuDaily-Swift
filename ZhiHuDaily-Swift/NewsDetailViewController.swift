@@ -645,7 +645,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     结束刷新的动画
     */
     func finishRefreshing(direction:RefreshDirection) {
-        
+        self.topRefreshState = TopRefreshState.NONE
     }
 
     //========================RefreshViewDelegate的实现================================================

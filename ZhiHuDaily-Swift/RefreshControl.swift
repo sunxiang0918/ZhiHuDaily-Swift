@@ -188,7 +188,7 @@ class RefreshControl:NSObject {
         if  self.scrollView.contentOffset.y>0 {
             
             let result = Float(self.scrollView.contentSize.height) + self.enableInsetBottom - Float(self.scrollView.bounds.height)
-            println("result:\(result)")
+//            println("result:\(result)")
             if Float(self.scrollView.contentOffset.y) >= result {
                 if  self.autoRefreshBottom || (self.scrollView.decelerating && !self.scrollView.dragging){
                      self.engageRefreshDirection(.RefreshDirectionBottom)
