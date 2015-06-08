@@ -427,6 +427,17 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         
         
         if  direction == RefreshDirection.RefreshDirectionTop {
+            
+            // 如果已经没有上一条新闻了,那么就不能再执行加载上一条的跳转了
+            let currentRow = self.newsLocation.1
+            let currentSection = self.newsLocation.0
+            if  currentSection == 0 {
+                if currentRow <= 1 {
+                    self.finishRefreshing(direction)
+                    return
+                }
+            }
+            
             //是下拉 加载上一条 
             //这个地方开始异步的获取新闻详细.然后再进行跳转
             self.performSegueWithIdentifier("showPreNewsSegue", sender: nil)
