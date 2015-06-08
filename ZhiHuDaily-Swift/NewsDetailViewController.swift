@@ -341,78 +341,85 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         if segue.identifier == "showNextNewsSegue" {
             let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
             
-            if  newsDetailViewController?.newsListControl == nil {
-                newsDetailViewController?.newsListControl = self.newsListControl
-                newsDetailViewController?.mainViewController = self.mainViewController
-                newsDetailViewController?.navigationController
-            }
-            
             //这个地方要计算下一条新闻的index
-            let currentRow = self.newsLocation.1
-            let currentSection = self.newsLocation.0
-            
-            var indexPath:(Int,Int)!
-            
-            if  currentSection == 0 {
-                //当天的新闻
-                if  self.newsListControl.todayNews?.news?.count <= currentRow {
-                    //表示当天的新闻已经完了,就需要加载下一天的新闻了
-                    
-                    //TODO 这个地方还需要判断 有没有下一天的新闻
-                    indexPath = (self.newsLocation.0+1,0)
-                }else {
-                    //表示当天的新闻还有剩,那么就返回下一天的就好了
-                    indexPath = (self.newsLocation.0,self.newsLocation.1+1)
+            valuationIndexPath(newsDetailViewController, calculator: { (currentSection, currentRow) -> (Int, Int) in
+                var indexPath:(Int,Int)!
+                
+                if  currentSection == 0 {
+                    //当天的新闻
+                    if  self.newsListControl.todayNews?.news?.count <= currentRow {
+                        //表示当天的新闻已经完了,就需要加载下一天的新闻了
+                        
+                        //TODO 这个地方还需要判断 有没有下一天的新闻
+                        indexPath = (self.newsLocation.0+1,0)
+                    }else {
+                        //表示当天的新闻还有剩,那么就返回下一天的就好了
+                        indexPath = (self.newsLocation.0,self.newsLocation.1+1)
+                    }
+                }else{
+                    //今天前的新闻
+                    if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
+                        //表示当天的新闻已经完了,就需要加载下一天的新闻了
+                        
+                        //TODO 这个地方还需要判断 有没有下一天的新闻
+                        indexPath = (self.newsLocation.0+1,0)
+                    }else {
+                        //表示当天的新闻还有剩,那么就返回下一天的就好了
+                        indexPath = (self.newsLocation.0,self.newsLocation.1+1)
+                    }
                 }
-            }else{
-                //今天前的新闻
-                if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
-                    //表示当天的新闻已经完了,就需要加载下一天的新闻了
-                    
-                    //TODO 这个地方还需要判断 有没有下一天的新闻
-                    indexPath = (self.newsLocation.0+1,0)
-                }else {
-                    //表示当天的新闻还有剩,那么就返回下一天的就好了
-                    indexPath = (self.newsLocation.0,self.newsLocation.1+1)
-                }
-            }
+                return indexPath
+            })
             
-            newsDetailViewController?.newsLocation = indexPath
         } else if segue.identifier == "showPreNewsSegue" {
+            
             let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
             
-            if  newsDetailViewController?.newsListControl == nil {
-                newsDetailViewController?.newsListControl = self.newsListControl
-                newsDetailViewController?.mainViewController = self.mainViewController
-                newsDetailViewController?.navigationController
-            }
-            
-            //这个地方要计算下一条新闻的index
-            let currentRow = self.newsLocation.1
-            let currentSection = self.newsLocation.0
-            
-            var indexPath:(Int,Int)!
-            
-            if  currentSection == 0 {
-                if currentRow <= 1 {
-                    //没有了
-                }else {
-                    indexPath = (self.newsLocation.0,self.newsLocation.1-1)
+            //计算上一条新闻的Index
+            valuationIndexPath(newsDetailViewController, calculator: { (currentSection, currentRow) -> (Int, Int) in
+                var indexPath:(Int,Int)!
+                
+                if  currentSection == 0 {
+                    if currentRow <= 1 {
+                        //没有了
+                    }else {
+                        indexPath = (self.newsLocation.0,self.newsLocation.1-1)
+                    }
+                }else{
+                    //今天前的新闻
+                    if  currentRow == 0 {
+                        //表示当天的新闻已经完了,就需要加载前一天的新闻了
+                        let a = self.newsListControl.news[self.newsLocation.0-1].news
+                        indexPath = (self.newsLocation.0-1,a?.count ?? 0)
+                    }else {
+                        //表示当天的新闻还有剩,那么就返回下一天的就好了
+                        indexPath = (self.newsLocation.0,self.newsLocation.1-1)
+                    }
                 }
-            }else{
-                //今天前的新闻
-                if  currentRow == 0 {
-                    //表示当天的新闻已经完了,就需要加载前一天的新闻了
-                    let a = self.newsListControl.news[self.newsLocation.0-1].news
-                    indexPath = (self.newsLocation.0-1,a?.count ?? 0)
-                }else {
-                    //表示当天的新闻还有剩,那么就返回下一天的就好了
-                    indexPath = (self.newsLocation.0,self.newsLocation.1-1)
-                }
-            }
-            
-            newsDetailViewController?.newsLocation = indexPath
+                return indexPath
+            })
         }
+    }
+    
+    /**
+    用于计算与赋值 下一条/上一条新闻的 Index坐标
+    
+    :param: newsDetailViewController newsDetailViewController
+    :param: calculator               具体的计算方法的闭包
+    */
+    private func valuationIndexPath(newsDetailViewController:NewsDetailViewController?,calculator:(currentSection:Int,currentRow:Int)->(Int,Int)){
+        if  newsDetailViewController?.newsListControl == nil {
+            newsDetailViewController?.newsListControl = self.newsListControl
+            newsDetailViewController?.mainViewController = self.mainViewController
+        }
+        
+        //这个地方要计算下一条新闻的index
+        let currentRow = self.newsLocation.1
+        let currentSection = self.newsLocation.0
+        
+        var indexPath:(Int,Int)!
+        
+        newsDetailViewController?.newsLocation = calculator(currentSection: currentSection, currentRow: currentRow)
     }
 
     //========================RefreshControlDelegate的实现================================================
