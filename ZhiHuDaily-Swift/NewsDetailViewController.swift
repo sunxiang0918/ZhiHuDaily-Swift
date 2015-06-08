@@ -193,10 +193,11 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         _refreshControl = RefreshControl(scrollView: webView.scrollView, delegate: self)
         _refreshControl.topEnabled = true
-//        refreshControl.bottomEnabled = true
+        _refreshControl.bottomEnabled = true
         _refreshControl.registeTopView(self)
+        _refreshControl.registeBottomView(self)
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
-//        refreshControl.enableInsetBottom = 30
+        _refreshControl.enableInsetBottom = SCROLL_HEIGHT
     }
 
     override func didReceiveMemoryWarning() {
@@ -238,7 +239,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                     self.nextButton.enabled = false
                     
                     bottomRefreshImage.hidden = true
-                    bottomRefreshLabel.text = "已经是最后一篇了"
+                    bottomRefreshLabel.text = "已是最后一篇了"
                 }else{
                     self.nextButton.enabled = true
                     
@@ -266,7 +267,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                   self.nextButton.enabled = false
                     
                     bottomRefreshImage.hidden = true
-                    bottomRefreshLabel.text = "已经是最后一篇了"
+                    bottomRefreshLabel.text = "已是最后一篇了"
                 }
             }else {
                self.nextButton.enabled = true
@@ -459,8 +460,6 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     *  @param direction 事件类型
     */
     func refreshControl(refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection){
-        println("refreshControl:\(refreshControl)  direction:\(direction)")
-        
         
         if  direction == RefreshDirection.RefreshDirectionTop {
             
@@ -479,6 +478,38 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             self.performSegueWithIdentifier("showPreNewsSegue", sender: nil)
             
             self.finishRefreshing(direction)
+        }else {
+            
+            let currentRow = self.newsLocation.1
+            let currentSection = self.newsLocation.0
+            
+            if  currentSection == 0 {
+                //当天的新闻
+                if  self.newsListControl.todayNews?.news?.count <= currentRow {
+                    //表示当天的新闻已经完了,不允许再点击了
+                    if  self.newsListControl.news.count==0{
+                        self.finishRefreshing(direction)
+                        return
+                    }
+                }
+            }else{
+                //今天前的新闻
+                if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
+                    //表示当天的新闻已经完了,不允许再点击了
+                    if  self.newsListControl.news.count > currentSection {
+                        
+                    }else {
+                        self.finishRefreshing(direction)
+                        return
+                    }
+                }
+            }
+            
+            //是上拉 加载下一条
+            self.performSegueWithIdentifier("showNextNewsSegue", sender: nil)
+            
+            self.finishRefreshing(direction)
+            
         }
         
     }
@@ -511,14 +542,52 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
         
         if  direction == RefreshDirection.RefreshDirectionBottom {
+            
+            let offsetY = Float(scrollView.contentOffset.y)
+            let contentHeight = Float(scrollView.contentSize.height)
+            let frameHeight = Float(scrollView.frame.height)
+            
             //上滑处理状态栏的背景色和样式
-            if  scrollView.contentOffset.y > 120 {
+            if  offsetY > 120 {
                 statusBarView.backgroundColor = UIColor.whiteColor()
                 UIApplication.sharedApplication().statusBarStyle = .Default
             }else {
                 statusBarView.backgroundColor = UIColor.clearColor()
                 UIApplication.sharedApplication().statusBarStyle = .LightContent
             }
+            
+            if offsetY > contentHeight-frameHeight+50 {
+                if topRefreshState == TopRefreshState.NONE {
+                    topRefreshState = TopRefreshState.DOING
+                    /**
+                    *  这个就是 执行UI动画的方法. 第一个方法就是持续时间  第二个参数是动画效果  第三个参数是完成后做的事情
+                    */
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.bottomRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                        }, completion: { (finished) -> Void in
+                            if  finished {
+                                self.topRefreshState = TopRefreshState.FINISH
+                            }else {
+                                self.topRefreshState = TopRefreshState.NONE
+                            }
+                    })
+                }
+            }else {
+                if self.topRefreshState == TopRefreshState.FINISH {
+                    topRefreshState = TopRefreshState.DOING
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.bottomRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                        }, completion: { (finished) -> Void in
+                            if  finished {
+                                self.topRefreshState = TopRefreshState.NONE
+                            }else {
+                                self.topRefreshState = TopRefreshState.FINISH
+                            }
+                    })
+                }
+            }
+            
+            
         }else if direction == RefreshDirection.RefreshDirectionTop {
             
             //下拉处理 上一条 的 动画. 思路是 当下拉了60后, 开始判断动画状态, 如果是没有执行动画, 就开始下拉动画并设置状态为doing. 动画完成后,设置状态为finish.
@@ -583,10 +652,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     
     //========================UIWebViewDelegate的实现================================================
     func webViewDidFinishLoad(webView: UIWebView) {
-        println("webViewDidFinishLoad")
         //在这里重新设置 下方 上拉刷新的组件的位置
-        bottomRefreshImage.frame = CGRectMake(self.view.bounds.width/2-60, webView.scrollView.contentSize.height+40, 15, 20)
-        bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+40),size: CGSize(width: 95,height: 20))
+        bottomRefreshImage.frame = CGRectMake(self.view.bounds.width/2-60, webView.scrollView.contentSize.height+30, 15, 20)
+        bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+30),size: CGSize(width: 95,height: 20))
     }
     //========================UIWebViewDelegate的实现================================================
 }

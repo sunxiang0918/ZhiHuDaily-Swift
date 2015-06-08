@@ -19,7 +19,6 @@ class CustomWebView: UIWebView {
     */
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        println(scrollView)
         
         let offsetY = Float(scrollView.contentOffset.y)
         let contentHeight = Float(scrollView.contentSize.height)
