@@ -11,7 +11,7 @@ import UIKit
 /**
 *  新闻详细页面的 controller
 */
-class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshViewDelegate{
+class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshControlDelegate,RefreshViewDelegate{
 
     /// 用于获取新闻详细的Control
     let newsDetailControl : NewsDetailControl = NewsDetailControl()
@@ -57,8 +57,13 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
     let imageSourceLabel = UILabel(frame: CGRectZero)
     let titleLabel = UILabel(frame: CGRectZero)
     
+    /// 上方 下拉刷新的组件
     let topRefreshImage = UIImageView(frame: CGRectZero)
     let topRefreshLabel = UILabel(frame: CGRectZero)
+    
+    /// 下方 上拉刷新的组件
+    let bottomRefreshImage = UIImageView(frame: CGRectZero)
+    let bottomRefreshLabel = UILabel(frame: CGRectZero)
     
     /**
     响应整个View的 慢拖动事件
@@ -133,6 +138,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         super.viewDidLoad()
         
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
+        self.webView.delegate = self
         
         //顶部图片
         self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(IN_WINDOW_HEIGHT)))
@@ -177,6 +183,13 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         self.titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
         self.webView.scrollView.addSubview(self.titleLabel)
 
+
+        bottomRefreshImage.image = UIImage(named: "ZHAnswerViewPrevIcon")
+        self.webView.scrollView.addSubview(self.bottomRefreshImage)
+        
+        bottomRefreshLabel.font = UIFont.systemFontOfSize(12)
+        bottomRefreshLabel.textColor = UIColor.grayColor()
+        self.webView.scrollView.addSubview(self.bottomRefreshLabel)
         
         _refreshControl = RefreshControl(scrollView: webView.scrollView, delegate: self)
         _refreshControl.topEnabled = true
@@ -210,7 +223,6 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         let currentSection = self.newsLocation.0
         
         if  currentSection == 0 {
-            
             if  currentRow == 1{
                 topRefreshImage.hidden = true
                 topRefreshLabel.text = "已经是第一篇了"
@@ -224,27 +236,43 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
                 //表示当天的新闻已经完了,不允许再点击了
                 if  self.newsListControl.news.count==0{
                     self.nextButton.enabled = false
+                    
+                    bottomRefreshImage.hidden = true
+                    bottomRefreshLabel.text = "已经是最后一篇了"
                 }else{
                     self.nextButton.enabled = true
+                    
+                    bottomRefreshImage.hidden = false
+                    bottomRefreshLabel.text = "载入下一篇"
                 }
             }else {
                 self.nextButton.enabled = true
+                
+                bottomRefreshImage.hidden = false
+                bottomRefreshLabel.text = "载入下一篇"
             }
         }else{
-            
             topRefreshImage.hidden = false
             topRefreshLabel.text = "载入上一篇"
-            
             //今天前的新闻
             if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
                 //表示当天的新闻已经完了,不允许再点击了
                 if  self.newsListControl.news.count > currentSection {
                     self.nextButton.enabled = true
+                    
+                    bottomRefreshImage.hidden = false
+                    bottomRefreshLabel.text = "载入下一篇"
                 }else {
                   self.nextButton.enabled = false
+                    
+                    bottomRefreshImage.hidden = true
+                    bottomRefreshLabel.text = "已经是最后一篇了"
                 }
             }else {
                self.nextButton.enabled = true
+                
+                bottomRefreshImage.hidden = false
+                bottomRefreshLabel.text = "载入下一篇"
             }
         }
         
@@ -287,6 +315,7 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
         }
         
         self.titleLabel.text = news.title
+        
     }
     
     /**
@@ -552,6 +581,14 @@ class NewsDetailViewController: UIViewController,RefreshControlDelegate,RefreshV
 
     //========================RefreshViewDelegate的实现================================================
     
+    //========================UIWebViewDelegate的实现================================================
+    func webViewDidFinishLoad(webView: UIWebView) {
+        println("webViewDidFinishLoad")
+        //在这里重新设置 下方 上拉刷新的组件的位置
+        bottomRefreshImage.frame = CGRectMake(self.view.bounds.width/2-60, webView.scrollView.contentSize.height+40, 15, 20)
+        bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+40),size: CGSize(width: 95,height: 20))
+    }
+    //========================UIWebViewDelegate的实现================================================
 }
 
 private enum PopActionState {
