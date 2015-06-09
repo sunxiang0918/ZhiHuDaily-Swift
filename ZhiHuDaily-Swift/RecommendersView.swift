@@ -24,4 +24,18 @@ class RecommendersView: UIView {
     @IBOutlet weak var image4: UIImageView!
     @IBOutlet weak var image5: UIImageView!
     
+    func getImageView(index:Int) -> UIImageView? {
+        
+        switch index {
+        case 0: return image1
+        case 1: return image2
+        case 2: return image3
+        case 3: return image4
+        case 4: return image5
+        default:
+            return nil
+        }
+        
+    }
+    
 }

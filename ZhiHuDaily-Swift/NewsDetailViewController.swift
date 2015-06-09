@@ -341,25 +341,15 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
 
                 for var i = 0; i<5;i++ {
                     if  i>=recommanders.count {
-                        switch i {
-                        case 0: recommandView.image1.hidden = true
-                        case 1: recommandView.image2.hidden = true
-                        case 2: recommandView.image3.hidden = true
-                        case 3: recommandView.image4.hidden = true
-                        case 4: recommandView.image5.hidden = true
-                        default:
-                            break
+                        
+                        if let image = recommandView.getImageView(i) {
+                            image.hidden = true
                         }
                         continue
                     }else {
-                        switch i {
-                        case 0: recommandView.image1.hidden = false; recommandView.image1.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
-                        case 1: recommandView.image2.hidden = false; recommandView.image2.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
-                        case 2: recommandView.image3.hidden = false; recommandView.image3.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
-                        case 3: recommandView.image4.hidden = false; recommandView.image4.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
-                        case 4: recommandView.image5.hidden = false; recommandView.image5.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
-                        default:
-                            break
+                        if let image = recommandView.getImageView(i) {
+                            image.hidden = false
+                            image.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
                         }
                     }
                 }
