@@ -57,6 +57,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     let imageSourceLabel = UILabel(frame: CGRectZero)
     let titleLabel = UILabel(frame: CGRectZero)
     
+    /// 推荐者的组件
+    var recommandView : RecommendersView!
+    
     /// 上方 下拉刷新的组件
     let topRefreshImage = UIImageView(frame: CGRectZero)
     let topRefreshLabel = UILabel(frame: CGRectZero)
@@ -137,6 +140,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.recommandView = UINib(nibName: "RecommendersView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! RecommendersView
+        
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.webView.delegate = self
         
@@ -151,6 +156,11 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.topMaskImage.image = UIImage(named: "News_Image_Mask")
         self.webView.scrollView.addSubview(self.topMaskImage)
         
+        //图片阴影遮罩
+        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
+        self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
+        self.webView.scrollView.addSubview(self.maskImage)
+        
         topRefreshImage.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-60,y: 40),size: CGSize(width: 15,height: 20))
         topRefreshImage.image = UIImage(named: "ZHAnswerViewBack")
         self.webView.scrollView.addSubview(self.topRefreshImage)
@@ -160,10 +170,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         topRefreshLabel.textColor = UIColor.whiteColor()
         self.webView.scrollView.addSubview(self.topRefreshLabel)
         
-        //图片阴影遮罩
-        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
-        self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
-        self.webView.scrollView.addSubview(self.maskImage)
+        recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+        self.webView.scrollView.addSubview(recommandView)
         
         //图片版权
         self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(self.view.bounds.width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
@@ -198,6 +206,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         _refreshControl.registeBottomView(self)
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
         _refreshControl.enableInsetBottom = SCROLL_HEIGHT
+        
+        println(self.webView.scrollView.subviews)
     }
 
     override func didReceiveMemoryWarning() {
@@ -297,6 +307,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     :param: news
     */
     private func loadDetailView(news:NewsDetailVO) {
+        
         if  var body = news.body {
             if let css = news.css {
                 for c in css {
@@ -316,6 +327,47 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         }
         
         self.titleLabel.text = news.title
+     
+        
+        let subviews = webView.scrollView.subviews
+        let browser : UIView = subviews[0] as! UIView
+        if  let recommanders = news.recommenders {
+            if  recommanders.isEmpty {
+                recommandView.hidden = true
+                browser.frame = CGRectMake(0, 0, browser.frame.width, browser.frame.height)
+            }else {
+                recommandView.hidden = false
+                browser.frame = CGRectMake(0, 40, browser.frame.width, browser.frame.height)
+
+                for var i = 0; i<5;i++ {
+                    if  i>=recommanders.count {
+                        switch i {
+                        case 0: recommandView.image1.hidden = true
+                        case 1: recommandView.image2.hidden = true
+                        case 2: recommandView.image3.hidden = true
+                        case 3: recommandView.image4.hidden = true
+                        case 4: recommandView.image5.hidden = true
+                        default:
+                            break
+                        }
+                        continue
+                    }else {
+                        switch i {
+                        case 0: recommandView.image1.hidden = false; recommandView.image1.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                        case 1: recommandView.image2.hidden = false; recommandView.image2.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                        case 2: recommandView.image3.hidden = false; recommandView.image3.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                        case 3: recommandView.image4.hidden = false; recommandView.image4.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                        case 4: recommandView.image5.hidden = false; recommandView.image5.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+        }else {
+            recommandView.hidden = true
+            browser.frame = CGRectMake(0, 0, browser.frame.width, browser.frame.height)
+        }
         
     }
     

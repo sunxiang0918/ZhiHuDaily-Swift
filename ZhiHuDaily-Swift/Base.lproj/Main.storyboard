@@ -255,7 +255,7 @@
                                 <rect key="frame" x="0.0" y="558" width="600" height="42"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ToolBar_Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="Vgp-hE-Cng">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="U1g-5d-iSJ"/>
                                         </constraints>
@@ -414,6 +414,7 @@
                                     <constraint firstItem="r9D-g2-2rT" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="px0-Bt-oDR"/>
                                     <constraint firstAttribute="bottom" secondItem="wf7-TR-zNc" secondAttribute="bottom" constant="-1" id="qW4-y2-mFG"/>
                                     <constraint firstItem="wf7-TR-zNc" firstAttribute="width" secondItem="r9D-g2-2rT" secondAttribute="width" id="rUN-JN-pcf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vgp-hE-Cng" secondAttribute="trailing" id="riZ-uN-Y94"/>
                                     <constraint firstAttribute="bottom" secondItem="r9D-g2-2rT" secondAttribute="bottom" constant="-1" id="tWI-a6-8CA"/>
                                     <constraint firstItem="dFy-ln-Eay" firstAttribute="leading" secondItem="wf7-TR-zNc" secondAttribute="trailing" id="u1i-3s-HlW"/>
                                     <constraint firstAttribute="trailing" secondItem="iX0-N7-evC" secondAttribute="trailing" constant="8" id="vHa-Xv-DyO"/>

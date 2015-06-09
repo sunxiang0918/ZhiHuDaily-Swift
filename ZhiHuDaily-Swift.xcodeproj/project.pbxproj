@@ -20,6 +20,9 @@
 		A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */; };
 		A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */; };
 		A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */; };
+		A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */; };
+		A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */; };
+		A45D9F991B272F2C00E7CDB0 /* FilletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */; };
 		A46A4FF01B247B11009E3661 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A4FEF1B247B11009E3661 /* CustomWebView.swift */; };
 		A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545721B176728001CC98F /* KYCircularProgress.swift */; };
 		A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A485458F1B1809BA001CC98F /* RefreshControl.swift */; };
@@ -84,6 +87,9 @@
 		A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTableViewCell.xib; sourceTree = "<group>"; };
 		A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTitleViewController.swift; sourceTree = "<group>"; };
+		A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendersView.xib; sourceTree = "<group>"; };
+		A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersView.swift; sourceTree = "<group>"; };
+		A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilletImageView.swift; sourceTree = "<group>"; };
 		A46A4FEF1B247B11009E3661 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
 		A48545721B176728001CC98F /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
 		A485458F1B1809BA001CC98F /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
@@ -241,6 +247,9 @@
 				A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */,
 				A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */,
 				A46A4FEF1B247B11009E3661 /* CustomWebView.swift */,
+				A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */,
+				A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */,
+				A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -488,6 +497,7 @@
 			files = (
 				A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */,
 				A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */,
+				A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */,
 				A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */,
 				A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */,
 			);
@@ -559,6 +569,7 @@
 				A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */,
 				A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */,
 				A4939FD11B1553D400E041C4 /* LaunchImageViewController.swift in Sources */,
+				A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */,
@@ -568,6 +579,7 @@
 				A4B3A7CB1B1FE85C00F3C1C1 /* NewsDetailVO.swift in Sources */,
 				A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
+				A45D9F991B272F2C00E7CDB0 /* FilletImageView.swift in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,
 				A46A4FF01B247B11009E3661 /* CustomWebView.swift in Sources */,
 				A4B3A7C51B1FE79500F3C1C1 /* NewsDetailControl.swift in Sources */,
