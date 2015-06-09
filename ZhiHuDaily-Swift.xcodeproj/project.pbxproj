@@ -23,6 +23,7 @@
 		A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */; };
 		A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */; };
 		A45D9F991B272F2C00E7CDB0 /* FilletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */; };
+		A45D9F9B1B273B1300E7CDB0 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */; };
 		A46A4FF01B247B11009E3661 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A4FEF1B247B11009E3661 /* CustomWebView.swift */; };
 		A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545721B176728001CC98F /* KYCircularProgress.swift */; };
 		A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A485458F1B1809BA001CC98F /* RefreshControl.swift */; };
@@ -90,6 +91,7 @@
 		A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendersView.xib; sourceTree = "<group>"; };
 		A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersView.swift; sourceTree = "<group>"; };
 		A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilletImageView.swift; sourceTree = "<group>"; };
+		A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
 		A46A4FEF1B247B11009E3661 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
 		A48545721B176728001CC98F /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
 		A485458F1B1809BA001CC98F /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */,
 				A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */,
 				A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */,
+				A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
+				A45D9F9B1B273B1300E7CDB0 /* CommonViewController.swift in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
 				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
 				A4B3A7CB1B1FE85C00F3C1C1 /* NewsDetailVO.swift in Sources */,
