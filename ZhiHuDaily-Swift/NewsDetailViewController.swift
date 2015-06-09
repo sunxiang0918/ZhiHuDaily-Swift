@@ -468,7 +468,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             let currentSection = self.newsLocation.0
             if  currentSection == 0 {
                 if currentRow <= 1 {
-                    self.finishRefreshing(direction)
+                    refreshControl.finishRefreshingDirection(direction)
                     return
                 }
             }
@@ -477,7 +477,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             //这个地方开始异步的获取新闻详细.然后再进行跳转
             self.performSegueWithIdentifier("showPreNewsSegue", sender: nil)
             
-            self.finishRefreshing(direction)
+            refreshControl.finishRefreshingDirection(direction)
         }else {
             
             let currentRow = self.newsLocation.1
@@ -488,7 +488,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                 if  self.newsListControl.todayNews?.news?.count <= currentRow {
                     //表示当天的新闻已经完了,不允许再点击了
                     if  self.newsListControl.news.count==0{
-                        self.finishRefreshing(direction)
+                        refreshControl.finishRefreshingDirection(direction)
                         return
                     }
                 }
@@ -499,7 +499,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                     if  self.newsListControl.news.count > currentSection {
                         
                     }else {
-                        self.finishRefreshing(direction)
+                        refreshControl.finishRefreshingDirection(direction)
                         return
                     }
                 }
@@ -508,7 +508,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             //是上拉 加载下一条
             self.performSegueWithIdentifier("showNextNewsSegue", sender: nil)
             
-            self.finishRefreshing(direction)
+            refreshControl.finishRefreshingDirection(direction)
             
         }
         
