@@ -158,7 +158,6 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             return cell
         }else{
             let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as? UITableViewCell
-            cell = tmp!
             
             if  tmp == nil {
                 cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")

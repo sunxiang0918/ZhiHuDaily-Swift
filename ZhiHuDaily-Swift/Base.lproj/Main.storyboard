@@ -525,11 +525,11 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-1a-wQQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-1a-wQQ">
                                 <rect key="frame" x="0.0" y="50" width="600" height="512"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KEv-7j-i30">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="commonListTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="commonListTableViewCell" id="KEv-7j-i30" customClass="CommonListTableViewCell" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KEv-7j-i30" id="5Ld-8c-yh5">
@@ -537,6 +537,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Nb-Iv-m4J" id="DVl-Cf-eDJ"/>
+                                    <outlet property="delegate" destination="0Nb-Iv-m4J" id="Ng8-jI-zMJ"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-PW-P9s">
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
@@ -598,6 +602,9 @@
                             <constraint firstItem="Oyu-Bk-9h1" firstAttribute="top" secondItem="R8j-1a-wQQ" secondAttribute="bottom" constant="38" id="og2-g6-90R"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="commonTableView" destination="R8j-1a-wQQ" id="y0t-BK-lgL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4s4-Xd-4FU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

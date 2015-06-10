@@ -31,6 +31,8 @@
 		A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */; };
 		A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486F0871B1A0E2900F75621 /* NewsListVO.swift */; };
 		A486F08B1B1B113600F75621 /* MainNewsListControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486F08A1B1B113600F75621 /* MainNewsListControl.swift */; };
+		A48BB66F1B2888030089A3D4 /* CommonListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48BB66E1B2888030089A3D4 /* CommonListTableViewCell.xib */; };
+		A48BB6721B288CA10089A3D4 /* CommonListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BB6711B288CA10089A3D4 /* CommonListTableViewCell.swift */; };
 		A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F121B1494A100E041C4 /* HttpControl.swift */; };
 		A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4939F141B14C71C00E041C4 /* SlideScrollView.swift */; };
 		A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A4939FA61B14D66800E041C4 /* CAAnimation+PKIdentifier.m */; };
@@ -99,6 +101,8 @@
 		A48545931B1812A5001CC98F /* RefreshViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewDelegate.swift; sourceTree = "<group>"; };
 		A486F0871B1A0E2900F75621 /* NewsListVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListVO.swift; sourceTree = "<group>"; };
 		A486F08A1B1B113600F75621 /* MainNewsListControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNewsListControl.swift; sourceTree = "<group>"; };
+		A48BB66E1B2888030089A3D4 /* CommonListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonListTableViewCell.xib; sourceTree = "<group>"; };
+		A48BB6711B288CA10089A3D4 /* CommonListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonListTableViewCell.swift; sourceTree = "<group>"; };
 		A4939F121B1494A100E041C4 /* HttpControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpControl.swift; sourceTree = "<group>"; };
 		A4939F141B14C71C00E041C4 /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
 		A4939FA51B14D66800E041C4 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 				A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */,
 				A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */,
 				A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */,
+				A48BB66E1B2888030089A3D4 /* CommonListTableViewCell.xib */,
+				A48BB6711B288CA10089A3D4 /* CommonListTableViewCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 			files = (
 				A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */,
 				A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */,
+				A48BB66F1B2888030089A3D4 /* CommonListTableViewCell.xib in Resources */,
 				A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */,
 				A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */,
 				A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */,
@@ -568,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A48BB6721B288CA10089A3D4 /* CommonListTableViewCell.swift in Sources */,
 				A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */,
 				A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */,
 				A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */,
