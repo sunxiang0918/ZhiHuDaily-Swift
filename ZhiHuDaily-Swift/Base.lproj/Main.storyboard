@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Left View Controller-->
+        <!--左边菜单视图-->
         <scene sceneID="iKm-UA-PmI">
             <objects>
-                <viewController storyboardIdentifier="leftViewController" id="JsO-fA-3ao" customClass="LeftViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftViewController" id="JsO-fA-3ao" userLabel="左边菜单视图" customClass="LeftViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lWt-gM-1Bd"/>
                         <viewControllerLayoutGuide type="bottom" id="NFr-GS-1cR"/>
@@ -65,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="627" y="1519"/>
         </scene>
-        <!--今日热闻-->
+        <!--主页面视图-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="rightViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rightViewController" id="BYZ-38-t0r" userLabel="主页面视图" customClass="ViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="575" y="803"/>
         </scene>
-        <!--Main Title View Controller-->
+        <!--主页面标题栏-->
         <scene sceneID="LIm-Gg-t8i">
             <objects>
-                <viewController storyboardIdentifier="mainTitleViewController" automaticallyAdjustsScrollViewInsets="NO" id="nVi-fe-NNd" customClass="MainTitleViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainTitleViewController" automaticallyAdjustsScrollViewInsets="NO" id="nVi-fe-NNd" userLabel="主页面标题栏" customClass="MainTitleViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SkD-NX-ai0"/>
                         <viewControllerLayoutGuide type="bottom" id="Iw1-GQ-lp4"/>
@@ -228,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="1350" y="597"/>
         </scene>
-        <!--News Detail View Controller-->
+        <!--新闻详细视图-->
         <scene sceneID="WyP-9r-GIu">
             <objects>
-                <viewController storyboardIdentifier="newsDetailViewController" id="lOs-R4-ra9" customClass="NewsDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newsDetailViewController" id="lOs-R4-ra9" userLabel="新闻详细视图" customClass="NewsDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gn7-qk-YbZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Kaj-Ph-IpD"/>
@@ -486,10 +486,10 @@
             </objects>
             <point key="canvasLocation" x="1418" y="1158"/>
         </scene>
-        <!--Common View Controller-->
+        <!--评论视图-->
         <scene sceneID="pks-Ia-W9y">
             <objects>
-                <viewController id="0Nb-Iv-m4J" customClass="CommonViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Nb-Iv-m4J" userLabel="评论视图" customClass="CommonViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GzO-Ps-t7p"/>
                         <viewControllerLayoutGuide type="bottom" id="Oyu-Bk-9h1"/>
