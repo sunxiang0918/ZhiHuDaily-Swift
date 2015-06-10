@@ -370,7 +370,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="0Nb-Iv-m4J" kind="show" id="kHM-FY-TQd"/>
+                                            <segue destination="0Nb-Iv-m4J" kind="show" identifier="showCommonsSegue" id="kHM-FY-TQd"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gi-VI-uty">
@@ -554,6 +554,9 @@
                                         <state key="normal" image="Comment_Icon_Back">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="doBackAction:" destination="0Nb-Iv-m4J" eventType="touchUpInside" id="Chj-C9-fnp"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Line" translatesAutoresizingMaskIntoConstraints="NO" id="k6A-Dr-rPZ">
                                         <rect key="frame" x="45" y="0.0" width="1" height="30"/>
