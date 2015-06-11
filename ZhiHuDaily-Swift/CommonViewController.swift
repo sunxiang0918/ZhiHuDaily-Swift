@@ -21,6 +21,9 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         let nib=UINib(nibName: "CommonListTableViewCell", bundle: nil)
         commonTableView.registerNib(nib, forCellReuseIdentifier: "commonListTableViewCell")
         
+        //IOS8 新增的逻辑,输入一个预估的高度,然后默认设置self.tableView.rowHeight = UITableViewAutomaticDimension;  这样就能自动的适配高度了,而不用去重载 tableview:heightForRowAtIndexPath:这个方法了
+        commonTableView.estimatedRowHeight = 90;
+        
         // Do any additional setup after loading the view.
     }
 
@@ -133,7 +136,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell = tmp!
             
             tmp?.nameLabel.text="123123"
-            tmp?.contentLabel.text="aasdfsandfansdfasdlkjflskadfnsad"
+            tmp?.contentLabel.text = ( indexPath.row%2 == 0 ? "aasdfsandfansdfasdlkjflskadfnsad" : "你妹的,我来测试一下中文的自动高矮到底是如何的.不晓得这么长了换行了没的. 如果没有,我就再加两句")
             tmp?.dateLabel.text="06-10 22:37"
             tmp?.voteNumberLabel.text="10"
             
@@ -145,10 +148,6 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 90
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
