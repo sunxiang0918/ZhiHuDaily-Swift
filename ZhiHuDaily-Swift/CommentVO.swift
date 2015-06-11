@@ -1,5 +1,5 @@
 //  评论的VO
-//  CommonVO.swift
+//  CommentVO.swift
 //  ZhiHuDaily-Swift
 //
 //  Created by SUN on 15/6/11.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class CommonVO {
+class CommentVO {
     
     /// 作者名
     let author : String
@@ -29,7 +29,7 @@ class CommonVO {
     /// 喜欢数
     let likes : Int
     
-    var replayTo : RefCommonVO?
+    var replayTo : RefCommentVO?
     
     init(author:String,content:String,avatar:String?,time:Int,id:Int,likes:Int = 0){
         self.author = author
@@ -43,7 +43,7 @@ class CommonVO {
 }
 
 //关联的评论
-class RefCommonVO {
+class RefCommentVO {
     
     let content : String
     

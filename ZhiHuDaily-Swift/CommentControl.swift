@@ -1,5 +1,5 @@
 //
-//  CommonControl.swift
+//  CommentControl.swift
 //  ZhiHuDaily-Swift
 //
 //  Created by SUN on 15/6/11.
@@ -10,39 +10,39 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class CommonControl {
+class CommentControl {
     
     /// 加载 长评论
-    func loadLongCommons(id:Int,complate:(longCommons:[CommonVO]?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadLongComments(id:Int,complate:(longComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMONS_URL+"\(id)/long-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers){ (_, _, data, error) -> Void in
+        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)/long-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers){ (_, _, data, error) -> Void in
             if let result: AnyObject = data {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(longCommons: self.convertJSON2VO(json))
+                complate(longComments: self.convertJSON2VO(json))
             }
         }
     }
     
     /// 加载 短评论
-    func loadShortCommons(id:Int,complate:(shortCommons:[CommonVO]?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadShortComments(id:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMONS_URL+"\(id)short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
             if let result: AnyObject = data {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(shortCommons: self.convertJSON2VO(json))
+                complate(shortComments: self.convertJSON2VO(json))
             }
         }
         
     }
     
-    private func convertJSON2VO(json:JSON) -> [CommonVO]? {
+    private func convertJSON2VO(json:JSON) -> [CommentVO]? {
         
         if  let comments = json["comments"].array {
-            var vos:[CommonVO] = []
+            var vos:[CommentVO] = []
             for comment in comments {
                 let author = comment["author"].string!
                 let content = comment["content"].string!
@@ -53,7 +53,7 @@ class CommonControl {
                 
                 let replay = comment["reply_to"]
                 
-                let vo = CommonVO(author: author, content: content, avatar: avatar, time: time, id: id, likes: likes)
+                let vo = CommentVO(author: author, content: content, avatar: avatar, time: time, id: id, likes: likes)
                 
                 vos.append(vo)
                 
@@ -64,7 +64,7 @@ class CommonControl {
                     let _id = replay["id"].int!
                     let _author = replay["author"].string!
                     
-                    vo.replayTo = RefCommonVO(id: _id, author: _author, content: _content, status: _status)
+                    vo.replayTo = RefCommentVO(id: _id, author: _author, content: _content, status: _status)
                 }
             }
             return vos
