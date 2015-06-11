@@ -28,7 +28,7 @@ class CommentControl {
     /// 加载 短评论
     func loadShortComments(id:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)/short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
             if let result: AnyObject = data {
                 //转换成JSON
                 let json = JSON(result)

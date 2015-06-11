@@ -10,6 +10,18 @@ import UIKit
 
 class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    /// 用于获取评论的Control
+    let commentControl : CommentControl = CommentControl()
+    
+    var newsId:Int!
+    
+    var newsExtral:NewsExtraVO!
+    
+    var longComments:[CommentVO]?
+    var shortComments:[CommentVO]?
+    
+    private let formatter:NSDateFormatter = NSDateFormatter()
+    
     @IBOutlet weak var commonTableView: UITableView!
     
     /// 用于记录POP动画状态的变量
@@ -18,6 +30,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        formatter.dateFormat = "MM-dd HH:mm"
+        
         let nib=UINib(nibName: "CommonListTableViewCell", bundle: nil)
         commonTableView.registerNib(nib, forCellReuseIdentifier: "commonListTableViewCell")
         
@@ -30,6 +44,24 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        //读取长评论和短评论
+        commentControl.loadLongComments(newsId, complate: { (longComments) -> Void in
+            self.longComments = longComments
+            
+            self.commentControl.loadShortComments(self.newsId, complate: { (shortComments) -> Void in
+                self.shortComments = shortComments
+                
+                //重新加载数据
+                self.commonTableView.reloadData()
+            }, block: nil)
+            
+        }, block: nil)
+        
     }
     
     @IBAction func doBackAction(sender: UIButton) {
@@ -114,7 +146,14 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        if section == 0{
+            //这个是长评论
+            return longComments?.count ?? 1
+        }else {
+            //这个是短评论
+            return shortComments?.count ?? 0
+        }
+        
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -122,26 +161,65 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell
-        if  indexPath.section==0 && indexPath.row == 0 {
-            //如果是第一行,就需要构建热门条目
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-            cell.backgroundColor = UIColor.clearColor()
-            cell.contentView.backgroundColor = UIColor.clearColor()
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.clipsToBounds = true
+        
+        var comment:CommentVO? = nil
+        
+        if  indexPath.section == 0 {
+            //长评论
             
-            return cell
+            let count = longComments?.count
+            
+            if count == nil || count! == 0{
+                //表示没有长评论.
+                
+                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+                cell.backgroundColor = UIColor.clearColor()
+                cell.contentView.backgroundColor = UIColor.clearColor()
+                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                cell.clipsToBounds = true
+                
+                return cell
+                
+            }else {
+                //表示有长评论
+                if  let _longComments = longComments {
+                    comment = _longComments[indexPath.row]
+                }
+            }
+            
         }else{
-            let tmp = tableView.dequeueReusableCellWithIdentifier("commonListTableViewCell") as? CommonListTableViewCell
-            cell = tmp!
+            //短评论
+            let count = shortComments?.count
             
-            tmp?.nameLabel.text="123123"
-            tmp?.contentLabel.text = ( indexPath.row%2 == 0 ? "aasdfsandfansdfasdlkjflskadfnsad" : "你妹的,我来测试一下中文的自动高矮到底是如何的.不晓得这么长了换行了没的. 如果没有,我就再加两句")
-            tmp?.dateLabel.text="06-10 22:37"
-            tmp?.voteNumberLabel.text="10"
-            
-            return cell
+            if count == nil || count! == 0{
+                //表示没有短评论.
+            }else {
+                //表示有短评论
+                if  let _shortComments = shortComments {
+                    comment = _shortComments[indexPath.row]
+                }
+            }
         }
+        
+        //到这里来的 都是一定有cell的
+        let tmp = tableView.dequeueReusableCellWithIdentifier("commonListTableViewCell") as? CommonListTableViewCell
+        cell = tmp!
+        
+        if  let _comment = comment {
+            tmp?.nameLabel.text=_comment.author
+            
+            tmp?.contentLabel.text = _comment.content
+            
+            let date = NSDate(timeIntervalSince1970: NSTimeInterval(_comment.time))
+            
+            tmp?.dateLabel.text=formatter.stringFromDate(date)
+            tmp?.voteNumberLabel.text="\(_comment.likes)"
+            if let url = _comment.avatar {
+                tmp?.avatorImage.hnk_setImageFromURL(NSURL(string: url)!, placeholder: UIImage(named:"Setting_Avatar"))
+            }
+        }
+        
+        return cell
     }
 
     //================UITableViewDataSource的实现================================
@@ -159,9 +237,9 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if  section == 0 {
-            return "23条长评"
+            return "\(newsExtral.longComments)条长评"
         }else {
-            return "116条短评"
+            return "\(newsExtral.shortComments  )条短评"
         }
     }
 }
