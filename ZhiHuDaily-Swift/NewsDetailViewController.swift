@@ -701,11 +701,6 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     //========================UIWebViewDelegate的实现================================================
 }
 
-private enum PopActionState {
-    case NONE
-    case FINISH
-    case CANCEL
-}
 
 private enum TopRefreshState {
     case NONE

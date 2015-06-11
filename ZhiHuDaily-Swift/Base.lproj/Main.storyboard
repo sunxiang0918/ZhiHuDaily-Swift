@@ -591,6 +591,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="kHV-8k-y8c" firstAttribute="top" secondItem="TPm-rA-2Zt" secondAttribute="topMargin" id="6dG-e0-4bt"/>
                             <constraint firstItem="kHV-8k-y8c" firstAttribute="leading" secondItem="TPm-rA-2Zt" secondAttribute="leadingMargin" constant="-16" id="8Ya-yH-0kP"/>
@@ -604,12 +605,20 @@
                             <constraint firstItem="R8j-1a-wQQ" firstAttribute="width" secondItem="TPm-rA-2Zt" secondAttribute="width" id="goe-ZH-rgh"/>
                             <constraint firstItem="Oyu-Bk-9h1" firstAttribute="top" secondItem="R8j-1a-wQQ" secondAttribute="bottom" constant="38" id="og2-g6-90R"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QyR-dC-ruF" appends="YES" id="lDc-tE-mf6"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="commonTableView" destination="R8j-1a-wQQ" id="y0t-BK-lgL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4s4-Xd-4FU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="QyR-dC-ruF">
+                    <connections>
+                        <action selector="panGestureAction:" destination="0Nb-Iv-m4J" id="OwG-mq-27y"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2230" y="1158"/>
         </scene>
