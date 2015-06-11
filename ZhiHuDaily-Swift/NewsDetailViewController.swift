@@ -308,6 +308,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     */
     private func loadDetailView(news:NewsDetailVO) {
         
+        self.news = news
+        
         if  var body = news.body {
             if let css = news.css {
                 for c in css {
@@ -470,6 +472,11 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                 }
                 return indexPath
             })
+        } else if segue.identifier == "showCommonsSegue" {
+            let commentViewController = segue.destinationViewController as? CommonViewController
+            
+            commentViewController?.newsExtral = self.newsExtral
+            commentViewController?.newsId = self.news.id
         }
     }
     
