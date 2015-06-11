@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6D6CBCBAC47A08E63F4FDC80 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */; };
+		A41E6A331B29D5DA000BFC4B /* CommonVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A321B29D5DA000BFC4B /* CommonVO.swift */; };
+		A41E6A351B29D815000BFC4B /* CommonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A341B29D815000BFC4B /* CommonControl.swift */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
@@ -75,6 +77,8 @@
 		6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6FB894871E29411B4B980961 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		A41E6A321B29D5DA000BFC4B /* CommonVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonVO.swift; sourceTree = "<group>"; };
+		A41E6A341B29D815000BFC4B /* CommonControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonControl.swift; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 			children = (
 				A486F0871B1A0E2900F75621 /* NewsListVO.swift */,
 				A4B3A7CA1B1FE85C00F3C1C1 /* NewsDetailVO.swift */,
+				A41E6A321B29D5DA000BFC4B /* CommonVO.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				A4B3A7C41B1FE79500F3C1C1 /* NewsDetailControl.swift */,
 				A486F08A1B1B113600F75621 /* MainNewsListControl.swift */,
 				A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */,
+				A41E6A341B29D815000BFC4B /* CommonControl.swift */,
 			);
 			name = control;
 			sourceTree = "<group>";
@@ -604,6 +610,8 @@
 				A4939FC31B14D66800E041C4 /* CAAnimation+PKIdentifier.m in Sources */,
 				A48545921B1809BA001CC98F /* RefreshControlDelegate.swift in Sources */,
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
+				A41E6A331B29D5DA000BFC4B /* CommonVO.swift in Sources */,
+				A41E6A351B29D815000BFC4B /* CommonControl.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
