@@ -1,4 +1,15 @@
+JAVA程序猿一枚,开始学习Swift一个多月,以前没有iOS的经验.在看了官方的文档和老镇的豆瓣电台视频后,想自己做一个东西来练手,因此有了这个东西.
+  
+在做的过程中,遇到了很多的问题,没想到一个看似很简单的东西,真要给它做像了,还是比较麻烦的,要学习的东西很多. 我现在只能尽量的把样子做像了,代码这些一团糟,很多思维都还是JAVA的思维,以后接触多了后,再来重构吧.  
+
+因为我没有入手开发者账号,因此我只在模拟器中运行了,并且是 iOS8和iphone6的模式下测试.估计选择其他的是有问题的.不过,貌似Xcode7支持非开发者真机调试了,这真是令开发大快人心的大好事.到时候我再来尝试兼容ipad,估计要改很多的地方.
+    
+
+#Screenshot
+![alt text](http://git.oschina.net/xycm/ZhiHuDaily-Swift/raw/master/screenshot.gif "程序运行截图 2015-06-12 09:51:26")
+
 #API 说明
+* API这里要感谢[@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90 "感谢")   , 给予了很大的帮助,基本上就是把他的分析稍微有些修改.感谢[@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90 "感谢")! [@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90 "感谢")! [@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90 "感谢")!重要的事情要说三遍.
 * 知乎日报的消息以 JSON 格式输出
 * 网址中 `api` 后数字代表 API 版本，过高或过低均会得到错误信息
 * 较老的接口（启动界面图像获取，最新消息，过往消息）中将数字 2 替换为 1.2 获得效果相同，替换为 1.1 获得的是老版本 API 输出的 JSON 格式（替换为更低，如 1.0，或更高，如 1.3，将会获得错误消息）
@@ -187,6 +198,116 @@
 	
 	此时返回的 JSON 数据缺少 `body`，`iamge-source`，`image`，`js` 属性。多出 `theme_name`，`editor_name`，`theme_id` 三个属性。`type` 由 0 变为 1。
 
+###4.5 新闻推荐者信息
+* URL:`http://news-at.zhihu.com/api/4/story/#{id}/recommenders`
+* 这个返回的就是某一篇新闻的推荐者的详细信息.
+* 响应实例:
+
+```json
+{
+    "items": [
+        {
+            "index": 1,
+            "recommenders": [
+                {
+                    "bio": "",
+                    "zhihu_url_token": "90b373201c03b47548dcac5832da1a95",
+                    "id": 1162,
+                    "avatar": "http://pic1.zhimg.com/f81b942d0_m.jpg",
+                    "name": "Wang Chris"
+                },
+                {
+                    "bio": "Phys2CS",
+                    "zhihu_url_token": "d2facf05b7138a6eb4631a161915f7d4",
+                    "id": 629,
+                    "avatar": "http://pic3.zhimg.com/9dfd356e2f137540439448fa25ef0ea6_m.jpg",
+                    "name": "Badger"
+                },
+                {
+                    "bio": "",
+                    "zhihu_url_token": "75a591efecfd4c22a6fc778a38a90f8d",
+                    "id": 69,
+                    "avatar": "http://pic1.zhimg.com/428ce35d11440c08c83f46dbfe435a5c_m.jpg",
+                    "name": "One Two"
+                },
+                {
+                    "bio": "重新做人",
+                    "zhihu_url_token": "4d2540e03e0e5e225f4817f7ff7fc389",
+                    "id": 7895,
+                    "avatar": "http://pic3.zhimg.com/816934c948f5e3cc781ecda1ece08c3e_m.jpg",
+                    "name": "王RRR"
+                },
+                {
+                    "bio": "金融菜鸟 音乐草根 技能点加歪",
+                    "zhihu_url_token": "b929aa5072baae224a74a18b5bd65376",
+                    "id": 2576,
+                    "avatar": "http://pic4.zhimg.com/1814a1b987a44cc49a448268412dbe23_m.jpg",
+                    "name": "酷冰"
+                },
+                {
+                    "bio": "你读书少，不骗你骗谁。",
+                    "zhihu_url_token": "1cd7424d0a7990aaff8e2ed24644992a",
+                    "id": 369,
+                    "avatar": "http://pic3.zhimg.com/bbb689a7a_m.jpg",
+                    "name": "卞卡"
+                },
+                {
+                    "bio": "智商捉不了鸡",
+                    "zhihu_url_token": "794c4d35096ad3dafb802124cdd83294",
+                    "id": 5778,
+                    "avatar": "http://pic4.zhimg.com/131bb14f5a12920afc975b3833538027_m.jpg",
+                    "name": "二核桃"
+                },
+                {
+                    "bio": "软件工程师",
+                    "zhihu_url_token": "93ce68e327ef290f84192014bbc168b2",
+                    "id": 6519,
+                    "avatar": "http://pic2.zhimg.com/5d55b2e8d_m.jpg",
+                    "name": "戴威"
+                }
+            ],
+            "author": {
+                "name": "灿妞儿"
+            }
+        },
+        {
+            "index": 2,
+            "recommenders": [
+                {
+                    "bio": "",
+                    "zhihu_url_token": "75a591efecfd4c22a6fc778a38a90f8d",
+                    "id": 69,
+                    "avatar": "http://pic1.zhimg.com/428ce35d11440c08c83f46dbfe435a5c_m.jpg",
+                    "name": "One Two"
+                }
+            ],
+            "author": {
+                "name": "Badger"
+            }
+        }
+    ],
+    "item_count": 3
+}
+```
+
+* 分析:
+
+|字段名|备注|
+|---|---|
+| item_count |表示这篇日报里面有 几篇内容|
+| items |表示推荐者信息|
+| -->index |表示这个推荐信息对应的是日报中的第几篇内容|
+| -->recommenders |推荐者信息|
+| ---->bio |推荐者的个性备注|
+| ---->zhihu_url_token | 用户的token |
+| ---->id | 用户id |
+| ---->avatar | 用户头像|
+| ---->name | 用户名 |
+| --> author | 第几篇内容对应的作者 |
+| ----> name | 第几篇内容对应的作者的名字|
+
+
+
 ###5. 过往消息
 * URL:`http://news.at.zhihu.com/api/4/news/before/{date}`
 * 若果需要查询 11 月 18 日的消息，{date}的数字应为 20131119
@@ -270,6 +391,7 @@
 ###8. 新闻对应短评论查看
 * URL: `http://news-at.zhihu.com/api/4/story/#{id}/short-comments`
 * 使用在 `最新消息` 中获得的 `id`，传入#{id}，得到短评论 JSON 格式的内容
+* 最新的测试结果,一次只返回20条.具体如何分页需要再分析
 * 响应实例:
 
 ```json
