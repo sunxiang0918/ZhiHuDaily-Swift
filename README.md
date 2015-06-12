@@ -359,6 +359,7 @@ JAVA程序猿一枚,开始学习Swift一个多月,以前没有iOS的经验.在�
 ###7. 新闻对应长评论查看
 * URL: http://news-at.zhihu.com/api/4/story/#{id}/long-comments
 * 使用在 `最新消息` 中获得的 `id`，传入#{id}，得到长评论 JSON 格式的内容
+* 最新的测试结果,一次只返回20条.找到显示全的方法了,调用  `http://news-at.zhihu.com/api/4/story/#{id}/long-comments/before/#{lasetId}` 就可以获取lasetId评论之前的的评论了,还是返回20个.不断的重复,就可以读取完成所有的评论
 * 响应实例:
 
 ```json
@@ -391,7 +392,7 @@ JAVA程序猿一枚,开始学习Swift一个多月,以前没有iOS的经验.在�
 ###8. 新闻对应短评论查看
 * URL: `http://news-at.zhihu.com/api/4/story/#{id}/short-comments`
 * 使用在 `最新消息` 中获得的 `id`，传入#{id}，得到短评论 JSON 格式的内容
-* 最新的测试结果,一次只返回20条.具体如何分页需要再分析
+* 最新的测试结果,一次只返回20条.找到显示全的方法了,调用  `http://news-at.zhihu.com/api/4/story/#{id}/short-comments/before/#{lasetId}` 就可以获取lasetId评论之前的的评论了,还是返回20个.不断的重复,就可以读取完成所有的评论
 * 响应实例:
 
 ```json
