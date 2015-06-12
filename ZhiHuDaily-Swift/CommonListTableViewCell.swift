@@ -10,11 +10,15 @@ import UIKit
 
 class CommonListTableViewCell: UITableViewCell {
 
+    var delegate : CommonListTableViewCellDelegate?
+    
     @IBOutlet weak var avatorImage: FilletImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var voteNumberLabel: UILabel!
+    @IBOutlet weak var expandButton: UIButton!
+    @IBOutlet weak var replayCommentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,4 +31,23 @@ class CommonListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func doExpandAction(sender: UIButton) {
+        
+        if self.expandButton.selected {
+            delegate?.doCollapse(self)
+            self.expandButton.selected = false
+        }else {
+            delegate?.doExpand(self)
+            self.expandButton.selected = true
+        }
+        
+    }
+}
+
+protocol CommonListTableViewCellDelegate{
+    
+    func doExpand(sender:CommonListTableViewCell)
+    
+    func doCollapse(sender:CommonListTableViewCell)
+    
 }

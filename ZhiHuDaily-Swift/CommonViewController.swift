@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CommonListTableViewCellDelegate {
 
     /// 用于获取评论的Control
     let commentControl : CommentControl = CommentControl()
@@ -187,21 +187,6 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
                 
                 return tmp
                 
-//                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-//                cell.backgroundColor = UIColor.blackColor()
-//                cell.contentView.backgroundColor = UIColor.blackColor()
-//                cell.selectionStyle = UITableViewCellSelectionStyle.None
-//                cell.clipsToBounds = true
-//                cell.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-22)
-//                
-//                let imageView = UIImageView(frame: CGRectMake(0, 0, 400, 500))
-//                
-//                imageView.image = UIImage(named: "Comment_Empty")
-//                
-//                cell.addSubview(imageView)
-//                
-//                return cell
-                
             }else {
                 //表示有长评论
                 if  let _longComments = longComments {
@@ -225,6 +210,11 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         //到这里来的 都是一定有cell的
         let tmp = tableView.dequeueReusableCellWithIdentifier("commonListTableViewCell") as? CommonListTableViewCell
+        
+        if  tmp?.delegate == nil {
+            tmp?.delegate = self
+        }
+        
         cell = tmp!
         
         if  let _comment = comment {
@@ -238,6 +228,23 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             tmp?.voteNumberLabel.text="\(_comment.likes)"
             if let url = _comment.avatar {
                 tmp?.avatorImage.hnk_setImageFromURL(NSURL(string: url)!, placeholder: UIImage(named:"Setting_Avatar"))
+            }
+            
+            tmp?.replayCommentLabel.numberOfLines = 2
+            tmp?.expandButton.selected = false
+            
+            if let replay = _comment.replayTo {
+                tmp?.expandButton.hidden = false
+                tmp?.replayCommentLabel.hidden = false
+                tmp?.replayCommentLabel.text = "//\(replay.author):\(replay.content)"
+                
+                println("1:\(tmp?.replayCommentLabel.intrinsicContentSize()) 2:\(tmp?.replayCommentLabel.frame.height) 3:\(tmp?.replayCommentLabel)")
+                
+            }else{
+                //没有引用的评论.
+                tmp?.expandButton.hidden = true
+                tmp?.replayCommentLabel.hidden = true
+                tmp?.replayCommentLabel.text = ""
             }
         }
         
@@ -263,5 +270,33 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         }else {
             return "\(newsExtral.shortComments  )条短评"
         }
+    }
+    
+    
+    //====================CommonListTableViewCellDelegate实现=============================
+    //执行展开操作
+    func doExpand(sender:CommonListTableViewCell) {
+        //设置行数
+        sender.replayCommentLabel.numberOfLines = 100
+        //放弃原来的大小,重新计算大小
+        sender.replayCommentLabel.invalidateIntrinsicContentSize()
+        
+        //调用table的 beginUpdates endUpdates 来动态刷新Table的 Cell
+        self.commonTableView.beginUpdates()
+        self.commonTableView.endUpdates()
+        
+    }
+    
+    //执行关闭操作
+    func doCollapse(sender:CommonListTableViewCell) {
+        //设置行数
+        sender.replayCommentLabel.numberOfLines = 2
+        //放弃原来的大小,重新计算大小
+        sender.replayCommentLabel.invalidateIntrinsicContentSize()
+
+        //调用table的 beginUpdates endUpdates 来动态刷新Table的 Cell
+        self.commonTableView.beginUpdates()
+        self.commonTableView.endUpdates()
+        
     }
 }
