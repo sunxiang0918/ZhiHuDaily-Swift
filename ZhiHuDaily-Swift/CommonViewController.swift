@@ -23,6 +23,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     private let formatter:NSDateFormatter = NSDateFormatter()
     
     @IBOutlet weak var commonTableView: UITableView!
+    @IBOutlet weak var commentNumberLabel: UILabel!
     
     /// 用于记录POP动画状态的变量
     private var popstate = PopActionState.NONE
@@ -48,6 +49,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     override func viewDidAppear(animated: Bool) {
+        
+        commentNumberLabel.text = "\(newsExtral.comments)条点评"
         
         //读取长评论和短评论
         commentControl.loadLongComments(newsId, complate: { (longComments) -> Void in

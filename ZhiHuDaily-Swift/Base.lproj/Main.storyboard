@@ -527,7 +527,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-1a-wQQ">
                                 <rect key="frame" x="0.0" y="50" width="600" height="512"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="commonListTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="commonListTableViewCell" id="KEv-7j-i30" customClass="CommonListTableViewCell" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -610,6 +610,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="commentNumberLabel" destination="c9h-jW-EDe" id="sJO-Cd-86R"/>
                         <outlet property="commonTableView" destination="R8j-1a-wQQ" id="y0t-BK-lgL"/>
                     </connections>
                 </viewController>
