@@ -35,6 +35,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         let nib=UINib(nibName: "CommonListTableViewCell", bundle: nil)
         commonTableView.registerNib(nib, forCellReuseIdentifier: "commonListTableViewCell")
+        commonTableView.registerNib(UINib(nibName: "EmptyCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCommentTableViewCell")
         
         //IOS8 新增的逻辑,输入一个预估的高度,然后默认设置self.tableView.rowHeight = UITableViewAutomaticDimension;  这样就能自动的适配高度了,而不用去重载 tableview:heightForRowAtIndexPath:这个方法了
         commonTableView.estimatedRowHeight = 90;
@@ -151,7 +152,12 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         if section == 0{
             //这个是长评论
-            return longComments?.count ?? 1
+            
+            if let count = longComments?.count {
+                return count == 0 ? 1 : count
+            }else {
+                return 1
+            }
         }else {
             //这个是短评论
             return shortComments?.count ?? 0
@@ -174,14 +180,27 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             if count == nil || count! == 0{
                 //表示没有长评论.
+                let tmp = tableView.dequeueReusableCellWithIdentifier("emptyCommentTableViewCell") as! EmptyCommentTableViewCell
                 
-                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-                cell.backgroundColor = UIColor.clearColor()
-                cell.contentView.backgroundColor = UIColor.clearColor()
-                cell.selectionStyle = UITableViewCellSelectionStyle.None
-                cell.clipsToBounds = true
+                //直接设置图片View的 约束的高度为  屏幕高度 - 上下title高度 - 两个section的高度
+                tmp.heightConstraint.constant = self.view.frame.height - 50 - 30 - 32 - 32
                 
-                return cell
+                return tmp
+                
+//                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+//                cell.backgroundColor = UIColor.blackColor()
+//                cell.contentView.backgroundColor = UIColor.blackColor()
+//                cell.selectionStyle = UITableViewCellSelectionStyle.None
+//                cell.clipsToBounds = true
+//                cell.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height-22)
+//                
+//                let imageView = UIImageView(frame: CGRectMake(0, 0, 400, 500))
+//                
+//                imageView.image = UIImage(named: "Comment_Empty")
+//                
+//                cell.addSubview(imageView)
+//                
+//                return cell
                 
             }else {
                 //表示有长评论
