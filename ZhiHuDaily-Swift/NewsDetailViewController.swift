@@ -207,7 +207,6 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
         _refreshControl.enableInsetBottom = SCROLL_HEIGHT
         
-        println(self.webView.scrollView.subviews)
     }
 
     override func didReceiveMemoryWarning() {

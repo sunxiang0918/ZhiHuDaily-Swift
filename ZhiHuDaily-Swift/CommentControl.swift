@@ -25,10 +25,44 @@ class CommentControl {
         }
     }
     
+    /**
+    加载更多的长评论
+    
+    :param: newsId   <#newsId description#>
+    :param: beforeId <#beforeId description#>
+    :param: complate <#complate description#>
+    */
+    func loadMoreLongComments(newsId:Int,beforeId:Int,complate:(longComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil) {
+        
+        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(newsId)/long-comments/before/\(beforeId)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+            if let result: AnyObject = data {
+                //转换成JSON
+                let json = JSON(result)
+                
+                complate(longComments: self.convertJSON2VO(json))
+            }
+        }
+        
+    }
+
+    
     /// 加载 短评论
     func loadShortComments(id:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
         
         Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)/short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
+            if let result: AnyObject = data {
+                //转换成JSON
+                let json = JSON(result)
+                
+                complate(shortComments: self.convertJSON2VO(json))
+            }
+        }
+        
+    }
+    
+    func loadMoreShortComments(newsId:Int,beforeId:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil) {
+        
+        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(newsId)/short-comments/before/\(beforeId)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
             if let result: AnyObject = data {
                 //转换成JSON
                 let json = JSON(result)

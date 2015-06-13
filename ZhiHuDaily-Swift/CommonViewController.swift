@@ -268,6 +268,35 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }
         
+        // 这里要处理 分页的加载了. 这里的逻辑是这样的. 判断到 如果界面已经刷新到 短新闻的倒数第3条了.那么就尝试进行新的数据
+        if  indexPath.section == 0 && indexPath.row+2 == (self.longComments?.count ?? 0) && (self.longComments?.count ?? 0 ) >= 20 && self.newsExtral.longComments > (self.longComments?.count ?? 0) {
+            let lastId = self.longComments?.last?.id
+            self.commentControl.loadMoreLongComments(self.newsId, beforeId: lastId!, complate: { (longComments) -> Void in
+                if let _longComments = longComments {
+                    if  _longComments.count > 0 {
+                        for longComment in _longComments {
+                            self.longComments?.append(longComment)
+                        }
+                        self.commonTableView.reloadData()
+                    }
+                }
+            }, block: nil)
+        }else if  indexPath.section == 1 && indexPath.row+2 == (self.shortComments?.count ?? 0) && (self.shortComments?.count ?? 0) >= 20 && self.newsExtral.shortComments > (self.shortComments?.count ?? 0) {
+            //必须是短新闻, 然后当前刷新的是 短新闻的倒数第3条新闻, 并且短新闻数量大于20  然后还有 短新闻没有加载
+            let lastId = self.shortComments?.last?.id
+            self.commentControl.loadMoreShortComments(self.newsId, beforeId: lastId!, complate: { (shortComments) -> Void in
+                //当从URL中获取到下一页评论的时候,开始把获取到得新闻 全部加载到 self.commonTableView中.然后重新加载表格数据
+                if let _shortComments = shortComments {
+                    if _shortComments.count > 0 {
+                        for shortComment in _shortComments {
+                            self.shortComments?.append(shortComment)
+                        }
+                        self.commonTableView.reloadData()
+                    }
+                }
+            }, block: nil)
+        }
+        
         return cell
     }
 
@@ -291,7 +320,6 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             return "\(newsExtral.shortComments  )条短评"
         }
     }
-    
     
     //====================CommonListTableViewCellDelegate实现=============================
     //执行展开操作
