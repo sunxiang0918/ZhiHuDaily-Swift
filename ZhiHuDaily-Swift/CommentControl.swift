@@ -59,12 +59,19 @@ class CommentControl {
                 
                 if replay.null == nil{
                     //表示有引用
-                    let _content = replay["content"].string!
                     let _status = replay["status"].int!
-                    let _id = replay["id"].int!
-                    let _author = replay["author"].string!
                     
-                    vo.replayTo = RefCommentVO(id: _id, author: _author, content: _content, status: _status)
+                    if  _status == 0 {
+                        let _content = replay["content"].string!
+                        let _id = replay["id"].int!
+                        let _author = replay["author"].string!
+                        vo.replayTo = RefCommentVO(id: _id, author: _author, content: _content, status: _status)
+                    } else {
+                        //  状态为1的 是被删除了的
+                        let _error_msg = replay["error_msg"].string!
+                        vo.replayTo = RefCommentVO(errorMsg: _error_msg, status: _status)
+                    }
+                    
                 }
             }
             return vos

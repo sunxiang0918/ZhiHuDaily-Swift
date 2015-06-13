@@ -215,6 +215,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             tmp?.delegate = self
         }
         
+        tmp?.replayCommentLabel.textColor = UIColor(white: 0.396, alpha: 1)
+        
         cell = tmp!
         
         if  let _comment = comment {
@@ -236,9 +238,27 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             if let replay = _comment.replayTo {
                 tmp?.expandButton.hidden = false
                 tmp?.replayCommentLabel.hidden = false
-                tmp?.replayCommentLabel.text = "//\(replay.author):\(replay.content)"
                 
-                println("1:\(tmp?.replayCommentLabel.intrinsicContentSize()) 2:\(tmp?.replayCommentLabel.frame.height) 3:\(tmp?.replayCommentLabel)")
+                if  replay.status == 0 {
+                    let content = "//\(replay.author):\(replay.content)"
+                    tmp?.replayCommentLabel.text = content
+                    tmp?.replayCommentLabel.backgroundColor = UIColor.clearColor()
+                    
+                    //根据字数 来计算是否需要显示展开按钮.
+                    //TODO 这个地方其实还是有问题的.有些情况下计算不准确...
+                    let width = tmp?.replayCommentLabel.frame.width
+                    let size = content.boundingRectWithSize(CGSizeMake(width!, 999), options: NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading , attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context:nil)
+                    if  size.height > 30 {
+                        tmp?.expandButton.hidden = false
+                    }else {
+                        tmp?.expandButton.hidden = true
+                    }
+                    
+                }else {
+                    tmp?.replayCommentLabel.text = "  \(replay.content)"
+                    tmp?.replayCommentLabel.backgroundColor = UIColor(white: 0.957, alpha: 1)
+                    tmp?.expandButton.hidden = true
+                }
                 
             }else{
                 //没有引用的评论.

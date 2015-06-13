@@ -53,6 +53,13 @@ class RefCommentVO {
     
     let author : String
     
+    init(errorMsg:String,status:Int = 1){
+        self.id = 0
+        self.author = ""
+        self.content = errorMsg
+        self.status = status
+    }
+    
     init(id:Int,author:String,content:String = "抱歉,原点评已经被删除",status:Int = 0) {
         self.id = id
         

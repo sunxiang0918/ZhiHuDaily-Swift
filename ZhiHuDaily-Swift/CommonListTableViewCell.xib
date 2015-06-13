@@ -57,33 +57,35 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8G2-ZI-2He" userLabel="评论内容Label">
-                        <rect key="frame" x="46" y="31" width="427" height="114"/>
+                        <rect key="frame" x="46" y="31" width="427" height="99.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqs-Qo-5fY">
                         <rect key="frame" x="456" y="148" width="35" height="20"/>
-                        <color key="backgroundColor" red="0.066666666669999999" green="0.47843137250000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.81176470588235294" green="0.8666666666666667" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7T5-YU-gcH"/>
                             <constraint firstAttribute="width" constant="35" id="jIf-ev-rj6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="展开">
-                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
-                        <state key="selected" title="收起"/>
+                        <state key="selected" title="收起">
+                            <color key="titleColor" red="0.3843137254901961" green="0.3843137254901961" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
                         <state key="highlighted" title="收起"/>
                         <connections>
                             <action selector="doExpandAction:" destination="iOD-al-J7Y" eventType="touchUpInside" id="MJL-Vg-xuJ"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woh-3Z-8m0" userLabel="引用评论Label">
-                        <rect key="frame" x="46" y="150" width="427" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woh-3Z-8m0" userLabel="引用评论Label">
+                        <rect key="frame" x="46" y="135.5" width="427" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
+                        <color key="highlightedColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                 </subviews>
                 <constraints>
