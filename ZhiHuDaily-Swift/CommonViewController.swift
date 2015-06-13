@@ -241,7 +241,13 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
                 
                 if  replay.status == 0 {
                     let content = "//\(replay.author):\(replay.content)"
-                    tmp?.replayCommentLabel.text = content
+
+                    //通过使用attributedText 来设置 同一个Label里面的字体和颜色不一样.从而实现引用的作者名加粗
+                    let attributedText = NSMutableAttributedString(string: content)
+                    attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0,count(replay.author)+3))
+                    attributedText.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(12), range: NSMakeRange(0,count(replay.author)+3))
+                    tmp?.replayCommentLabel.attributedText = attributedText
+                    
                     tmp?.replayCommentLabel.backgroundColor = UIColor.clearColor()
                     
                     //根据字数 来计算是否需要显示展开按钮.
