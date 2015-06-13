@@ -56,6 +56,8 @@
 		A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */; };
 		A4FAFA4C1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA4A1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift */; };
 		A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FAFA4B1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib */; };
+		A4FAFA521B2C835500CA9E66 /* CommentSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */; };
+		A4FAFA541B2C836200CA9E66 /* CommentSectionTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FAFA531B2C836200CA9E66 /* CommentSectionTitleView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +145,8 @@
 		A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalPopAnimation.swift; sourceTree = "<group>"; };
 		A4FAFA4A1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCommentTableViewCell.swift; sourceTree = "<group>"; };
 		A4FAFA4B1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCommentTableViewCell.xib; sourceTree = "<group>"; };
+		A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSectionTitleView.swift; sourceTree = "<group>"; };
+		A4FAFA531B2C836200CA9E66 /* CommentSectionTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentSectionTitleView.xib; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
 		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -251,6 +255,8 @@
 		A4391E541B160EB500A27DA5 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */,
+				A4FAFA531B2C836200CA9E66 /* CommentSectionTitleView.xib */,
 				A48BB6711B288CA10089A3D4 /* CommonListTableViewCell.swift */,
 				A48BB66E1B2888030089A3D4 /* CommonListTableViewCell.xib */,
 				A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */,
@@ -517,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */,
+				A4FAFA541B2C836200CA9E66 /* CommentSectionTitleView.xib in Resources */,
 				A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */,
 				A48BB66F1B2888030089A3D4 /* CommonListTableViewCell.xib in Resources */,
 				A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */,
@@ -622,6 +629,7 @@
 				A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
+				A4FAFA521B2C835500CA9E66 /* CommentSectionTitleView.swift in Sources */,
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
 				A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */,
 				A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */,

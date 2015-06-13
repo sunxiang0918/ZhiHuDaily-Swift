@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CommonListTableViewCellDelegate {
+class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CommonListTableViewCellDelegate,CommentSectionTitleViewDelegate {
 
     /// 用于获取评论的Control
     let commentControl : CommentControl = CommentControl()
@@ -28,6 +28,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     /// 用于记录POP动画状态的变量
     private var popstate = PopActionState.NONE
     
+    private var sectionExpanded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +38,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         let nib=UINib(nibName: "CommonListTableViewCell", bundle: nil)
         commonTableView.registerNib(nib, forCellReuseIdentifier: "commonListTableViewCell")
         commonTableView.registerNib(UINib(nibName: "EmptyCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCommentTableViewCell")
+        commonTableView.registerNib(UINib(nibName: "CommentSectionTitleView", bundle: nil), forHeaderFooterViewReuseIdentifier: "commentSectionTitleView")
+        
         
         //IOS8 新增的逻辑,输入一个预估的高度,然后默认设置self.tableView.rowHeight = UITableViewAutomaticDimension;  这样就能自动的适配高度了,而不用去重载 tableview:heightForRowAtIndexPath:这个方法了
         commonTableView.estimatedRowHeight = 90;
@@ -66,6 +70,11 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             
         }, block: nil)
         
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //当评论页面消失的时候 还原这个状态. 为下一个评论页面做准备
+        CommentSectionTitleView.isExpanded = false
     }
     
     @IBAction func doBackAction(sender: UIButton) {
@@ -160,13 +169,44 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }else {
             //这个是短评论
-            return shortComments?.count ?? 0
+            
+            if  sectionExpanded {
+                return shortComments?.count ?? 0
+            }else {
+                return 0
+            }
+            
         }
-        
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+    
+    /**
+    重载这个方法 来自定义 sectino的 标题栏
+    
+    :param: tableView
+    :param: section
+    
+    :returns:
+    */
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let tmp = tableView.dequeueReusableHeaderFooterViewWithIdentifier("commentSectionTitleView") as! CommentSectionTitleView
+        
+        if tmp.delegate == nil {
+            tmp.delegate = self
+        }
+        
+        if  section == 0 {
+            tmp.titleLabel.text = "\(newsExtral.longComments)条长评"
+            tmp.expandButton.hidden = true
+        }else {
+            tmp.titleLabel.text = "\(newsExtral.shortComments  )条短评"
+            tmp.expandButton.hidden = false
+        }
+        
+        return tmp
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell
@@ -316,15 +356,21 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         if  section == 0 {
             return 32
         }
-        return 22
+        return 32
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if  section == 0 {
-            return "\(newsExtral.longComments)条长评"
-        }else {
-            return "\(newsExtral.shortComments  )条短评"
-        }
+    /**
+    因为我们的表格使用的是 grouped模式. 所以他默认的 有一个 footer.
+    如果有这个footer,那么 视觉上看起来 第二个的header 高度就和第一个是不一样的了.
+    所以这个地方要给他设置没
+    
+    :param: tableView
+    :param: section
+    
+    :returns:
+    */
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.min
     }
     
     //====================CommonListTableViewCellDelegate实现=============================
@@ -353,4 +399,18 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.commonTableView.endUpdates()
         
     }
+    //====================CommonListTableViewCellDelegate实现=============================
+    
+    
+    //====================CommentSectionTitleViewDelegate实现=============================
+    func doSectionExpand(sender:CommentSectionTitleView){
+        sectionExpanded = true
+        commonTableView.reloadData()
+    }
+    
+    func doSectionCollapse(sender:CommentSectionTitleView){
+        sectionExpanded = false
+        commonTableView.reloadData()
+    }
+    //====================CommentSectionTitleViewDelegate实现=============================
 }
