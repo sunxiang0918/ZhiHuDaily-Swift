@@ -77,7 +77,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-GD-mHO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-GD-mHO" userLabel="新闻列表TableView">
                                 <rect key="frame" x="0.0" y="-80" width="600" height="680"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -97,7 +97,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JMM-s6-3n1"/>
                                 </connections>
                             </tableView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNt-2z-BMu">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNt-2z-BMu" userLabel="主页面标题关联ContainerView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -119,7 +119,7 @@
                             <constraint firstItem="RNt-2z-BMu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="dqS-Ea-PLn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG"/>
+                    <navigationItem key="navigationItem" title="今日热闻" id="FX0-VX-OjG" userLabel="标题Label"/>
                     <connections>
                         <outlet property="mainTableView" destination="zcx-GD-mHO" id="ERN-ZR-g3j"/>
                         <outlet property="mainTitleView" destination="RNt-2z-BMu" id="k0a-vh-Yhe"/>
@@ -141,13 +141,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-a6-owA">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-a6-owA" userLabel="顶部状态栏View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="bih-8Y-JXL"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZU9-Oe-Ugo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZU9-Oe-Ugo" userLabel="左侧栏按钮Button">
                                 <rect key="frame" x="26" y="12" width="30" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="≣">
@@ -159,19 +159,19 @@
                                     <action selector="showLeftButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KoY-TN-29E"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日热闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5q-7h-ed1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日热闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5q-7h-ed1" userLabel="标题Label">
                                 <rect key="frame" x="272" y="22" width="56" height="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fEh-MZ-QmF">
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fEh-MZ-QmF" userLabel="刷新进度Activity">
                                 <rect key="frame" x="244" y="19" width="20" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B57-Ll-CTv" customClass="KYCircularProgress" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B57-Ll-CTv" userLabel="圆形进度条Progress" customClass="KYCircularProgress" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                 <rect key="frame" x="244" y="19" width="20" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -228,6 +228,127 @@
             </objects>
             <point key="canvasLocation" x="1350" y="597"/>
         </scene>
+        <!--推荐者列表视图-->
+        <scene sceneID="N6x-qZ-aAz">
+            <objects>
+                <viewController id="g5x-Oc-8mq" userLabel="推荐者列表视图" customClass="RecommendersListViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m4Z-J9-CVt"/>
+                        <viewControllerLayoutGuide type="bottom" id="pMh-Aw-ein"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PzO-Va-iZ5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiK-pv-QWU" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKQ-Vt-jMV" userLabel="返回">
+                                        <rect key="frame" x="8" y="14" width="50" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="5VU-Ny-1oE"/>
+                                            <constraint firstAttribute="height" constant="35" id="toi-Wj-X7R"/>
+                                        </constraints>
+                                        <state key="normal" image="Back_White">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doBackAction:" destination="QwH-sq-MXQ" eventType="touchUpInside" id="YOB-Ph-REJ"/>
+                                            <action selector="doBackAction:" destination="g5x-Oc-8mq" eventType="touchUpInside" id="fuS-eG-h8A"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUF-50-G1Q">
+                                        <rect key="frame" x="277" y="17" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="TcG-Kc-URg"/>
+                                            <constraint firstAttribute="height" constant="30" id="n0p-aG-0lR"/>
+                                        </constraints>
+                                        <state key="normal" title="推荐者">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18585021669999999" green="0.57548766220000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KUF-50-G1Q" secondAttribute="trailing" id="Baq-42-q4v"/>
+                                    <constraint firstAttribute="bottom" secondItem="KUF-50-G1Q" secondAttribute="bottom" constant="3" id="H7B-Bq-bcn"/>
+                                    <constraint firstItem="tKQ-Vt-jMV" firstAttribute="leading" secondItem="YiK-pv-QWU" secondAttribute="leading" constant="8" id="dZq-Nc-wh1"/>
+                                    <constraint firstAttribute="centerX" secondItem="KUF-50-G1Q" secondAttribute="centerX" id="mnc-AM-Zgt"/>
+                                    <constraint firstAttribute="height" constant="50" id="tEI-jk-JvS"/>
+                                    <constraint firstAttribute="bottom" secondItem="tKQ-Vt-jMV" secondAttribute="bottom" constant="1" id="zuA-Xw-fVm"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Baq-42-q4v"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RhC-AS-3XQ" userLabel="推荐者List TableView">
+                                <rect key="frame" x="0.0" y="50" width="600" height="550"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="recommandersListTableCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="recommandersListTableCell" textLabel="Yk1-Vs-VPL" detailTextLabel="FeQ-T3-arg" style="IBUITableViewCellStyleSubtitle" id="T3x-Tt-ja5">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3x-Tt-ja5" id="Bq0-CJ-z5L">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yk1-Vs-VPL">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FeQ-T3-arg">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="HjV-W2-gSH" detailTextLabel="3oz-l9-Qut" style="IBUITableViewCellStyleSubtitle" id="IaY-pW-4fv">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaY-pW-4fv" id="Sf6-10-LQE">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HjV-W2-gSH">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3oz-l9-Qut">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="RhC-AS-3XQ" secondAttribute="trailing" constant="-16" id="61x-m0-mGl"/>
+                            <constraint firstItem="pMh-Aw-ein" firstAttribute="top" secondItem="RhC-AS-3XQ" secondAttribute="bottom" id="9pN-Qb-ot2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YiK-pv-QWU" secondAttribute="trailing" constant="-16" id="AJv-iE-2Rf"/>
+                            <constraint firstItem="YiK-pv-QWU" firstAttribute="top" secondItem="m4Z-J9-CVt" secondAttribute="bottom" constant="-20" id="KaR-Ly-HZf"/>
+                            <constraint firstItem="RhC-AS-3XQ" firstAttribute="leading" secondItem="PzO-Va-iZ5" secondAttribute="leadingMargin" constant="-16" id="hbo-2A-PQO"/>
+                            <constraint firstItem="YiK-pv-QWU" firstAttribute="leading" secondItem="PzO-Va-iZ5" secondAttribute="leadingMargin" constant="-16" id="hyr-KH-Dl0"/>
+                            <constraint firstItem="RhC-AS-3XQ" firstAttribute="top" secondItem="m4Z-J9-CVt" secondAttribute="bottom" constant="30" id="sIi-Pw-mg9"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJX-j5-Xue" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2041" y="483"/>
+        </scene>
         <!--新闻详细视图-->
         <scene sceneID="WyP-9r-GIu">
             <objects>
@@ -240,27 +361,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2U-QX-wo2" customClass="CustomWebView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2U-QX-wo2" userLabel="新闻内容WebView" customClass="CustomWebView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-80" width="600" height="638"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1w1-yo-Jjs">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1w1-yo-Jjs" userLabel="顶部状态栏View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CXq-65-el9"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLZ-A7-Q1V">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLZ-A7-Q1V" userLabel="底部状态栏View">
                                 <rect key="frame" x="0.0" y="558" width="600" height="42"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ToolBar_Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="Vgp-hE-Cng">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ToolBar_Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="Vgp-hE-Cng" userLabel="底部状态栏阴影Image">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="U1g-5d-iSJ"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F02-eb-LfW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F02-eb-LfW" userLabel="返回按钮Button">
                                         <rect key="frame" x="8" y="-1" width="64" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="40e-l4-nS3"/>
@@ -274,7 +395,7 @@
                                             <action selector="backButtonAction:" destination="lOs-R4-ra9" eventType="touchUpInside" id="hlh-b3-aEx"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9D-g2-2rT">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9D-g2-2rT" userLabel="均分间隔View">
                                         <rect key="frame" x="72" y="-1" width="66" height="43"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSY-3h-da7">
@@ -292,7 +413,7 @@
                                             <constraint firstAttribute="height" constant="43" id="4lY-Ys-cYp"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nT-Fy-EQt">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nT-Fy-EQt" userLabel="下一新闻按钮Button">
                                         <rect key="frame" x="138" y="-1" width="64" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="ZDn-Up-5gt"/>
@@ -306,14 +427,14 @@
                                             <segue destination="lOs-R4-ra9" kind="show" identifier="showNextNewsSegue" id="pCJ-qN-EUG"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf7-TR-zNc">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf7-TR-zNc" userLabel="均分间隔View">
                                         <rect key="frame" x="202" y="-1" width="66" height="43"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="lx4-Ri-T0n"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFy-ln-Eay">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFy-ln-Eay" userLabel="点赞按钮Button">
                                         <rect key="frame" x="268" y="-1" width="64" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="i1e-Xt-0zQ"/>
@@ -324,7 +445,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5S3-hf-QYK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5S3-hf-QYK" userLabel="点赞数Label">
                                         <rect key="frame" x="296" y="6" width="24" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="EWh-MD-vHu"/>
@@ -334,14 +455,14 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-n3-AZ4">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-n3-AZ4" userLabel="均分间隔View">
                                         <rect key="frame" x="332" y="-1" width="66" height="43"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="uAV-n5-zEY"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqH-9z-ip2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqH-9z-ip2" userLabel="分享按钮Button">
                                         <rect key="frame" x="398" y="-1" width="64" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="Uac-AO-65k"/>
@@ -352,14 +473,14 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-bE-F0q">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-bE-F0q" userLabel="均分间隔View">
                                         <rect key="frame" x="462" y="-1" width="66" height="43"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="g3J-NB-dSI"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX0-N7-evC">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX0-N7-evC" userLabel="评论按钮Button">
                                         <rect key="frame" x="528" y="-1" width="64" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="D9t-7n-fuh"/>
@@ -373,7 +494,7 @@
                                             <segue destination="0Nb-Iv-m4J" kind="show" identifier="showCommonsSegue" id="kHM-FY-TQd"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gi-VI-uty">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gi-VI-uty" userLabel="评论数Label">
                                         <rect key="frame" x="557" y="6" width="24" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="0Dm-ka-cdt"/>
@@ -475,16 +596,17 @@
                         <outlet property="voteButton" destination="dFy-ln-Eay" id="OFI-sj-5dW"/>
                         <outlet property="voteNumberLabel" destination="5S3-hf-QYK" id="GrL-LC-nDX"/>
                         <outlet property="webView" destination="M2U-QX-wo2" id="uxq-Km-w5U"/>
+                        <segue destination="g5x-Oc-8mq" kind="show" identifier="showRecommendersSegue" id="JQN-xI-iAU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UxP-Mw-tGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="JAR-gT-Jy5">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="JAR-gT-Jy5" userLabel="滑动返回手势PanGesture">
                     <connections>
                         <action selector="panGestureAction:" destination="lOs-R4-ra9" id="wna-eq-RWw"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1418" y="1158"/>
+            <point key="canvasLocation" x="1350" y="1267"/>
         </scene>
         <!--评论视图-->
         <scene sceneID="pks-Ia-W9y">
@@ -498,10 +620,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-8k-y8c">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-8k-y8c" userLabel="顶部状态栏View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100条点评" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-jW-EDe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100条点评" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-jW-EDe" userLabel="顶部标题Label">
                                         <rect key="frame" x="249" y="20" width="102" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="1vx-x1-XEJ"/>
@@ -525,7 +647,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-1a-wQQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-1a-wQQ" userLabel="评论表格TableView">
                                 <rect key="frame" x="0.0" y="50" width="600" height="521"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -542,10 +664,10 @@
                                     <outlet property="delegate" destination="0Nb-Iv-m4J" id="Ng8-jI-zMJ"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-PW-P9s">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-PW-P9s" userLabel="底部状态栏View">
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-oo-Fxe">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-oo-Fxe" userLabel="返回按钮Button">
                                         <rect key="frame" x="0.0" y="-4" width="48" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="O5d-Tf-Qae"/>
@@ -558,14 +680,14 @@
                                             <action selector="doBackAction:" destination="0Nb-Iv-m4J" eventType="touchUpInside" id="Chj-C9-fnp"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Line" translatesAutoresizingMaskIntoConstraints="NO" id="k6A-Dr-rPZ">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Line" translatesAutoresizingMaskIntoConstraints="NO" id="k6A-Dr-rPZ" userLabel="底部间隔图片Image">
                                         <rect key="frame" x="45" y="0.0" width="1" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="g3g-eD-013"/>
                                             <constraint firstAttribute="width" constant="1" id="kYn-7k-5YP"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woh-FW-VYh">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woh-FW-VYh" userLabel="点评按钮Button">
                                         <rect key="frame" x="46" y="4" width="554" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="pg2-xA-A1c"/>
@@ -618,7 +740,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4s4-Xd-4FU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="QyR-dC-ruF">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="QyR-dC-ruF" userLabel="滑动返回手势PanGesture">
                     <connections>
                         <action selector="panGestureAction:" destination="0Nb-Iv-m4J" id="OwG-mq-27y"/>
                     </connections>
@@ -638,10 +760,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-ej-A9k">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-ej-A9k" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkm-in-on1">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkm-in-on1" userLabel="发布按钮Button">
                                         <rect key="frame" x="554" y="17" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="K4G-XS-2y7"/>
@@ -652,7 +774,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGu-uR-Uds" userLabel="返回">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGu-uR-Uds" userLabel="返回按钮Button">
                                         <rect key="frame" x="8" y="14" width="50" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="78Y-41-uD8"/>
@@ -675,10 +797,10 @@
                                     <constraint firstAttribute="trailing" secondItem="bkm-in-on1" secondAttribute="trailing" id="hOl-Vk-NbK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-oN-oHb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-oN-oHb" userLabel="Footer View">
                                 <rect key="frame" x="0.0" y="562" width="600" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="同时分享到:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR2-cp-rjS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="同时分享到:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR2-cp-rjS" userLabel="分享Label">
                                         <rect key="frame" x="19" y="9" width="81" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="81" id="Byn-rv-Rsg"/>
@@ -688,10 +810,10 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Sina" translatesAutoresizingMaskIntoConstraints="NO" id="RmV-FD-71U">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Sina" translatesAutoresizingMaskIntoConstraints="NO" id="RmV-FD-71U" userLabel="分享到微博图片Image">
                                         <rect key="frame" x="103" y="6" width="20" height="26"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Tencent" translatesAutoresizingMaskIntoConstraints="NO" id="1pA-Rr-MU2">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Tencent" translatesAutoresizingMaskIntoConstraints="NO" id="1pA-Rr-MU2" userLabel="分享到微信图片Image">
                                         <rect key="frame" x="138" y="6" width="20" height="26"/>
                                     </imageView>
                                 </subviews>
@@ -702,7 +824,7 @@
                                     <constraint firstItem="VR2-cp-rjS" firstAttribute="leading" secondItem="aIm-oN-oHb" secondAttribute="leading" constant="19" id="q2G-lR-htS"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="不友善言论会被删除,深度讨论会被优先展示.                          好吧,这个功能其实没做" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQv-MD-VJb">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="不友善言论会被删除,深度讨论会被优先展示.                          好吧,这个功能其实没做" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQv-MD-VJb" userLabel="评论内容TextView">
                                 <rect key="frame" x="0.0" y="50" width="600" height="512"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

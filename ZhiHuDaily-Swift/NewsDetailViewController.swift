@@ -142,6 +142,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         self.recommandView = UINib(nibName: "RecommendersView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! RecommendersView
         
+        // 这个是给recommandView这个非Button 增加点击事件. 方法就是添加一个 Tap的手势.   然后指明点击后 执行哪个响应方法
+        self.recommandView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showRecommendersViewAction:"))
+        
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.webView.delegate = self
         
@@ -476,6 +479,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             
             commentViewController?.newsExtral = self.newsExtral
             commentViewController?.newsId = self.news.id
+        }else if segue.identifier == "showRecommendersSegue" {
+            let recommendersViewController = segue.destinationViewController as? RecommendersListViewController
+            recommendersViewController?.newsId = self.news.id
         }
     }
     
@@ -705,6 +711,15 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+30),size: CGSize(width: 95,height: 20))
     }
     //========================UIWebViewDelegate的实现================================================
+    
+    
+    /**
+    响应
+    */
+    func showRecommendersViewAction(sender:AnyObject){
+        self.performSegueWithIdentifier("showRecommendersSegue", sender: self.recommandView)
+    }
+    
 }
 
 

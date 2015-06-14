@@ -12,6 +12,7 @@
 		A41E6A331B29D5DA000BFC4B /* CommentVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A321B29D5DA000BFC4B /* CommentVO.swift */; };
 		A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A341B29D815000BFC4B /* CommentControl.swift */; };
 		A42CB9B61B2D7A4700534BD0 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */; };
+		A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
@@ -85,6 +86,7 @@
 		A41E6A321B29D5DA000BFC4B /* CommentVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentVO.swift; sourceTree = "<group>"; };
 		A41E6A341B29D815000BFC4B /* CommentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentControl.swift; sourceTree = "<group>"; };
 		A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
+		A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersListViewController.swift; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */,
+				A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
+				A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */,
 				A4FAFA521B2C835500CA9E66 /* CommentSectionTitleView.swift in Sources */,
 				A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */,
 				A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */,
