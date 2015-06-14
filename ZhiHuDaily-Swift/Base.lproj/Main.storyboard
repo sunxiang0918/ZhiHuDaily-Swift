@@ -575,6 +575,9 @@
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="QwH-sq-MXQ" kind="showDetail" id="FAM-uK-Fm9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -623,6 +626,109 @@
             </objects>
             <point key="canvasLocation" x="2230" y="1158"/>
         </scene>
+        <!--发表评论视图-->
+        <scene sceneID="Z6B-aZ-hLs">
+            <objects>
+                <viewController id="QwH-sq-MXQ" userLabel="发表评论视图" customClass="WriteCommentViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bsh-Fl-cur"/>
+                        <viewControllerLayoutGuide type="bottom" id="yim-CB-bzp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z5k-h9-CwF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-ej-A9k">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkm-in-on1">
+                                        <rect key="frame" x="554" y="17" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="K4G-XS-2y7"/>
+                                            <constraint firstAttribute="width" constant="46" id="a86-aj-8b1"/>
+                                        </constraints>
+                                        <state key="normal" title="发布">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGu-uR-Uds" userLabel="返回">
+                                        <rect key="frame" x="8" y="14" width="50" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="78Y-41-uD8"/>
+                                            <constraint firstAttribute="height" constant="35" id="N6w-F9-vF3"/>
+                                        </constraints>
+                                        <state key="normal" image="Back_White">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doBackAction:" destination="QwH-sq-MXQ" eventType="touchUpInside" id="TkZ-mb-XnA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18585021669999999" green="0.57548766220000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="LGu-uR-Uds" secondAttribute="bottom" constant="1" id="6rA-ru-rI9"/>
+                                    <constraint firstAttribute="height" constant="50" id="La2-dN-wCv"/>
+                                    <constraint firstAttribute="bottom" secondItem="bkm-in-on1" secondAttribute="bottom" constant="3" id="TVh-ER-lWR"/>
+                                    <constraint firstItem="LGu-uR-Uds" firstAttribute="leading" secondItem="cfi-ej-A9k" secondAttribute="leading" constant="8" id="VDI-g2-lbx"/>
+                                    <constraint firstAttribute="trailing" secondItem="bkm-in-on1" secondAttribute="trailing" id="hOl-Vk-NbK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-oN-oHb">
+                                <rect key="frame" x="0.0" y="562" width="600" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="同时分享到:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR2-cp-rjS">
+                                        <rect key="frame" x="19" y="9" width="81" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81" id="Byn-rv-Rsg"/>
+                                            <constraint firstAttribute="height" constant="21" id="yCq-fV-ee9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Sina" translatesAutoresizingMaskIntoConstraints="NO" id="RmV-FD-71U">
+                                        <rect key="frame" x="103" y="6" width="20" height="26"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment_Share_Tencent" translatesAutoresizingMaskIntoConstraints="NO" id="1pA-Rr-MU2">
+                                        <rect key="frame" x="138" y="6" width="20" height="26"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="VR2-cp-rjS" secondAttribute="bottom" constant="10" id="MSE-OK-PbA"/>
+                                    <constraint firstAttribute="height" constant="40" id="aXk-vi-cmI"/>
+                                    <constraint firstItem="VR2-cp-rjS" firstAttribute="leading" secondItem="aIm-oN-oHb" secondAttribute="leading" constant="19" id="q2G-lR-htS"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="不友善言论会被删除,深度讨论会被优先展示.                          好吧,这个功能其实没做" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQv-MD-VJb">
+                                <rect key="frame" x="0.0" y="50" width="600" height="512"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardAppearance="light"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="cfi-ej-A9k" secondAttribute="trailing" constant="-16" id="1qV-hU-KJ6"/>
+                            <constraint firstItem="cfi-ej-A9k" firstAttribute="top" secondItem="bsh-Fl-cur" secondAttribute="bottom" constant="-20" id="3ah-cN-Q8O"/>
+                            <constraint firstItem="aIm-oN-oHb" firstAttribute="leading" secondItem="Z5k-h9-CwF" secondAttribute="leadingMargin" constant="-16" id="G9X-vB-GMd"/>
+                            <constraint firstItem="yQv-MD-VJb" firstAttribute="top" secondItem="bsh-Fl-cur" secondAttribute="bottom" constant="30" id="GQC-1n-RWt"/>
+                            <constraint firstItem="yim-CB-bzp" firstAttribute="top" secondItem="aIm-oN-oHb" secondAttribute="bottom" constant="-2" id="MxI-5i-hGA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aIm-oN-oHb" secondAttribute="trailing" constant="-16" id="Pke-IB-U0b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yQv-MD-VJb" secondAttribute="trailing" constant="-16" id="SZv-Zy-F9r"/>
+                            <constraint firstItem="yim-CB-bzp" firstAttribute="top" secondItem="yQv-MD-VJb" secondAttribute="bottom" constant="38" id="XBk-vv-OU0"/>
+                            <constraint firstItem="yQv-MD-VJb" firstAttribute="leading" secondItem="Z5k-h9-CwF" secondAttribute="leadingMargin" constant="-16" id="du5-H5-P57"/>
+                            <constraint firstItem="cfi-ej-A9k" firstAttribute="leading" secondItem="Z5k-h9-CwF" secondAttribute="leadingMargin" constant="-16" id="h7e-GQ-AoZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LAQ-JK-7Cf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3001" y="1292"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8SC-gy-fGe">
             <objects>
@@ -646,9 +752,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back_White" width="44" height="44"/>
         <image name="Comment_Icon_Back" width="48" height="38"/>
         <image name="Comment_Icon_Compose" width="15" height="15"/>
         <image name="Comment_Line" width="1" height="1"/>
+        <image name="Comment_Share_Sina" width="25" height="25"/>
+        <image name="Comment_Share_Tencent" width="25" height="25"/>
         <image name="News_Navigation_Arrow" width="64" height="43"/>
         <image name="News_Navigation_Comment" width="64" height="43"/>
         <image name="News_Navigation_Next" width="64" height="43"/>

@@ -11,6 +11,7 @@
 		A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */; };
 		A41E6A331B29D5DA000BFC4B /* CommentVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A321B29D5DA000BFC4B /* CommentVO.swift */; };
 		A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A341B29D815000BFC4B /* CommentControl.swift */; };
+		A42CB9B61B2D7A4700534BD0 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
@@ -83,6 +84,7 @@
 		A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		A41E6A321B29D5DA000BFC4B /* CommentVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentVO.swift; sourceTree = "<group>"; };
 		A41E6A341B29D815000BFC4B /* CommentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentControl.swift; sourceTree = "<group>"; };
+		A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */,
 				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
+				A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				A4C5507E1B18C3E2000E9526 /* Constant.swift in Sources */,
 				A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */,
 				A4939F151B14C71C00E041C4 /* SlideScrollView.swift in Sources */,
+				A42CB9B61B2D7A4700534BD0 /* WriteCommentViewController.swift in Sources */,
 				A4939FC71B14D66800E041C4 /* PKRevealControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
