@@ -40,6 +40,19 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showRecommenderDetailSegue" {
+            let recommenderDetailViewController = segue.destinationViewController as? RecommenderDetailViewController
+            
+            let recommenderInfo = sender as? RecommenderInfoVO
+            
+            recommenderDetailViewController?.recommenderId = recommenderInfo?.id
+            recommenderDetailViewController?.recommenderName = recommenderInfo?.name
+            recommenderDetailViewController?.recommenderToken = recommenderInfo?.token
+            
+        }
+    }
+    
     @IBAction func doBackAction(sender: UIButton) {
         
         self.navigationController?.popViewControllerAnimated(true)
@@ -56,6 +69,13 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
     */
 
     //====================实现UITableViewDelegate=========================
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let recommender = recommenders?.items?[indexPath.section].recommenders[indexPath.row]
+        
+        self.performSegueWithIdentifier("showRecommenderDetailSegue", sender: recommender)
+    }
     //====================实现UITableViewDelegate=========================
     
     
@@ -71,12 +91,17 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let item = recommenders?.items?[section]
         
-        let index = item?.index
-        let author = item?.author
-        
-        return "回答\(index!) (作者:\(author!)) 推荐者"
+        if  recommenders?.items?.count > 1 {
+            let item = recommenders?.items?[section]
+            
+            let index = item?.index
+            let author = item?.author
+            
+            return "回答\(index!) (作者:\(author!)) 推荐者"
+        }else {
+            return nil
+        }
         
     }
     

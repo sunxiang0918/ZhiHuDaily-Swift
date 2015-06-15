@@ -308,6 +308,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="XjZ-e3-yz0" kind="show" identifier="showRecommenderDetailSegue" id="iCJ-aY-Pqd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -733,6 +736,81 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2230" y="1158"/>
+        </scene>
+        <!--推荐者详情视图-->
+        <scene sceneID="Xm6-b4-aj1">
+            <objects>
+                <viewController id="XjZ-e3-yz0" userLabel="推荐者详情视图" customClass="RecommenderDetailViewController" customModule="ZhiHuDaily_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RbQ-oJ-om1"/>
+                        <viewControllerLayoutGuide type="bottom" id="MYT-L5-qmP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JTc-kh-iZl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WF9-5r-5vb" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐者" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1N-8D-Dxj">
+                                        <rect key="frame" x="0.0" y="17" width="600" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="ZE9-Y2-x1m"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7T-jS-ZTg" userLabel="返回">
+                                        <rect key="frame" x="8" y="14" width="50" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Xqa-Sr-AQJ"/>
+                                            <constraint firstAttribute="width" constant="50" id="pge-Pd-Sqw"/>
+                                        </constraints>
+                                        <state key="normal" image="Back_White">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doBackAction:" destination="QwH-sq-MXQ" eventType="touchUpInside" id="8Ar-wc-WAL"/>
+                                            <action selector="doBackAction:" destination="g5x-Oc-8mq" eventType="touchUpInside" id="cFg-Os-MqU"/>
+                                            <action selector="doBackAction:" destination="XjZ-e3-yz0" eventType="touchUpInside" id="nKJ-oT-L4K"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18585021669999999" green="0.57548766220000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5l8-53-H99"/>
+                                    <constraint firstItem="u7T-jS-ZTg" firstAttribute="leading" secondItem="WF9-5r-5vb" secondAttribute="leading" constant="8" id="DdX-ZT-ynh"/>
+                                    <constraint firstItem="E1N-8D-Dxj" firstAttribute="leading" secondItem="WF9-5r-5vb" secondAttribute="leading" id="PNV-gL-y2x"/>
+                                    <constraint firstAttribute="trailing" secondItem="E1N-8D-Dxj" secondAttribute="trailing" id="kBB-D4-Wit"/>
+                                    <constraint firstAttribute="bottom" secondItem="u7T-jS-ZTg" secondAttribute="bottom" constant="1" id="pPj-yv-9tf"/>
+                                    <constraint firstItem="E1N-8D-Dxj" firstAttribute="top" secondItem="WF9-5r-5vb" secondAttribute="top" constant="17" id="x0I-C5-BTf"/>
+                                </constraints>
+                            </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="25x-Ci-DMD">
+                                <rect key="frame" x="0.0" y="50" width="600" height="550"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="WF9-5r-5vb" secondAttribute="trailing" constant="-16" id="Gy8-LA-cwy"/>
+                            <constraint firstItem="MYT-L5-qmP" firstAttribute="top" secondItem="25x-Ci-DMD" secondAttribute="bottom" id="JDz-Or-rZ7"/>
+                            <constraint firstItem="WF9-5r-5vb" firstAttribute="top" secondItem="RbQ-oJ-om1" secondAttribute="bottom" constant="-20" id="UEr-Vj-uQe"/>
+                            <constraint firstItem="25x-Ci-DMD" firstAttribute="leading" secondItem="JTc-kh-iZl" secondAttribute="leadingMargin" constant="-16" id="XgF-EK-zYd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="25x-Ci-DMD" secondAttribute="trailing" constant="-16" id="gj7-wV-kdE"/>
+                            <constraint firstItem="25x-Ci-DMD" firstAttribute="top" secondItem="RbQ-oJ-om1" secondAttribute="bottom" constant="30" id="jQ4-fK-d3N"/>
+                            <constraint firstItem="WF9-5r-5vb" firstAttribute="leading" secondItem="JTc-kh-iZl" secondAttribute="leadingMargin" constant="-16" id="nTu-fL-UNu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="recommenderNameLabel" destination="E1N-8D-Dxj" id="mhW-uZ-nSs"/>
+                        <outlet property="recommenderWebView" destination="25x-Ci-DMD" id="rmp-g4-Iyu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3El-FZ-NM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2771" y="483"/>
         </scene>
         <!--发表评论视图-->
         <scene sceneID="Z6B-aZ-hLs">
