@@ -26,6 +26,7 @@
 		A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */; };
 		A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */; };
 		A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */; };
+		A453EAE61B3074DE005B0E25 /* SharePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453EAE51B3074DE005B0E25 /* SharePopupView.swift */; };
 		A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */; };
 		A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */; };
 		A45D9F991B272F2C00E7CDB0 /* FilletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */; };
@@ -112,6 +113,7 @@
 		A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTableViewCell.xib; sourceTree = "<group>"; };
 		A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTitleViewController.swift; sourceTree = "<group>"; };
+		A453EAE51B3074DE005B0E25 /* SharePopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePopupView.swift; sourceTree = "<group>"; };
 		A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendersView.xib; sourceTree = "<group>"; };
 		A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersView.swift; sourceTree = "<group>"; };
 		A45D9F981B272F2C00E7CDB0 /* FilletImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilletImageView.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */,
 				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
+				A453EAE51B3074DE005B0E25 /* SharePopupView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
 				A4363FC91B2FBBCE00101E8E /* CNPPopupController.m in Sources */,
 				A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */,
+				A453EAE61B3074DE005B0E25 /* SharePopupView.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A45D9F9B1B273B1300E7CDB0 /* CommonViewController.swift in Sources */,
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
