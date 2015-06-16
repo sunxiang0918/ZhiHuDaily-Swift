@@ -30,6 +30,9 @@ class RecommenderDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         recommenderNameLabel.text = "\(recommenderName!) - 知乎"
+        
+        recommenderWebView.loadRequest(NSURLRequest(URL: NSURL(string: PEOPLE_URL+recommenderToken!)!))
+        
     }
     
     @IBAction func doBackAction(sender: AnyObject) {

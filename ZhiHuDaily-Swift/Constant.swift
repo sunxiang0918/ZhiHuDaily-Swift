@@ -25,6 +25,7 @@ let NEWS_DETAIL_URL = "http://news-at.zhihu.com/api/4/news/"
 let NEWS_EXTRA_URL = "http://news-at.zhihu.com/api/4/story-extra/"
 let COMMENTS_URL = "http://news-at.zhihu.com/api/4/story/"
 let RECOMMENDERS_URL = "http://news-at.zhihu.com/api/4/story/"
+let PEOPLE_URL = "http://www.zhihu.com/people/"
 
 //由于NewsDetailViewController和NavigationControllerDelegate 都需要访问这个转场控制器,而且两个的关系差太远,所以只能写到这作为全局变量了
 var interactionController : UIPercentDrivenInteractiveTransition?
