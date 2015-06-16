@@ -213,56 +213,27 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
         _refreshControl.enableInsetBottom = SCROLL_HEIGHT
         
-        
         //实例化 popupController
         initPopupController()
     }
     
     private func initPopupController(){
         
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        paragraphStyle.alignment = NSTextAlignment.Center;
-        
-        let title = NSAttributedString(string: "It's A Popup!", attributes: [NSFontAttributeName:UIFont.boldSystemFontOfSize(24),NSParagraphStyleAttributeName:paragraphStyle])
-        let lineOne = NSAttributedString(string: "You can add text and images", attributes: [NSFontAttributeName:UIFont.systemFontOfSize(18),NSParagraphStyleAttributeName:paragraphStyle])
-        let lineTwo = NSAttributedString(string: "With style, using NSAttributedString", attributes: [NSFontAttributeName:UIFont.systemFontOfSize(18),NSParagraphStyleAttributeName:paragraphStyle,NSForegroundColorAttributeName:UIColor(red: 0.46, green: 0.8, blue: 1.0, alpha: 1.0)])
-
-        let button = CNPPopupButton(frame: CGRectMake(0, 0, 200, 60))
-        button.titleLabel?.textColor = UIColor.whiteColor()
-        button.titleLabel?.font = UIFont.boldSystemFontOfSize(18)
-        button.setTitle("Close Me", forState: UIControlState.Normal)
-        button.backgroundColor = UIColor(red: 0.46, green: 0.8, blue: 1.0, alpha: 1.0)
-        button.layer.cornerRadius = 4
-        //这个地方相当于是给OC传递了一个闭包
-        button.selectionHandler = {
-            button in
-                self.popupController?.dismissPopupControllerAnimated(true)
-        }
-        
-        let titleLabel = UILabel()
-        titleLabel.numberOfLines = 0
-        titleLabel.attributedText = title
-        
-        let lineOneLabel = UILabel()
-        lineOneLabel.numberOfLines = 0;
-        lineOneLabel.attributedText = lineOne;
-        
-        let imageView = UIImageView(image: UIImage(named: "Homescreen_Icon"))
-        
-        let lineTwoLabel = UILabel()
-        lineTwoLabel.numberOfLines = 0
-        lineTwoLabel.attributedText = lineTwo
-        
-//        SharePopupView.xib
-        let view = UINib(nibName: "SharePopupView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? UIView
+        /// 实例化SharePopupView 弹出视图
+        let view = UINib(nibName: "SharePopupView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? SharePopupView
+        /// 设置弹出视图的大小
         view?.frame = CGRectMake(0, 0, self.view.frame.width, 300)
         
-//        self.popupController = CNPPopupController(contents: [titleLabel,lineOneLabel,imageView,lineTwoLabel,button])
+        /// 设置弹出视图中 取消操作的 动作闭包
+        view?.cancelHandel = {self.popupController?.dismissPopupControllerAnimated(true)}
+        
+        /// 实例化弹出控制器
         self.popupController = CNPPopupController(contents: [view!])
         self.popupController!.theme = CNPPopupTheme.defaultTheme()
+        /// 设置点击背景取消弹出视图
         self.popupController!.theme.shouldDismissOnBackgroundTouch = true
         self.popupController!.theme.popupStyle = CNPPopupStyle.ActionSheet
+        /// 设置视图的边框
         self.popupController!.theme.popupContentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         self.popupController!.delegate = self;
         
