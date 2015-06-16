@@ -11,7 +11,7 @@ import UIKit
 /**
 *  新闻详细页面的 controller
 */
-class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshControlDelegate,RefreshViewDelegate{
+class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshControlDelegate,RefreshViewDelegate,CNPPopupControllerDelegate{
 
     /// 用于获取新闻详细的Control
     let newsDetailControl : NewsDetailControl = NewsDetailControl()
@@ -38,6 +38,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     private var popstate = PopActionState.NONE
     
     private var topRefreshState = TopRefreshState.NONE
+    
+    private var popupController : CNPPopupController?
     
     /// 界面上的 各种组件
     @IBOutlet weak var webView: UIWebView!
@@ -202,6 +204,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         bottomRefreshLabel.textColor = UIColor.grayColor()
         self.webView.scrollView.addSubview(self.bottomRefreshLabel)
         
+        // 实例化 刷新的Control
         _refreshControl = RefreshControl(scrollView: webView.scrollView, delegate: self)
         _refreshControl.topEnabled = true
         _refreshControl.bottomEnabled = true
@@ -209,6 +212,59 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         _refreshControl.registeBottomView(self)
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
         _refreshControl.enableInsetBottom = SCROLL_HEIGHT
+        
+        
+        //实例化 popupController
+        initPopupController()
+    }
+    
+    private func initPopupController(){
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        paragraphStyle.alignment = NSTextAlignment.Center;
+        
+        let title = NSAttributedString(string: "It's A Popup!", attributes: [NSFontAttributeName:UIFont.boldSystemFontOfSize(24),NSParagraphStyleAttributeName:paragraphStyle])
+        let lineOne = NSAttributedString(string: "You can add text and images", attributes: [NSFontAttributeName:UIFont.systemFontOfSize(18),NSParagraphStyleAttributeName:paragraphStyle])
+        let lineTwo = NSAttributedString(string: "With style, using NSAttributedString", attributes: [NSFontAttributeName:UIFont.systemFontOfSize(18),NSParagraphStyleAttributeName:paragraphStyle,NSForegroundColorAttributeName:UIColor(red: 0.46, green: 0.8, blue: 1.0, alpha: 1.0)])
+
+        let button = CNPPopupButton(frame: CGRectMake(0, 0, 200, 60))
+        button.titleLabel?.textColor = UIColor.whiteColor()
+        button.titleLabel?.font = UIFont.boldSystemFontOfSize(18)
+        button.setTitle("Close Me", forState: UIControlState.Normal)
+        button.backgroundColor = UIColor(red: 0.46, green: 0.8, blue: 1.0, alpha: 1.0)
+        button.layer.cornerRadius = 4
+        //这个地方相当于是给OC传递了一个闭包
+        button.selectionHandler = {
+            button in
+                self.popupController?.dismissPopupControllerAnimated(true)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.numberOfLines = 0
+        titleLabel.attributedText = title
+        
+        let lineOneLabel = UILabel()
+        lineOneLabel.numberOfLines = 0;
+        lineOneLabel.attributedText = lineOne;
+        
+        let imageView = UIImageView(image: UIImage(named: "Homescreen_Icon"))
+        
+        let lineTwoLabel = UILabel()
+        lineTwoLabel.numberOfLines = 0
+        lineTwoLabel.attributedText = lineTwo
+        
+//        SharePopupView.xib
+        let view = UINib(nibName: "SharePopupView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? UIView
+        view?.frame = CGRectMake(0, 0, self.view.frame.width, 300)
+        
+//        self.popupController = CNPPopupController(contents: [titleLabel,lineOneLabel,imageView,lineTwoLabel,button])
+        self.popupController = CNPPopupController(contents: [view!])
+        self.popupController!.theme = CNPPopupTheme.defaultTheme()
+        self.popupController!.theme.shouldDismissOnBackgroundTouch = true
+        self.popupController!.theme.popupStyle = CNPPopupStyle.ActionSheet
+        self.popupController!.theme.popupContentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.popupController!.delegate = self;
         
     }
 
@@ -407,6 +463,11 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    @IBAction func shareButtonAction(sender: UIButton) {
+        
+        //显示弹出窗口
+        self.popupController?.presentPopupControllerAnimated(true)
+    }
     /**
     界面切换传值的方法
     
@@ -720,6 +781,10 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.performSegueWithIdentifier("showRecommendersSegue", sender: self.recommandView)
     }
     
+    
+    //========================CNPPopupControllerDelegate的实现================================================
+    
+    //========================CNPPopupControllerDelegate的实现================================================
 }
 
 

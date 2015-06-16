@@ -461,6 +461,9 @@
                                         <state key="normal" image="News_Navigation_Share">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareButtonAction:" destination="lOs-R4-ra9" eventType="touchUpInside" id="xL7-fW-ZKc"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-bE-F0q" userLabel="均分间隔View">
                                         <rect key="frame" x="462" y="-1" width="66" height="43"/>

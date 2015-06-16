@@ -7,6 +7,7 @@
 //
 
 #import "PKRevealController.h"
+#import "CNPPopupController.h"
 
 #ifndef ZhiHuDaily_Swift_ObjectiveCBridge_h
 #define ZhiHuDaily_Swift_ObjectiveCBridge_h

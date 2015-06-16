@@ -20,6 +20,8 @@
 		A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A432D3291B147B9F006D2B0E /* Images.xcassets */; };
 		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
+		A4363FC91B2FBBCE00101E8E /* CNPPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4363FC81B2FBBCE00101E8E /* CNPPopupController.m */; };
+		A4363FCB1B2FC52600101E8E /* SharePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4363FCA1B2FC52600101E8E /* SharePopupView.xib */; };
 		A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */; };
 		A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */; };
 		A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */; };
@@ -103,6 +105,9 @@
 		A432D3321B147B9F006D2B0E /* ZhiHuDaily-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZhiHuDaily-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
+		A4363FC71B2FBBCE00101E8E /* CNPPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPPopupController.h; sourceTree = "<group>"; };
+		A4363FC81B2FBBCE00101E8E /* CNPPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPPopupController.m; sourceTree = "<group>"; };
+		A4363FCA1B2FC52600101E8E /* SharePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharePopupView.xib; sourceTree = "<group>"; };
 		A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshBottomView.swift; sourceTree = "<group>"; };
 		A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTableViewCell.xib; sourceTree = "<group>"; };
@@ -265,6 +270,15 @@
 				A432D3371B147B9F006D2B0E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4363FC61B2FBBCE00101E8E /* CNPPopupController */ = {
+			isa = PBXGroup;
+			children = (
+				A4363FC71B2FBBCE00101E8E /* CNPPopupController.h */,
+				A4363FC81B2FBBCE00101E8E /* CNPPopupController.m */,
+			);
+			path = CNPPopupController;
 			sourceTree = "<group>";
 		};
 		A4391E541B160EB500A27DA5 /* view */ = {
@@ -448,6 +462,7 @@
 				A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */,
 				A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */,
 				A4A3A58F1B2EABEC002E3CA0 /* RecommenderTableViewCell.xib */,
+				A4363FCA1B2FC52600101E8E /* SharePopupView.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -455,6 +470,7 @@
 		A4FB843F1B147D4700603073 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				A4363FC61B2FBBCE00101E8E /* CNPPopupController */,
 				A4939FA21B14D66800E041C4 /* PKRevealController */,
 			);
 			name = FrameWorks;
@@ -562,6 +578,7 @@
 				A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */,
 				A4FAFA541B2C836200CA9E66 /* CommentSectionTitleView.xib in Resources */,
 				A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */,
+				A4363FCB1B2FC52600101E8E /* SharePopupView.xib in Resources */,
 				A4A3A5911B2EABEC002E3CA0 /* RecommenderTableViewCell.xib in Resources */,
 				A48BB66F1B2888030089A3D4 /* CommonListTableViewCell.xib in Resources */,
 				A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */,
@@ -641,6 +658,7 @@
 				A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */,
 				A4939FC51B14D66800E041C4 /* NSObject+PKBlocks.m in Sources */,
 				A4939F131B1494A100E041C4 /* HttpControl.swift in Sources */,
+				A4363FC91B2FBBCE00101E8E /* CNPPopupController.m in Sources */,
 				A486F0881B1A0E2900F75621 /* NewsListVO.swift in Sources */,
 				A4939FCA1B14D66800E041C4 /* PKSequentialAnimation.m in Sources */,
 				A45D9F9B1B273B1300E7CDB0 /* CommonViewController.swift in Sources */,
