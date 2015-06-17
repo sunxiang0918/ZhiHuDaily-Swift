@@ -742,6 +742,21 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         bottomRefreshImage.frame = CGRectMake(self.view.bounds.width/2-60, webView.scrollView.contentSize.height+30, 15, 20)
         bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+30),size: CGSize(width: 95,height: 20))
     }
+    
+
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if  navigationType == UIWebViewNavigationType.LinkClicked {
+            //监听用户的点击, 如果是点击了 页面上的超链接. 那么就用一个 单独的webView的页面来做显示
+            if let url = request.URL {
+                //这个地方做简化的实现了, 真正的知乎是做了一个简易的浏览器. 这里直接调用系统的safari就行了.
+                if url.scheme == "http" || url.scheme == "mailto" || url.scheme == "https" {
+                    UIApplication.sharedApplication().openURL(url)
+                    return false
+                }
+            }
+        }
+        return true
+    }
     //========================UIWebViewDelegate的实现================================================
     
     
