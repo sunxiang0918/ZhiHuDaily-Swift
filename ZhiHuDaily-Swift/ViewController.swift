@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate,MainTitleViewDelegate {
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate,MainTitleViewDelegate,SlideScrollViewDelegate {
     
     private let BACKGROUND_COLOR = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
     
@@ -151,6 +151,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 let topNews = _todayNews.topNews
                 
                 slideView.initWithFrameRect(slideRect, topNewsArray: topNews)
+                slideView.delegate = self
             }
             
             cell.addSubview(slideView)
@@ -346,7 +347,59 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     //================RefreshControlDelegate的实现===============================
     
+    //================SlideScrollViewDelegate的实现===============================
+    func SlideScrollViewDidClicked(index: Int) {
+        
+        ///用于处理最热新闻的 点击, 使用遍历,把已加载的新闻找出来对比ID是否相同. 然后获取到她在表格中的坐标,从而进行页面跳转
+        if  let topNews=newsListControl.todayNews?.topNews {
+            let news = topNews[index-1]
+            
+            var indexPath:NSIndexPath?
+            
+            if  let n = newsListControl.todayNews?.news {
+                for var i = 0 ; i < n.count ; i++ {
+                    if news.id==n[i].id {
+                        indexPath = NSIndexPath(forRow: i+1, inSection: 0)
+                        //这个地方开始异步的获取新闻详细.然后再进行跳转
+                        self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+                        return
+                    }
+                }
+            }
+            
+            gotoTopNewsDetail(news, block: { (indexPath) -> Void in
+                //这个地方开始异步的获取新闻详细.然后再进行跳转
+                self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+                self.mainTableView.reloadData()
+            })
+        }
+    }
     
+    /// 对于比在已加载新闻的 最热新闻. 需要加载今天以前的新闻来做对比. 又由于这个加载的过程是异步的.因此,这个地方做了一个递归
+    private func gotoTopNewsDetail(news:NewsVO,block:(NSIndexPath)->Void){
+        
+        let nes = newsListControl.news
+        
+        for var j=0;j<nes.count;j++ {
+            let nList = nes[j]
+            let n = nList.news!
+            
+            for var i = 0 ; i < n.count ; i++ {
+                if news.id==n[i].id {
+                    block(NSIndexPath(forRow: i, inSection: j+1))
+                    return
+                }
+            }
+        }
+        
+        /// 加载上一天的新闻
+        newsListControl.loadNewDayNews({ () -> Void in
+            /// 加载成功后,重新的找这篇新闻是否是在已加载了的新闻中
+            self.gotoTopNewsDetail(news, block: block)
+        })
+    }
+    
+    //================SlideScrollViewDelegate的实现===============================
 
 }
 
