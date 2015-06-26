@@ -47,11 +47,11 @@
                                     <constraint firstAttribute="width" constant="318" id="XLv-kn-pdc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.10588235294117647" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JnF-9w-5y2" firstAttribute="top" secondItem="lWt-gM-1Bd" secondAttribute="bottom" constant="81" id="Yxu-Po-DWA"/>
                             <constraint firstItem="JnF-9w-5y2" firstAttribute="leading" secondItem="o8c-hg-NNo" secondAttribute="leadingMargin" constant="2" id="qsc-rE-LCo"/>
