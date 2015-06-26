@@ -351,6 +351,21 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
+            self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
+            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+            self.topImage.hidden = false
+            self.topMaskImage.hidden = false
+            self.maskImage.hidden = false
+            self.imageSourceLabel.hidden = false
+            self.titleLabel.hidden = false
+        }else{
+            self.webView.scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
+            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+            self.topImage.hidden = true
+            self.topMaskImage.hidden = true
+            self.maskImage.hidden = true
+            self.imageSourceLabel.hidden = true
+            self.titleLabel.hidden = true
         }
         
         if let imageSource = news.imageSource {

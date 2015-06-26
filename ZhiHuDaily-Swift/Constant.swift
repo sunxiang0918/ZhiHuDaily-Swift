@@ -10,14 +10,21 @@ import UIKit
 
 
 //主页上得各种高度的变量
+/// 100
 let TABLE_CELL_HEIGHT : Float = 100
+/// 24
 let SECTION_HEIGHT:Float = 24
+/// 80
 let SCROLL_HEIGHT:Float = 80
+/// 400
 let IMAGE_HEIGHT:Float = 400
+/// 200
 let IN_WINDOW_HEIGHT:Float = 200
+/// 44
 let TITLE_HEIGHT:Float = 44
 
 //知乎的各种网址
+/// http://news-at.zhihu.com/api/4/start-image/1080*1776
 let LAUNCH_IMAGE_URL="http://news-at.zhihu.com/api/4/start-image/1080*1776"
 let LATEST_NEWS_URL="http://news-at.zhihu.com/api/4/news/latest"
 let SOMEDAY_NEWS_URL = "http://news.at.zhihu.com/api/4/news/before/"
