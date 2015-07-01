@@ -11,7 +11,7 @@ import Foundation
 public class DiskCache {
     
     public class func basePath() -> String {
-        let cachesPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
+        let cachesPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         let hanekePathComponent = HanekeGlobals.Domain
         let basePath = cachesPath.stringByAppendingPathComponent(hanekePathComponent)
         // TODO: Do not recaculate basePath value
@@ -59,28 +59,35 @@ public class DiskCache {
     
     public func getData(key : String) -> NSData? {
         let path = self.pathForKey(key)
-        var error : NSError? = nil
-        if let data = NSData(contentsOfFile: path, options: NSDataReadingOptions.allZeros, error: &error) {
-            return data
-        }else{
+        do{
+            let data = try NSData(contentsOfFile: path, options: NSDataReadingOptions())
+                return data
+        }catch{
             return nil
         }
         
     }
+
     
     public func fetchData(key : String, failure fail : ((NSError?) -> ())? = nil, success succeed : (NSData) -> ()) {
         dispatch_async(cacheQueue, {
             let path = self.pathForKey(key)
             var error: NSError? = nil
-            if let data = NSData(contentsOfFile: path, options: NSDataReadingOptions.allZeros, error: &error) {
+            do {
+                let data = try NSData(contentsOfFile: path, options: NSDataReadingOptions())
                 dispatch_async(dispatch_get_main_queue(), {
                    succeed(data)
                 })
                 self.updateDiskAccessDateAtPath(path)
-            } else if let block = fail {
-                dispatch_async(dispatch_get_main_queue(), {
-                    block(error)
-                })
+            } catch let error1 as NSError {
+                error = error1
+                if let block = fail {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        block(error)
+                    })
+                }
+            } catch {
+                fatalError()
             }
         })
     }
@@ -97,16 +104,23 @@ public class DiskCache {
         let cachePath = self.path
         dispatch_async(cacheQueue, {
             var error: NSError? = nil
-            if let contents = fileManager.contentsOfDirectoryAtPath(cachePath, error: &error) as? [String] {
+            do{
+            let contents = try fileManager.contentsOfDirectoryAtPath(cachePath)
                 for pathComponent in contents {
                     let path = cachePath.stringByAppendingPathComponent(pathComponent)
-                    if !fileManager.removeItemAtPath(path, error: &error) {
+                    do {
+                        try fileManager.removeItemAtPath(path)
+                    } catch let error1 as NSError {
+                        error = error1
                         Log.error("Failed to remove path \(path)", error)
+                    } catch {
+                        fatalError()
                     }
                 }
                 self.calculateSize()
-            } else {
-                Log.error("Failed to list directory", error)
+            
+            }catch{
+                Log.error("Failed to list directory")
             }
         })
     }
@@ -126,8 +140,8 @@ public class DiskCache {
     }
 
     public func pathForKey(key : String) -> String {
-        var escapedFilename = key.escapedFilename()
-        let filename = count(escapedFilename) < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
+        let escapedFilename = key.escapedFilename()
+        let filename = escapedFilename.characters.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
         let keyPath = self.path.stringByAppendingPathComponent(filename)
         return keyPath
     }
@@ -140,18 +154,22 @@ public class DiskCache {
         fileCount = 0
         let cachePath = self.path
         var error : NSError?
-        if let contents = fileManager.contentsOfDirectoryAtPath(cachePath, error: &error) as? [String] {
+        do {
+            let contents = try fileManager.contentsOfDirectoryAtPath(cachePath)
             for pathComponent in contents {
                 let path = cachePath.stringByAppendingPathComponent(pathComponent)
                 fileCount++
-                if let attributes : NSDictionary = fileManager.attributesOfItemAtPath(path, error: &error) {
+                do {
+                    let attributes : NSDictionary = try fileManager.attributesOfItemAtPath(path)
                     size += attributes.fileSize()
-                } else {
+                } catch let error1 as NSError {
+                    error = error1
                     Log.error("Failed to read file size of \(path)", error)
                 }
             }
-        } else {
-            Log.error("Failed to list directory", error)
+        }catch let error2 as NSError {
+            error = error2
+            Log.error("Failed to read file size of \(path)", error)
         }
     }
     
@@ -174,8 +192,20 @@ public class DiskCache {
         let path = self.pathForKey(key)
         var error: NSError?
         let fileManager = NSFileManager.defaultManager()
-        let previousAttributes : NSDictionary? = fileManager.attributesOfItemAtPath(path, error: nil)
-        let success = data.writeToFile(path, options: NSDataWritingOptions.AtomicWrite, error:&error)
+        let previousAttributes : NSDictionary?
+        do {
+            previousAttributes = try fileManager.attributesOfItemAtPath(path)
+        } catch _ {
+            previousAttributes = nil
+        }
+        let success: Bool
+        do {
+            try data.writeToFile(path, options: NSDataWritingOptions.AtomicWrite)
+            success = true
+        } catch let error1 as NSError {
+            error = error1
+            success = false
+        }
         if (!success) {
             Log.error("Failed to write key \(key)", error)
         }
@@ -192,7 +222,14 @@ public class DiskCache {
         let fileManager = NSFileManager.defaultManager()
         let now = NSDate()
         var error : NSError?
-        let success = fileManager.setAttributes([NSFileModificationDate : now], ofItemAtPath: path, error: &error)
+        let success: Bool
+        do {
+            try fileManager.setAttributes([NSFileModificationDate : now], ofItemAtPath: path)
+            success = true
+        } catch let error1 as NSError {
+            error = error1
+            success = false
+        }
         if !success {
             Log.error("Failed to update access date", error)
         }
@@ -202,18 +239,24 @@ public class DiskCache {
     private func removeFileAtPath(path:String) {
         var error : NSError?
         let fileManager = NSFileManager.defaultManager()
-        if let attributes : NSDictionary = fileManager.attributesOfItemAtPath(path, error: &error) {
+        do {
+            let attributes : NSDictionary = try fileManager.attributesOfItemAtPath(path)
             let fileSize = attributes.fileSize()
-            if fileManager.removeItemAtPath(path, error: &error) {
+            do {
+                try fileManager.removeItemAtPath(path)
                 self.size -= fileSize
                 self.fileCount--
+            } catch let error1 as NSError {
+                error = error1
+                Log.error("Failed to remove file", error)
+            }
+        } catch let error1 as NSError {
+            error = error1
+            if isNoSuchFileError(error) {
+                Log.debug("File not found", error)
             } else {
                 Log.error("Failed to remove file", error)
             }
-        } else if isNoSuchFileError(error) {
-            Log.debug("File not found", error)
-        } else {
-            Log.error("Failed to remove file", error)
         }
     }
 }

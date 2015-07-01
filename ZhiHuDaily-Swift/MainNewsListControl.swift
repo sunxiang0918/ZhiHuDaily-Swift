@@ -46,7 +46,7 @@ class MainNewsListControl {
     /**
     刷新新闻
     
-    :param: date 日期
+    - parameter date: 日期
     */
     private func refreshNews(news:NewsListVO){
         //获取日期
@@ -58,7 +58,7 @@ class MainNewsListControl {
             if  let result:AnyObject = data {
                 let json = JSON(result)
                 
-                let date = json["date"].int!
+                _ = json["date"].int!
                 
                 //最新新闻
                 let stories = json["stories"].array
@@ -74,18 +74,18 @@ class MainNewsListControl {
     /**
     获取到某个日期之后一天的日期的数字
     
-    :param: date 某个日期
+    - parameter date: 某个日期
     
-    :returns: 第二天的日期
+    - returns: 第二天的日期
     */
     private func getNextDateInt(date:Int) ->Int? {
-        var formatter:NSDateFormatter = NSDateFormatter()
+        let formatter:NSDateFormatter = NSDateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         let today=formatter.dateFromString("\(date)")
         
         if let t = today {
             let tomorrow = NSDate(timeInterval: (24 * 60 * 60), sinceDate: t)
-            return formatter.stringFromDate(tomorrow).toInt()
+            return Int(formatter.stringFromDate(tomorrow))
         }
         
         return nil
@@ -105,7 +105,7 @@ class MainNewsListControl {
                 //转换成JSON
                 let json = JSON(result)
                 
-                let date = json["date"].string!.toInt()
+                let date = Int(json["date"].string!)
                 
                 //最热新闻
                 let top_stories = json["top_stories"].array
@@ -145,10 +145,10 @@ class MainNewsListControl {
     /**
     转换新闻List JSON对象到VO对象
     
-    :param: stories [JSON]
-    :param: type    新闻类型,因为TOP 和一般的 结构上有点区别
+    - parameter stories: [JSON]
+    - parameter type:    新闻类型,因为TOP 和一般的 结构上有点区别
     
-    :returns:
+    - returns:
     */
     private func convertStoriesJson2Vo(stories:[JSON]?,type:NewsTypeEnum = .NEWS) ->[NewsVO]? {
         var news:[NewsVO]? = nil
@@ -168,10 +168,10 @@ class MainNewsListControl {
     /**
     把JSON转换成 NewsVO
     
-    :param: json JSON
-    :param: type News类型,因为 最热新闻的结构稍微有点不一样
+    - parameter json: JSON
+    - parameter type: News类型,因为 最热新闻的结构稍微有点不一样
     
-    :returns:
+    - returns:
     */
     private func convertJSON2VO(json:JSON,type:NewsTypeEnum = .NEWS) -> NewsVO {
         
@@ -219,7 +219,7 @@ class MainNewsListControl {
             let today = NSDate()
             let formatter:NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyyMMdd"
-            day = formatter.stringFromDate(today).toInt()!
+            day = Int(formatter.stringFromDate(today))!
         }else {
             let lastestNews = news.last
             day = (lastestNews?.date)!
@@ -231,7 +231,7 @@ class MainNewsListControl {
                 
                 let news = NewsListVO()
                 
-                let date = json["date"].string!.toInt()
+                let date = Int(json["date"].string!)
                 
                 news.date = date
                 

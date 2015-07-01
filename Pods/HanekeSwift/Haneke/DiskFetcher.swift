@@ -55,7 +55,13 @@ public class DiskFetcher<T : DataConvertible> : Fetcher<T> {
         }
         
         var error: NSError?
-        let data = NSData(contentsOfFile: self.path, options: NSDataReadingOptions.allZeros, error: &error)
+        let data: NSData?
+        do {
+            data = try NSData(contentsOfFile: self.path, options: NSDataReadingOptions())
+        } catch let error1 as NSError {
+            error = error1
+            data = nil
+        }
         if data == nil {
             dispatch_async(dispatch_get_main_queue()) {
                 fail(error)

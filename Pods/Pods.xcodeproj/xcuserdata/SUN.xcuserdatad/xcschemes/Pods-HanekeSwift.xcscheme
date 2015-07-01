@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CABFFE42945E31C7D68EBEF5"
+               BlueprintIdentifier = "02F2013057BB735A6AC5D898"
                BuildableName = "Haneke.framework"
                BlueprintName = "Pods-HanekeSwift"
                ReferencedContainer = "container:Pods.xcodeproj">

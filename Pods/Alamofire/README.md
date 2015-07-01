@@ -1,8 +1,10 @@
 ![Alamofire: Elegant Networking in Swift](https://raw.githubusercontent.com/Alamofire/Alamofire/assets/alamofire.png)
 
 [![Build Status](https://travis-ci.org/Alamofire/Alamofire.svg)](https://travis-ci.org/Alamofire/Alamofire)
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Alamofire.svg)](https://img.shields.io/cocoapods/v/Alamofire.svg)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Alamofire is an HTTP networking library written in Swift, from the [creator](https://github.com/mattt) of [AFNetworking](https://github.com/afnetworking/afnetworking).
+Alamofire is an HTTP networking library written in Swift.
 
 ## Features
 
@@ -19,8 +21,8 @@ Alamofire is an HTTP networking library written in Swift, from the [creator](htt
 
 ## Requirements
 
-- iOS 7.0+ / Mac OS X 10.9+
-- Xcode 6.1
+- iOS 8.0+ / Mac OS X 10.9+
+- Xcode 7.0
 
 ## Communication
 
@@ -32,11 +34,9 @@ Alamofire is an HTTP networking library written in Swift, from the [creator](htt
 
 ## Installation
 
-> **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
+> **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks (10.9).**
 >
-> To use Alamofire with a project targeting iOS 7, you must include the `Alamofire.swift` source file directly in your project. See the ['Source File'](#source-file) section for instructions.
->
-> For Swift 1.2 using the Xcode 6.3 Beta, use the [xcode-6.3 branch](https://github.com/Alamofire/Alamofire/tree/xcode-6.3).
+> Alamofire is no longer supported on iOS 7 due to the lack of support for frameworks. Without frameworks, running Travis-CI against iOS 7 would require a second duplicated test target. The separate test suite would need to import all the Swift files and the tests would need to be duplicated and re-written. This split would be too difficult to maintain to ensure the highest possible quality of the Alamofire ecosystem.
 
 ### CocoaPods
 
@@ -55,7 +55,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Alamofire', '~> 1.1'
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift-2.0'
 ```
 
 Then, run the following command:
@@ -66,7 +66,7 @@ $ pod install
 
 ### Carthage
 
-Carthage is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
 
 You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
 
@@ -78,14 +78,14 @@ $ brew install carthage
 To integrate Alamofire into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Alamofire/Alamofire" >= 1.1
+github "Alamofire/Alamofire" "swift-2.0"
 ```
 
 ### Manually
 
 If you prefer not to use either of the aforementioned dependency managers, you can integrate Alamofire into your project manually.
 
-### Embedded Framework
+#### Embedded Framework
 
 - Add Alamofire as a [submodule](http://git-scm.com/docs/git-submodule) by opening the Terminal, `cd`-ing into your top-level project directory, and entering the following command:
 
@@ -93,16 +93,25 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 $ git submodule add https://github.com/Alamofire/Alamofire.git
 ```
 
-- Open the `Alamofire` folder, and drag `Alamofire.xcodeproj` into the file navigator of your app project.
-- In Xcode, navigate to the target configuration window by clicking on the blue project icon, and selecting the application target under the "Targets" heading in the sidebar.
-- Ensure that the deployment target of Alamofire.framework matches that of the application target.
-- In the tab bar at the top of that window, open the "Build Phases" panel.
-- Expand the "Target Dependencies" group, and add `Alamofire.framework`.
-- Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `Alamofire.framework`.
+- Open the new `Alamofire` folder, and drag the `Alamofire.xcodeproj` into the Project Navigator of your application's Xcode project.
 
-#### Source File
+    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
 
-For application targets that do not support embedded frameworks, such as iOS 7, Alamofire can be integrated by adding the `Alamofire.swift` source file directly into your project. Note that any calling conventions described in the ['Usage'](#usage) section with the `Alamofire` prefix would instead omit it (for example, `Alamofire.request` becomes `request`), since this functionality is incorporated into the top-level namespace.
+- Select the `Alamofire.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
+- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
+- In the tab bar at the top of that window, open the "General" panel.
+- Click on the `+` button under the "Embedded Binaries" section.
+- You will see two different `Alamofire.xcodeproj` folders each with two different versions of the `Alamofire.framework` nested inside a `Products` folder.
+
+    > It does not matter which `Products` folder you choose from, but it does matter whether you choose the top or bottom `Alamofire.framework`. 
+    
+- Select the top `Alamofire.framework` for iOS and the bottom one for OS X.
+
+    > You can verify which one you selected by inspecting the build log for your project. The build target for `Alamofire` will be listed as either `Alamofire iOS` or `Alamofire OSX`.
+
+- And that's it!
+
+> The `Alamofire.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.> > 
 
 ---
 
@@ -714,7 +723,7 @@ enum Router: URLRequestConvertible {
 ```
 
 ```swift
-Alamofire.request(Router.Search(query: "foo bar", page: 1)) // ?q=foo+bar&offset=50
+Alamofire.request(Router.Search(query: "foo bar", page: 1)) // ?q=foo%20bar&offset=50
 ```
 
 #### CRUD & Authorization
@@ -810,13 +819,9 @@ Alamofire is named after the [Alamo Fire flower](https://aggie-horticulture.tamu
 
 * * *
 
-## Contact
+## Credits
 
-Follow AFNetworking on Twitter ([@AFNetworking](https://twitter.com/AFNetworking))
-
-### Creator
-
-- [Mattt Thompson](http://github.com/mattt) ([@mattt](https://twitter.com/mattt))
+Alamofire is owned and maintained by the [Alamofire Software Foundation](http://alamofire.org).
 
 ## License
 

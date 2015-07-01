@@ -46,7 +46,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     左边的按钮的事件响应
     
-    :param: sender
+    - parameter sender:
     */
     @IBAction func leftButtonAction(sender: UIButton) {
         
@@ -116,15 +116,15 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     这部分是用来处理表格的第二个section和试图的titleView 之间的动画效果的
     
-    :param: offsetY
-    :param: scrollView 
+    - parameter offsetY:
+    - parameter scrollView: 
     */
     func changeTitleAndTableHeader(offsetY:Float,scrollView:UIScrollView) {
         
         let needY=IN_WINDOW_HEIGHT-SCROLL_HEIGHT-TITLE_HEIGHT
         
         //计算出透明度
-        var result =  offsetY/needY
+        let result =  offsetY/needY
         
         if  result > 1 {
             //只有当上划的距离已经大于needY了后,才开始做进一步的处理
@@ -135,7 +135,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
             let tableView = scrollView as! UITableView
             
             //获取第一个section有多少行数据
-            var cellNumber = tableView.numberOfRowsInSection(0)
+            let cellNumber = tableView.numberOfRowsInSection(0)
             
             //用于隐藏titleView的伐值, 算法是: (表格第一个section的行数-1)*每一个cell的高度+一个section的高度+上面的needY
             let hiddenHeight = Float(cellNumber-1) * TABLE_CELL_HEIGHT + SECTION_HEIGHT + needY
@@ -177,7 +177,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     显示刷新的进度条
     
-    :param: offsetY
+    - parameter offsetY:
     */
     func showRefeshProgress(offsetY:Float){
         

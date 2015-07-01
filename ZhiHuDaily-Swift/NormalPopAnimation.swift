@@ -13,7 +13,7 @@ import UIKit
 */
 class NormalPopAnimation: NSObject,UIViewControllerAnimatedTransitioning {
    
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.4
     }
     
@@ -31,8 +31,8 @@ class NormalPopAnimation: NSObject,UIViewControllerAnimatedTransitioning {
         
         let containerView = transitionContext.containerView()
         
-        containerView.addSubview(toViewController?.view ?? nil)
-        containerView.sendSubviewToBack(toViewController?.view ?? nil)
+        containerView!.addSubview(toViewController?.view ?? nil)
+        containerView!.sendSubviewToBack(toViewController?.view ?? nil)
         
         let duration = self.transitionDuration(transitionContext)
         

@@ -16,9 +16,9 @@ class NewsDetailControl {
     /**
     加载新闻详细的方法
     
-    :param: id       新闻的id
-    :param: complate 当加载完成后,调用的回调
-    :param: block 当加载失败后,调用的回调
+    - parameter id:       新闻的id
+    - parameter complate: 当加载完成后,调用的回调
+    - parameter block: 当加载失败后,调用的回调
     */
     func loadNewsDetail(id:Int,complate:(newsDetail:NewsDetailVO?)->Void,block:((error:NSError)->Void)? = nil){
 
@@ -61,8 +61,8 @@ class NewsDetailControl {
     /**
     加载新闻扩展信息的
     
-    :param: id       新闻ID
-    :param: complate 扩展信息
+    - parameter id:       新闻ID
+    - parameter complate: 扩展信息
     */
     func loadNewsExtraInfo(id:Int,complate:(newsExtra:NewsExtraVO?)->Void,block:((error:NSError)->Void)? = nil){
         
@@ -88,9 +88,9 @@ class NewsDetailControl {
     /**
     把JSON转换成为VO 对象
     
-    :param: json json
+    - parameter json: json
     
-    :returns: VO对象
+    - returns: VO对象
     */
     private func convertJSON2VO(json:SwiftyJSON.JSON) -> NewsDetailVO {
         let id = json["id"].int!
@@ -138,7 +138,7 @@ class NewsDetailControl {
         
         var _section:Section? = nil
         if  section.error == nil {
-            var sect:Section?
+//            var sect:Section?
             let thumbnail = section["thumbnail"].string!
             let i = section["id"].int!
             let sectionName = section["name"].string!

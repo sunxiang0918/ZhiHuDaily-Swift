@@ -66,10 +66,10 @@ class RefreshControl:NSObject {
     /**
     构造函数
     
-    :param: scrollView 被监控的滑动视图
-    :param: delegate   事件响应方
+    - parameter scrollView: 被监控的滑动视图
+    - parameter delegate:   事件响应方
     
-    :returns: 自身
+    - returns: 自身
     */
     init(scrollView:UIScrollView,delegate:RefreshControlDelegate){
         
@@ -79,8 +79,8 @@ class RefreshControl:NSObject {
         super.init()
         
         //增加scrollView的 contentSize 和 contentOffset 属性的 变化的 监听
-        self.scrollView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old, context: nil)
-        self.scrollView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old | NSKeyValueObservingOptions.Prior, context: nil)
+        self.scrollView.addObserver(self, forKeyPath: "contentSize", options: [NSKeyValueObservingOptions.New, NSKeyValueObservingOptions.Old], context: nil)
+        self.scrollView.addObserver(self, forKeyPath: "contentOffset", options: [NSKeyValueObservingOptions.New, NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.Prior], context: nil)
 
     }
     
@@ -93,12 +93,12 @@ class RefreshControl:NSObject {
     /**
     实现KVO 事件监听的响应
     
-    :param: keyPath 事件名字
-    :param: object  发起对象
-    :param: change  变化对象
-    :param: context 上下文
+    - parameter keyPath: 事件名字
+    - parameter object:  发起对象
+    - parameter change:  变化对象
+    - parameter context: 上下文
     */
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if  "contentSize" == keyPath{
             //如果是scrollView的 contentSize 改变了大小
@@ -116,7 +116,7 @@ class RefreshControl:NSObject {
             
             if  self.refreshingDirection == .RefreshingDirectionNone {
                 //如果是Offset正在滑动 并且当前没有其他的刷新事件
-                self.drogForChange(change)
+                self.drogForChange(change!)
             }
         }
     }
@@ -124,7 +124,7 @@ class RefreshControl:NSObject {
     /**
     注册头部的显示视图,这个视图必须是继承自UIView,并且实现RefreshViewDelegate协议
     
-    :param: topView 头部视图
+    - parameter topView: 头部视图
     */
     func registeTopView<T where T:RefreshViewDelegate>(topView:T){
         self.topView = topView
@@ -135,7 +135,7 @@ class RefreshControl:NSObject {
     /**
     注册底部的显示视图,这个视图必须是继承自UIView,并且实现RefreshViewDelegate协议
     
-    :param: topView 底部视图
+    - parameter topView: 底部视图
     */
     func registeBottomView<T where T:RefreshViewDelegate>(bottomView:T){
         self.bottomView = bottomView
@@ -146,7 +146,7 @@ class RefreshControl:NSObject {
     /**
     通过程序调用 开始刷新
     
-    :param: direction 刷新的方向事件
+    - parameter direction: 刷新的方向事件
     */
     func startRefreshingDirection(direction:RefreshDirection){
         self.startRefreshingDirection(direction, animation: true)
@@ -155,7 +155,7 @@ class RefreshControl:NSObject {
     /**
     通过程序调用 完成刷新
     
-    :param: direction 刷新的方向事件
+    - parameter direction: 刷新的方向事件
     */
     func finishRefreshingDirection(direction:RefreshDirection){
         self.finishRefreshingDirection(direction, animation: true)
@@ -166,7 +166,7 @@ class RefreshControl:NSObject {
     /**
     这个方法就是当触发滑动的时候,处理滑动的事件的
     
-    :param: change
+    - parameter change:
     */
     private func drogForChange(change:[NSObject : AnyObject]){
         
@@ -205,7 +205,7 @@ class RefreshControl:NSObject {
     /**
     允许开始刷新
     
-    :param: direction 事件类型
+    - parameter direction: 事件类型
     */
     private func canEngageRefreshDirection(direction:RefreshDirection) {
         
@@ -221,7 +221,7 @@ class RefreshControl:NSObject {
     /**
     执行还没有进行刷新的时候,view的动画效果
     
-    :param: direction 事件类型
+    - parameter direction: 事件类型
     */
     private func didDisengageRefreshDirection(direction:RefreshDirection) {
         
@@ -238,7 +238,7 @@ class RefreshControl:NSObject {
     /**
     开始真正的执行刷新命令
     
-    :param: direction 事件类型
+    - parameter direction: 事件类型
     */
     private func engageRefreshDirection(direction:RefreshDirection) {
         var edge:UIEdgeInsets = UIEdgeInsetsZero
@@ -279,7 +279,7 @@ class RefreshControl:NSObject {
     /**
     开始执行View的刷新事件
     
-    :param: direction 刷新事件
+    - parameter direction: 刷新事件
     */
     private func didEngageRefreshDirection(direction:RefreshDirection){
         if  let top = self.topView {

@@ -15,8 +15,8 @@ class RecommenderControl {
     /**
     获取一个新闻的推荐者
     
-    :param: newsId   新闻Id
-    :param: complate 读取后的操作
+    - parameter newsId:   新闻Id
+    - parameter complate: 读取后的操作
     */
     func getNewsRecommenders(newsId:Int,complate:(recommenders:RecommendersVO)->Void,block:((error:NSError)->Void)? = nil){
         
@@ -33,9 +33,9 @@ class RecommenderControl {
     /**
     把JSON对象转换成VO
     
-    :param: json
+    - parameter json:
     
-    :returns:
+    - returns:
     */
     private func convertJSON2VO(json:JSON) -> RecommendersVO{
     

@@ -56,8 +56,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     界面切换传值的方法
     
-    :param: segue
-    :param: sender
+    - parameter segue:
+    - parameter sender:
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "mainTitleView" {
@@ -143,8 +143,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             cell.clipsToBounds = true
             
-            var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(IMAGE_HEIGHT)))
-            var slideView = SlideScrollView(frame: slideRect)
+            let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(IMAGE_HEIGHT)))
+            let slideView = SlideScrollView(frame: slideRect)
 
             let todayNews = newsListControl.todayNews
             if let _todayNews = todayNews {
@@ -158,7 +158,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             return cell
         }else{
-            let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as? UITableViewCell
+            let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell")
             
             if  tmp == nil {
                 cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")
@@ -166,7 +166,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 cell = tmp!
             }
             
-            let c = cell as! NewsListTableViewCell
+//            let c = cell as! NewsListTableViewCell
             
             if  indexPath.section==0{
                 //这个是今天的新闻
@@ -190,10 +190,10 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     返回视图Cell
     
-    :param: newsList
-    :param: row
+    - parameter newsList:
+    - parameter row:
     
-    :returns:
+    - returns:
     */
     private func doReturnCell(newsList:NewsListVO,row:Int) -> UITableViewCell {
         
@@ -225,9 +225,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     返回有多少个Sections
     
-    :param: tableView
+    - parameter tableView:
     
-    :returns:
+    - returns:
     */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -239,10 +239,10 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     返回每一个Sections的Ttitle的高度
     
-    :param: tableView
-    :param: section   section的序号, 从0开始
+    - parameter tableView:
+    - parameter section:   section的序号, 从0开始
     
-    :returns:
+    - returns:
     */
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if  section == 0 {
@@ -256,10 +256,10 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     设置每一个Section的样子
     
-    :param: tableView
-    :param: section
+    - parameter tableView:
+    - parameter section:
     
-    :returns: 自定义的View
+    - returns: 自定义的View
     */
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -310,8 +310,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     /**
     标记 已点击的 单元格
     
-    :param: newsListVO
-    :param: indexPath
+    - parameter newsListVO:
+    - parameter indexPath:
     */
     private func doAlreadyRead(indexPath:NSIndexPath) {
         

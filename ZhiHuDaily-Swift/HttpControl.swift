@@ -17,7 +17,7 @@ class HttpControl {
     /**
     接收一个网址,然后回调代理的方法,传回数据
     
-    :param: url 网址
+    - parameter url: 网址
     */
     func onSearch(url:String) {
         Alamofire.Manager.sharedInstance.request(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in

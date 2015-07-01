@@ -44,17 +44,17 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         
         activityIndicatorView.hidesWhenStopped=true;
 //        activityIndicatorView.color=
-        activityIndicatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicatorView)
         
         loadingLabel.backgroundColor=UIColor.clearColor()
         loadingLabel.font=UIFont.systemFontOfSize(13)
-        loadingLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        loadingLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(loadingLabel)
         
         promptLabel.backgroundColor=UIColor.clearColor()
         promptLabel.font=UIFont.systemFontOfSize(13)
-        promptLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        promptLabel.translatesAutoresizingMaskIntoConstraints = false
         promptLabel.textAlignment = NSTextAlignment.Center
         self.addSubview(promptLabel)
         
@@ -98,7 +98,7 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     */
     func resetLayoutSubViews(){
         
-        let tempContraint = self.constraints()
+        let tempContraint = self.constraints
 
         if  tempContraint.count > 0 {
             self.removeConstraints(tempContraint)
@@ -119,10 +119,10 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
 
             self.addConstraints([tLeft,tTop,tRight,tHeight])
             
-            let viewsDictionary = [NSString(string:"promptLabel"):self.promptLabel]
+            let viewsDictionary = ["promptLabel":self.promptLabel]
             
-            let pHList = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[promptLabel]-0-|", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: viewsDictionary)
-            let pVList = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[promptLabel(==45)]", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: viewsDictionary)
+            let pHList = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[promptLabel]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary as [String : AnyObject])
+            let pVList = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[promptLabel(==45)]", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary  as [String : AnyObject])
             
             self.addConstraints(pHList)
             self.addConstraints(pVList)

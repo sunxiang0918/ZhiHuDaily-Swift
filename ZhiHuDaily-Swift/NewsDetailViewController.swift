@@ -73,7 +73,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     响应整个View的 慢拖动事件
     
-    :param: sender
+    - parameter sender:
     */
     @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
         
@@ -85,7 +85,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             popstate = PopActionState.NONE
             
             //获取拖动事件的开始点坐标
-            let location = sender.locationInView(view)
+            _ = sender.locationInView(view)
             
             //获取拖动事件的偏移坐标
             let translation = sender.translationInView(view!)
@@ -247,7 +247,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     页面重新加载的时候调用的方法
     
-    :param: animated
+    - parameter animated:
     */
     override func viewWillAppear(animated: Bool) {
         
@@ -333,7 +333,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     根据读取的数据,加载页面
     
-    :param: news
+    - parameter news:
     */
     private func loadDetailView(news:NewsDetailVO) {
         
@@ -376,7 +376,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
      
         
         let subviews = webView.scrollView.subviews
-        let browser : UIView = subviews[0] as! UIView
+        let browser : UIView = subviews[0] as UIView
         if  let recommanders = news.recommenders {
             if  recommanders.isEmpty {
                 recommandView.hidden = true
@@ -410,9 +410,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     获取新闻VO
     
-    :param: location
+    - parameter location:
     
-    :returns:
+    - returns:
     */
     private func getNewsVO(location:(Int,Int)) -> NewsVO {
         let section = location.0
@@ -442,7 +442,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     返回上一界面的Action
     
-    :param: sender
+    - parameter sender:
     */
     @IBAction func backButtonAction(sender: UIButton) {
         //开始调用navigation的POP转场
@@ -457,8 +457,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     界面切换传值的方法
     
-    :param: segue
-    :param: sender
+    - parameter segue:
+    - parameter sender:
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showNextNewsSegue" {
@@ -535,8 +535,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     用于计算与赋值 下一条/上一条新闻的 Index坐标
     
-    :param: newsDetailViewController newsDetailViewController
-    :param: calculator               具体的计算方法的闭包
+    - parameter newsDetailViewController: newsDetailViewController
+    - parameter calculator:               具体的计算方法的闭包
     */
     private func valuationIndexPath(newsDetailViewController:NewsDetailViewController?,calculator:(currentSection:Int,currentRow:Int)->(Int,Int)){
         if  newsDetailViewController?.newsListControl == nil {
@@ -548,7 +548,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         let currentRow = self.newsLocation.1
         let currentSection = self.newsLocation.0
         
-        var indexPath:(Int,Int)!
+//        var indexPath:(Int,Int)!
         
         newsDetailViewController?.newsLocation = calculator(currentSection: currentSection, currentRow: currentRow)
     }

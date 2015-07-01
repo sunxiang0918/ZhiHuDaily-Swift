@@ -28,9 +28,9 @@ class CommentControl {
     /**
     加载更多的长评论
     
-    :param: newsId   <#newsId description#>
-    :param: beforeId <#beforeId description#>
-    :param: complate <#complate description#>
+    - parameter newsId:   <#newsId description#>
+    - parameter beforeId: <#beforeId description#>
+    - parameter complate: <#complate description#>
     */
     func loadMoreLongComments(newsId:Int,beforeId:Int,complate:(longComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil) {
         

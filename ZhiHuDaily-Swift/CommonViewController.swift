@@ -90,8 +90,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             popstate = PopActionState.NONE
             
-            //获取拖动事件的开始点坐标
-            let location = sender.locationInView(view)
+//            //获取拖动事件的开始点坐标
+//            let location = sender.locationInView(view)
             
             //获取拖动事件的偏移坐标
             let translation = sender.translationInView(view!)
@@ -185,10 +185,10 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     /**
     重载这个方法 来自定义 sectino的 标题栏
     
-    :param: tableView
-    :param: section
+    - parameter tableView:
+    - parameter section:
     
-    :returns:
+    - returns:
     */
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tmp = tableView.dequeueReusableHeaderFooterViewWithIdentifier("commentSectionTitleView") as! CommentSectionTitleView
@@ -284,8 +284,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
 
                     //通过使用attributedText 来设置 同一个Label里面的字体和颜色不一样.从而实现引用的作者名加粗
                     let attributedText = NSMutableAttributedString(string: content)
-                    attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0,count(replay.author)+3))
-                    attributedText.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(12), range: NSMakeRange(0,count(replay.author)+3))
+                    attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0,replay.author.characters.count+3))
+                    attributedText.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(12), range: NSMakeRange(0,replay.author.characters.count+3))
                     tmp?.replayCommentLabel.attributedText = attributedText
                     
                     tmp?.replayCommentLabel.backgroundColor = UIColor.clearColor()
@@ -293,7 +293,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
                     //根据字数 来计算是否需要显示展开按钮.
                     //TODO 这个地方其实还是有问题的.有些情况下计算不准确...
                     let width = tmp?.replayCommentLabel.frame.width
-                    let size = content.boundingRectWithSize(CGSizeMake(width!, 999), options: NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading , attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context:nil)
+                    let size = content.boundingRectWithSize(CGSizeMake(width!, 999), options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading] , attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context:nil)
                     if  size.height > 30 {
                         tmp?.expandButton.hidden = false
                     }else {
@@ -364,10 +364,10 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     如果有这个footer,那么 视觉上看起来 第二个的header 高度就和第一个是不一样的了.
     所以这个地方要给他设置没
     
-    :param: tableView
-    :param: section
+    - parameter tableView:
+    - parameter section:
     
-    :returns:
+    - returns:
     */
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.min

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rightController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("rightViewController") as! ViewController
         
         //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
-        let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as? UIViewController
+        let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController")
         
         rightController.leftViewController = leftController
         
@@ -53,7 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //从网络上加载开始图片
     func loadStartImage(url:String,onSuccess:(String,UIImage)->Void){
         //同步调用URL,获取开始图片的JSON结果
-        var data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: url)!), returningResponse: nil, error: nil)
+        var data: NSData?
+        do {
+            data = try NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: url)!), returningResponse: nil)
+        } catch _ {
+            data = nil
+        }
         
         if let temp = data {
             //把结果NSData 转换成JSON
@@ -63,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //获取版权人
             let name = json["text"].string
             
-            if  var iu = imageUrl {
+            if  let iu = imageUrl {
                 
                 //这个使用的是异步加载的,所以界面可能就会有闪烁
                 let imageCache=Shared.imageCache
@@ -75,7 +80,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //在缓存中没有找到图片,那么就需要请求一次获取图片
                     //这个是同步加载的,所以界面不会有闪烁
                     //获取图片的NSData
-                    data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil, error: nil)
+                    do{
+                        data = try NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil)
+                    }catch {
+                        //TODO 报错
+                    }
                     
                     //把NSData转换成必要的UIImage对象
                     if let d  = data, let image = UIImage(data: d) {
@@ -120,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "edu.cuit.sun.ZhiHuDaily_Swift" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] as NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -136,7 +145,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("ZhiHuDaily_Swift.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -148,6 +160,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -168,12 +182,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func saveContext () {
         if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            
+            if moc.hasChanges{
+                
+                do{
+                    try moc.save()
+                }catch{
+                    NSLog("Unresolved error")
+                    abort()
+                }
+                
+//                // Replace this implementation with code to handle the error appropriately.
+//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                NSLog("Unresolved error \(error), \(error!.userInfo)")
+//                abort()
             }
         }
     }
