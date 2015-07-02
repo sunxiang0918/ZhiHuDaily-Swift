@@ -82,8 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //获取图片的NSData
                     do{
                         data = try NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil)
-                    }catch {
+                    }catch let e {
                         //TODO 报错
+                        print(e)
                     }
                     
                     //把NSData转换成必要的UIImage对象
