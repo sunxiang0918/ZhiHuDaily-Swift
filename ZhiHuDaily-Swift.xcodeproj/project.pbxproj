@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D6CBCBAC47A08E63F4FDC80 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */; };
 		A41E6A331B29D5DA000BFC4B /* CommentVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A321B29D5DA000BFC4B /* CommentVO.swift */; };
 		A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A341B29D815000BFC4B /* CommentControl.swift */; };
@@ -64,6 +63,8 @@
 		A4D80C741B1E9BE600247226 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C731B1E9BE600247226 /* NewsDetailViewController.swift */; };
 		A4D80C781B1EAC4D00247226 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C771B1EAC4D00247226 /* NavigationControllerDelegate.swift */; };
 		A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */; };
+		A4FA82C11B45869000311088 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; };
+		A4FA82C21B45869000311088 /* Pods.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4FAFA4C1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA4A1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift */; };
 		A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FAFA4B1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib */; };
 		A4FAFA521B2C835500CA9E66 /* CommentSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */; };
@@ -86,6 +87,20 @@
 			remoteInfo = PKRevealController;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4FA82C31B45869000311088 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4FA82C21B45869000311088 /* Pods.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,7 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D6CBCBAC47A08E63F4FDC80 /* Pods.framework in Frameworks */,
+				A4FA82C11B45869000311088 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +507,7 @@
 				A432D3181B147B9F006D2B0E /* Resources */,
 				EF5FBBD50872EDC89E1F0872 /* Embed Pods Frameworks */,
 				2A4C5A9306129A7CF0246D2C /* Copy Pods Resources */,
+				A4FA82C31B45869000311088 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -782,7 +798,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -821,7 +837,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
