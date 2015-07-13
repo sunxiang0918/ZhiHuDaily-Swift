@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -11,11 +11,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="bSd-Lv-BYj">
                         <rect key="frame" x="8" y="8" width="265" height="63.5"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="265" id="VlH-c7-ODn"/>
                             <constraint firstAttribute="height" constant="64" id="dUg-YR-glj"/>
@@ -23,9 +24,15 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="VlH-c7-ODn"/>
+                            </mask>
+                        </variation>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UAH-5K-KM6">
                         <rect key="frame" x="287" y="7" width="80" height="64"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="0gZ-vm-Uqh"/>
                             <constraint firstAttribute="width" constant="80" id="qSe-aO-ULE"/>
@@ -33,6 +40,7 @@
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❏多图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-bI-CRL">
                         <rect key="frame" x="333" y="58.5" width="34" height="12.5"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12.5" id="2TY-qE-6GO"/>
@@ -43,15 +51,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="bSd-Lv-BYj" secondAttribute="centerY" id="2Qx-dE-2g2"/>
                     <constraint firstAttribute="centerY" secondItem="UAH-5K-KM6" secondAttribute="centerY" constant="0.75" id="GvL-lr-gfn"/>
                     <constraint firstItem="sgm-bI-CRL" firstAttribute="bottom" secondItem="UAH-5K-KM6" secondAttribute="bottom" id="M9C-cj-gJW"/>
                     <constraint firstItem="bSd-Lv-BYj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Y2C-an-Rby"/>
                     <constraint firstItem="sgm-bI-CRL" firstAttribute="trailing" secondItem="UAH-5K-KM6" secondAttribute="trailing" id="c9q-DJ-LDR"/>
+                    <constraint firstItem="UAH-5K-KM6" firstAttribute="leading" secondItem="bSd-Lv-BYj" secondAttribute="trailing" constant="14" id="icr-22-YRA"/>
                     <constraint firstItem="UAH-5K-KM6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="quo-kn-Pel"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="multipicLabel" destination="sgm-bI-CRL" id="L0U-K2-OzG"/>
                 <outlet property="newsImageView" destination="UAH-5K-KM6" id="OGK-xi-q8I"/>
