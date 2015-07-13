@@ -41,8 +41,11 @@ class LaunchImageViewController: UIViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         }
         
-        
-        logoImageView = UIImageView(frame: CGRectMake(0, UIScreen.mainScreen().bounds.height-185, UIScreen.mainScreen().bounds.width, 185))   //LOGO图片View
+        //1536 × 570
+        let width = UIScreen.mainScreen().bounds.width
+        //这里应该使用两种尺寸比例的图,但是由于没有找到,就只有找到一种.因此 ipad和iphone的比例是不一样的,因此需要不同的处理
+        let height = width>400 ? width*570/1536 : 185
+        logoImageView = UIImageView(frame: CGRectMake(0, UIScreen.mainScreen().bounds.height-height, width, height))   //LOGO图片View
     }
     
     //本视图显示前
