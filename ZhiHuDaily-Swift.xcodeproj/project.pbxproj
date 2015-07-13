@@ -14,12 +14,12 @@
 		A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */; };
 		A42ECD5B1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42ECD5A1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift */; };
 		A42ECD5E1B53F8DC004D8E74 /* AppException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42ECD5D1B53F8DC004D8E74 /* AppException.swift */; };
+		A42ECD601B541548004D8E74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A42ECD5F1B541548004D8E74 /* LaunchScreen.storyboard */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
 		A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A432D3261B147B9F006D2B0E /* Main.storyboard */; };
 		A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A432D3291B147B9F006D2B0E /* Images.xcassets */; };
-		A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */; };
 		A432D3391B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */; };
 		A4363FC91B2FBBCE00101E8E /* CNPPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4363FC81B2FBBCE00101E8E /* CNPPopupController.m */; };
 		A4363FCB1B2FC52600101E8E /* SharePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4363FCA1B2FC52600101E8E /* SharePopupView.xib */; };
@@ -114,6 +114,7 @@
 		A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersListViewController.swift; sourceTree = "<group>"; };
 		A42ECD5A1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSession+SynchronousTask.swift"; sourceTree = "<group>"; };
 		A42ECD5D1B53F8DC004D8E74 /* AppException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppException.swift; sourceTree = "<group>"; };
+		A42ECD5F1B541548004D8E74 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		A432D3241B147B9F006D2B0E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A432D3271B147B9F006D2B0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A432D3291B147B9F006D2B0E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A432D32C1B147B9F006D2B0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A432D3321B147B9F006D2B0E /* ZhiHuDaily-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZhiHuDaily-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D3371B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D3381B147B9F006D2B0E /* ZhiHuDaily_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuDaily_SwiftTests.swift; sourceTree = "<group>"; };
@@ -260,9 +260,9 @@
 				A432D3241B147B9F006D2B0E /* ViewController.swift */,
 				A432D3261B147B9F006D2B0E /* Main.storyboard */,
 				A432D3291B147B9F006D2B0E /* Images.xcassets */,
-				A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */,
 				A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */,
 				A432D31D1B147B9F006D2B0E /* Supporting Files */,
+				A42ECD5F1B541548004D8E74 /* LaunchScreen.storyboard */,
 			);
 			path = "ZhiHuDaily-Swift";
 			sourceTree = "<group>";
@@ -604,13 +604,13 @@
 			files = (
 				A432D3281B147B9F006D2B0E /* Main.storyboard in Resources */,
 				A4FAFA541B2C836200CA9E66 /* CommentSectionTitleView.xib in Resources */,
-				A432D32D1B147B9F006D2B0E /* LaunchScreen.xib in Resources */,
 				A4363FCB1B2FC52600101E8E /* SharePopupView.xib in Resources */,
 				A4A3A5911B2EABEC002E3CA0 /* RecommenderTableViewCell.xib in Resources */,
 				A48BB66F1B2888030089A3D4 /* CommonListTableViewCell.xib in Resources */,
 				A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */,
 				A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */,
 				A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */,
+				A42ECD601B541548004D8E74 /* LaunchScreen.storyboard in Resources */,
 				A432D32A1B147B9F006D2B0E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,14 +758,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A432D32B1B147B9F006D2B0E /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A432D32C1B147B9F006D2B0E /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -861,6 +853,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ZhiHuDaily-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cuit.sun.$(PRODUCT_NAME:rfc1034identifier)";
@@ -878,6 +871,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ZhiHuDaily-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cuit.sun.$(PRODUCT_NAME:rfc1034identifier)";

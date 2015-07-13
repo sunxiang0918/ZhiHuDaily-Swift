@@ -150,36 +150,39 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.webView.delegate = self
         
+        //我也不知道为什么,设置界面约束后,如果直接实用bounds.width. 在ipad上 右边侧就可能出现2DPI的白边.也就是说宽度没够,所以这里再加了4DPI
+        let width = self.view.bounds.width+4
+        
         //顶部图片
-        self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(IN_WINDOW_HEIGHT)))
+        self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(IN_WINDOW_HEIGHT)))
         self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
         
         //图片上阴影遮罩
-        self.topMaskImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: 75))
+        self.topMaskImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: 75))
         self.topMaskImage.image = UIImage(named: "News_Image_Mask")
         self.webView.scrollView.addSubview(self.topMaskImage)
         
         //图片阴影遮罩
-        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: self.view.bounds.width,height: 75))
+        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: width,height: 75))
         self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
         self.webView.scrollView.addSubview(self.maskImage)
         
-        topRefreshImage.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-60,y: 40),size: CGSize(width: 15,height: 20))
+        topRefreshImage.frame = CGRect(origin: CGPoint(x: width/2-60,y: 40),size: CGSize(width: 15,height: 20))
         topRefreshImage.image = UIImage(named: "ZHAnswerViewBack")
         self.webView.scrollView.addSubview(self.topRefreshImage)
 
-        topRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: 40),size: CGSize(width: 95,height: 20))
+        topRefreshLabel.frame = CGRect(origin: CGPoint(x: width/2-40,y: 40),size: CGSize(width: 95,height: 20))
         topRefreshLabel.font = UIFont.systemFontOfSize(12)
         topRefreshLabel.textColor = UIColor.whiteColor()
         self.webView.scrollView.addSubview(self.topRefreshLabel)
         
-        recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+        recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: width,height: CGFloat(40)))
         self.webView.scrollView.addSubview(recommandView)
         
         //图片版权
-        self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(self.view.bounds.width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
+        self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
         self.imageSourceLabel.backgroundColor = UIColor.clearColor()
         self.imageSourceLabel.textColor = UIColor.whiteColor()
         self.imageSourceLabel.textAlignment = NSTextAlignment.Right
@@ -349,10 +352,12 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             webView.loadHTMLString(body, baseURL: nil)
         }
         
+        let width = self.view.bounds.width+4
+        
         if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
-            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: width,height: CGFloat(40)))
             self.topImage.hidden = false
             self.topMaskImage.hidden = false
             self.maskImage.hidden = false
@@ -360,7 +365,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             self.titleLabel.hidden = false
         }else{
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
-            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: self.view.bounds.width,height: CGFloat(40)))
+            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(40)))
             self.topImage.hidden = true
             self.topMaskImage.hidden = true
             self.maskImage.hidden = true
