@@ -12,6 +12,8 @@
 		A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E6A341B29D815000BFC4B /* CommentControl.swift */; };
 		A42CB9B61B2D7A4700534BD0 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */; };
 		A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */; };
+		A42ECD5B1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42ECD5A1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift */; };
+		A42ECD5E1B53F8DC004D8E74 /* AppException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42ECD5D1B53F8DC004D8E74 /* AppException.swift */; };
 		A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D31F1B147B9F006D2B0E /* AppDelegate.swift */; };
 		A432D3231B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A432D3211B147B9F006D2B0E /* ZhiHuDaily_Swift.xcdatamodeld */; };
 		A432D3251B147B9F006D2B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432D3241B147B9F006D2B0E /* ViewController.swift */; };
@@ -110,6 +112,8 @@
 		A41E6A341B29D815000BFC4B /* CommentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentControl.swift; sourceTree = "<group>"; };
 		A42CB9B51B2D7A4700534BD0 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
 		A42CB9B81B2D7FFB00534BD0 /* RecommendersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersListViewController.swift; sourceTree = "<group>"; };
+		A42ECD5A1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSession+SynchronousTask.swift"; sourceTree = "<group>"; };
+		A42ECD5D1B53F8DC004D8E74 /* AppException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppException.swift; sourceTree = "<group>"; };
 		A432D31A1B147B9F006D2B0E /* ZhiHuDaily-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZhiHuDaily-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A432D31E1B147B9F006D2B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A432D31F1B147B9F006D2B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -359,6 +363,8 @@
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 				A4C5507D1B18C3E2000E9526 /* Constant.swift */,
 				A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */,
+				A42ECD5A1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift */,
+				A42ECD5D1B53F8DC004D8E74 /* AppException.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -687,10 +693,12 @@
 				A4939FCB1B14D66800E041C4 /* PKLog.m in Sources */,
 				A48545941B1812A5001CC98F /* RefreshViewDelegate.swift in Sources */,
 				A4B3A7CB1B1FE85C00F3C1C1 /* NewsDetailVO.swift in Sources */,
+				A42ECD5E1B53F8DC004D8E74 /* AppException.swift in Sources */,
 				A44207161B1C9FC0005656C9 /* RefreshBottomView.swift in Sources */,
 				A4FAFA4C1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift in Sources */,
 				A4A3A58A1B2E8292002E3CA0 /* RecommenderControl.swift in Sources */,
 				A4A3A5871B2E8077002E3CA0 /* RecommendersVO.swift in Sources */,
+				A42ECD5B1B53F51A004D8E74 /* NSURLSession+SynchronousTask.swift in Sources */,
 				A4939FC61B14D66800E041C4 /* UIViewController+PKRevealController.m in Sources */,
 				A45D9F991B272F2C00E7CDB0 /* FilletImageView.swift in Sources */,
 				A4939FC81B14D66800E041C4 /* PKAnimation.m in Sources */,

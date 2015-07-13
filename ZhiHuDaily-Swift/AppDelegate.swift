@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //同步调用URL,获取开始图片的JSON结果
         var data: NSData?
         do {
-            data = try NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: url)!), returningResponse: nil)
+            data = try NSURLSession.sharedSession().sendSynchronousDataTaskWithURL(NSURL(string: url)!)
         } catch _ {
             data = nil
         }
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //这个是同步加载的,所以界面不会有闪烁
                     //获取图片的NSData
                     do{
-                        data = try NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: iu)!), returningResponse: nil)
+                        data = try NSURLSession.sharedSession().sendSynchronousDataTaskWithURL(NSURL(string: iu)!)
                     }catch let e {
                         //TODO 报错
                         print(e)
@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext()
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
