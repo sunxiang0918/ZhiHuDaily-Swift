@@ -94,7 +94,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             shadowImg.image = UIImage(named:"shadow.png")
             self.addSubview(shadowImg)
             
-            let noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:CGFloat(myHeight))));
+            let noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:CGFloat(IN_WINDOW_HEIGHT-25)),size:CGSize(width:320,height:CGFloat(myHeight))));
             noteView.userInteractionEnabled = false;
             noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
             
@@ -111,16 +111,16 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             
             noteTitle = UILabel()
             noteTitle.textColor = UIColor.whiteColor()
-            noteTitle.font = UIFont.boldSystemFontOfSize(16)
+            noteTitle.font = UIFont.boldSystemFontOfSize(FONT_SIZE)
             noteTitle.numberOfLines = 0
             noteTitle.lineBreakMode = NSLineBreakMode.ByCharWrapping
             
             noteTitle.text = self._topNewsArray![1].title
-            noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
+            noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: CGFloat(IN_WINDOW_HEIGHT-50-20)),size: CGSize(width: UIScreen.mainScreen().bounds.width-75,height: 50))
             
             //增加底部的Mask
             let maskImage = UIImage(named: "Home_Image_Mask")
-            let maskImageView = UIImageView(frame: CGRectMake(0, CGFloat(125), viewSize.size.width, 75))
+            let maskImageView = UIImageView(frame: CGRectMake(0, CGFloat(IN_WINDOW_HEIGHT-75), viewSize.size.width, 75))
             maskImageView.image = maskImage
             //            maskImageView.backgroundColor = UIColor.blackColor()
             self.addSubview(maskImageView)

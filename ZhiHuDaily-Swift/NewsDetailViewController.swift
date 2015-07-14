@@ -165,7 +165,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.webView.scrollView.addSubview(self.topMaskImage)
         
         //图片阴影遮罩
-        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: 125),size: CGSize(width: width,height: 75))
+        self.maskImage.frame = CGRect(origin: CGPoint(x: 0,y: CGFloat(IN_WINDOW_HEIGHT-75)),size: CGSize(width: width,height: 75))
         self.maskImage.image = UIImage(named: "Home_Image_Mask_Plus")
         self.webView.scrollView.addSubview(self.maskImage)
         
@@ -177,9 +177,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         topRefreshLabel.font = UIFont.systemFontOfSize(12)
         topRefreshLabel.textColor = UIColor.whiteColor()
         self.webView.scrollView.addSubview(self.topRefreshLabel)
-        
-        recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: width,height: CGFloat(40)))
-        self.webView.scrollView.addSubview(recommandView)
+
+        self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: CGFloat(IN_WINDOW_HEIGHT)),size: CGSize(width: width,height: CGFloat(40)))
+        self.webView.scrollView.addSubview(self.recommandView)
         
         //图片版权
         self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
@@ -190,11 +190,11 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.webView.scrollView.addSubview(self.imageSourceLabel)
         
         //标题的label
-        self.titleLabel.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
+        self.titleLabel.frame = CGRect(origin: CGPoint(x: 10,y: CGFloat(IN_WINDOW_HEIGHT-50-20)),size: CGSize(width: 300,height: 50))
         self.titleLabel.backgroundColor = UIColor.clearColor()
         self.titleLabel.textColor = UIColor.whiteColor()
         self.titleLabel.textAlignment = NSTextAlignment.Left
-        self.titleLabel.font = UIFont.boldSystemFontOfSize(16)
+        self.titleLabel.font = UIFont.boldSystemFontOfSize(FONT_SIZE)
         self.titleLabel.numberOfLines = 0
         self.titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
         self.webView.scrollView.addSubview(self.titleLabel)
@@ -344,11 +344,14 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         if  var body = news.body {
             if let css = news.css {
+                var temp = ""
                 for c in css {
-                    body = "<link href='\(c)' rel='stylesheet' type='text/css' />\(body)"
+                    temp = "<link href='\(c)' rel='stylesheet' type='text/css' />\(temp)"
                 }
+                //由于它的CSS中已经写死了 顶部图片的高度就是200,因此这个地方需要增加一个CSS 来根据设备的大小来改变图片的高度
+                body = "\(temp) <style> .headline .img-place-holder { height: \(IN_WINDOW_HEIGHT)px;}</style> \(body)"
             }
-            
+
             webView.loadHTMLString(body, baseURL: nil)
         }
         
@@ -357,7 +360,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         if  let _image = news.image {
             self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
-            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 200),size: CGSize(width: width,height: CGFloat(40)))
+            self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: CGFloat(IN_WINDOW_HEIGHT)),size: CGSize(width: width,height: CGFloat(40)))
             self.topImage.hidden = false
             self.topMaskImage.hidden = false
             self.maskImage.hidden = false
@@ -365,7 +368,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             self.titleLabel.hidden = false
         }else{
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
-            recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(40)))
+            self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(40)))
             self.topImage.hidden = true
             self.topMaskImage.hidden = true
             self.maskImage.hidden = true
