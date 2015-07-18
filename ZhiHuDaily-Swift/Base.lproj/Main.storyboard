@@ -461,18 +461,6 @@
                                             <constraint firstAttribute="height" constant="43" id="lx4-Ri-T0n"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFy-ln-Eay" userLabel="点赞按钮Button">
-                                        <rect key="frame" x="268" y="-1" width="64" height="43"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="i1e-Xt-0zQ"/>
-                                            <constraint firstAttribute="width" constant="64" id="iOM-4X-oLL"/>
-                                            <constraint firstAttribute="height" constant="43" id="ueU-wP-Eun"/>
-                                        </constraints>
-                                        <state key="normal" image="News_Navigation_Vote">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5S3-hf-QYK" userLabel="点赞数Label">
                                         <rect key="frame" x="296" y="6" width="24" height="12"/>
                                         <animations/>
@@ -541,11 +529,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-t5-6qc" userLabel="点赞按钮View" customClass="ZanButton" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                                        <rect key="frame" x="268" y="-1" width="64" height="43"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="QN6-XF-8lS"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="SKA-9s-2Qz"/>
+                                            <constraint firstAttribute="width" constant="64" id="Z0X-Cj-O7W"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="dFy-ln-Eay" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="00H-DA-3B6"/>
                                     <constraint firstItem="4nT-Fy-EQt" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="4BT-x8-CP4"/>
                                     <constraint firstItem="r9D-g2-2rT" firstAttribute="leading" secondItem="wf7-TR-zNc" secondAttribute="trailing" constant="64" id="4ea-LI-Ib3"/>
                                     <constraint firstItem="r9D-g2-2rT" firstAttribute="leading" secondItem="qLZ-A7-Q1V" secondAttribute="leading" constant="72" id="6IM-7f-XQU"/>
@@ -558,17 +555,20 @@
                                     <constraint firstItem="bqH-9z-ip2" firstAttribute="leading" secondItem="Ke7-n3-AZ4" secondAttribute="trailing" id="MO7-Ht-cLe"/>
                                     <constraint firstItem="wf7-TR-zNc" firstAttribute="width" secondItem="Ke7-n3-AZ4" secondAttribute="width" id="MOa-My-0MP"/>
                                     <constraint firstItem="iX0-N7-evC" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="NwO-nn-4pR"/>
+                                    <constraint firstItem="yPX-t5-6qc" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="Q5p-WE-7WY"/>
                                     <constraint firstItem="4nT-Fy-EQt" firstAttribute="leading" secondItem="r9D-g2-2rT" secondAttribute="trailing" id="Sya-1o-zQL"/>
                                     <constraint firstItem="wf7-TR-zNc" firstAttribute="leading" secondItem="r9D-g2-2rT" secondAttribute="trailing" constant="64" id="UGO-MM-gXM"/>
                                     <constraint firstAttribute="bottom" secondItem="Ke7-n3-AZ4" secondAttribute="bottom" constant="-1" id="Uio-hM-Vo6"/>
                                     <constraint firstAttribute="bottom" secondItem="wf7-TR-zNc" secondAttribute="bottom" constant="-1" id="Wzq-US-o7t"/>
-                                    <constraint firstItem="5S3-hf-QYK" firstAttribute="leading" secondItem="dFy-ln-Eay" secondAttribute="trailing" constant="-36" id="YGN-t2-HVt"/>
                                     <constraint firstAttribute="bottom" secondItem="r9D-g2-2rT" secondAttribute="bottom" id="YVq-p0-1Os"/>
                                     <constraint firstItem="Ke7-n3-AZ4" firstAttribute="leading" secondItem="wf7-TR-zNc" secondAttribute="trailing" constant="64" id="ZDB-l7-hix"/>
+                                    <constraint firstItem="5S3-hf-QYK" firstAttribute="trailing" secondItem="yPX-t5-6qc" secondAttribute="trailing" id="Zsg-uJ-zjZ"/>
+                                    <constraint firstItem="5S3-hf-QYK" firstAttribute="leading" secondItem="yPX-t5-6qc" secondAttribute="leading" id="bH9-hj-cTb"/>
                                     <constraint firstItem="F02-eb-LfW" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="con-64-e80"/>
                                     <constraint firstItem="D4n-bE-F0q" firstAttribute="leading" secondItem="Ke7-n3-AZ4" secondAttribute="trailing" constant="64" id="eAs-Bn-ymc"/>
                                     <constraint firstItem="D4n-bE-F0q" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="eIq-fQ-Aea"/>
                                     <constraint firstItem="5S3-hf-QYK" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="6" id="eSq-7X-xGg"/>
+                                    <constraint firstItem="yPX-t5-6qc" firstAttribute="leading" secondItem="wf7-TR-zNc" secondAttribute="trailing" id="hoB-kq-BoU"/>
                                     <constraint firstAttribute="trailing" secondItem="7Gi-VI-uty" secondAttribute="trailing" constant="19" id="iXz-zk-iK3"/>
                                     <constraint firstItem="Vgp-hE-Cng" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" id="joi-DV-d9b"/>
                                     <constraint firstAttribute="height" constant="42" id="kPS-hQ-6hU"/>
@@ -577,8 +577,8 @@
                                     <constraint firstAttribute="bottom" secondItem="wf7-TR-zNc" secondAttribute="bottom" constant="-1" id="qW4-y2-mFG"/>
                                     <constraint firstItem="wf7-TR-zNc" firstAttribute="width" secondItem="r9D-g2-2rT" secondAttribute="width" id="rUN-JN-pcf"/>
                                     <constraint firstAttribute="trailing" secondItem="Vgp-hE-Cng" secondAttribute="trailing" id="riZ-uN-Y94"/>
+                                    <constraint firstItem="5S3-hf-QYK" firstAttribute="leading" secondItem="yPX-t5-6qc" secondAttribute="trailing" constant="-36" id="spC-Dj-afK"/>
                                     <constraint firstAttribute="bottom" secondItem="r9D-g2-2rT" secondAttribute="bottom" constant="-1" id="tWI-a6-8CA"/>
-                                    <constraint firstItem="dFy-ln-Eay" firstAttribute="leading" secondItem="wf7-TR-zNc" secondAttribute="trailing" id="u1i-3s-HlW"/>
                                     <constraint firstAttribute="trailing" secondItem="iX0-N7-evC" secondAttribute="trailing" constant="8" id="vHa-Xv-DyO"/>
                                     <constraint firstItem="Ke7-n3-AZ4" firstAttribute="top" secondItem="qLZ-A7-Q1V" secondAttribute="top" constant="-1" id="vtm-00-Rfk"/>
                                     <constraint firstAttribute="trailing" secondItem="D4n-bE-F0q" secondAttribute="trailing" constant="72" id="xAs-pL-pXz"/>
@@ -592,6 +592,8 @@
                                         <exclude reference="tWI-a6-8CA"/>
                                         <exclude reference="Wzq-US-o7t"/>
                                         <exclude reference="qW4-y2-mFG"/>
+                                        <exclude reference="Zsg-uJ-zjZ"/>
+                                        <exclude reference="bH9-hj-cTb"/>
                                         <exclude reference="Uio-hM-Vo6"/>
                                         <exclude reference="BD0-Xs-v6p"/>
                                     </mask>
@@ -640,7 +642,7 @@
                         <outlet property="nextButton" destination="4nT-Fy-EQt" id="AE2-QR-KdO"/>
                         <outlet property="shareButton" destination="bqH-9z-ip2" id="GE6-ak-Ha9"/>
                         <outlet property="statusBarView" destination="1w1-yo-Jjs" id="Etd-Ta-CB3"/>
-                        <outlet property="voteButton" destination="dFy-ln-Eay" id="OFI-sj-5dW"/>
+                        <outlet property="voteButton" destination="yPX-t5-6qc" id="ovd-Ah-RCf"/>
                         <outlet property="voteNumberLabel" destination="5S3-hf-QYK" id="GrL-LC-nDX"/>
                         <outlet property="webView" destination="M2U-QX-wo2" id="uxq-Km-w5U"/>
                         <segue destination="g5x-Oc-8mq" kind="show" identifier="showRecommendersSegue" id="JQN-xI-iAU"/>
@@ -1042,7 +1044,6 @@
         <image name="News_Navigation_Comment" width="64" height="43"/>
         <image name="News_Navigation_Next" width="64" height="43"/>
         <image name="News_Navigation_Share" width="64" height="43"/>
-        <image name="News_Navigation_Vote" width="64" height="43"/>
         <image name="ToolBar_Shadow" width="320" height="2"/>
     </resources>
     <inferredMetricsTieBreakers>

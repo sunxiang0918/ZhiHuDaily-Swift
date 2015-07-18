@@ -45,7 +45,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var voteButton: UIButton!
+    @IBOutlet weak var voteButton: ZanButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var commonButton: UIButton!
     @IBOutlet weak var voteNumberLabel: UILabel!
@@ -216,6 +216,16 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         _refreshControl.enableInsetTop = SCROLL_HEIGHT
         _refreshControl.enableInsetBottom = SCROLL_HEIGHT
         
+        // 处理点赞的按钮
+        voteButton.unzanAction = {(number)->Void in
+            self.voteNumberLabel.text = "\(number)"
+            self.voteNumberLabel.textColor = UIColor.lightGrayColor()
+        }
+        voteButton.zanAction = {(number)->Void in
+            self.voteNumberLabel.text = "\(number)"
+            self.voteNumberLabel.textColor = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
+        }
+        
         //实例化 popupController
         initPopupController()
     }
@@ -328,6 +338,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         newsDetailControl.loadNewsExtraInfo(news.id, complate: { (newsExtra) -> Void in
             self.newsExtral = newsExtra
             self.voteNumberLabel.text = "\(self.newsExtral.popularity)"
+            self.voteButton.initNumber = self.newsExtral.popularity
             self.commonNumberLabel.text = "\(self.newsExtral.comments)"
         })
     }

@@ -27,6 +27,8 @@
 		A44789B61B1BFB790051F52C /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */; };
 		A44789B71B1BFB790051F52C /* NewsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */; };
 		A44DFC0C1B18601600854A9A /* MainTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */; };
+		A4534E821B5A4E8400EAE46A /* NumberScrollAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4534E801B5A4E8400EAE46A /* NumberScrollAnimatedView.swift */; };
+		A4534E831B5A4E8400EAE46A /* ZanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4534E811B5A4E8400EAE46A /* ZanButton.swift */; };
 		A453EAE61B3074DE005B0E25 /* SharePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453EAE51B3074DE005B0E25 /* SharePopupView.swift */; };
 		A45D9F941B272BD300E7CDB0 /* RecommendersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */; };
 		A45D9F971B272C1000E7CDB0 /* RecommendersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */; };
@@ -132,6 +134,8 @@
 		A44789B41B1BFB790051F52C /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		A44789B51B1BFB790051F52C /* NewsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTableViewCell.xib; sourceTree = "<group>"; };
 		A44DFC0B1B18601600854A9A /* MainTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTitleViewController.swift; sourceTree = "<group>"; };
+		A4534E801B5A4E8400EAE46A /* NumberScrollAnimatedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberScrollAnimatedView.swift; sourceTree = "<group>"; };
+		A4534E811B5A4E8400EAE46A /* ZanButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZanButton.swift; sourceTree = "<group>"; };
 		A453EAE51B3074DE005B0E25 /* SharePopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePopupView.swift; sourceTree = "<group>"; };
 		A45D9F931B272BD300E7CDB0 /* RecommendersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendersView.xib; sourceTree = "<group>"; };
 		A45D9F961B272C1000E7CDB0 /* RecommendersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendersView.swift; sourceTree = "<group>"; };
@@ -359,6 +363,8 @@
 		A4939F111B14947500E041C4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A4534E801B5A4E8400EAE46A /* NumberScrollAnimatedView.swift */,
+				A4534E811B5A4E8400EAE46A /* ZanButton.swift */,
 				A485458D1B18099D001CC98F /* RefreshControl */,
 				A4939F121B1494A100E041C4 /* HttpControl.swift */,
 				A4C5507D1B18C3E2000E9526 /* Constant.swift */,
@@ -716,6 +722,8 @@
 				A432D3201B147B9F006D2B0E /* AppDelegate.swift in Sources */,
 				A41E6A331B29D5DA000BFC4B /* CommentVO.swift in Sources */,
 				A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */,
+				A4534E831B5A4E8400EAE46A /* ZanButton.swift in Sources */,
+				A4534E821B5A4E8400EAE46A /* NumberScrollAnimatedView.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */,
