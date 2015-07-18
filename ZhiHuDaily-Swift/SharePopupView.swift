@@ -24,7 +24,9 @@ class SharePopupView: UIView,UIScrollViewDelegate {
         self.scrollView.delegate = self
         
         /// 设置弹出内容的宽度
-        contentViewWidth.constant = rect.width * 2 - 30
+        if  rect.width < 600 {
+            contentViewWidth.constant = rect.width * 2 - 30
+        }
         
     }
     
