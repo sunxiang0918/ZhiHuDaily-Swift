@@ -23,11 +23,19 @@ class SharePopupView: UIView,UIScrollViewDelegate {
         /// 设置scrollView 委托为自己
         self.scrollView.delegate = self
         
+        var pageNumber = 0
         /// 设置弹出内容的宽度
         if  rect.width < 600 {
-            contentViewWidth.constant = rect.width * 2 - 30
+            pageNumber = 2
+        }else {
+            pageNumber = 1
         }
         
+        contentViewWidth.constant = rect.width * CGFloat(pageNumber) - 30
+        
+        self.pageControl.numberOfPages = pageNumber
+        
+        self.pageControl.hidesForSinglePage = true
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -45,7 +53,7 @@ class SharePopupView: UIView,UIScrollViewDelegate {
         // 计算页数
         let page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         
-        self.pageControl.currentPage = Int(page);
+        self.pageControl.currentPage = Int(page)
         self.pageControl.updateCurrentPageDisplay()
     }
     
@@ -56,8 +64,8 @@ class SharePopupView: UIView,UIScrollViewDelegate {
 
         var width:CGFloat,height:CGFloat
         
-        width = scrollView.frame.size.width;
-        height = scrollView.frame.size.height;
+        width = scrollView.frame.size.width
+        height = scrollView.frame.size.height
         
         let frame = CGRectMake(width * CGFloat(page), 0, width, height)
         

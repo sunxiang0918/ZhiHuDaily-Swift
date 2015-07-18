@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CNPPopupController/CNPPopupController.m"
-            timestampString = "458906887.233166"
+            filePath = "ZhiHuDaily-Swift/SharePopupView.swift"
+            timestampString = "458911147.755563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "-presentPopupControllerAnimated:"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "changeCurrentPage(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
