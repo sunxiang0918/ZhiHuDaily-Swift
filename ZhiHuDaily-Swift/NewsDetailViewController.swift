@@ -246,6 +246,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         /// 设置点击背景取消弹出视图
         self.popupController!.theme.shouldDismissOnBackgroundTouch = true
         self.popupController!.theme.popupStyle = CNPPopupStyle.ActionSheet
+        //设置最大宽度,否则可能会在IPAD上出现只显示一半的情况,因为默认就只有300宽
+        self.popupController!.theme.maxPopupWidth = self.view.frame.width
         /// 设置视图的边框
         self.popupController!.theme.popupContentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         self.popupController!.delegate = self;

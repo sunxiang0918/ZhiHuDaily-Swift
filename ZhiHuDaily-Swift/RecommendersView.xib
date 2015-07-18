@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,12 +12,14 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐者" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc8-Ux-ASz">
                     <rect key="frame" x="16" y="11" width="42" height="17"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="466-h2-wWh" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                     <rect key="frame" x="69" y="5" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Ejx-XH-DYq"/>
                         <constraint firstAttribute="width" constant="30" id="oSD-ZV-Otw"/>
@@ -25,6 +27,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r4Z-EO-EeS" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                     <rect key="frame" x="112" y="5" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="RVh-g7-HtG"/>
                         <constraint firstAttribute="width" constant="30" id="S7X-40-HqG"/>
@@ -32,6 +35,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-cP-8dy" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                     <rect key="frame" x="155" y="5" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="cDQ-wF-EYe"/>
                         <constraint firstAttribute="height" constant="30" id="wJV-nu-l9a"/>
@@ -39,6 +43,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6SR-2I-xDj" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                     <rect key="frame" x="198" y="5" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="IL4-AX-fwX"/>
                         <constraint firstAttribute="width" constant="30" id="WoU-aC-zCZ"/>
@@ -46,12 +51,14 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qtc-iB-1cD" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                     <rect key="frame" x="241" y="5" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="5bw-42-gwV"/>
                         <constraint firstAttribute="height" constant="30" id="ikL-ld-tMP"/>
                     </constraints>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.90486900252525249" green="0.90486900252525249" blue="0.90486900252525249" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="dJK-cP-8dy" firstAttribute="leading" secondItem="r4Z-EO-EeS" secondAttribute="trailing" constant="13" id="75B-bs-OX6"/>

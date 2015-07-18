@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,6 +12,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享这篇内容" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWp-e3-mAD">
                     <rect key="frame" x="0.0" y="8" width="600" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="leU-nM-WmB"/>
                     </constraints>
@@ -27,12 +28,14 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abo-0x-DW0">
                                     <rect key="frame" x="8" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_WeChat">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZr-vk-0Fm">
                                     <rect key="frame" x="17" y="58" width="42" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="H3A-1w-uW4"/>
                                         <constraint firstAttribute="width" constant="42" id="tJD-KQ-jrN"/>
@@ -43,16 +46,19 @@
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69e-ua-WQW">
                                     <rect key="frame" x="68" y="0.0" width="41.5" height="158"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJy-UQ-6qG">
                                     <rect key="frame" x="109" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_WeChat_Moments">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyc-yr-uli">
                                     <rect key="frame" x="114" y="58" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="VN7-kh-Tx2"/>
                                         <constraint firstAttribute="height" constant="21" id="ed5-CA-xt3"/>
@@ -63,16 +69,19 @@
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fs4-bc-ZCr">
                                     <rect key="frame" x="169" y="0.0" width="41.5" height="158"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xl-3x-ypD">
                                     <rect key="frame" x="211" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_QQ">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Uw-Tt-s8i">
                                     <rect key="frame" x="220" y="58" width="42" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" id="fOC-1I-o2G"/>
                                         <constraint firstAttribute="height" constant="21" id="igh-gc-04a"/>
@@ -83,16 +92,19 @@
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fQ-bJ-Bqp">
                                     <rect key="frame" x="271" y="0.0" width="42" height="158"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZX-w6-WsR">
                                     <rect key="frame" x="313" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Sina">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新浪微博" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwb-9r-r36">
                                     <rect key="frame" x="322" y="58" width="42" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="bfy-iK-1Fv"/>
                                         <constraint firstAttribute="width" constant="42" id="gXi-fi-tG5"/>
@@ -103,16 +115,19 @@
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHH-7k-oe3">
                                     <rect key="frame" x="373" y="0.0" width="41.5" height="158"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFh-06-anj">
                                     <rect key="frame" x="414" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Copylink">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="复制链接" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6E-Wz-Kva">
                                     <rect key="frame" x="423" y="58" width="42" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="0BK-49-3uy"/>
                                         <constraint firstAttribute="width" constant="42" id="va8-p9-LxS"/>
@@ -123,16 +138,19 @@
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvo-BG-4TE">
                                     <rect key="frame" x="474" y="0.0" width="41.5" height="158"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvG-5X-V0h">
                                     <rect key="frame" x="516" y="0.0" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Email">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电子邮件" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdh-QV-P8d">
                                     <rect key="frame" x="525" y="58" width="42" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" id="1Ks-WF-1sB"/>
                                         <constraint firstAttribute="height" constant="21" id="88t-hx-8HV"/>
@@ -143,12 +161,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Cw-3HF">
                                     <rect key="frame" x="8" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_YoudaoNote">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有道云笔记" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKJ-uG-4Me">
                                     <rect key="frame" x="13" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="klz-aJ-jcT"/>
                                         <constraint firstAttribute="height" constant="21" id="qBR-7P-gD4"/>
@@ -159,12 +179,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdQ-95-CuB">
                                     <rect key="frame" x="109" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Evernote">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="印象笔记" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-gK-4Kp">
                                     <rect key="frame" x="114" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="6ID-W0-fkn"/>
                                         <constraint firstAttribute="width" constant="50" id="aSb-Gr-gfh"/>
@@ -175,12 +197,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpN-JT-rM0">
                                     <rect key="frame" x="211" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Tencent">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="腾讯微博" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1f-Ty-3vd">
                                     <rect key="frame" x="216" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="ACP-4y-Eer"/>
                                         <constraint firstAttribute="width" constant="50" id="eBe-PW-bIC"/>
@@ -191,12 +215,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZm-pd-tGL">
                                     <rect key="frame" x="313" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Message">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5l-i8-y0b">
                                     <rect key="frame" x="318" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="Td7-tk-6Em"/>
                                         <constraint firstAttribute="height" constant="21" id="nct-h3-YM9"/>
@@ -207,12 +233,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rB2-Im-qKX">
                                     <rect key="frame" x="414" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Instapaper">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instapaper" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-tK-vvX">
                                     <rect key="frame" x="419" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="93z-Gh-pB4"/>
                                         <constraint firstAttribute="height" constant="21" id="feO-Y3-heY"/>
@@ -223,12 +251,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRp-qk-jii">
                                     <rect key="frame" x="516" y="78" width="60" height="60"/>
+                                    <animations/>
                                     <state key="normal" image="Share_Renren">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8o-bZ-NIY">
                                     <rect key="frame" x="521" y="135" width="50" height="21"/>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="Kh2-8G-H6g"/>
                                         <constraint firstAttribute="height" constant="21" id="N54-Ue-I9Z"/>
@@ -238,6 +268,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="LdQ-95-CuB" secondAttribute="bottom" constant="20" id="0TR-Ff-feK"/>
@@ -314,6 +345,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="uHk-IY-5Nc" secondAttribute="trailing" id="3Ks-6N-41h"/>
                         <constraint firstItem="uHk-IY-5Nc" firstAttribute="top" secondItem="P18-bx-j5J" secondAttribute="top" id="54h-hl-mts"/>
@@ -331,6 +363,7 @@
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-xe-oiv">
                     <rect key="frame" x="32" y="224" width="536" height="30"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="m7B-Rv-seI"/>
@@ -342,6 +375,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqe-Od-0JG">
                     <rect key="frame" x="32" y="262" width="536" height="30"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="M01-US-R9W"/>
@@ -356,6 +390,7 @@
                 </button>
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="sAE-gi-uvu">
                     <rect key="frame" x="289" y="191" width="23" height="37"/>
+                    <animations/>
                     <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -363,6 +398,7 @@
                     </connections>
                 </pageControl>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="P18-bx-j5J" firstAttribute="leading" secondItem="c5b-sz-qBC" secondAttribute="leading" constant="8" id="6Fq-eo-jCh"/>
