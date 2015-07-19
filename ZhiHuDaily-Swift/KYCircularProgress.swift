@@ -56,7 +56,7 @@ class KYCircularProgress: UIView {
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -119,7 +119,7 @@ class KYCircularShapeView: UIView {
         return self.layer as! CAShapeLayer
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

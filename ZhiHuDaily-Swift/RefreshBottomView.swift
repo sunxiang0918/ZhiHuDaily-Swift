@@ -28,7 +28,7 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         loadingLabel = UILabel(frame: CGRectZero)
         promptLabel = UILabel(frame: CGRectZero)

@@ -98,8 +98,8 @@ class RefreshControl:NSObject {
     - parameter change:  变化对象
     - parameter context: 上下文
     */
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
+
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if  "contentSize" == keyPath{
             //如果是scrollView的 contentSize 改变了大小
             

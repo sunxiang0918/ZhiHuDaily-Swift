@@ -18,7 +18,7 @@ class FilletImageView: UIImageView {
     }
     */
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         //设置圆角
