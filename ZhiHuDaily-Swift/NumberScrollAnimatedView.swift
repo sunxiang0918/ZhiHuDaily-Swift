@@ -13,10 +13,10 @@ class NumberScrollAnimatedView: UIView {
     var delegate:NumberScrollAnimatedDelegate?
     private var finishAction:(()->Void)?
     
-    // 这个用于记录上一次的值的
+    /// 这个用于记录上一次的值的
     private var lastValue:NSNumber?
     
-    // 记录这个View中的Number的值
+    /// 记录这个View中的Number的值
     var value:NSNumber! = 0 {
         didSet {
             //使用观察器来记录上一次的值,以及更新View中的Label
@@ -25,10 +25,10 @@ class NumberScrollAnimatedView: UIView {
         }
     }
     
-    // 用于记录字体的颜色
+    /// 用于记录字体的颜色
     var textColor:UIColor!
     
-    // 用于记录字体
+    /// 用于记录字体
     var font:UIFont! {
         didSet {
             //使用观察器来更新字体
@@ -49,25 +49,25 @@ class NumberScrollAnimatedView: UIView {
         }
     }
     
-    //用于记录整个动画的时间的
+    /// 用于记录整个动画的时间的
     var duration:Float = 1
     
-    //用于记录每一个Label的时间差,这个值的绝对值越大.在动画过程中,多位数中每一位数字的动画时间差别就越大,0表示各位数 同时变动,同时停止
+    /// 用于记录每一个Label的时间差,这个值的绝对值越大.在动画过程中,多位数中每一位数字的动画时间差别就越大,0表示各位数 同时变动,同时停止
     var durationOffset:Float = 0
     
-    //表示每一位数字要变动几次 才停下来. 0表示变动1次   -1表示不进行动画,直接变动
+    /// 表示每一位数字要变动几次 才停下来. 0表示变动1次   -1表示不进行动画,直接变动
     var desity:Int = 0
     
-    //表示最小的位数, 位数不够就直接补零
+    /// 表示最小的位数, 位数不够就直接补零
     var minLength:Int = 0
     
-    //表示变动的方向, 是从上而下 还是从下而上
+    /// 表示变动的方向, 是从上而下 还是从下而上
     var isAscending:Bool = false
     
-    //表示单个字符的宽度
+    /// 表示单个字符的宽度
     private var characterWidth:CGFloat!
     
-    //用于记录字符, Layer Label的 数组
+    /// 用于记录字符, Layer Label的 数组
     private var oldNumbersText:[String] = []
     private var numbersText:[String] = []
     private var scrollLayers:[CAScrollLayer] = []
@@ -91,7 +91,7 @@ class NumberScrollAnimatedView: UIView {
         
     }
     
-    //表示预准备动画
+    /// 表示预准备动画
     private func prepareAnimations(){
         
         //把一切都先还原
@@ -116,7 +116,12 @@ class NumberScrollAnimatedView: UIView {
         self.createScrollLayers()
     }
     
-    // 这个是具体的创建NumbersText的罗技
+    /**
+    这个是具体的创建NumbersText的逻辑
+    
+    - parameter value:       新的值
+    - parameter numbersText: 返回的每一位数字的数组
+    */
     private func createNumbersText(value:NSNumber,inout numbersText:[String]){
        
         //找到数字的字符串
@@ -149,7 +154,7 @@ class NumberScrollAnimatedView: UIView {
         
     }
     
-    //创建ScrollLayers
+    /// 创建ScrollLayers
     private func createScrollLayers(){
         //每一个Layer的宽度就是字符的宽度
         let width = self.characterWidth;
@@ -191,7 +196,13 @@ class NumberScrollAnimatedView: UIView {
         
     }
     
-    //根据数字和Layer,创建每一个Layer上的Label
+    /**
+    根据数字和Layer,创建每一个Layer上的Label
+    
+    - parameter scrollLayer: Layer
+    - parameter numberText:  数字
+    - parameter needChange:  是否需要跳动动画
+    */
     private func createContentForLayer(scrollLayer:CAScrollLayer,withNumberText numberText:String,andNeedChange needChange:Bool = true) {
         //先把这一位的数字转换为Int
         let number = Int(numberText)
@@ -235,7 +246,13 @@ class NumberScrollAnimatedView: UIView {
         }
     }
     
-    //创建Label的方法
+    /**
+    创建Label的方法
+    
+    - parameter text: Label的数字
+    
+    - returns: 生成的UILabel
+    */
     private func createLabel(text:String) -> UILabel {
         let view = UILabel()
         
@@ -248,7 +265,7 @@ class NumberScrollAnimatedView: UIView {
         return view;
     }
     
-    //这个是用来创建动画的
+    /// 这个是用来创建动画的
     private func createAnimations(){
 
         //首先计算动画的时间
@@ -294,14 +311,18 @@ class NumberScrollAnimatedView: UIView {
         }
     }
     
-    //开始动画
+    /**
+    开始动画
+    
+    - parameter finishAction: 完成动画后的执行操作的闭包
+    */
     func startAnimation(finishAction:(()->Void)? = nil){
         self.finishAction = finishAction
         self.prepareAnimations()
         self.createAnimations()
     }
     
-    //结束动画
+    /// 结束动画
     func stopAnimation(){
         
         for layer in scrollLayers {
@@ -310,7 +331,15 @@ class NumberScrollAnimatedView: UIView {
         
     }
     
-    var finishedCount = 0
+    /// 用于记录动画是否全部结束
+    private var finishedCount = 0
+    
+    /**
+    动画完成后的回调
+    
+    - parameter sender: 动画发起方
+    - parameter flag:   结束标识
+    */
     override func animationDidStop(sender:CAAnimation,finished flag:Bool) {
         finishedCount++
         
@@ -330,9 +359,12 @@ class NumberScrollAnimatedView: UIView {
 
 }
 
+/**
+*  动画完成的回调 委托协议
+*/
 protocol NumberScrollAnimatedDelegate {
     
-    //动画完成的回调
+    /// 动画完成的回调
     func animationDidFinish()
     
 }

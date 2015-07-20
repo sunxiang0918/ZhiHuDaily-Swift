@@ -16,10 +16,13 @@ class ZanButton: UIView{
     
     private var numberView:NumberScrollAnimatedView!
     
-    var zanAction:((Int)->Void)?       //点赞的时候的动作
-    var unzanAction:((Int)->Void)?     //点取消赞的时候的动作
+    /// 点赞的时候的动作闭包
+    var zanAction:((Int)->Void)?
     
-    //点赞之前的图标
+    /// 点取消赞的时候的动作
+    var unzanAction:((Int)->Void)?
+    
+    /// 点赞之前的图标
     var zanImage:UIImage! {
         didSet{
             if !isZan {
@@ -27,7 +30,8 @@ class ZanButton: UIView{
             }
         }
     }
-    //点赞后的图标
+    
+    ///  点赞后的图标
     var zanedImage:UIImage! {
         didSet{
             if  isZan {
@@ -36,7 +40,7 @@ class ZanButton: UIView{
         }
     }
     
-    //是否已点赞
+    /// 是否已点赞
     var isZan = false
     
     var initNumber:Int {
@@ -51,20 +55,20 @@ class ZanButton: UIView{
         }
     }
     
-    //赞的数量
+    /// 赞的数量
     private var zanNumber = 0
     
-    //PopView的高度
+    /// PopView的高度
     var popHeight:Float = 20.0
-    //PopView的背景色
+    /// PopView的背景色
     var popBackgroundColor = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
-    //PopView的圆角
+    /// PopView的圆角
     var popCornerRadius:Float = 2.0
-    //PopView的字体
+    /// PopView的字体
     var popFont = UIFont.systemFontOfSize(10)
-    //PopView的字体颜色
+    /// PopView的字体颜色
     var popFontColor = UIColor.whiteColor()
-    //PopView中字体跳动的动画持续时间
+    /// PopView中字体跳动的动画持续时间
     var popNumberDuration:Float = 0.4
     var popShowDuration:Float = 0.3
     
@@ -86,6 +90,11 @@ class ZanButton: UIView{
         initBaseLayout()
     }
     
+    /**
+    初始化控件
+    
+    - returns:
+    */
     private func initBaseLayout(){
         
         //设置图片
@@ -133,6 +142,9 @@ class ZanButton: UIView{
         self.addSubview(zanNotifyView)
     }
     
+    /**
+    开始执行点赞动画
+    */
     func zanAnimationPlay(){
         
         //点击取反
