@@ -34,7 +34,7 @@ extension NSURLSession {
             error = taskError
             
             dispatch_semaphore_signal(semaphore);
-        }?.resume()
+        }.resume()
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         
@@ -70,7 +70,7 @@ extension NSURLSession {
             error = taskError
             
             dispatch_semaphore_signal(semaphore);
-        }?.resume()
+        }.resume()
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         
