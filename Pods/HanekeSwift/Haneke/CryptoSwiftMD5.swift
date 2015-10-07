@@ -26,7 +26,6 @@ import Foundation
 /** array of bytes, little-endian representation */
 func arrayOfBytes<T>(value:T, length:Int? = nil) -> [UInt8] {
     let totalBytes = length ?? (sizeofValue(value) * 8)
-    _ = value
     
     let valuePointer = UnsafeMutablePointer<T>.alloc(1)
     valuePointer.memory = value
@@ -69,7 +68,7 @@ class HashBase {
     }
     
     /** Common part for hash calculation. Prepare header data. */
-    func prepare(len:Int = 64) -> NSMutableData {
+    func prepare(len: Int = 64) -> NSMutableData {
         let tmpMessage: NSMutableData = NSMutableData(data: self.message)
         
         // Step 1. Append Padding Bits
@@ -89,7 +88,7 @@ class HashBase {
     }
 }
 
-func rotateLeft(v:UInt32, n:UInt32) -> UInt32 {
+func rotateLeft(v: UInt32, n: UInt32) -> UInt32 {
     return ((v << n) & 0xFFFFFFFF) | (v >> (32 - n))
 }
 
@@ -130,14 +129,13 @@ class MD5 : HashBase {
         // Step 2. Append Length a 64-bit representation of lengthInBits
         let lengthInBits = (message.length * 8)
         let lengthBytes = lengthInBits.bytes(64 / 8)
-        tmpMessage.appendBytes(Array(lengthBytes.reverse()))
+        tmpMessage.appendBytes(lengthBytes.reverse())
         
         // Process the message in successive 512-bit chunks:
         let chunkSizeBytes = 512 / 8 // 64
         var leftMessageBytes = tmpMessage.length
         for (var i = 0; i < tmpMessage.length; i = i + chunkSizeBytes, leftMessageBytes -= chunkSizeBytes) {
             let chunk = tmpMessage.subdataWithRange(NSRange(location: i, length: min(chunkSizeBytes,leftMessageBytes)))
-            _ = tmpMessage.bytes
             
             // break chunk into sixteen 32-bit words M[j], 0 ≤ j ≤ 15
             var M:[UInt32] = [UInt32](count: 16, repeatedValue: 0)
@@ -191,7 +189,7 @@ class MD5 : HashBase {
         }
         
         let buf: NSMutableData = NSMutableData()
-        hh.map({ (item) -> () in
+        hh.forEach({ (item) -> () in
             var i:UInt32 = item.littleEndian
             buf.appendBytes(&i, length: sizeofValue(i))
         })

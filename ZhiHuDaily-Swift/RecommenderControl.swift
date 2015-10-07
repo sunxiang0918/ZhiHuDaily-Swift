@@ -20,13 +20,13 @@ class RecommenderControl {
     */
     func getNewsRecommenders(newsId:Int,complate:(recommenders:RecommendersVO)->Void,block:((error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,RECOMMENDERS_URL+"\(newsId)/recommenders", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers){ (_, _, data, error) -> Void in
-            if let result: AnyObject = data {
-                //转换成JSON
-                let json = JSON(result)
-                
-                complate(recommenders: self.convertJSON2VO(json))
-            }
+        Alamofire.Manager.sharedInstance.request(Method.GET, RECOMMENDERS_URL+"\(newsId)/recommenders", parameters: nil, encoding: ParameterEncoding.URL, headers: nil).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+                if let result: AnyObject = data.value {
+                    //转换成JSON
+                    let json = JSON(result)
+                    
+                    complate(recommenders: self.convertJSON2VO(json))
+                }
         }
     }
     

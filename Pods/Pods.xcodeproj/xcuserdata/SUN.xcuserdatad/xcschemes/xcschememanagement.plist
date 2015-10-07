@@ -4,17 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Alamofire.xcscheme</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-HanekeSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SwiftyJSON.xcscheme</key>
+		<key>HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,25 +19,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>02F2013057BB735A6AC5D898</key>
+		<key>15F0AB3141D3AF76EFB530738CFFA459</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF404409F642573DBD2D86F0</key>
+		<key>77D7D8FA7B8C155BD686AA9907626399</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D4BDED2AB6B79CDB2610E248</key>
+		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6967C2E7277751FC7AEF0D7</key>
+		<key>CEFB69066BEBBE6F2B1C455E3E2E7C11</key>
 		<dict>
 			<key>primary</key>
 			<true/>

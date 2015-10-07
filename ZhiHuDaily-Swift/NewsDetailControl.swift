@@ -35,8 +35,8 @@ class NewsDetailControl {
         }else{
             //没有找到新闻的详细,从网络上读取
             //调用HTTP请求 获取新闻详细
-            Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseString(encoding: NSUTF8StringEncoding){ (_, _, data, error) -> Void in
-                if  let result = data {
+            Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseString(encoding: NSUTF8StringEncoding){ (_, _, data) -> Void in
+                if  let result = data.value {
                     if let dataFromString = result.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
                         let json = JSON(data: dataFromString)
                         
@@ -48,9 +48,9 @@ class NewsDetailControl {
                         cache.set(value: dataFromString, key: "\(id)")
                     }
                 }else {
-                    if let b = block {
-                        b(error: error!)
-                    }
+//                    if let b = block {
+//                       b(error: error!)
+//                    }
                 }
             
             }
@@ -67,8 +67,8 @@ class NewsDetailControl {
     func loadNewsExtraInfo(id:Int,complate:(newsExtra:NewsExtraVO?)->Void,block:((error:NSError)->Void)? = nil){
         
         //由于新闻额外信息 是随时可能变的,所以不能做缓存
-        Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_EXTRA_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if let result: AnyObject = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_EXTRA_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+            if let result: AnyObject = data.value {
                 //转换成JSON
                 let json = JSON(result)
                 

@@ -13,11 +13,11 @@ public extension Cache {
     //计算缓存大小  block (count,size)
     public func calculateSizeWithCompletionBlock(block:(Int,Int)->Void) {
         
-//        dispatch_async(cacheQueue, {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             var count = 0
             var size = 0
         
-            for (_, (_, _, diskCache)) in self.formats {
+            for (_, (_, memoryCache, diskCache)) in self.formats {
                 
                 //重新计算下大小
                 diskCache.calculateSize()

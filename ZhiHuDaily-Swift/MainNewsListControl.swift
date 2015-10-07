@@ -54,8 +54,8 @@ class MainNewsListControl {
         //获取下一天的日期,因为知乎的API决定的,你要查询今天的,就必须传入明天的日期
         let tomorrow=getNextDateInt(date)
         
-        Alamofire.Manager.sharedInstance.request(Method.GET, SOMEDAY_NEWS_URL+"\(tomorrow)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if  let result:AnyObject = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET, SOMEDAY_NEWS_URL+"\(tomorrow)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+            if  let result:AnyObject = data.value {
                 let json = JSON(result)
                 
                 _ = json["date"].int!
@@ -100,8 +100,8 @@ class MainNewsListControl {
         
 //        let data = NSURLConnection.sendSynchronousRequest(NSURLRequest(URL: NSURL(string: LATEST_NEWS_URL)!), returningResponse: nil, error: nil)
         
-        Alamofire.Manager.sharedInstance.request(Method.GET, LATEST_NEWS_URL, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if let result: AnyObject = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET, LATEST_NEWS_URL, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+            if let result: AnyObject = data.value {
                 //转换成JSON
                 let json = JSON(result)
                 
@@ -225,8 +225,8 @@ class MainNewsListControl {
             day = (lastestNews?.date)!
         }
         
-        Alamofire.Manager.sharedInstance.request(Method.GET, SOMEDAY_NEWS_URL+"\(day)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if  let result:AnyObject = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET, SOMEDAY_NEWS_URL+"\(day)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+            if  let result:AnyObject = data.value {
                 let json = JSON(result)
                 
                 let news = NewsListVO()

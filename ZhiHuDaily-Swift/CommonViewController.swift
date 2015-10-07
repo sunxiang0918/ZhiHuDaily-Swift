@@ -99,7 +99,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             //当偏移坐标的x轴大于0,也就是向右滑动的时候.开始做真正的动作
             if  translation.x >= 0 && self.navigationController?.viewControllers.count >= 2 {
                 //开启新的转场动画控制器
-                interactionController = UIPercentDrivenInteractiveTransition.new()
+                interactionController = UIPercentDrivenInteractiveTransition()
                 
                 //开始调用navigation的POP转场
                 self.navigationController?.popViewControllerAnimated(true)

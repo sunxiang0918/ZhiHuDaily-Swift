@@ -20,8 +20,8 @@ class HttpControl {
     - parameter url: 网址
     */
     func onSearch(url:String) {
-        Alamofire.Manager.sharedInstance.request(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data, error) -> Void in
-            if let result: AnyObject = data {
+        Alamofire.Manager.sharedInstance.request(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
+            if let result: AnyObject = data.value {
                 self.delegate?.didRecieveReusults(result)
             }
         }
