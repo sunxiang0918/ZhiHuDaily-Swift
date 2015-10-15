@@ -47,6 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //UIModalTransitionStyle转场动画效果   CrossDissolve渐变  PartialCurl翻页  FlipHorizontal上下翻转  CoverVertical上下平移(默认值)
         })
         
+        // 增加Icon 3DTouch的功能
+        
+        //添加icon 3d Touch
+        //先建立图标
+        let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Share)
+        //然后创建按钮项,通过Type可以确定是哪一个按钮,
+        let firstItem = UIMutableApplicationShortcutItem(type: "1", localizedTitle: "最新日报", localizedSubtitle: nil, icon: firstItemIcon, userInfo: nil)
+        
+        let secondItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Compose)
+        let secondItem = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "每日瞎扯", localizedSubtitle: nil, icon: secondItemIcon, userInfo: nil)
+        
+        application.shortcutItems = [firstItem,secondItem]
+        
         return true
     }
     
@@ -199,6 +212,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                abort()
             }
         }
+    }
+    
+    // MARK: - 3D Touch的操作
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        //这个方法就是激活了3DTouch时触发的操作.
+        
+        let handledShortCutItem = handleShortCutItem(shortcutItem)
+        completionHandler(handledShortCutItem)
+    }
+    
+    /**
+    这个方法用处处理3DTouch的操作
+    
+    - parameter shortcutItem: 3DTouch的按钮
+    
+    - returns: 是否执行成功
+    */
+    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        var handled = false
+        
+        //找到根视图
+        let launchImageViewController = window!.rootViewController as? LaunchImageViewController
+        //打开根视图
+        let rootNavigationViewController = launchImageViewController!.viewController as? UINavigationController
+        let pkRevealController = rootNavigationViewController?.viewControllers.first as? PKRevealController
+        let rootViewController = pkRevealController?.frontViewController
+        
+        if shortcutItem.type == "1" { //最新日报
+            
+            //然后打开最新的日报
+            rootViewController?.performSegueWithIdentifier("pushSegue", sender: "newNews")
+            
+            handled = true
+        }
+        
+        if shortcutItem.type == "2" { //每日瞎扯
+            
+            //然后打开每日瞎扯
+            rootViewController?.performSegueWithIdentifier("pushSegue", sender: "xiacheNews")
+            
+            handled = true
+            
+        }
+        return handled
     }
 
 }

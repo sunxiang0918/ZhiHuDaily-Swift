@@ -21,7 +21,7 @@ class LaunchImageViewController: UIViewController {
     
     private var sourceLabel: UILabel!       //版权的Label
     
-    private var viewController:UIViewController!    //动画完成后跳转的view
+    var viewController:UIViewController!    //动画完成后跳转的view
     
     private let fromImageView:UIImageView = UIImageView(frame: UIScreen.mainScreen().bounds)        //起始图片View
     

@@ -71,9 +71,37 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 newsDetailViewController?.mainViewController = self
             }
             
-            let index = sender as! NSIndexPath
+            var index = sender as? NSIndexPath
             
-            newsDetailViewController?.newsLocation = (index.section,index.row)
+            if index == nil {
+                //这里说明不是NSIndexPath 那么就只能是 String了
+                let command = sender as! String
+                
+                if  "newNews" == command {
+                    //如果是打开的最新的日报,那么index就应该是 section=0 row = 1
+                    index = NSIndexPath(forRow: 1, inSection: 0)
+                }else if "xiacheNews" == command {
+                    
+                    let todayNews = self.newsListControl.todayNews?.news
+                    
+                    if todayNews != nil {
+                        for (i,news) in todayNews!.enumerate() {
+                            if news.title.containsString("瞎扯") {
+                                //找到瞎扯的文章
+                                index = NSIndexPath(forRow: i+1, inSection: 0)
+                                break
+                            }
+                        }
+                    }
+                    
+                    if  index==nil {
+                        //如果没有找到 那么就默认打开最新的
+                        index = NSIndexPath(forRow: 1, inSection: 0)
+                    }
+                }
+            }
+            
+            newsDetailViewController?.newsLocation = (index!.section,index!.row)
             
         }
     }
