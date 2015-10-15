@@ -8,6 +8,9 @@ JAVA程序猿一枚,开始学习Swift一个多月,以前没有iOS的经验.在�
 #Screenshot
 [@新的截图太大(25MB),请点击此处查看](http://git.oschina.net/xycm/ZhiHuDaily-Swift/raw/swift-2.0/screenshot-new.gif)  
 
+新增加了3D-Touch 功能:
+![](http://git.oschina.net/xycm/ZhiHuDaily-Swift/raw/swift-2.0/3d-touch-screenshot.gif) 
+
 ![alt text](http://git.oschina.net/xycm/ZhiHuDaily-Swift/raw/master/screenshot.gif "程序运行截图 2015-06-12 09:51:26")
 
 #API 说明
