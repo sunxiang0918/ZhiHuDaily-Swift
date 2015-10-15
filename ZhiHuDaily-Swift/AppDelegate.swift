@@ -39,6 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //放入rootView
         navController?.pushViewController(revealController, animated: false)
         
+        // 增加3DTouch启动程序时的处理
+        // 从启动项中获取是否是从3DTouch中启动的
+        let launchShortcutItem:UIApplicationShortcutItem? = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey as NSObject] as? UIApplicationShortcutItem
+        if  launchShortcutItem != nil{
+            //说明是使用3DTouch启动的,那么当页面启动的时候就需要直接跳转到新闻详细中
+            //这里的逻辑是这样的,在启动的时候设置一个标志,是否需要跳转,然后在LaunchImageViewController中会判断是否有这个标志.如果有
+            //就进行界面的跳转
+            LaunchImageViewController.jumpTo = launchShortcutItem?.type == "1" ? "newNews" : "xiacheNews"
+        }
+        
+        // 开始加载开始图片
         loadStartImage(LAUNCH_IMAGE_URL, onSuccess: {(name,image) in
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
@@ -59,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let secondItem = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "每日瞎扯", localizedSubtitle: nil, icon: secondItemIcon, userInfo: nil)
         
         application.shortcutItems = [firstItem,secondItem]
-        
+
         return true
     }
     

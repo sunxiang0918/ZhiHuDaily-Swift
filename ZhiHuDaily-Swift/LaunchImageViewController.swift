@@ -31,6 +31,8 @@ class LaunchImageViewController: UIViewController {
     
     private var logoImageView:UIImageView?
     
+    static var jumpTo:String?      //跳转使用的
+    
     //本视图加载
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +103,21 @@ class LaunchImageViewController: UIViewController {
         let viewController:UIViewController = timer.userInfo as! UIViewController
         
         //跳转页面
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.presentViewController(viewController, animated: true) { () -> Void in
+            //这里设置了一个回调.当页面跳转到主视图后,判断是否存在直接跳转到新闻详细的里面.如果有,就继续跳转.
+            if LaunchImageViewController.jumpTo != nil {
+                //打开根视图
+                let rootNavigationViewController = viewController as? UINavigationController
+                let pkRevealController = rootNavigationViewController?.viewControllers.first as? PKRevealController
+                let rootViewController = pkRevealController?.frontViewController
+                
+                //然后打开最新的日报
+                rootViewController?.performSegueWithIdentifier("pushSegue", sender: LaunchImageViewController.jumpTo)
+                
+                LaunchImageViewController.jumpTo = nil
+            }
+        }
+        
     }
     
     override func prefersStatusBarHidden() -> Bool {
