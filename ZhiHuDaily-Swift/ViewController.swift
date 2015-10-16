@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,RefreshControlDelegate,MainTitleViewDelegate,SlideScrollViewDelegate {
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UIViewControllerPreviewingDelegate,RefreshControlDelegate,MainTitleViewDelegate,SlideScrollViewDelegate {
     
     private let BACKGROUND_COLOR = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
     
@@ -21,6 +21,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     var refreshControl : RefreshControl!
     
     let newsListControl : MainNewsListControl = MainNewsListControl()
+    
+    // 长按手势标识
+    var longPress = UILongPressGestureRecognizer()
     
     //主页面上关联的表格
     @IBOutlet weak var mainTableView: UITableView!
@@ -45,6 +48,12 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         refreshBottomView?.resetLayoutSubViews()
         
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //检测3D Touch
+        check3DTouch()
         
     }
 
@@ -124,6 +133,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         self.revealController.showViewController(leftViewController!)
     }
     
+    //MARK: UITableViewDataSource的实现
     //================UITableViewDataSource的实现================================
     
     //设置tableView的数据行数
@@ -248,6 +258,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     //================UITableViewDataSource的实现================================
     
+    // MARK: UITableViewDelegate的实现
     //================UITableViewDelegate的实现==================================
     
     /**
@@ -330,6 +341,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         doAlreadyRead(indexPath)
         
+        check3DTouch()
+        
         //这个地方开始异步的获取新闻详细.然后再进行跳转
         self.performSegueWithIdentifier("pushSegue", sender: indexPath)
         
@@ -354,6 +367,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     //================UITableViewDelegate的实现==================================
     
 
+    // MARK: RefreshControlDelegate的实现
     //================RefreshControlDelegate的实现===============================
     func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
         
@@ -375,6 +389,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     //================RefreshControlDelegate的实现===============================
     
+    // MARK: SlideScrollViewDelegate的实现
     //================SlideScrollViewDelegate的实现===============================
     func SlideScrollViewDidClicked(index: Int) {
         
@@ -429,5 +444,73 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     //================SlideScrollViewDelegate的实现===============================
 
+    // MARK: 3D Touch UIViewControllerPreviewingDelegate的实现
+    
+    /**
+    检测页面是否处于3DTouch
+    */
+    func check3DTouch(){
+        
+        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
+            
+            self.registerForPreviewingWithDelegate(self, sourceView: self.view)
+            //长按停止
+            self.longPress.enabled = false
+            
+        } else {
+            self.longPress.enabled = true
+        }
+    }
+    
+    /**
+    轻按进入浮动页面
+    
+    - parameter previewingContext:
+    - parameter location:
+    
+    - returns:
+    */
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let cellPosition = mainTableView.convertPoint(location, fromView: view)
+        
+        if let touchedIndexPath = mainTableView.indexPathForRowAtPoint(cellPosition) {
+            
+            mainTableView.deselectRowAtIndexPath(touchedIndexPath, animated: true)
+            
+            let aStoryboard = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle())
+            
+            if let newsDetailViewController = aStoryboard.instantiateViewControllerWithIdentifier("newsDetailViewController") as? NewsDetailViewController  {
+                
+                if  newsDetailViewController.newsListControl == nil {
+                    newsDetailViewController.newsListControl = self.newsListControl
+                    newsDetailViewController.mainViewController = self
+                }
+                
+                newsDetailViewController.newsLocation = (touchedIndexPath.section,touchedIndexPath.row)
+                
+                let cellFrame = mainTableView.cellForRowAtIndexPath(touchedIndexPath)!.frame
+                previewingContext.sourceRect = view.convertRect(cellFrame, fromView: mainTableView)
+                
+                return newsDetailViewController
+            }
+        }
+
+        
+        
+        return UIViewController()
+    }
+    
+    /**
+    重按进入文章详情页
+    
+    - parameter previewingContext:
+    - parameter viewControllerToCommit:
+    */
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        
+        self.showViewController(viewControllerToCommit, sender: self)
+    }
+    
 }
 
