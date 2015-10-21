@@ -158,12 +158,15 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         // var page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         //应该是我没搞明白swift的真谛吧，我不相信有这么麻烦，求大神指教啊
 
-        let pageWidth:Int = Int(scrollView.frame.size.width)
-        let offX:Int = Int(scrollView.contentOffset.x)
-        let a = offX - pageWidth / 2 as Int
-        let b = a / pageWidth as Int
-        let c = floor(Double(b))
-        let page:Int = Int(c) + 1
+//        let pageWidth:Int = Int(scrollView.frame.size.width)
+//        let offX:Int = Int(scrollView.contentOffset.x)
+//        let a = offX - pageWidth / 2 as Int
+//        let b = a / pageWidth as Int
+//        let c = floor(Double(b))
+//        let page:Int = Int(c) + 1
+        
+        // 2015-10-21 19:19:51 感谢@heronlyj 的指正, 其实在swift2.0的时候也发现了 swift的 运算格式放款了.   最开始使用swift1.0的时候 确实是严格些
+        let page = Int(floor((scrollView.contentOffset.x - scrollView.frame.size.width / 2) / scrollView.frame.size.width)) + 1
         
         currentPageIndex=page
         pageControl.currentPage=(page-1)
