@@ -55,7 +55,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avator" translatesAutoresizingMaskIntoConstraints="NO" id="cD3-6g-vS9" customClass="CircleImage" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avator" translatesAutoresizingMaskIntoConstraints="NO" id="cD3-6g-vS9" customClass="FilletImageView" customModule="ZhiHuDaily_Swift" customModuleProvider="target">
                                 <rect key="frame" x="16" y="28" width="46" height="46"/>
                                 <animations/>
                                 <constraints>
