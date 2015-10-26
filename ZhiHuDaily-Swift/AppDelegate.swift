@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //实例化一个PKRevealController 也就是能左右滑动的视图
         let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         
+        //设置左边的宽度
+        revealController.setMinimumWidth((self.window?.frame.width)!*0.6, maximumWidth: (self.window?.frame.width)!*0.6, forViewController: leftController)
+        
         //放入rootView
         navController?.pushViewController(revealController, animated: false)
         

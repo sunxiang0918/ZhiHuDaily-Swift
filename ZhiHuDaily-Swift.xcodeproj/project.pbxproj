@@ -36,6 +36,7 @@
 		A45D9F9B1B273B1300E7CDB0 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */; };
 		A461268D1B2F150900694253 /* RecommenderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A461268C1B2F150900694253 /* RecommenderDetailViewController.swift */; };
 		A46A4FF01B247B11009E3661 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A4FEF1B247B11009E3661 /* CustomWebView.swift */; };
+		A47BEABF1BDE7F40009E3F9E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BEABE1BDE7F40009E3F9E /* CircleImage.swift */; };
 		A48545731B176728001CC98F /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545721B176728001CC98F /* KYCircularProgress.swift */; };
 		A48545911B1809BA001CC98F /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A485458F1B1809BA001CC98F /* RefreshControl.swift */; };
 		A48545921B1809BA001CC98F /* RefreshControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */; };
@@ -143,6 +144,7 @@
 		A45D9F9A1B273B1300E7CDB0 /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
 		A461268C1B2F150900694253 /* RecommenderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommenderDetailViewController.swift; sourceTree = "<group>"; };
 		A46A4FEF1B247B11009E3661 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
+		A47BEABE1BDE7F40009E3F9E /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		A48545721B176728001CC98F /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
 		A485458F1B1809BA001CC98F /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		A48545901B1809BA001CC98F /* RefreshControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlDelegate.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				A44207151B1C9FC0005656C9 /* RefreshBottomView.swift */,
 				A4939F141B14C71C00E041C4 /* SlideScrollView.swift */,
 				A453EAE51B3074DE005B0E25 /* SharePopupView.swift */,
+				A47BEABE1BDE7F40009E3F9E /* CircleImage.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				A41E6A351B29D815000BFC4B /* CommentControl.swift in Sources */,
 				A4534E831B5A4E8400EAE46A /* ZanButton.swift in Sources */,
 				A4534E821B5A4E8400EAE46A /* NumberScrollAnimatedView.swift in Sources */,
+				A47BEABF1BDE7F40009E3F9E /* CircleImage.swift in Sources */,
 				A4939FC91B14D66800E041C4 /* PKLayerAnimator.m in Sources */,
 				A4939FCC1B14D66800E041C4 /* PKRevealController.m in Sources */,
 				A42CB9B91B2D7FFB00534BD0 /* RecommendersListViewController.swift in Sources */,
