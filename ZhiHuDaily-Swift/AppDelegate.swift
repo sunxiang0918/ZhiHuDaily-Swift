@@ -24,12 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rightController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("rightViewController") as! ViewController
         
         //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
-        let leftController: UIViewController?=UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController")
+        let leftController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as! LeftViewController
         
         rightController.leftViewController = leftController
         
         //开始异步的读取新闻数据
         rightController.newsListControl.refreshNews()
+        
+        //开始异步的读取主题数据
+        leftController.themesListControl.loadThemeList()
         
         let navController = self.window?.rootViewController as? UINavigationController
         
