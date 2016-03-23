@@ -38,7 +38,7 @@ class LaunchImageViewController: UIViewController {
         super.viewDidLoad()
         
         //设置关闭状态栏
-        if self.respondsToSelector("setNeedsStatusBarAppearanceUpdate") {
+        if self.respondsToSelector(#selector(UIViewController.setNeedsStatusBarAppearanceUpdate)) {
             self.prefersStatusBarHidden()
             self.setNeedsStatusBarAppearanceUpdate()
         }
@@ -93,7 +93,7 @@ class LaunchImageViewController: UIViewController {
         UIView.commitAnimations()
         
         //启动一个定时器,到时间后执行 presentNextViewController: 方法
-        NSTimer.scheduledTimerWithTimeInterval(TIME_DURATION, target: self, selector: "presentNextViewController:", userInfo: self.viewController, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(TIME_DURATION, target: self, selector: #selector(LaunchImageViewController.presentNextViewController(_:)), userInfo: self.viewController, repeats: false)
     }
 
     //动画显示完毕后,把页面跳转到主视图

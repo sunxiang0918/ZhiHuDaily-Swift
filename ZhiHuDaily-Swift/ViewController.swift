@@ -400,7 +400,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             var indexPath:NSIndexPath?
             
             if  let n = newsListControl.todayNews?.news {
-                for var i = 0 ; i < n.count ; i++ {
+                for i in 0  ..< n.count  {
                     if news.id==n[i].id {
                         indexPath = NSIndexPath(forRow: i+1, inSection: 0)
                         //这个地方开始异步的获取新闻详细.然后再进行跳转
@@ -423,11 +423,11 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         let nes = newsListControl.news
         
-        for var j=0;j<nes.count;j++ {
+        for j in 0 ..< nes.count {
             let nList = nes[j]
             let n = nList.news!
             
-            for var i = 0 ; i < n.count ; i++ {
+            for i in 0  ..< n.count  {
                 if news.id==n[i].id {
                     block(NSIndexPath(forRow: i, inSection: j+1))
                     return

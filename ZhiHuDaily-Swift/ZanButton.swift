@@ -113,7 +113,7 @@ class ZanButton: UIView{
         }
         
         //设置点击事件
-        let tapImageViewGesture = UITapGestureRecognizer(target: self, action: "zanAnimationPlay")
+        let tapImageViewGesture = UITapGestureRecognizer(target: self, action: #selector(ZanButton.zanAnimationPlay))
         
         zanImageView.addGestureRecognizer(tapImageViewGesture)
         
@@ -152,7 +152,7 @@ class ZanButton: UIView{
         
         if self.isZan {
             //赞的数量加1
-            self.zanNumber++
+            self.zanNumber += 1
             
             //开始执行动画
             UIView.animateWithDuration(NSTimeInterval(popShowDuration), animations: { () -> Void in
@@ -183,7 +183,7 @@ class ZanButton: UIView{
             self.zanImageView?.image = zanedImage
         }else{
             //如果是取消赞的操作
-            self.zanNumber--
+            self.zanNumber -= 1
             self.numberView.value = self.zanNumber
             self.zanImageView?.image = zanImage
             

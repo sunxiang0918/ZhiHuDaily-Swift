@@ -145,7 +145,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.recommandView = UINib(nibName: "RecommendersView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! RecommendersView
         
         // 这个是给recommandView这个非Button 增加点击事件. 方法就是添加一个 Tap的手势.   然后指明点击后 执行哪个响应方法
-        self.recommandView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showRecommendersViewAction:"))
+        self.recommandView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsDetailViewController.showRecommendersViewAction(_:))))
         
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.webView.delegate = self
@@ -406,7 +406,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                 recommandView.hidden = false
                 browser.frame = CGRectMake(0, 40, browser.frame.width, browser.frame.height)
 
-                for var i = 0; i<5;i++ {
+                for i in 0 ..< 5 {
                     if  i>=recommanders.count {
                         
                         if let image = recommandView.getImageView(i) {

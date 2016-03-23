@@ -51,7 +51,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             scrollView.scrollsToTop = false
             scrollView.delegate = self
             
-            for var i=0; i<pageCount; i++ {
+            for i in 0 ..< pageCount {
                 let newsVO:NewsVO=_topNewsArray![i]
                 
                 let imgView:UIImageView=UIImageView()
@@ -73,7 +73,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
                 
                 imgView.tag = i
                 
-                let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed:")
+                let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SlideScrollView.imagePressed(_:)))
                 
                 tap.numberOfTapsRequired = 1
                 tap.numberOfTouchesRequired = 1
@@ -129,7 +129,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             
             self.addSubview(noteView)
             
-            NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
+            NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(SlideScrollView.autoShowNextPage), userInfo: nil, repeats: true)
             
         }
         

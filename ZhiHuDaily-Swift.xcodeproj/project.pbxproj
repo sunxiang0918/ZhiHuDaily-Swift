@@ -572,7 +572,7 @@
 				TargetAttributes = {
 					A432D3191B147B9F006D2B0E = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = KY2PPGYFJ7;
+						DevelopmentTeam = H2WA38DNJF;
 					};
 					A432D3311B147B9F006D2B0E = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -880,7 +880,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swiftcom.sun.ZhiHuDily-Swit";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiHuDaily-Swift/ObjectiveCBridge.h";
@@ -898,7 +898,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swiftcom.sun.ZhiHuDily-Swit";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiHuDaily-Swift/ObjectiveCBridge.h";
