@@ -18,7 +18,7 @@ class SharePopupView: UIView,UIScrollViewDelegate {
     }
     */
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         /// 设置scrollView 委托为自己
         self.scrollView.delegate = self
@@ -45,7 +45,7 @@ class SharePopupView: UIView,UIScrollViewDelegate {
     @IBOutlet weak var contentViewWidth: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //滑动的时候 进行pageControl的控制
         
         let pageWidth = self.scrollView.frame.size.width
@@ -57,7 +57,7 @@ class SharePopupView: UIView,UIScrollViewDelegate {
         self.pageControl.updateCurrentPageDisplay()
     }
     
-    @IBAction func changeCurrentPage(sender: UIPageControl) {
+    @IBAction func changeCurrentPage(_ sender: UIPageControl) {
         //pageControl的页数变化的时候,反过来控制scrollView的滑动
         
         let page = pageControl.currentPage
@@ -67,13 +67,13 @@ class SharePopupView: UIView,UIScrollViewDelegate {
         width = scrollView.frame.size.width
         height = scrollView.frame.size.height
         
-        let frame = CGRectMake(width * CGFloat(page), 0, width, height)
+        let frame = CGRect(x: width * CGFloat(page), y: 0, width: width, height: height)
         
         scrollView.scrollRectToVisible(frame, animated: true)
     }
     
     /// 执行取消操作
-    @IBAction func doCancelAction(sender: UIButton) {
+    @IBAction func doCancelAction(_ sender: UIButton) {
         if let handel = self.cancelHandel {
             handel()
         }

@@ -7,26 +7,48 @@
 //
 
 import UIKit
+import Kingfisher
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class RecommendersListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
-    private let recommenderControl = RecommenderControl()
+    fileprivate let recommenderControl = RecommenderControl()
     
     var newsId : Int?
     
-    private var recommenders : RecommendersVO?
+    fileprivate var recommenders : RecommendersVO?
     
     @IBOutlet weak var recommenderTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        recommenderTableView.registerNib(UINib(nibName: "RecommenderTableViewCell", bundle: nil), forCellReuseIdentifier: "recommenderTableViewCell")
+        recommenderTableView.register(UINib(nibName: "RecommenderTableViewCell", bundle: nil), forCellReuseIdentifier: "recommenderTableViewCell")
         
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         recommenderControl.getNewsRecommenders(self.newsId!, complate: { (recommenders) -> Void in
             self.recommenders = recommenders
@@ -40,9 +62,9 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRecommenderDetailSegue" {
-            let recommenderDetailViewController = segue.destinationViewController as? RecommenderDetailViewController
+            let recommenderDetailViewController = segue.destination as? RecommenderDetailViewController
             
             let recommenderInfo = sender as? RecommenderInfoVO
             
@@ -53,9 +75,9 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
         }
     }
     
-    @IBAction func doBackAction(sender: UIButton) {
+    @IBAction func doBackAction(_ sender: UIButton) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
     /*
@@ -70,27 +92,27 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
 
     //====================实现UITableViewDelegate=========================
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let recommender = recommenders?.items?[indexPath.section].recommenders[indexPath.row]
+        let recommender = recommenders?.items?[(indexPath as NSIndexPath).section].recommenders[(indexPath as NSIndexPath).row]
         
-        self.performSegueWithIdentifier("showRecommenderDetailSegue", sender: recommender)
+        self.performSegue(withIdentifier: "showRecommenderDetailSegue", sender: recommender)
     }
     //====================实现UITableViewDelegate=========================
     
     
     //====================实现UITableViewDataSource=========================
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return recommenders?.items?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return recommenders?.items?[section].recommenders.count ?? 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if  recommenders?.items?.count > 1 {
             let item = recommenders?.items?[section]
@@ -108,17 +130,17 @@ class RecommendersListViewController: UIViewController,UITableViewDelegate,UITab
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("recommenderTableViewCell") as? RecommenderTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recommenderTableViewCell") as? RecommenderTableViewCell
         
-        let item = recommenders?.items?[indexPath.section]
+        let item = recommenders?.items?[(indexPath as NSIndexPath).section]
         
-        let recommender = item?.recommenders[indexPath.row]
+        let recommender = item?.recommenders[(indexPath as NSIndexPath).row]
         
         cell?.userNameLabel.text = recommender?.name
         cell?.userDesLabel.text = recommender?.bio
-        cell?.userAvatorImage.hnk_setImageFromURL(NSURL(string: recommender!.avatar)!, placeholder: UIImage(named:"Setting_Avatar"))
+        cell?.userAvatorImage.kf_setImage(with: URL(string: recommender!.avatar)!, placeholder: UIImage(named:"Setting_Avatar"))
         
         return cell!
     }

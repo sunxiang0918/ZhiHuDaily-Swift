@@ -21,8 +21,8 @@ class WriteCommentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func doBackAction(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+    @IBAction func doBackAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: { () -> Void in
             
         })
     }

@@ -9,17 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>HanekeSwift.xcscheme</key>
+		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-ZhiHuDaily-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>SwiftyJSON3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15F0AB3141D3AF76EFB530738CFFA459</key>
+		<key>4EE7E86542C387C536BBAACD6800ECC0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77D7D8FA7B8C155BD686AA9907626399</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
+		<key>7AC95C180585586423793FC07026F01C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CEFB69066BEBBE6F2B1C455E3E2E7C11</key>
+		<key>BDAF27BE15DBEE3F66D84079233BDDFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

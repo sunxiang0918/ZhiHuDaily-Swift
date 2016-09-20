@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
+import SwiftyJSON3
 
 class RecommenderControl {
     
@@ -18,14 +18,14 @@ class RecommenderControl {
     - parameter newsId:   新闻Id
     - parameter complate: 读取后的操作
     */
-    func getNewsRecommenders(newsId:Int,complate:(recommenders:RecommendersVO)->Void,block:((error:NSError)->Void)? = nil){
+    func getNewsRecommenders(_ newsId:Int,complate:@escaping (_ recommenders:RecommendersVO)->Void,block:((_ error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET, RECOMMENDERS_URL+"\(newsId)/recommenders", parameters: nil, encoding: ParameterEncoding.URL, headers: nil).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-                if let result: AnyObject = data.value {
+        Alamofire.request(RECOMMENDERS_URL+"\(newsId)/recommenders").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response in
+                if let result: Any = response.result.value {
                     //转换成JSON
                     let json = JSON(result)
                     
-                    complate(recommenders: self.convertJSON2VO(json))
+                    complate(self.convertJSON2VO(json))
                 }
         }
     }
@@ -37,7 +37,7 @@ class RecommenderControl {
     
     - returns:
     */
-    private func convertJSON2VO(json:JSON) -> RecommendersVO{
+    fileprivate func convertJSON2VO(_ json:JSON) -> RecommendersVO{
     
         let item_count = json["item_count"].int!
         

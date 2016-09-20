@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UIViewControllerPreviewingDelegate,RefreshControlDelegate,MainTitleViewDelegate,SlideScrollViewDelegate {
     
-    private let BACKGROUND_COLOR = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
+    fileprivate let BACKGROUND_COLOR = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
     
     var leftViewController : UIViewController?
     
@@ -33,7 +34,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad() {
         
         let nib=UINib(nibName: "NewsListTableViewCell", bundle: nil)
-        mainTableView.registerNib(nib, forCellReuseIdentifier: "newsListTableViewCell")
+        mainTableView.register(nib, forCellReuseIdentifier: "newsListTableViewCell")
         
         refreshControl = RefreshControl(scrollView: mainTableView, delegate: self)
         refreshControl.topEnabled = true
@@ -43,7 +44,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         refreshControl.enableInsetBottom = 30
         
         let y=max(self.mainTableView.bounds.size.height, self.mainTableView.contentSize.height);
-        refreshBottomView = RefreshBottomView(frame: CGRectMake(CGFloat(0),y , self.mainTableView!.bounds.size.width, CGFloat(refreshControl.enableInsetBottom+45)))
+        refreshBottomView = RefreshBottomView(frame: CGRect(x: CGFloat(0),y: y , width: self.mainTableView!.bounds.size.width, height: CGFloat(refreshControl.enableInsetBottom+45)))
         refreshControl.registeBottomView(refreshBottomView!)
         refreshBottomView?.resetLayoutSubViews()
         
@@ -51,7 +52,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         //检测3D Touch
         check3DTouch()
         
@@ -68,19 +69,19 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     - parameter segue:
     - parameter sender:
     */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainTitleView" {
-            mainTitleViewController = segue.destinationViewController as? MainTitleViewController
+            mainTitleViewController = segue.destination as? MainTitleViewController
             mainTitleViewController?.mainTitleViewDelegate = self
         }else if segue.identifier == "pushSegue" {
-            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
+            let newsDetailViewController = segue.destination as? NewsDetailViewController
             
             if  newsDetailViewController?.newsListControl == nil {
                 newsDetailViewController?.newsListControl = self.newsListControl
                 newsDetailViewController?.mainViewController = self
             }
             
-            var index = sender as? NSIndexPath
+            var index = sender as? IndexPath
             
             if index == nil {
                 //这里说明不是NSIndexPath 那么就只能是 String了
@@ -88,16 +89,16 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 
                 if  "newNews" == command {
                     //如果是打开的最新的日报,那么index就应该是 section=0 row = 1
-                    index = NSIndexPath(forRow: 1, inSection: 0)
+                    index = IndexPath(row: 1, section: 0)
                 }else if "xiacheNews" == command {
                     
                     let todayNews = self.newsListControl.todayNews?.news
                     
                     if todayNews != nil {
-                        for (i,news) in todayNews!.enumerate() {
-                            if news.title.containsString("瞎扯") {
+                        for (i,news) in todayNews!.enumerated() {
+                            if news.title.contains("瞎扯") {
                                 //找到瞎扯的文章
-                                index = NSIndexPath(forRow: i+1, inSection: 0)
+                                index = IndexPath(row: i+1, section: 0)
                                 break
                             }
                         }
@@ -105,39 +106,39 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                     
                     if  index==nil {
                         //如果没有找到 那么就默认打开最新的
-                        index = NSIndexPath(forRow: 1, inSection: 0)
+                        index = IndexPath(row: 1, section: 0)
                     }
                 }
             }
             
-            newsDetailViewController?.newsLocation = (index!.section,index!.row)
+            newsDetailViewController?.newsLocation = ((index! as NSIndexPath).section,(index! as NSIndexPath).row)
             
         }
     }
     
     
     //整个View的上下滑动事件的响应
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if  scrollView is UITableView {
             //这部分代码是为了 限制下拉滑动的距离的.当到达scrollHeight后,就不允许再继续往下拉了
             if -Float(scrollView.contentOffset.y)>SCROLL_HEIGHT{
                 //表示到顶了,不能再让他滑动了,思路就是让offset一直保持在最大值. 并且 animated 动画要等于false
-                scrollView.setContentOffset(CGPointMake(CGFloat(0), CGFloat(-SCROLL_HEIGHT)), animated: false)
+                scrollView.setContentOffset(CGPoint(x: CGFloat(0), y: CGFloat(-SCROLL_HEIGHT)), animated: false)
                 return
             }
         }
     }
     
     func doLeftAction() {
-        self.revealController.showViewController(leftViewController!)
+        self.revealController.show(leftViewController!)
     }
     
     //MARK: UITableViewDataSource的实现
     //================UITableViewDataSource的实现================================
     
     //设置tableView的数据行数
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if  section == 0 {
             if  let newsList = newsListControl.todayNews {
                 if let news = newsList.news {
@@ -161,8 +162,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     //返回单元格的高
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        if  indexPath.section==0&&indexPath.row == 0 {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        if  (indexPath as NSIndexPath).section==0&&(indexPath as NSIndexPath).row == 0 {
             return CGFloat(IN_WINDOW_HEIGHT)
         }else {
             return CGFloat(TABLE_CELL_HEIGHT)
@@ -170,15 +171,15 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     //配置tableView 的单元格
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell
-        if  indexPath.section==0 && indexPath.row == 0 {
+        if  (indexPath as NSIndexPath).section==0 && (indexPath as NSIndexPath).row == 0 {
             //如果是第一行,就需要构建热门条目
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-            cell.backgroundColor = UIColor.clearColor()
-            cell.contentView.backgroundColor = UIColor.clearColor()
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+            cell.backgroundColor = UIColor.clear
+            cell.contentView.backgroundColor = UIColor.clear
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.clipsToBounds = true
             
             let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:tableView.frame.width,height:CGFloat(IMAGE_HEIGHT)))
@@ -196,27 +197,27 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             return cell
         }else{
-            let tmp = tableView.dequeueReusableCellWithIdentifier("newsListTableViewCell")
+            let tmp = tableView.dequeueReusableCell(withIdentifier: "newsListTableViewCell")
             
             if  tmp == nil {
-                cell = NewsListTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "newsListTableViewCell")
+                cell = NewsListTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "newsListTableViewCell")
             }else {
                 cell = tmp!
             }
             
 //            let c = cell as! NewsListTableViewCell
             
-            if  indexPath.section==0{
+            if  (indexPath as NSIndexPath).section==0{
                 //这个是今天的新闻
                 
                 let newsList = newsListControl.todayNews!
                 
-                cell = self.doReturnCell(newsList, row: indexPath.row-1)
+                cell = self.doReturnCell(newsList, row: (indexPath as NSIndexPath).row-1)
                 
             }else {
-                let newsList = newsListControl.news[indexPath.section-1]
+                let newsList = newsListControl.news[(indexPath as NSIndexPath).section-1]
                 
-                cell = self.doReturnCell(newsList, row: indexPath.row)
+                cell = self.doReturnCell(newsList, row: (indexPath as NSIndexPath).row)
                 
             }
             
@@ -233,24 +234,24 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     - returns:
     */
-    private func doReturnCell(newsList:NewsListVO,row:Int) -> UITableViewCell {
+    fileprivate func doReturnCell(_ newsList:NewsListVO,row:Int) -> UITableViewCell {
         
-        let cell = mainTableView.dequeueReusableCellWithIdentifier("newsListTableViewCell") as! NewsListTableViewCell
+        let cell = mainTableView.dequeueReusableCell(withIdentifier: "newsListTableViewCell") as! NewsListTableViewCell
         
         if let news = newsList.news {
             cell.titleLabel.text = news[row].title
             
             if  news[row].alreadyRead {
-                cell.titleLabel.textColor = UIColor.grayColor()
+                cell.titleLabel.textColor = UIColor.gray
             }else {
-                cell.titleLabel.textColor = UIColor.blackColor()
+                cell.titleLabel.textColor = UIColor.black
             }
             
             let images = news[row].images
             if  let _img = images {
-                cell.newsImageView.hnk_setImageFromURL(NSURL(string: _img[0] ?? "")!,placeholder: UIImage(named: "Image_Preview"))
+                cell.newsImageView.kf_setImage(with: URL(string: _img[0])!, placeholder: UIImage(named: "Image_Preview"))
             }
-            cell.multipicLabel.hidden = !news[row].multipic
+            cell.multipicLabel.isHidden = !news[row].multipic
         }
         
         return cell
@@ -268,7 +269,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     - returns:
     */
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         let newsCount = self.newsListControl.news.count
         
@@ -283,7 +284,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     - returns:
     */
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if  section == 0 {
             //由于第一个section是不要的,所以直接设置高度为0
             return 0
@@ -300,7 +301,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     - returns: 自定义的View
     */
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         //自定义一个View
         let myView = UIView()
@@ -308,11 +309,11 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         myView.backgroundColor = BACKGROUND_COLOR
         
         //实例化一个标签
-        let titleView = UILabel(frame:CGRectMake(0, 0, tableView.frame.width, CGFloat(SECTION_HEIGHT)))
+        let titleView = UILabel(frame:CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat(SECTION_HEIGHT)))
         
-        titleView.font = UIFont.boldSystemFontOfSize(14)        //设置字体
-        titleView.textAlignment = NSTextAlignment.Center        //设置居中
-        titleView.textColor = UIColor.whiteColor()      //设置字体颜色
+        titleView.font = UIFont.boldSystemFont(ofSize: 14)        //设置字体
+        titleView.textAlignment = NSTextAlignment.center        //设置居中
+        titleView.textColor = UIColor.white      //设置字体颜色
         
         //设置文字内容
         
@@ -323,13 +324,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             news = self.newsListControl.news[section-1]
         }
         let date = news.date
-        let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "zh_CN")
+        let formatter:DateFormatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
         formatter.dateFormat = "yyyyMMdd"
-        let today = formatter.dateFromString("\(date)")
+        let today = formatter.date(from: "\(date!)")
         formatter.dateFormat = "MM月d日 cccc"
         
-        titleView.text = formatter.stringFromDate(today!)
+        titleView.text = formatter.string(from: today!)
         
         myView.addSubview(titleView)
         
@@ -337,14 +338,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     // 当点击选择Row了以后的 动作
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         doAlreadyRead(indexPath)
         
         check3DTouch()
         
         //这个地方开始异步的获取新闻详细.然后再进行跳转
-        self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+        self.performSegue(withIdentifier: "pushSegue", sender: indexPath)
         
     }
     
@@ -354,13 +355,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     - parameter newsListVO:
     - parameter indexPath:
     */
-    private func doAlreadyRead(indexPath:NSIndexPath) {
+    fileprivate func doAlreadyRead(_ indexPath:IndexPath) {
         
-        let cell = mainTableView.cellForRowAtIndexPath(indexPath)
+        let cell = mainTableView.cellForRow(at: indexPath)
         
         let c = cell as! NewsListTableViewCell
         
-        c.titleLabel.textColor = UIColor.grayColor()
+        c.titleLabel.textColor = UIColor.gray
         
     }
     
@@ -369,9 +370,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     // MARK: RefreshControlDelegate的实现
     //================RefreshControlDelegate的实现===============================
-    func refreshControl(refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
+    func refreshControl(_ refreshControl: RefreshControl, didEngageRefreshDirection direction: RefreshDirection) {
         
-        if  direction == RefreshDirection.RefreshDirectionTop {
+        if  direction == RefreshDirection.refreshDirectionTop {
             //是下拉刷新
             self.newsListControl.refreshNews()
             self.mainTableView.reloadData()
@@ -381,7 +382,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             })
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             refreshControl.finishRefreshingDirection(direction)
         })
         
@@ -391,20 +392,20 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     // MARK: SlideScrollViewDelegate的实现
     //================SlideScrollViewDelegate的实现===============================
-    func SlideScrollViewDidClicked(index: Int) {
+    func SlideScrollViewDidClicked(_ index: Int) {
         
         ///用于处理最热新闻的 点击, 使用遍历,把已加载的新闻找出来对比ID是否相同. 然后获取到她在表格中的坐标,从而进行页面跳转
         if  let topNews=newsListControl.todayNews?.topNews {
             let news = topNews[index-1]
             
-            var indexPath:NSIndexPath?
+            var indexPath:IndexPath?
             
             if  let n = newsListControl.todayNews?.news {
                 for i in 0  ..< n.count  {
                     if news.id==n[i].id {
-                        indexPath = NSIndexPath(forRow: i+1, inSection: 0)
+                        indexPath = IndexPath(row: i+1, section: 0)
                         //这个地方开始异步的获取新闻详细.然后再进行跳转
-                        self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+                        self.performSegue(withIdentifier: "pushSegue", sender: indexPath)
                         return
                     }
                 }
@@ -412,14 +413,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             gotoTopNewsDetail(news, block: { (indexPath) -> Void in
                 //这个地方开始异步的获取新闻详细.然后再进行跳转
-                self.performSegueWithIdentifier("pushSegue", sender: indexPath)
+                self.performSegue(withIdentifier: "pushSegue", sender: indexPath)
                 self.mainTableView.reloadData()
             })
         }
     }
     
     /// 对于比在已加载新闻的 最热新闻. 需要加载今天以前的新闻来做对比. 又由于这个加载的过程是异步的.因此,这个地方做了一个递归
-    private func gotoTopNewsDetail(news:NewsVO,block:(NSIndexPath)->Void){
+    fileprivate func gotoTopNewsDetail(_ news:NewsVO,block:@escaping (IndexPath)->Void){
         
         let nes = newsListControl.news
         
@@ -429,7 +430,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             
             for i in 0  ..< n.count  {
                 if news.id==n[i].id {
-                    block(NSIndexPath(forRow: i, inSection: j+1))
+                    block(IndexPath(row: i, section: j+1))
                     return
                 }
             }
@@ -451,14 +452,14 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     */
     func check3DTouch(){
         
-        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
+        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             
-            self.registerForPreviewingWithDelegate(self, sourceView: self.view)
+            self.registerForPreviewing(with: self, sourceView: self.view)
             //长按停止
-            self.longPress.enabled = false
+            self.longPress.isEnabled = false
             
         } else {
-            self.longPress.enabled = true
+            self.longPress.isEnabled = true
         }
     }
     
@@ -470,27 +471,27 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     - returns:
     */
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let cellPosition = mainTableView.convertPoint(location, fromView: view)
+        let cellPosition = mainTableView.convert(location, from: view)
         
-        if let touchedIndexPath = mainTableView.indexPathForRowAtPoint(cellPosition) {
+        if let touchedIndexPath = mainTableView.indexPathForRow(at: cellPosition) {
             
-            mainTableView.deselectRowAtIndexPath(touchedIndexPath, animated: true)
+            mainTableView.deselectRow(at: touchedIndexPath, animated: true)
             
-            let aStoryboard = UIStoryboard(name: "Main", bundle:NSBundle.mainBundle())
+            let aStoryboard = UIStoryboard(name: "Main", bundle:Bundle.main)
             
-            if let newsDetailViewController = aStoryboard.instantiateViewControllerWithIdentifier("newsDetailViewController") as? NewsDetailViewController  {
+            if let newsDetailViewController = aStoryboard.instantiateViewController(withIdentifier: "newsDetailViewController") as? NewsDetailViewController  {
                 
                 if  newsDetailViewController.newsListControl == nil {
                     newsDetailViewController.newsListControl = self.newsListControl
                     newsDetailViewController.mainViewController = self
                 }
                 
-                newsDetailViewController.newsLocation = (touchedIndexPath.section,touchedIndexPath.row)
+                newsDetailViewController.newsLocation = ((touchedIndexPath as NSIndexPath).section,(touchedIndexPath as NSIndexPath).row)
                 
-                let cellFrame = mainTableView.cellForRowAtIndexPath(touchedIndexPath)!.frame
-                previewingContext.sourceRect = view.convertRect(cellFrame, fromView: mainTableView)
+                let cellFrame = mainTableView.cellForRow(at: touchedIndexPath)!.frame
+                previewingContext.sourceRect = view.convert(cellFrame, from: mainTableView)
                 
                 return newsDetailViewController
             }
@@ -507,9 +508,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     - parameter previewingContext:
     - parameter viewControllerToCommit:
     */
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         
-        self.showViewController(viewControllerToCommit, sender: self)
+        self.show(viewControllerToCommit, sender: self)
     }
     
 }

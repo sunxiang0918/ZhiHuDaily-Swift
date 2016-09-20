@@ -9,77 +9,67 @@
 
 import Foundation
 
-extension NSURLSession {
+extension URLSession {
     
-    func sendSynchronousDataTaskWithRequest(request:NSURLRequest) throws -> NSData?{
-        var response:NSURLResponse? = nil
-        return try self.sendSynchronousDataTaskWithRequest(request, returningResponse: &response)
-    }
-    
-    func sendSynchronousDataTaskWithRequest(request:NSURLRequest,inout returningResponse response:NSURLResponse?) throws -> NSData?{
+    func sendSynchronousDataTaskWithRequest(_ request:URLRequest) throws -> (URLResponse?,Data?){
         
-        let semaphore:dispatch_semaphore_t = dispatch_semaphore_create(0)
+        let semaphore:DispatchSemaphore = DispatchSemaphore(value: 0)
         
-        var data:NSData? = nil
+        var data:Data? = nil
+        
+        var response:URLResponse? = nil
         
         var error:NSError? = nil
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request) { (taskData, taskResponse, taskError) -> Void in
+        URLSession.shared.dataTask(with: request, completionHandler: { (taskData, taskResponse, taskError) -> Void in
             data = taskData
             
             if let _response = taskResponse {
                 response = _response
             }
             
-            error = taskError
+            error = taskError as NSError?
             
-            dispatch_semaphore_signal(semaphore);
-        }.resume()
+            semaphore.signal();
+        }) .resume()
         
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        semaphore.wait(timeout: DispatchTime.distantFuture);
         
         if let _error = error {
             //异常
-            throw AppException.Other(_error.description)
+            throw AppException.other(_error.description)
         }
         
-        return data
+        return (response,data)
     }
     
-    func sendSynchronousDataTaskWithURL(url:NSURL) throws -> NSData?{
-     
-        var response:NSURLResponse? = nil
+    func sendSynchronousDataTaskWithURL(_ url:URL) throws -> (URLResponse?,Data?){
+        let semaphore:DispatchSemaphore = DispatchSemaphore(value: 0)
         
-        return try self.sendSynchronousDataTaskWithURL(url, returningResponse: &response)
-        
-    }
-    
-    func sendSynchronousDataTaskWithURL(url:NSURL,inout returningResponse response:NSURLResponse?) throws -> NSData?{
-        let semaphore:dispatch_semaphore_t = dispatch_semaphore_create(0)
-        
-        var data:NSData? = nil
+        var data:Data? = nil
+        var response:URLResponse? = nil
         
         var error:NSError? = nil
         
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (taskData, taskResponse, taskError) -> Void in
+        URLSession.shared.dataTask(with: url, completionHandler: { (taskData, taskResponse, taskError) -> Void in
             data = taskData
             if let _response = taskResponse {
                 response = _response
             }
             
-            error = taskError
+            error = taskError as NSError?
             
-            dispatch_semaphore_signal(semaphore);
-        }.resume()
+            semaphore.signal();
+        }) .resume()
         
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        semaphore.wait(timeout: DispatchTime.distantFuture);
         
         if let _error = error {
             //异常
-            throw AppException.Other(_error.description)
+            throw AppException.other(_error.description)
         }
         
-        return data
+        return (response,data)
     }
     
 }

@@ -19,12 +19,14 @@ class HttpControl {
     
     - parameter url: 网址
     */
-    func onSearch(url:String) {
-        Alamofire.Manager.sharedInstance.request(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+    func onSearch(_ url:String) {
+        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            if let result: Any = response.result.value {
                 self.delegate?.didRecieveReusults(result)
             }
+
         }
+
     }
 }
 
@@ -34,5 +36,5 @@ protocol HttpProtocol {
     /**
     *  定义了一个协议,接收anyObject. 然后解析处理结果
     */
-    func didRecieveReusults(results:AnyObject)
+    func didRecieveReusults(_ results:Any)
 }

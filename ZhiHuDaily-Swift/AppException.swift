@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum AppException : ErrorType {
-    case Other(String)
+enum AppException : Error {
+    case other(String)
 }

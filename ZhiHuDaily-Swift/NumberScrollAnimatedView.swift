@@ -8,13 +8,13 @@
 
 import UIKit
 
-class NumberScrollAnimatedView: UIView {
+class NumberScrollAnimatedView: UIView,CAAnimationDelegate {
     
     var delegate:NumberScrollAnimatedDelegate?
-    private var finishAction:(()->Void)?
+    fileprivate var finishAction:(()->Void)?
     
     /// 这个用于记录上一次的值的
-    private var lastValue:NSNumber?
+    fileprivate var lastValue:NSNumber?
     
     /// 记录这个View中的Number的值
     var value:NSNumber! = 0 {
@@ -35,7 +35,7 @@ class NumberScrollAnimatedView: UIView {
             if !font.isEqual(oldValue) {
                //如果是新的值
                 //那么久计算出这个字体下,一个字符的宽度
-                self.characterWidth = NSString(string: "8").sizeWithAttributes([NSFontAttributeName:font]).width
+                self.characterWidth = NSString(string: "8").size(attributes: [NSFontAttributeName:font]).width
                 
                 //遍历所有的Label,把字体给改了
                 for value in self.scrollLabels {
@@ -65,13 +65,13 @@ class NumberScrollAnimatedView: UIView {
     var isAscending:Bool = false
     
     /// 表示单个字符的宽度
-    private var characterWidth:CGFloat!
+    fileprivate var characterWidth:CGFloat!
     
     /// 用于记录字符, Layer Label的 数组
-    private var oldNumbersText:[String] = []
-    private var numbersText:[String] = []
-    private var scrollLayers:[CAScrollLayer] = []
-    private var scrollLabels:[UILabel] = []
+    fileprivate var oldNumbersText:[String] = []
+    fileprivate var numbersText:[String] = []
+    fileprivate var scrollLayers:[CAScrollLayer] = []
+    fileprivate var scrollLabels:[UILabel] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,16 +83,16 @@ class NumberScrollAnimatedView: UIView {
         _init()
     }
     
-    private func _init(){
+    fileprivate func _init(){
         
         //设置默认的字体和颜色
-        self.font = UIFont.systemFontOfSize(UIFont.systemFontSize())
-        self.textColor = UIColor.blackColor()
+        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        self.textColor = UIColor.black
         
     }
     
     /// 表示预准备动画
-    private func prepareAnimations(){
+    fileprivate func prepareAnimations(){
         
         //把一切都先还原
         for layer in scrollLayers {
@@ -122,7 +122,7 @@ class NumberScrollAnimatedView: UIView {
     - parameter value:       新的值
     - parameter numbersText: 返回的每一位数字的数组
     */
-    private func createNumbersText(value:NSNumber,inout numbersText:[String]){
+    fileprivate func createNumbersText(_ value:NSNumber,numbersText:inout [String]){
        
         //找到数字的字符串
         let textValue = value.stringValue
@@ -155,14 +155,14 @@ class NumberScrollAnimatedView: UIView {
     }
     
     /// 创建ScrollLayers
-    private func createScrollLayers(){
+    fileprivate func createScrollLayers(){
         //每一个Layer的宽度就是字符的宽度
         let width = self.characterWidth;
         //高度和view的高度相同
-        let height = CGRectGetHeight(self.frame);
+        let height = self.frame.height;
         
         //计算View的宽度 以及 整个数字的宽度
-        let frameWidth = Float(CGRectGetWidth(self.frame))
+        let frameWidth = Float(self.frame.width)
         let length = Float(self.characterWidth) * Float(numbersText.count)
         
         //找到起始的横坐标,这个主要是用于居中数字用的
@@ -172,12 +172,12 @@ class NumberScrollAnimatedView: UIView {
         let lengthEqual = numbersText.count == oldNumbersText.count
         
         //遍历每一位数字字符串,然后为每一个数字创建Layer
-        for (index,value) in numbersText.enumerate() {
+        for (index,value) in numbersText.enumerated() {
             
             let layer = CAScrollLayer()
             
             //设置每一位数字layer的位置和大小
-            layer.frame = CGRectMake(CGFloat(roundf(offset+(Float(index) * Float(width)))), 0, width, height)
+            layer.frame = CGRect(x: CGFloat(roundf(offset+(Float(index) * Float(width!)))), y: 0, width: width!, height: height)
             
             //加入数组以及View的layer中去
             scrollLayers.append(layer)
@@ -203,7 +203,7 @@ class NumberScrollAnimatedView: UIView {
     - parameter numberText:  数字
     - parameter needChange:  是否需要跳动动画
     */
-    private func createContentForLayer(scrollLayer:CAScrollLayer,withNumberText numberText:String,andNeedChange needChange:Bool = true) {
+    fileprivate func createContentForLayer(_ scrollLayer:CAScrollLayer,withNumberText numberText:String,andNeedChange needChange:Bool = true) {
         //先把这一位的数字转换为Int
         let number = Int(numberText)
         
@@ -234,7 +234,7 @@ class NumberScrollAnimatedView: UIView {
             let textLabel = createLabel(text)
             
             //设置Label的值,这里需要注意的是height在不断的变化
-            textLabel.frame = CGRectMake(0, height, CGRectGetWidth(scrollLayer.frame), CGRectGetHeight(scrollLayer.frame))
+            textLabel.frame = CGRect(x: 0, y: height, width: scrollLayer.frame.width, height: scrollLayer.frame.height)
             
             //增加到subPlayer中去
             scrollLayer.addSublayer(textLabel.layer)
@@ -242,7 +242,7 @@ class NumberScrollAnimatedView: UIView {
             scrollLabels.append(textLabel)
             
             //计算新的Y坐标
-            height = CGRectGetMaxY(textLabel.frame)
+            height = textLabel.frame.maxY
         }
     }
     
@@ -253,12 +253,12 @@ class NumberScrollAnimatedView: UIView {
     
     - returns: 生成的UILabel
     */
-    private func createLabel(text:String) -> UILabel {
+    fileprivate func createLabel(_ text:String) -> UILabel {
         let view = UILabel()
         
         view.textColor = self.textColor
         view.font = self.font
-        view.textAlignment = NSTextAlignment.Center
+        view.textAlignment = NSTextAlignment.center
         
         view.text = text
         
@@ -266,7 +266,7 @@ class NumberScrollAnimatedView: UIView {
     }
     
     /// 这个是用来创建动画的
-    private func createAnimations(){
+    fileprivate func createAnimations(){
 
         //首先计算动画的时间
         let duration = self.duration - ( Float(numbersText.count) * self.durationOffset )
@@ -293,19 +293,19 @@ class NumberScrollAnimatedView: UIView {
                 //这个是计算倒数第二个元素的Y坐标,用于起始坐标
                 let i = (scrollLayer.sublayers?.count)!-2
                 let y = scrollLayer.sublayers?[i].frame.origin.y
-                animation.fromValue = NSNumber(float: Float(0-y!))
+                animation.fromValue = NSNumber(value: Float(0-y!) as Float)
                 //设置Y坐标为0,作为动画的终止坐标
-                animation.toValue = NSNumber(float: Float(0))
+                animation.toValue = NSNumber(value: Float(0) as Float)
             }else {
                 //取第二个元素的Y坐标,作为起始坐标
                 let y = scrollLayer.sublayers?[1].frame.origin.y
-                animation.fromValue = NSNumber(float: Float(0-y!))
+                animation.fromValue = NSNumber(value: Float(0-y!) as Float)
                 //设置最后一个元素的Y坐标,作为动画的终止坐标
-                animation.toValue = NSNumber(float: Float(0-maxY!))
+                animation.toValue = NSNumber(value: Float(0-maxY!) as Float)
             }
             
             //增加动画
-            scrollLayer.addAnimation(animation, forKey: "NumberScrollAnimatedView")
+            scrollLayer.add(animation, forKey: "NumberScrollAnimatedView")
             
             offset += self.durationOffset
         }
@@ -316,7 +316,7 @@ class NumberScrollAnimatedView: UIView {
     
     - parameter finishAction: 完成动画后的执行操作的闭包
     */
-    func startAnimation(finishAction:(()->Void)? = nil){
+    func startAnimation(_ finishAction:(()->Void)? = nil){
         self.finishAction = finishAction
         self.prepareAnimations()
         self.createAnimations()
@@ -326,13 +326,13 @@ class NumberScrollAnimatedView: UIView {
     func stopAnimation(){
         
         for layer in scrollLayers {
-            layer.removeAnimationForKey("NumberScrollAnimatedView")
+            layer.removeAnimation(forKey: "NumberScrollAnimatedView")
         }
         
     }
     
     /// 用于记录动画是否全部结束
-    private var finishedCount = 0
+    fileprivate var finishedCount = 0
     
     /**
     动画完成后的回调
@@ -340,7 +340,7 @@ class NumberScrollAnimatedView: UIView {
     - parameter sender: 动画发起方
     - parameter flag:   结束标识
     */
-    override func animationDidStop(sender:CAAnimation,finished flag:Bool) {
+    public func animationDidStop(_ sender:CAAnimation,finished flag:Bool) {
         finishedCount += 1
         
         if  finishedCount == scrollLayers.count {

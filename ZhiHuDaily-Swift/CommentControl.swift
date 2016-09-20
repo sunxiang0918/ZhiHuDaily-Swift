@@ -8,19 +8,19 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
+import SwiftyJSON3
 
 class CommentControl {
     
     /// 加载 长评论
-    func loadLongComments(id:Int,complate:(longComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadLongComments(_ id:Int,complate:@escaping (_ longComments:[CommentVO]?)->Void,block:((_ error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)/long-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers){ (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+        Alamofire.request(COMMENTS_URL+"\(id)/long-comments").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers){ response -> Void in
+            if let result: Any = response.result.value {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(longComments: self.convertJSON2VO(json))
+                complate(self.convertJSON2VO(json))
             }
         }
     }
@@ -28,18 +28,18 @@ class CommentControl {
     /**
     加载更多的长评论
     
-    - parameter newsId:   <#newsId description#>
-    - parameter beforeId: <#beforeId description#>
-    - parameter complate: <#complate description#>
+    - parameter newsId:
+    - parameter beforeId:
+    - parameter complate:
     */
-    func loadMoreLongComments(newsId:Int,beforeId:Int,complate:(longComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil) {
+    func loadMoreLongComments(_ newsId:Int,beforeId:Int,complate:@escaping (_ longComments:[CommentVO]?)->Void,block:((_ error:NSError)->Void)? = nil) {
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(newsId)/long-comments/before/\(beforeId)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+        Alamofire.request(COMMENTS_URL+"\(newsId)/long-comments/before/\(beforeId)").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response -> Void in
+            if let result: Any = response.result.value {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(longComments: self.convertJSON2VO(json))
+                complate(self.convertJSON2VO(json))
             }
         }
         
@@ -47,33 +47,33 @@ class CommentControl {
 
     
     /// 加载 短评论
-    func loadShortComments(id:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadShortComments(_ id:Int,complate:@escaping (_ shortComments:[CommentVO]?)->Void,block:((_ error:NSError)->Void)? = nil){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(id)/short-comments", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+        Alamofire.request(COMMENTS_URL+"\(id)/short-comments").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response -> Void in
+            if let result: Any = response.result.value {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(shortComments: self.convertJSON2VO(json))
+                complate(self.convertJSON2VO(json))
             }
         }
         
     }
     
-    func loadMoreShortComments(newsId:Int,beforeId:Int,complate:(shortComments:[CommentVO]?)->Void,block:((error:NSError)->Void)? = nil) {
+    func loadMoreShortComments(_ newsId:Int,beforeId:Int,complate:@escaping (_ shortComments:[CommentVO]?)->Void,block:((_ error:NSError)->Void)? = nil) {
         
-        Alamofire.Manager.sharedInstance.request(Method.GET,COMMENTS_URL+"\(newsId)/short-comments/before/\(beforeId)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+        Alamofire.request(COMMENTS_URL+"\(newsId)/short-comments/before/\(beforeId)").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response -> Void in
+            if let result: Any = response.result.value {
                 //转换成JSON
                 let json = JSON(result)
                 
-                complate(shortComments: self.convertJSON2VO(json))
+                complate(self.convertJSON2VO(json))
             }
         }
         
     }
     
-    private func convertJSON2VO(json:JSON) -> [CommentVO]? {
+    fileprivate func convertJSON2VO(_ json:JSON) -> [CommentVO]? {
         
         if  let comments = json["comments"].array {
             var vos:[CommentVO] = []

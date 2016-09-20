@@ -13,38 +13,38 @@ import UIKit
 */
 class NormalPopAnimation: NSObject,UIViewControllerAnimatedTransitioning {
    
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
     }
     
     
     // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
         
-        let screenBounds = UIScreen.mainScreen().bounds
+        let screenBounds = UIScreen.main.bounds
         
-        let initFrame = transitionContext.initialFrameForViewController(fromViewController!)
-        let finalFrame = CGRectOffset(initFrame, screenBounds.size.width, 0)
+        let initFrame = transitionContext.initialFrame(for: fromViewController!)
+        let finalFrame = initFrame.offsetBy(dx: screenBounds.size.width, dy: 0)
         
-        let containerView = transitionContext.containerView()
+        let containerView = transitionContext.containerView
         
-        containerView!.addSubview(toViewController?.view ?? nil)
-        containerView!.sendSubviewToBack(toViewController?.view ?? nil)
+        containerView.addSubview((toViewController?.view ?? nil)!)
+        containerView.sendSubview(toBack: (toViewController?.view ?? nil)!)
         
-        let duration = self.transitionDuration(transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
         
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animate(withDuration: duration, animations: { () -> Void in
             fromViewController?.view.frame = finalFrame
-        }) { (finished) -> Void in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+        }, completion: { (finished) -> Void in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             
-            if  !transitionContext.transitionWasCancelled() {
-                UIApplication.sharedApplication().statusBarStyle = .LightContent
+            if  !transitionContext.transitionWasCancelled {
+                UIApplication.shared.statusBarStyle = .lightContent
             }
-        }
+        }) 
         
     }
     

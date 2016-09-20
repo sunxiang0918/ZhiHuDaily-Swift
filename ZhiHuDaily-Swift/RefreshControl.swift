@@ -16,9 +16,9 @@ import UIKit
 - RefreshingDirectionBottom: 上拉
 */
 enum RefreshingDirections {
-    case RefreshingDirectionNone
-    case RefreshingDirectionTop
-    case RefreshingDirectionBottom
+    case refreshingDirectionNone
+    case refreshingDirectionTop
+    case refreshingDirectionBottom
 }
 
 /**
@@ -28,8 +28,8 @@ enum RefreshingDirections {
 - RefreshDirectionBottom: 向下回调
 */
 enum RefreshDirection {
-    case RefreshDirectionTop
-    case RefreshDirectionBottom
+    case refreshDirectionTop
+    case refreshDirectionBottom
 }
 
 class RefreshControl:NSObject {
@@ -41,7 +41,7 @@ class RefreshControl:NSObject {
         }
     }
     
-    private var _refreshingDirection : RefreshingDirections = .RefreshingDirectionNone
+    fileprivate var _refreshingDirection : RefreshingDirections = .refreshingDirectionNone
     
     var scrollView:UIScrollView     //被监听的滑动视图
     
@@ -59,9 +59,9 @@ class RefreshControl:NSObject {
     
     var autoRefreshBottom:Bool = false      //是否开启自动上拉刷新，上拉到enableInsetBottom位置自动上拉刷新
     
-    private var topView:RefreshViewDelegate?     //顶部视图
+    fileprivate var topView:RefreshViewDelegate?     //顶部视图
     
-    private var bottomView:RefreshViewDelegate?      //底部视图
+    fileprivate var bottomView:RefreshViewDelegate?      //底部视图
     
     /**
     构造函数
@@ -79,8 +79,8 @@ class RefreshControl:NSObject {
         super.init()
         
         //增加scrollView的 contentSize 和 contentOffset 属性的 变化的 监听
-        self.scrollView.addObserver(self, forKeyPath: "contentSize", options: [NSKeyValueObservingOptions.New, NSKeyValueObservingOptions.Old], context: nil)
-        self.scrollView.addObserver(self, forKeyPath: "contentOffset", options: [NSKeyValueObservingOptions.New, NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.Prior], context: nil)
+        self.scrollView.addObserver(self, forKeyPath: "contentSize", options: [NSKeyValueObservingOptions.new, NSKeyValueObservingOptions.old], context: nil)
+        self.scrollView.addObserver(self, forKeyPath: "contentOffset", options: [NSKeyValueObservingOptions.new, NSKeyValueObservingOptions.old, NSKeyValueObservingOptions.prior], context: nil)
 
     }
     
@@ -99,7 +99,7 @@ class RefreshControl:NSObject {
     - parameter context: 上下文
     */
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if  "contentSize" == keyPath{
             //如果是scrollView的 contentSize 改变了大小
             
@@ -114,7 +114,7 @@ class RefreshControl:NSObject {
         }else if "contentOffset" == keyPath {
             //如果是scrollView进行了滑动
             
-            if  self.refreshingDirection == .RefreshingDirectionNone {
+            if  self.refreshingDirection == .refreshingDirectionNone {
                 //如果是Offset正在滑动 并且当前没有其他的刷新事件
                 self.drogForChange(change!)
             }
@@ -126,7 +126,7 @@ class RefreshControl:NSObject {
     
     - parameter topView: 头部视图
     */
-    func registeTopView<T where T:RefreshViewDelegate>(topView:T){
+    func registeTopView<T>(_ topView:T) where T:RefreshViewDelegate{
         self.topView = topView
         
         self.topView?.refreshControl = self
@@ -137,7 +137,7 @@ class RefreshControl:NSObject {
     
     - parameter topView: 底部视图
     */
-    func registeBottomView<T where T:RefreshViewDelegate>(bottomView:T){
+    func registeBottomView<T>(_ bottomView:T) where T:RefreshViewDelegate{
         self.bottomView = bottomView
         
         self.bottomView?.refreshControl = self
@@ -148,7 +148,7 @@ class RefreshControl:NSObject {
     
     - parameter direction: 刷新的方向事件
     */
-    func startRefreshingDirection(direction:RefreshDirection){
+    func startRefreshingDirection(_ direction:RefreshDirection){
         self.startRefreshingDirection(direction, animation: true)
     }
     
@@ -157,7 +157,7 @@ class RefreshControl:NSObject {
     
     - parameter direction: 刷新的方向事件
     */
-    func finishRefreshingDirection(direction:RefreshDirection){
+    func finishRefreshingDirection(_ direction:RefreshDirection){
         self.finishRefreshingDirection(direction, animation: true)
     }
     
@@ -168,20 +168,20 @@ class RefreshControl:NSObject {
     
     - parameter change:
     */
-    private func drogForChange(change:[NSObject : AnyObject]){
+    fileprivate func drogForChange(_ change:[AnyHashable: Any]){
         
         if self.scrollView.contentOffset.y<0 {
             
             if -Float(self.scrollView.contentOffset.y) >= self.enableInsetTop {
                 //这个地方是 已经满足刷新的条件了.要开始刷新了
-                if  self.autoRefreshTop || (self.scrollView.decelerating && !self.scrollView.dragging) {
-                    self.engageRefreshDirection(.RefreshDirectionTop)
+                if  self.autoRefreshTop || (self.scrollView.isDecelerating && !self.scrollView.isDragging) {
+                    self.engageRefreshDirection(.refreshDirectionTop)
                 }else {
-                    self.canEngageRefreshDirection(.RefreshDirectionTop)
+                    self.canEngageRefreshDirection(.refreshDirectionTop)
                 }
             }else{
                 //这个是 还没有满足刷新条件的时候, 触发 topView的 动画
-                self.didDisengageRefreshDirection(.RefreshDirectionTop)
+                self.didDisengageRefreshDirection(.refreshDirectionTop)
             }
         }
         
@@ -190,13 +190,13 @@ class RefreshControl:NSObject {
             let result = Float(self.scrollView.contentSize.height) + self.enableInsetBottom - Float(self.scrollView.bounds.height)
 //            println("result:\(result)")
             if Float(self.scrollView.contentOffset.y) >= result {
-                if  self.autoRefreshBottom || (self.scrollView.decelerating && !self.scrollView.dragging){
-                     self.engageRefreshDirection(.RefreshDirectionBottom)
+                if  self.autoRefreshBottom || (self.scrollView.isDecelerating && !self.scrollView.isDragging){
+                     self.engageRefreshDirection(.refreshDirectionBottom)
                 }else {
-                    self.canEngageRefreshDirection(.RefreshDirectionBottom)
+                    self.canEngageRefreshDirection(.refreshDirectionBottom)
                 }
             }else{
-                self.didDisengageRefreshDirection(.RefreshDirectionBottom)
+                self.didDisengageRefreshDirection(.refreshDirectionBottom)
             }
             
         }
@@ -207,7 +207,7 @@ class RefreshControl:NSObject {
     
     - parameter direction: 事件类型
     */
-    private func canEngageRefreshDirection(direction:RefreshDirection) {
+    fileprivate func canEngageRefreshDirection(_ direction:RefreshDirection) {
         
         if  let top = self.topView {
             top.canEngageRefresh(self.scrollView,direction: direction)
@@ -223,7 +223,7 @@ class RefreshControl:NSObject {
     
     - parameter direction: 事件类型
     */
-    private func didDisengageRefreshDirection(direction:RefreshDirection) {
+    fileprivate func didDisengageRefreshDirection(_ direction:RefreshDirection) {
         
         if  let top = self.topView {
             top.didDisengageRefresh(self.scrollView,direction:direction)
@@ -240,12 +240,12 @@ class RefreshControl:NSObject {
     
     - parameter direction: 事件类型
     */
-    private func engageRefreshDirection(direction:RefreshDirection) {
-        var edge:UIEdgeInsets = UIEdgeInsetsZero
+    fileprivate func engageRefreshDirection(_ direction:RefreshDirection) {
+        var edge:UIEdgeInsets = UIEdgeInsets.zero
         
-        if  direction == .RefreshDirectionTop {
+        if  direction == .refreshDirectionTop {
             //修改事件类型为 正在执行下滑刷新
-            self._refreshingDirection = .RefreshingDirectionTop
+            self._refreshingDirection = .refreshingDirectionTop
             //获取下滑的距离
             let topH = self.enableInsetTop < 45 ? 45:self.enableInsetTop
             
@@ -259,10 +259,10 @@ class RefreshControl:NSObject {
                 }
             }
             
-        }else if direction == .RefreshDirectionBottom {
+        }else if direction == .refreshDirectionBottom {
             let bottomH = self.enableInsetBottom < 45 ? 45:self.enableInsetBottom
             edge = UIEdgeInsetsMake(0, 0, CGFloat(bottomH), 0)
-            self._refreshingDirection = .RefreshingDirectionBottom
+            self._refreshingDirection = .refreshingDirectionBottom
             
             //设置scrollView的contentInset
             if let t = self.bottomView {
@@ -281,7 +281,7 @@ class RefreshControl:NSObject {
     
     - parameter direction: 刷新事件
     */
-    private func didEngageRefreshDirection(direction:RefreshDirection){
+    fileprivate func didEngageRefreshDirection(_ direction:RefreshDirection){
         if  let top = self.topView {
             top.startRefreshing(direction)
         }
@@ -293,35 +293,35 @@ class RefreshControl:NSObject {
         self.delegate.refreshControl(self, didEngageRefreshDirection: direction)
     }
     
-    private func startRefreshingDirection(direction:RefreshDirection,animation:Bool) {
+    fileprivate func startRefreshingDirection(_ direction:RefreshDirection,animation:Bool) {
         
-        var point = CGPointZero
+        var point = CGPoint.zero
         
-        if  direction == .RefreshDirectionTop {
+        if  direction == .refreshDirectionTop {
             let topH = self.enableInsetTop < 45 ? 45:self.enableInsetTop
-            point = CGPointMake(0, CGFloat(-topH))
-        }else if direction == .RefreshDirectionBottom {
+            point = CGPoint(x: 0, y: CGFloat(-topH))
+        }else if direction == .refreshDirectionBottom {
             let height = max(self.scrollView.contentSize.height,self.scrollView.frame.height)
             let bottomH = self.enableInsetBottom < 45 ? 45:self.enableInsetBottom
             let result = height - self.scrollView.bounds.height + CGFloat(bottomH)
-            point = CGPointMake(0, result)
+            point = CGPoint(x: 0, y: result)
         }
         
         self.scrollView.setContentOffset(point, animated: true)
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(0.25 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
 
             self.engageRefreshDirection(direction)
         })
     }
     
-    private func finishRefreshingDirection(direction:RefreshDirection,animation:Bool) {
+    fileprivate func finishRefreshingDirection(_ direction:RefreshDirection,animation:Bool) {
         
 //        UIView.animateWithDuration(0.25, animations: { () -> Void in
 //            self.scrollView.contentInset = UIEdgeInsetsZero
 //        })
         
-        self._refreshingDirection = .RefreshingDirectionNone
+        self._refreshingDirection = .refreshingDirectionNone
         
         if  let top = self.topView {
             top.finishRefreshing(direction)

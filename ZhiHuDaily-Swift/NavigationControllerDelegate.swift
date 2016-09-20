@@ -20,9 +20,9 @@ class NavigationControllerDelegate: NSObject,UINavigationControllerDelegate {
     
     //====================UINavigationControllerDelegate协议的实现======================================================
     //返回动画
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if operation == UINavigationControllerOperation.Pop {
+        if operation == UINavigationControllerOperation.pop {
             //如果是返回,就返回特殊的动画. 否则就返回nil,也就是默认动画
             return popAnimation
         }
@@ -31,7 +31,7 @@ class NavigationControllerDelegate: NSObject,UINavigationControllerDelegate {
     }
     
     // 返回 interactionController 也就是转场动画控制器.  注意! 如果 上面的那个方法 navigationController:animationControllerForOperation:fromViewController:toViewController: 返回的是nil. 那么就不会调用这个方法
-    func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
     }
     

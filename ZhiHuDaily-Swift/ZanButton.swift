@@ -10,11 +10,11 @@ import UIKit
 
 class ZanButton: UIView{
 
-    private var zanImageView:UIImageView!
+    fileprivate var zanImageView:UIImageView!
     
-    private var zanNotifyView:UIView!
+    fileprivate var zanNotifyView:UIView!
     
-    private var numberView:NumberScrollAnimatedView!
+    fileprivate var numberView:NumberScrollAnimatedView!
     
     /// 点赞的时候的动作闭包
     var zanAction:((Int)->Void)?
@@ -51,12 +51,12 @@ class ZanButton: UIView{
         
         set{
             zanNumber = newValue
-            self.numberView.value = zanNumber
+            self.numberView.value = zanNumber as NSNumber!
         }
     }
     
     /// 赞的数量
-    private var zanNumber = 0
+    fileprivate var zanNumber = 0
     
     /// PopView的高度
     var popHeight:Float = 20.0
@@ -65,9 +65,9 @@ class ZanButton: UIView{
     /// PopView的圆角
     var popCornerRadius:Float = 2.0
     /// PopView的字体
-    var popFont = UIFont.systemFontOfSize(10)
+    var popFont = UIFont.systemFont(ofSize: 10)
     /// PopView的字体颜色
-    var popFontColor = UIColor.whiteColor()
+    var popFontColor = UIColor.white
     /// PopView中字体跳动的动画持续时间
     var popNumberDuration:Float = 0.4
     var popShowDuration:Float = 0.3
@@ -95,13 +95,13 @@ class ZanButton: UIView{
     
     - returns:
     */
-    private func initBaseLayout(){
+    fileprivate func initBaseLayout(){
         
         //设置图片
-        zanImageView = UIImageView(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)))
-        zanImageView.contentMode = UIViewContentMode.Center
+        zanImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        zanImageView.contentMode = UIViewContentMode.center
         
-        zanImageView.userInteractionEnabled = true
+        zanImageView.isUserInteractionEnabled = true
         self.addSubview(zanImageView)
         
         if zanImage == nil {
@@ -118,7 +118,7 @@ class ZanButton: UIView{
         zanImageView.addGestureRecognizer(tapImageViewGesture)
         
         //开始构建
-        zanNotifyView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame), CGFloat(popHeight)))
+        zanNotifyView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(popHeight)))
         zanNotifyView.backgroundColor=popBackgroundColor
         
         //设置圆角矩形
@@ -129,13 +129,13 @@ class ZanButton: UIView{
         zanNotifyView.alpha=0
         
         //开始设置数字了
-        numberView = NumberScrollAnimatedView(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame), CGFloat(popHeight)))
-        numberView.backgroundColor = UIColor.clearColor()
+        numberView = NumberScrollAnimatedView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(popHeight)))
+        numberView.backgroundColor = UIColor.clear
         numberView.font = popFont
         numberView.textColor = popFontColor
         numberView.desity = 0
         numberView.duration = popNumberDuration
-        numberView.value = zanNumber
+        numberView.value = zanNumber as NSNumber!
         
         zanNotifyView.addSubview(numberView!)
         
@@ -155,19 +155,19 @@ class ZanButton: UIView{
             self.zanNumber += 1
             
             //开始执行动画
-            UIView.animateWithDuration(NSTimeInterval(popShowDuration), animations: { () -> Void in
+            UIView.animate(withDuration: TimeInterval(popShowDuration), animations: { () -> Void in
                 //第一阶段动画效果,用于显示popView
-                self.zanNotifyView?.frame = CGRectMake(0, -30, CGRectGetWidth(self.frame), CGFloat(self.popHeight))
+                self.zanNotifyView?.frame = CGRect(x: 0, y: -30, width: self.frame.width, height: CGFloat(self.popHeight))
                 self.zanNotifyView?.alpha = 1
                 }, completion: { (finished) -> Void in
                     //完成第一阶段动画后, 开始跳动数字
                     
-                    self.numberView.value = self.zanNumber
+                    self.numberView.value = self.zanNumber as NSNumber!
                     self.numberView.startAnimation({()->Void in
                         //数字跳动完成后,开始 第二阶段动画, 用于popView的消失
-                        UIView.animateWithDuration(NSTimeInterval(self.popShowDuration), animations: { () -> Void in
+                        UIView.animate(withDuration: TimeInterval(self.popShowDuration), animations: { () -> Void in
                             //动画效果
-                            self.zanNotifyView?.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGFloat(self.popHeight))
+                            self.zanNotifyView?.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(self.popHeight))
                             self.zanNotifyView?.alpha = 0
                             
                             }, completion: { (finished) -> Void in
@@ -184,7 +184,7 @@ class ZanButton: UIView{
         }else{
             //如果是取消赞的操作
             self.zanNumber -= 1
-            self.numberView.value = self.zanNumber
+            self.numberView.value = self.zanNumber as NSNumber!
             self.zanImageView?.image = zanImage
             
             if  let _unzanAction = unzanAction {

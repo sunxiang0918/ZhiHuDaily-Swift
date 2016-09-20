@@ -24,24 +24,24 @@ class CommentSectionTitleView: UITableViewHeaderFooterView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var expandButton: UIButton!
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         if  CommentSectionTitleView.isExpanded {
-            self.expandButton.selected = true
+            self.expandButton.isSelected = true
         } else {
-            self.expandButton.selected = false
+            self.expandButton.isSelected = false
         }
     }
     
-    @IBAction func doExpandAction(sender: UIButton) {
+    @IBAction func doExpandAction(_ sender: UIButton) {
         
-        if self.expandButton.selected {
+        if self.expandButton.isSelected {
             CommentSectionTitleView.isExpanded = false
             delegate?.doSectionCollapse(self)
-            self.expandButton.selected = false
+            self.expandButton.isSelected = false
         }else {
             CommentSectionTitleView.isExpanded = true
             delegate?.doSectionExpand(self)
-            self.expandButton.selected = true
+            self.expandButton.isSelected = true
         }
         
     }
@@ -49,8 +49,8 @@ class CommentSectionTitleView: UITableViewHeaderFooterView {
 
 protocol CommentSectionTitleViewDelegate {
     
-    func doSectionExpand(sender:CommentSectionTitleView)
+    func doSectionExpand(_ sender:CommentSectionTitleView)
     
-    func doSectionCollapse(sender:CommentSectionTitleView)
+    func doSectionCollapse(_ sender:CommentSectionTitleView)
     
 }

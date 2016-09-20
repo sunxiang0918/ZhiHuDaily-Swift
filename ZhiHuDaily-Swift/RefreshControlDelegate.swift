@@ -18,6 +18,6 @@ protocol RefreshControlDelegate {
     *  @param refreshControl 响应的控件
     *  @param direction 事件类型
     */
-    func refreshControl(refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection)
+    func refreshControl(_ refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection)
     
 }

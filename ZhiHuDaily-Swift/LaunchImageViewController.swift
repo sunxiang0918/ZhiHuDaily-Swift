@@ -11,25 +11,25 @@ import UIKit
 class LaunchImageViewController: UIViewController {
 
     //常量
-    private let TIME_DURATION = 4.0     //动画的时间
-    private let FROM_TIME_DURATION = 1.66       //开始放大的时间
-    private let ALPHA:CGFloat = 0.0     //组件的透明度
-    private let X_SCALE:CGFloat = 1.15      //放大倍数
-    private let Y_SCALE:CGFloat = 1.15      //放大倍数
+    fileprivate let TIME_DURATION = 4.0     //动画的时间
+    fileprivate let FROM_TIME_DURATION = 1.66       //开始放大的时间
+    fileprivate let ALPHA:CGFloat = 0.0     //组件的透明度
+    fileprivate let X_SCALE:CGFloat = 1.15      //放大倍数
+    fileprivate let Y_SCALE:CGFloat = 1.15      //放大倍数
     
-    private var myImage:UIImage!        //显示的图片
+    fileprivate var myImage:UIImage!        //显示的图片
     
-    private var sourceLabel: UILabel!       //版权的Label
+    fileprivate var sourceLabel: UILabel!       //版权的Label
     
     var viewController:UIViewController!    //动画完成后跳转的view
     
-    private let fromImageView:UIImageView = UIImageView(frame: UIScreen.mainScreen().bounds)        //起始图片View
+    fileprivate let fromImageView:UIImageView = UIImageView(frame: UIScreen.main.bounds)        //起始图片View
     
-    private let toImageView:UIImageView = UIImageView(frame: UIScreen.mainScreen().bounds)  //目标图片View
+    fileprivate let toImageView:UIImageView = UIImageView(frame: UIScreen.main.bounds)  //目标图片View
     
-    private let maskImageView:UIImageView = UIImageView(frame: UIScreen.mainScreen().bounds)        //遮罩图片View
+    fileprivate let maskImageView:UIImageView = UIImageView(frame: UIScreen.main.bounds)        //遮罩图片View
     
-    private var logoImageView:UIImageView?
+    fileprivate var logoImageView:UIImageView?
     
     static var jumpTo:String?      //跳转使用的
     
@@ -38,20 +38,20 @@ class LaunchImageViewController: UIViewController {
         super.viewDidLoad()
         
         //设置关闭状态栏
-        if self.respondsToSelector(#selector(UIViewController.setNeedsStatusBarAppearanceUpdate)) {
-            self.prefersStatusBarHidden()
+        if self.responds(to: #selector(UIViewController.setNeedsStatusBarAppearanceUpdate)) {
+            //self.prefersStatusBarHidden
             self.setNeedsStatusBarAppearanceUpdate()
         }
         
         //1536 × 570
-        let width = UIScreen.mainScreen().bounds.width
+        let width = UIScreen.main.bounds.width
         //这里应该使用两种尺寸比例的图,但是由于没有找到,就只有找到一种.因此 ipad和iphone的比例是不一样的,因此需要不同的处理
         let height = width>400 ? width*570/1536 : 185
-        logoImageView = UIImageView(frame: CGRectMake(0, UIScreen.mainScreen().bounds.height-height, width, height))   //LOGO图片View
+        logoImageView = UIImageView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height-height, width: width, height: height))   //LOGO图片View
     }
     
     //本视图显示前
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //加载图片,并加入view中
@@ -76,7 +76,7 @@ class LaunchImageViewController: UIViewController {
     }
     
     //本视图显示后动作
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         //开始设置动画,这个动画是渐变透明
@@ -88,22 +88,22 @@ class LaunchImageViewController: UIViewController {
         //开始设置动画,这个动画是渐变放大
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(TIME_DURATION)
-        let transform = CGAffineTransformMakeScale(X_SCALE, Y_SCALE)
+        let transform = CGAffineTransform(scaleX: X_SCALE, y: Y_SCALE)
         self.toImageView.transform = transform
         UIView.commitAnimations()
         
         //启动一个定时器,到时间后执行 presentNextViewController: 方法
-        NSTimer.scheduledTimerWithTimeInterval(TIME_DURATION, target: self, selector: #selector(LaunchImageViewController.presentNextViewController(_:)), userInfo: self.viewController, repeats: false)
+        Timer.scheduledTimer(timeInterval: TIME_DURATION, target: self, selector: #selector(LaunchImageViewController.presentNextViewController(_:)), userInfo: self.viewController, repeats: false)
     }
 
     //动画显示完毕后,把页面跳转到主视图
-    func presentNextViewController(timer:NSTimer) {
+    func presentNextViewController(_ timer:Timer) {
         
         //从timer中把目标View获取出来
         let viewController:UIViewController = timer.userInfo as! UIViewController
         
         //跳转页面
-        self.presentViewController(viewController, animated: true) { () -> Void in
+        self.present(viewController, animated: true) { () -> Void in
             //这里设置了一个回调.当页面跳转到主视图后,判断是否存在直接跳转到新闻详细的里面.如果有,就继续跳转.
             if LaunchImageViewController.jumpTo != nil {
                 //打开根视图
@@ -112,7 +112,7 @@ class LaunchImageViewController: UIViewController {
                 let rootViewController = pkRevealController?.frontViewController
                 
                 //然后打开最新的日报
-                rootViewController?.performSegueWithIdentifier("pushSegue", sender: LaunchImageViewController.jumpTo)
+                rootViewController?.performSegue(withIdentifier: "pushSegue", sender: LaunchImageViewController.jumpTo)
                 
                 LaunchImageViewController.jumpTo = nil
             }
@@ -120,7 +120,7 @@ class LaunchImageViewController: UIViewController {
         
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -130,7 +130,7 @@ class LaunchImageViewController: UIViewController {
     }
 
     //类方法, 初始化本View.
-    class func addTransitionToViewController(viewController : UIViewController,modalTransitionStyle theStyle:UIModalTransitionStyle,withImageDate imageDate:UIImage,withSourceName name:String) -> UIViewController? {
+    class func addTransitionToViewController(_ viewController : UIViewController,modalTransitionStyle theStyle:UIModalTransitionStyle,withImageDate imageDate:UIImage,withSourceName name:String) -> UIViewController? {
         
         let instance = LaunchImageViewController()
         
@@ -140,7 +140,7 @@ class LaunchImageViewController: UIViewController {
     }
     
     //初始化, 没有使用构造函数是因为 重写UIViewController的init 是非常麻烦的.
-    func initWithTargetView(targetView:UIViewController,modalTransitionStyle theStyle:UIModalTransitionStyle,withImageDate imageDate:UIImage,withSourceName name:String){
+    func initWithTargetView(_ targetView:UIViewController,modalTransitionStyle theStyle:UIModalTransitionStyle,withImageDate imageDate:UIImage,withSourceName name:String){
         
         //设置targetView的转场效果
         targetView.modalTransitionStyle = theStyle
@@ -154,13 +154,13 @@ class LaunchImageViewController: UIViewController {
         let rect = viewController.view.frame
         
         //初始化版权Label
-        self.sourceLabel = UILabel(frame: CGRectMake((rect.size.width-200)/2, (rect.size.height-30), 200, 30))
+        self.sourceLabel = UILabel(frame: CGRect(x: (rect.size.width-200)/2, y: (rect.size.height-30), width: 200, height: 30))
         self.sourceLabel.text = name        //设置版权Label的内容
-        self.sourceLabel.textColor = UIColor.grayColor()     //颜色
-        self.sourceLabel.font = UIFont.systemFontOfSize(10) //字体大小
-        self.sourceLabel.textAlignment = NSTextAlignment.Center     //文字居中对齐
-        self.sourceLabel.textColor = UIColor.whiteColor()   //字体颜色为白色
-        self.sourceLabel.backgroundColor = UIColor.clearColor() //背景色为透明
+        self.sourceLabel.textColor = UIColor.gray     //颜色
+        self.sourceLabel.font = UIFont.systemFont(ofSize: 10) //字体大小
+        self.sourceLabel.textAlignment = NSTextAlignment.center     //文字居中对齐
+        self.sourceLabel.textColor = UIColor.white   //字体颜色为白色
+        self.sourceLabel.backgroundColor = UIColor.clear //背景色为透明
     }
     
 }

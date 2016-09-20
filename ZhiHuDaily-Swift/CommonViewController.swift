@@ -7,6 +7,28 @@
 //
 
 import UIKit
+import Kingfisher
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class CommonViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CommonListTableViewCellDelegate,CommentSectionTitleViewDelegate {
 
@@ -20,15 +42,15 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     var longComments:[CommentVO]?
     var shortComments:[CommentVO]?
     
-    private let formatter:NSDateFormatter = NSDateFormatter()
+    fileprivate let formatter:DateFormatter = DateFormatter()
     
     @IBOutlet weak var commonTableView: UITableView!
     @IBOutlet weak var commentNumberLabel: UILabel!
     
     /// 用于记录POP动画状态的变量
-    private var popstate = PopActionState.NONE
+    fileprivate var popstate = PopActionState.none
     
-    private var sectionExpanded = false
+    fileprivate var sectionExpanded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +58,9 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         formatter.dateFormat = "MM-dd HH:mm"
         
         let nib=UINib(nibName: "CommonListTableViewCell", bundle: nil)
-        commonTableView.registerNib(nib, forCellReuseIdentifier: "commonListTableViewCell")
-        commonTableView.registerNib(UINib(nibName: "EmptyCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCommentTableViewCell")
-        commonTableView.registerNib(UINib(nibName: "CommentSectionTitleView", bundle: nil), forHeaderFooterViewReuseIdentifier: "commentSectionTitleView")
+        commonTableView.register(nib, forCellReuseIdentifier: "commonListTableViewCell")
+        commonTableView.register(UINib(nibName: "EmptyCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCommentTableViewCell")
+        commonTableView.register(UINib(nibName: "CommentSectionTitleView", bundle: nil), forHeaderFooterViewReuseIdentifier: "commentSectionTitleView")
         
         
         //IOS8 新增的逻辑,输入一个预估的高度,然后默认设置self.tableView.rowHeight = UITableViewAutomaticDimension;  这样就能自动的适配高度了,而不用去重载 tableview:heightForRowAtIndexPath:这个方法了
@@ -53,7 +75,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         commentNumberLabel.text = "\(newsExtral.comments)条点评"
         
@@ -72,29 +94,29 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         //当评论页面消失的时候 还原这个状态. 为下一个评论页面做准备
         CommentSectionTitleView.isExpanded = false
     }
     
-    @IBAction func doBackAction(sender: UIButton) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func doBackAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
+    @IBAction func panGestureAction(_ sender: UIPanGestureRecognizer) {
         
         let view = self.view
         
-        if  sender.state == UIGestureRecognizerState.Began {
+        if  sender.state == UIGestureRecognizerState.began {
             //当拖动事件开始的时候
             
-            popstate = PopActionState.NONE
+            popstate = PopActionState.none
             
 //            //获取拖动事件的开始点坐标
 //            let location = sender.locationInView(view)
             
             //获取拖动事件的偏移坐标
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             //当偏移坐标的x轴大于0,也就是向右滑动的时候.开始做真正的动作
             if  translation.x >= 0 && self.navigationController?.viewControllers.count >= 2 {
@@ -102,13 +124,13 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
                 interactionController = UIPercentDrivenInteractiveTransition()
                 
                 //开始调用navigation的POP转场
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
-        }else if  sender.state == UIGestureRecognizerState.Changed {
+        }else if  sender.state == UIGestureRecognizerState.changed {
             //当拖动事件进行时
             
             //获取到事件的偏移坐标
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             if translation.x<0 {
                 //如果是向左移动,就不采取动作
@@ -119,24 +141,24 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             let b = (view?.bounds)!
             
             //计算百分比
-            let d = fabs(translation.x / CGRectGetWidth(b))
+            let d = fabs(translation.x / b.width)
             
             //设置转场动画的百分比
-            interactionController?.updateInteractiveTransition(d)
-        }else if sender.state == UIGestureRecognizerState.Ended {
+            interactionController?.update(d)
+        }else if sender.state == UIGestureRecognizerState.ended {
             //当拖动事件结束时
             
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             //判断速率向量是否大于0, 并且拉动的距离已经过半了
-            if  sender.velocityInView(view).x > 0 && translation.x > CGRectGetMidX(view.bounds)-20  {
-                popstate = PopActionState.FINISH
+            if  sender.velocity(in: view).x > 0 && translation.x > (view?.bounds.midX)!-20  {
+                popstate = PopActionState.finish
                 //完成整个动画
-                interactionController?.finishInteractiveTransition()
+                interactionController?.finish()
             }else {
-                popstate = PopActionState.CANCEL
+                popstate = PopActionState.cancel
                 //停止转场
-                interactionController?.cancelInteractiveTransition()
+                interactionController?.cancel()
             }
             
             //这个地方必须设置成nil. 避免两次之间的转场冲突了
@@ -157,7 +179,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     //================UITableViewDataSource的实现================================
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0{
             //这个是长评论
@@ -190,8 +212,8 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     - returns:
     */
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let tmp = tableView.dequeueReusableHeaderFooterViewWithIdentifier("commentSectionTitleView") as! CommentSectionTitleView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let tmp = tableView.dequeueReusableHeaderFooterView(withIdentifier: "commentSectionTitleView") as! CommentSectionTitleView
         
         if tmp.delegate == nil {
             tmp.delegate = self
@@ -199,28 +221,28 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         if  section == 0 {
             tmp.titleLabel.text = "\(newsExtral.longComments)条长评"
-            tmp.expandButton.hidden = true
+            tmp.expandButton.isHidden = true
         }else {
             tmp.titleLabel.text = "\(newsExtral.shortComments  )条短评"
-            tmp.expandButton.hidden = false
+            tmp.expandButton.isHidden = false
         }
         
         return tmp
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell
         
         var comment:CommentVO? = nil
         
-        if  indexPath.section == 0 {
+        if  (indexPath as NSIndexPath).section == 0 {
             //长评论
             
             let count = longComments?.count
             
             if count == nil || count! == 0{
                 //表示没有长评论.
-                let tmp = tableView.dequeueReusableCellWithIdentifier("emptyCommentTableViewCell") as! EmptyCommentTableViewCell
+                let tmp = tableView.dequeueReusableCell(withIdentifier: "emptyCommentTableViewCell") as! EmptyCommentTableViewCell
                 
                 //直接设置图片View的 约束的高度为  屏幕高度 - 上下title高度 - 两个section的高度
                 tmp.heightConstraint.constant = self.view.frame.height - 50 - 30 - 32 - 32
@@ -230,7 +252,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             }else {
                 //表示有长评论
                 if  let _longComments = longComments {
-                    comment = _longComments[indexPath.row]
+                    comment = _longComments[(indexPath as NSIndexPath).row]
                 }
             }
             
@@ -243,13 +265,13 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             }else {
                 //表示有短评论
                 if  let _shortComments = shortComments {
-                    comment = _shortComments[indexPath.row]
+                    comment = _shortComments[(indexPath as NSIndexPath).row]
                 }
             }
         }
         
         //到这里来的 都是一定有cell的
-        let tmp = tableView.dequeueReusableCellWithIdentifier("commonListTableViewCell") as? CommonListTableViewCell
+        let tmp = tableView.dequeueReusableCell(withIdentifier: "commonListTableViewCell") as? CommonListTableViewCell
         
         if  tmp?.delegate == nil {
             tmp?.delegate = self
@@ -264,58 +286,58 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             tmp?.contentLabel.text = _comment.content
             
-            let date = NSDate(timeIntervalSince1970: NSTimeInterval(_comment.time))
+            let date = Date(timeIntervalSince1970: TimeInterval(_comment.time))
             
-            tmp?.dateLabel.text=formatter.stringFromDate(date)
+            tmp?.dateLabel.text=formatter.string(from: date)
             tmp?.voteNumberLabel.text="\(_comment.likes)"
             if let url = _comment.avatar {
-                tmp?.avatorImage.hnk_setImageFromURL(NSURL(string: url)!, placeholder: UIImage(named:"Setting_Avatar"))
+                tmp?.avatorImage.kf_setImage(with: URL(string: url)!, placeholder: UIImage(named:"Setting_Avatar"))
             }
             
             tmp?.replayCommentLabel.numberOfLines = 2
-            tmp?.expandButton.selected = false
+            tmp?.expandButton.isSelected = false
             
             if let replay = _comment.replayTo {
-                tmp?.expandButton.hidden = false
-                tmp?.replayCommentLabel.hidden = false
+                tmp?.expandButton.isHidden = false
+                tmp?.replayCommentLabel.isHidden = false
                 
                 if  replay.status == 0 {
                     let content = "//\(replay.author):\(replay.content)"
 
                     //通过使用attributedText 来设置 同一个Label里面的字体和颜色不一样.从而实现引用的作者名加粗
                     let attributedText = NSMutableAttributedString(string: content)
-                    attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0,replay.author.characters.count+3))
-                    attributedText.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(12), range: NSMakeRange(0,replay.author.characters.count+3))
+                    attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,replay.author.characters.count+3))
+                    attributedText.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 12), range: NSMakeRange(0,replay.author.characters.count+3))
                     tmp?.replayCommentLabel.attributedText = attributedText
                     
-                    tmp?.replayCommentLabel.backgroundColor = UIColor.clearColor()
+                    tmp?.replayCommentLabel.backgroundColor = UIColor.clear
                     
                     //根据字数 来计算是否需要显示展开按钮.
                     //TODO 这个地方其实还是有问题的.有些情况下计算不准确...
                     let width = tmp?.replayCommentLabel.frame.width
-                    let size = content.boundingRectWithSize(CGSizeMake(width!, 999), options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading] , attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12)], context:nil)
+                    let size = content.boundingRect(with: CGSize(width: width!, height: 999), options: [NSStringDrawingOptions.usesLineFragmentOrigin, NSStringDrawingOptions.usesFontLeading] , attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)], context:nil)
                     if  size.height > 30 {
-                        tmp?.expandButton.hidden = false
+                        tmp?.expandButton.isHidden = false
                     }else {
-                        tmp?.expandButton.hidden = true
+                        tmp?.expandButton.isHidden = true
                     }
                     
                 }else {
                     tmp?.replayCommentLabel.text = "  \(replay.content)"
                     tmp?.replayCommentLabel.backgroundColor = UIColor(white: 0.957, alpha: 1)
-                    tmp?.expandButton.hidden = true
+                    tmp?.expandButton.isHidden = true
                 }
                 
             }else{
                 //没有引用的评论.
-                tmp?.expandButton.hidden = true
-                tmp?.replayCommentLabel.hidden = true
+                tmp?.expandButton.isHidden = true
+                tmp?.replayCommentLabel.isHidden = true
                 tmp?.replayCommentLabel.text = ""
             }
         }
         
         // 这里要处理 分页的加载了. 这里的逻辑是这样的. 判断到 如果界面已经刷新到 短新闻的倒数第3条了.那么就尝试进行新的数据
-        if  indexPath.section == 0 && indexPath.row+2 == (self.longComments?.count ?? 0) && (self.longComments?.count ?? 0 ) >= 20 && self.newsExtral.longComments > (self.longComments?.count ?? 0) {
+        if  (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row+2 == (self.longComments?.count ?? 0) && (self.longComments?.count ?? 0 ) >= 20 && self.newsExtral.longComments > (self.longComments?.count ?? 0) {
             let lastId = self.longComments?.last?.id
             self.commentControl.loadMoreLongComments(self.newsId, beforeId: lastId!, complate: { (longComments) -> Void in
                 if let _longComments = longComments {
@@ -327,7 +349,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
                     }
                 }
             }, block: nil)
-        }else if  indexPath.section == 1 && indexPath.row+2 == (self.shortComments?.count ?? 0) && (self.shortComments?.count ?? 0) >= 20 && self.newsExtral.shortComments > (self.shortComments?.count ?? 0) {
+        }else if  (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row+2 == (self.shortComments?.count ?? 0) && (self.shortComments?.count ?? 0) >= 20 && self.newsExtral.shortComments > (self.shortComments?.count ?? 0) {
             //必须是短新闻, 然后当前刷新的是 短新闻的倒数第3条新闻, 并且短新闻数量大于20  然后还有 短新闻没有加载
             let lastId = self.shortComments?.last?.id
             self.commentControl.loadMoreShortComments(self.newsId, beforeId: lastId!, complate: { (shortComments) -> Void in
@@ -348,11 +370,11 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     //================UITableViewDataSource的实现================================
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if  section == 0 {
             return 32
         }
@@ -369,13 +391,13 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     - returns:
     */
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.min
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
     
     //====================CommonListTableViewCellDelegate实现=============================
     //执行展开操作
-    func doExpand(sender:CommonListTableViewCell) {
+    func doExpand(_ sender:CommonListTableViewCell) {
         //设置行数
         sender.replayCommentLabel.numberOfLines = 100
         //放弃原来的大小,重新计算大小
@@ -388,7 +410,7 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     //执行关闭操作
-    func doCollapse(sender:CommonListTableViewCell) {
+    func doCollapse(_ sender:CommonListTableViewCell) {
         //设置行数
         sender.replayCommentLabel.numberOfLines = 2
         //放弃原来的大小,重新计算大小
@@ -403,12 +425,12 @@ class CommonViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     //====================CommentSectionTitleViewDelegate实现=============================
-    func doSectionExpand(sender:CommentSectionTitleView){
+    func doSectionExpand(_ sender:CommentSectionTitleView){
         sectionExpanded = true
         commonTableView.reloadData()
     }
     
-    func doSectionCollapse(sender:CommentSectionTitleView){
+    func doSectionCollapse(_ sender:CommentSectionTitleView){
         sectionExpanded = false
         commonTableView.reloadData()
     }

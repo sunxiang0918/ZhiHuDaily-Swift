@@ -25,20 +25,20 @@ class CommonListTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func doExpandAction(sender: UIButton) {
+    @IBAction func doExpandAction(_ sender: UIButton) {
         
-        if self.expandButton.selected {
+        if self.expandButton.isSelected {
             delegate?.doCollapse(self)
-            self.expandButton.selected = false
+            self.expandButton.isSelected = false
         }else {
             delegate?.doExpand(self)
-            self.expandButton.selected = true
+            self.expandButton.isSelected = true
         }
         
     }
@@ -46,8 +46,8 @@ class CommonListTableViewCell: UITableViewCell {
 
 protocol CommonListTableViewCellDelegate{
     
-    func doExpand(sender:CommonListTableViewCell)
+    func doExpand(_ sender:CommonListTableViewCell)
     
-    func doCollapse(sender:CommonListTableViewCell)
+    func doCollapse(_ sender:CommonListTableViewCell)
     
 }

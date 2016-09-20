@@ -7,6 +7,37 @@
 //
 
 import UIKit
+import Kingfisher
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 /**
 *  新闻详细页面的 controller
@@ -15,8 +46,6 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
 
     /// 用于获取新闻详细的Control
     let newsDetailControl : NewsDetailControl = NewsDetailControl()
-    
-    /// 用于获取新闻list的Control
     var newsListControl : MainNewsListControl!
     
     /// 上下拉动的 Control
@@ -26,20 +55,20 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     var newsLocation: (Int,Int)!
     
     /// 记录新闻详细的VO
-    private var news:NewsDetailVO!
+    fileprivate var news:NewsDetailVO!
     
     /// 记录新闻扩展信息的VO
-    private var newsExtral:NewsExtraVO!
+    fileprivate var newsExtral:NewsExtraVO!
     
     /// 主视图的Controller
     var mainViewController : UIViewController!
     
     /// 用于记录POP动画状态的变量
-    private var popstate = PopActionState.NONE
+    fileprivate var popstate = PopActionState.none
     
-    private var topRefreshState = TopRefreshState.NONE
+    fileprivate var topRefreshState = TopRefreshState.none
     
-    private var popupController : CNPPopupController?
+    fileprivate var popupController : CNPPopupController?
     
     /// 界面上的 各种组件
     @IBOutlet weak var webView: UIWebView!
@@ -53,42 +82,42 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     @IBOutlet weak var statusBarView: UIView!
 
     /// title上的各种组件
-    let topImage = UIImageView(frame: CGRectZero)
-    let maskImage = UIImageView(frame: CGRectZero)
-    let topMaskImage = UIImageView(frame: CGRectZero)
-    let imageSourceLabel = UILabel(frame: CGRectZero)
-    let titleLabel = UILabel(frame: CGRectZero)
+    let topImage = UIImageView(frame: CGRect.zero)
+    let maskImage = UIImageView(frame: CGRect.zero)
+    let topMaskImage = UIImageView(frame: CGRect.zero)
+    let imageSourceLabel = UILabel(frame: CGRect.zero)
+    let titleLabel = UILabel(frame: CGRect.zero)
     
     /// 推荐者的组件
     var recommandView : RecommendersView!
     
     /// 上方 下拉刷新的组件
-    let topRefreshImage = UIImageView(frame: CGRectZero)
-    let topRefreshLabel = UILabel(frame: CGRectZero)
+    let topRefreshImage = UIImageView(frame: CGRect.zero)
+    let topRefreshLabel = UILabel(frame: CGRect.zero)
     
     /// 下方 上拉刷新的组件
-    let bottomRefreshImage = UIImageView(frame: CGRectZero)
-    let bottomRefreshLabel = UILabel(frame: CGRectZero)
+    let bottomRefreshImage = UIImageView(frame: CGRect.zero)
+    let bottomRefreshLabel = UILabel(frame: CGRect.zero)
     
     /**
     响应整个View的 慢拖动事件
     
     - parameter sender:
     */
-    @IBAction func panGestureAction(sender: UIPanGestureRecognizer) {
+    @IBAction func panGestureAction(_ sender: UIPanGestureRecognizer) {
         
         let view = self.view
         
-        if  sender.state == UIGestureRecognizerState.Began {
+        if  sender.state == UIGestureRecognizerState.began {
             //当拖动事件开始的时候
             
-            popstate = PopActionState.NONE
+            popstate = PopActionState.none
             
             //获取拖动事件的开始点坐标
-            _ = sender.locationInView(view)
+            _ = sender.location(in: view)
             
             //获取拖动事件的偏移坐标
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             //当偏移坐标的x轴大于0,也就是向右滑动的时候.开始做真正的动作
             if  translation.x >= 0 && self.navigationController?.viewControllers.count >= 2 {
@@ -96,13 +125,13 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                 interactionController = UIPercentDrivenInteractiveTransition()
                 
                 //开始调用navigation的POP转场
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
             }
-        }else if  sender.state == UIGestureRecognizerState.Changed {
+        }else if  sender.state == UIGestureRecognizerState.changed {
             //当拖动事件进行时
             
             //获取到事件的偏移坐标
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             if translation.x<0 {
                 //如果是向左移动,就不采取动作
@@ -113,24 +142,24 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             let b = (view?.bounds)!
             
             //计算百分比
-            let d = fabs(translation.x / CGRectGetWidth(b))
+            let d = fabs(translation.x / b.width)
             
             //设置转场动画的百分比
-            interactionController?.updateInteractiveTransition(d)
-        }else if sender.state == UIGestureRecognizerState.Ended {
+            interactionController?.update(d)
+        }else if sender.state == UIGestureRecognizerState.ended {
             //当拖动事件结束时
             
-            let translation = sender.translationInView(view!)
+            let translation = sender.translation(in: view!)
             
             //判断速率向量是否大于0, 并且拉动的距离已经过半了
-            if  sender.velocityInView(view).x > 0 && translation.x > CGRectGetMidX(view.bounds)-20  {
-                popstate = PopActionState.FINISH
+            if  sender.velocity(in: view).x > 0 && translation.x > (view?.bounds.midX)!-20  {
+                popstate = PopActionState.finish
                 //完成整个动画
-                interactionController?.finishInteractiveTransition()
+                interactionController?.finish()
             }else {
-                popstate = PopActionState.CANCEL
+                popstate = PopActionState.cancel
                 //停止转场
-                interactionController?.cancelInteractiveTransition()
+                interactionController?.cancel()
             }
             
             //这个地方必须设置成nil. 避免两次之间的转场冲突了
@@ -142,7 +171,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.recommandView = UINib(nibName: "RecommendersView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! RecommendersView
+        self.recommandView = UINib(nibName: "RecommendersView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! RecommendersView
         
         // 这个是给recommandView这个非Button 增加点击事件. 方法就是添加一个 Tap的手势.   然后指明点击后 执行哪个响应方法
         self.recommandView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsDetailViewController.showRecommendersViewAction(_:))))
@@ -155,7 +184,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         //顶部图片
         self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(IN_WINDOW_HEIGHT)))
-        self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
+        self.topImage.contentMode = UIViewContentMode.scaleAspectFill
         self.topImage.clipsToBounds = true
         self.webView.scrollView.addSubview(self.topImage)
         
@@ -174,8 +203,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         self.webView.scrollView.addSubview(self.topRefreshImage)
 
         topRefreshLabel.frame = CGRect(origin: CGPoint(x: width/2-40,y: 40),size: CGSize(width: 95,height: 20))
-        topRefreshLabel.font = UIFont.systemFontOfSize(12)
-        topRefreshLabel.textColor = UIColor.whiteColor()
+        topRefreshLabel.font = UIFont.systemFont(ofSize: 12)
+        topRefreshLabel.textColor = UIColor.white
         self.webView.scrollView.addSubview(self.topRefreshLabel)
 
         self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: CGFloat(IN_WINDOW_HEIGHT)),size: CGSize(width: width,height: CGFloat(40)))
@@ -183,28 +212,28 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         //图片版权
         self.imageSourceLabel.frame = CGRect(origin: CGPoint(x: CGFloat(width-150-10),y: CGFloat(IN_WINDOW_HEIGHT-12-5)),size: CGSize(width: 150,height: 12))
-        self.imageSourceLabel.backgroundColor = UIColor.clearColor()
-        self.imageSourceLabel.textColor = UIColor.whiteColor()
-        self.imageSourceLabel.textAlignment = NSTextAlignment.Right
-        self.imageSourceLabel.font = UIFont.systemFontOfSize(8)
+        self.imageSourceLabel.backgroundColor = UIColor.clear
+        self.imageSourceLabel.textColor = UIColor.white
+        self.imageSourceLabel.textAlignment = NSTextAlignment.right
+        self.imageSourceLabel.font = UIFont.systemFont(ofSize: 8)
         self.webView.scrollView.addSubview(self.imageSourceLabel)
         
         //标题的label
         self.titleLabel.frame = CGRect(origin: CGPoint(x: 10,y: CGFloat(IN_WINDOW_HEIGHT-50-20)),size: CGSize(width: 300,height: 50))
-        self.titleLabel.backgroundColor = UIColor.clearColor()
-        self.titleLabel.textColor = UIColor.whiteColor()
-        self.titleLabel.textAlignment = NSTextAlignment.Left
-        self.titleLabel.font = UIFont.boldSystemFontOfSize(FONT_SIZE)
+        self.titleLabel.backgroundColor = UIColor.clear
+        self.titleLabel.textColor = UIColor.white
+        self.titleLabel.textAlignment = NSTextAlignment.left
+        self.titleLabel.font = UIFont.boldSystemFont(ofSize: FONT_SIZE)
         self.titleLabel.numberOfLines = 0
-        self.titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        self.titleLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
         self.webView.scrollView.addSubview(self.titleLabel)
 
 
         bottomRefreshImage.image = UIImage(named: "ZHAnswerViewPrevIcon")
         self.webView.scrollView.addSubview(self.bottomRefreshImage)
         
-        bottomRefreshLabel.font = UIFont.systemFontOfSize(12)
-        bottomRefreshLabel.textColor = UIColor.grayColor()
+        bottomRefreshLabel.font = UIFont.systemFont(ofSize: 12)
+        bottomRefreshLabel.textColor = UIColor.gray
         self.webView.scrollView.addSubview(self.bottomRefreshLabel)
         
         // 实例化 刷新的Control
@@ -219,7 +248,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         // 处理点赞的按钮
         voteButton.unzanAction = {(number)->Void in
             self.voteNumberLabel.text = "\(number)"
-            self.voteNumberLabel.textColor = UIColor.lightGrayColor()
+            self.voteNumberLabel.textColor = UIColor.lightGray
         }
         voteButton.zanAction = {(number)->Void in
             self.voteNumberLabel.text = "\(number)"
@@ -230,22 +259,22 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         initPopupController()
     }
     
-    private func initPopupController(){
+    fileprivate func initPopupController(){
         
         /// 实例化SharePopupView 弹出视图
-        let view = UINib(nibName: "SharePopupView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? SharePopupView
+        let view = UINib(nibName: "SharePopupView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SharePopupView
         /// 设置弹出视图的大小
-        view?.frame = CGRectMake(0, 0, self.view.frame.width, 300)
+        view?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 300)
         
         /// 设置弹出视图中 取消操作的 动作闭包
-        view?.cancelHandel = {self.popupController?.dismissPopupControllerAnimated(true)}
+        view?.cancelHandel = {self.popupController?.dismiss(animated: true)}
         
         /// 实例化弹出控制器
         self.popupController = CNPPopupController(contents: [view!])
-        self.popupController!.theme = CNPPopupTheme.defaultTheme()
+        self.popupController!.theme = CNPPopupTheme.default()
         /// 设置点击背景取消弹出视图
         self.popupController!.theme.shouldDismissOnBackgroundTouch = true
-        self.popupController!.theme.popupStyle = CNPPopupStyle.ActionSheet
+        self.popupController!.theme.popupStyle = CNPPopupStyle.actionSheet
         //设置最大宽度,否则可能会在IPAD上出现只显示一半的情况,因为默认就只有300宽
         self.popupController!.theme.maxPopupWidth = self.view.frame.width
         /// 设置视图的边框
@@ -264,9 +293,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     
     - parameter animated:
     */
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        if  popstate == PopActionState.CANCEL {
+        if  popstate == PopActionState.cancel {
             //如果是 pop动画 一半而取消的, 虽然还是会触发viewWillAppear这个方法, 但是就不让他做事情了
             return
         }
@@ -279,10 +308,10 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
         if  currentSection == 0 {
             if  currentRow == 1{
-                topRefreshImage.hidden = true
+                topRefreshImage.isHidden = true
                 topRefreshLabel.text = "已经是第一篇了"
             }else {
-                topRefreshImage.hidden = false
+                topRefreshImage.isHidden = false
                 topRefreshLabel.text = "载入上一篇"
             }
             
@@ -290,43 +319,43 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             if  self.newsListControl.todayNews?.news?.count <= currentRow {
                 //表示当天的新闻已经完了,不允许再点击了
                 if  self.newsListControl.news.count==0{
-                    self.nextButton.enabled = false
+                    self.nextButton.isEnabled = false
                     
-                    bottomRefreshImage.hidden = true
+                    bottomRefreshImage.isHidden = true
                     bottomRefreshLabel.text = "已是最后一篇了"
                 }else{
-                    self.nextButton.enabled = true
+                    self.nextButton.isEnabled = true
                     
-                    bottomRefreshImage.hidden = false
+                    bottomRefreshImage.isHidden = false
                     bottomRefreshLabel.text = "载入下一篇"
                 }
             }else {
-                self.nextButton.enabled = true
+                self.nextButton.isEnabled = true
                 
-                bottomRefreshImage.hidden = false
+                bottomRefreshImage.isHidden = false
                 bottomRefreshLabel.text = "载入下一篇"
             }
         }else{
-            topRefreshImage.hidden = false
+            topRefreshImage.isHidden = false
             topRefreshLabel.text = "载入上一篇"
             //今天前的新闻
             if self.newsListControl.news[currentSection-1].news?.count == currentRow+1 {
                 //表示当天的新闻已经完了,不允许再点击了
                 if  self.newsListControl.news.count > currentSection {
-                    self.nextButton.enabled = true
+                    self.nextButton.isEnabled = true
                     
-                    bottomRefreshImage.hidden = false
+                    bottomRefreshImage.isHidden = false
                     bottomRefreshLabel.text = "载入下一篇"
                 }else {
-                  self.nextButton.enabled = false
+                  self.nextButton.isEnabled = false
                     
-                    bottomRefreshImage.hidden = true
+                    bottomRefreshImage.isHidden = true
                     bottomRefreshLabel.text = "已是最后一篇了"
                 }
             }else {
-               self.nextButton.enabled = true
+               self.nextButton.isEnabled = true
                 
-                bottomRefreshImage.hidden = false
+                bottomRefreshImage.isHidden = false
                 bottomRefreshLabel.text = "载入下一篇"
             }
         }
@@ -351,7 +380,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     
     - parameter news:
     */
-    private func loadDetailView(news:NewsDetailVO) {
+    fileprivate func loadDetailView(_ news:NewsDetailVO) {
         
         self.news = news
         
@@ -371,22 +400,22 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         let width = self.view.bounds.width+4
         
         if  let _image = news.image {
-            self.topImage.hnk_setImageFromURL(NSURL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
+            self.topImage.kf_setImage(with: URL(string: _image)!, placeholder: UIImage(named: "Image_Preview"))
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
             self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: CGFloat(IN_WINDOW_HEIGHT)),size: CGSize(width: width,height: CGFloat(40)))
-            self.topImage.hidden = false
-            self.topMaskImage.hidden = false
-            self.maskImage.hidden = false
-            self.imageSourceLabel.hidden = false
-            self.titleLabel.hidden = false
+            self.topImage.isHidden = false
+            self.topMaskImage.isHidden = false
+            self.maskImage.isHidden = false
+            self.imageSourceLabel.isHidden = false
+            self.titleLabel.isHidden = false
         }else{
             self.webView.scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
             self.recommandView.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: width,height: CGFloat(40)))
-            self.topImage.hidden = true
-            self.topMaskImage.hidden = true
-            self.maskImage.hidden = true
-            self.imageSourceLabel.hidden = true
-            self.titleLabel.hidden = true
+            self.topImage.isHidden = true
+            self.topMaskImage.isHidden = true
+            self.maskImage.isHidden = true
+            self.imageSourceLabel.isHidden = true
+            self.titleLabel.isHidden = true
         }
         
         if let imageSource = news.imageSource {
@@ -400,30 +429,30 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         let browser : UIView = subviews[0] as UIView
         if  let recommanders = news.recommenders {
             if  recommanders.isEmpty {
-                recommandView.hidden = true
-                browser.frame = CGRectMake(0, 0, browser.frame.width, browser.frame.height)
+                recommandView.isHidden = true
+                browser.frame = CGRect(x: 0, y: 0, width: browser.frame.width, height: browser.frame.height)
             }else {
-                recommandView.hidden = false
-                browser.frame = CGRectMake(0, 40, browser.frame.width, browser.frame.height)
+                recommandView.isHidden = false
+                browser.frame = CGRect(x: 0, y: 40, width: browser.frame.width, height: browser.frame.height)
 
                 for i in 0 ..< 5 {
                     if  i>=recommanders.count {
                         
                         if let image = recommandView.getImageView(i) {
-                            image.hidden = true
+                            image.isHidden = true
                         }
                         continue
                     }else {
                         if let image = recommandView.getImageView(i) {
-                            image.hidden = false
-                            image.hnk_setImageFromURL(NSURL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
+                            image.isHidden = false
+                            image.kf_setImage(with: URL(string: recommanders[i])!, placeholder: UIImage(named: "Setting_Avatar"))
                         }
                     }
                 }
             }
         }else {
-            recommandView.hidden = true
-            browser.frame = CGRectMake(0, 0, browser.frame.width, browser.frame.height)
+            recommandView.isHidden = true
+            browser.frame = CGRect(x: 0, y: 0, width: browser.frame.width, height: browser.frame.height)
         }
         
     }
@@ -435,7 +464,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     
     - returns:
     */
-    private func getNewsVO(location:(Int,Int)) -> NewsVO {
+    fileprivate func getNewsVO(_ location:(Int,Int)) -> NewsVO {
         let section = location.0
         let row = location.1
         
@@ -465,15 +494,15 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     
     - parameter sender:
     */
-    @IBAction func backButtonAction(sender: UIButton) {
+    @IBAction func backButtonAction(_ sender: UIButton) {
         //开始调用navigation的POP转场
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func shareButtonAction(sender: UIButton) {
+    @IBAction func shareButtonAction(_ sender: UIButton) {
         
         //显示弹出窗口
-        self.popupController?.presentPopupControllerAnimated(true)
+        self.popupController?.present(animated: true)
     }
     /**
     界面切换传值的方法
@@ -481,9 +510,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     - parameter segue:
     - parameter sender:
     */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNextNewsSegue" {
-            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
+            let newsDetailViewController = segue.destination as? NewsDetailViewController
             
             //这个地方要计算下一条新闻的index
             valuationIndexPath(newsDetailViewController, calculator: { (currentSection, currentRow) -> (Int, Int) in
@@ -517,7 +546,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             
         } else if segue.identifier == "showPreNewsSegue" {
             
-            let newsDetailViewController = segue.destinationViewController as? NewsDetailViewController
+            let newsDetailViewController = segue.destination as? NewsDetailViewController
             
             //计算上一条新闻的Index
             valuationIndexPath(newsDetailViewController, calculator: { (currentSection, currentRow) -> (Int, Int) in
@@ -543,12 +572,12 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
                 return indexPath
             })
         } else if segue.identifier == "showCommonsSegue" {
-            let commentViewController = segue.destinationViewController as? CommonViewController
+            let commentViewController = segue.destination as? CommonViewController
             
             commentViewController?.newsExtral = self.newsExtral
             commentViewController?.newsId = self.news.id
         }else if segue.identifier == "showRecommendersSegue" {
-            let recommendersViewController = segue.destinationViewController as? RecommendersListViewController
+            let recommendersViewController = segue.destination as? RecommendersListViewController
             recommendersViewController?.newsId = self.news.id
         }
     }
@@ -559,7 +588,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     - parameter newsDetailViewController: newsDetailViewController
     - parameter calculator:               具体的计算方法的闭包
     */
-    private func valuationIndexPath(newsDetailViewController:NewsDetailViewController?,calculator:(currentSection:Int,currentRow:Int)->(Int,Int)){
+    fileprivate func valuationIndexPath(_ newsDetailViewController:NewsDetailViewController?,calculator:(_ currentSection:Int,_ currentRow:Int)->(Int,Int)){
         if  newsDetailViewController?.newsListControl == nil {
             newsDetailViewController?.newsListControl = self.newsListControl
             newsDetailViewController?.mainViewController = self.mainViewController
@@ -571,7 +600,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
         
 //        var indexPath:(Int,Int)!
         
-        newsDetailViewController?.newsLocation = calculator(currentSection: currentSection, currentRow: currentRow)
+        newsDetailViewController?.newsLocation = calculator(currentSection, currentRow)
     }
 
     //========================RefreshControlDelegate的实现================================================
@@ -581,9 +610,9 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     *  @param refreshControl 响应的控件
     *  @param direction 事件类型
     */
-    func refreshControl(refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection){
+    func refreshControl(_ refreshControl:RefreshControl,didEngageRefreshDirection direction:RefreshDirection){
         
-        if  direction == RefreshDirection.RefreshDirectionTop {
+        if  direction == RefreshDirection.refreshDirectionTop {
             
             // 如果已经没有上一条新闻了,那么就不能再执行加载上一条的跳转了
             let currentRow = self.newsLocation.1
@@ -597,7 +626,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             
             //是下拉 加载上一条 
             //这个地方开始异步的获取新闻详细.然后再进行跳转
-            self.performSegueWithIdentifier("showPreNewsSegue", sender: nil)
+            self.performSegue(withIdentifier: "showPreNewsSegue", sender: nil)
             
             refreshControl.finishRefreshingDirection(direction)
         }else {
@@ -628,7 +657,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             }
             
             //是上拉 加载下一条
-            self.performSegueWithIdentifier("showNextNewsSegue", sender: nil)
+            self.performSegue(withIdentifier: "showNextNewsSegue", sender: nil)
             
             refreshControl.finishRefreshingDirection(direction)
             
@@ -654,16 +683,16 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     松开可刷新的动画
     */
-    func canEngageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
+    func canEngageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection) {
         
     }
     
     /**
     松开返回的动画
     */
-    func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection) {
+    func didDisengageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection) {
         
-        if  direction == RefreshDirection.RefreshDirectionBottom {
+        if  direction == RefreshDirection.refreshDirectionBottom {
             
             let offsetY = Float(scrollView.contentOffset.y)
             let contentHeight = Float(scrollView.contentSize.height)
@@ -671,75 +700,75 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
             
             //上滑处理状态栏的背景色和样式
             if  offsetY > 120 {
-                statusBarView.backgroundColor = UIColor.whiteColor()
-                UIApplication.sharedApplication().statusBarStyle = .Default
+                statusBarView.backgroundColor = UIColor.white
+                UIApplication.shared.statusBarStyle = .default
             }else {
-                statusBarView.backgroundColor = UIColor.clearColor()
-                UIApplication.sharedApplication().statusBarStyle = .LightContent
+                statusBarView.backgroundColor = UIColor.clear
+                UIApplication.shared.statusBarStyle = .lightContent
             }
             
             if offsetY > contentHeight-frameHeight+50 {
-                if topRefreshState == TopRefreshState.NONE {
-                    topRefreshState = TopRefreshState.DOING
+                if topRefreshState == TopRefreshState.none {
+                    topRefreshState = TopRefreshState.doing
                     /**
                     *  这个就是 执行UI动画的方法. 第一个方法就是持续时间  第二个参数是动画效果  第三个参数是完成后做的事情
                     */
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.bottomRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        self.bottomRefreshImage.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                         }, completion: { (finished) -> Void in
                             if  finished {
-                                self.topRefreshState = TopRefreshState.FINISH
+                                self.topRefreshState = TopRefreshState.finish
                             }else {
-                                self.topRefreshState = TopRefreshState.NONE
+                                self.topRefreshState = TopRefreshState.none
                             }
                     })
                 }
             }else {
-                if self.topRefreshState == TopRefreshState.FINISH {
-                    topRefreshState = TopRefreshState.DOING
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.bottomRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                if self.topRefreshState == TopRefreshState.finish {
+                    topRefreshState = TopRefreshState.doing
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        self.bottomRefreshImage.transform = CGAffineTransform(rotationAngle: CGFloat(0))
                         }, completion: { (finished) -> Void in
                             if  finished {
-                                self.topRefreshState = TopRefreshState.NONE
+                                self.topRefreshState = TopRefreshState.none
                             }else {
-                                self.topRefreshState = TopRefreshState.FINISH
+                                self.topRefreshState = TopRefreshState.finish
                             }
                     })
                 }
             }
             
             
-        }else if direction == RefreshDirection.RefreshDirectionTop {
+        }else if direction == RefreshDirection.refreshDirectionTop {
             
             //下拉处理 上一条 的 动画. 思路是 当下拉了60后, 开始判断动画状态, 如果是没有执行动画, 就开始下拉动画并设置状态为doing. 动画完成后,设置状态为finish.
             if scrollView.contentOffset.y < -60 {
-                if topRefreshState == TopRefreshState.NONE {
-                    topRefreshState = TopRefreshState.DOING
+                if topRefreshState == TopRefreshState.none {
+                    topRefreshState = TopRefreshState.doing
                     /**
                     *  这个就是 执行UI动画的方法. 第一个方法就是持续时间  第二个参数是动画效果  第三个参数是完成后做的事情
                     */
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.topRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        self.topRefreshImage.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                         }, completion: { (finished) -> Void in
                             if  finished {
-                                self.topRefreshState = TopRefreshState.FINISH
+                                self.topRefreshState = TopRefreshState.finish
                             }else {
-                                self.topRefreshState = TopRefreshState.NONE
+                                self.topRefreshState = TopRefreshState.none
                             }
                     })
                 }
             } else {
                 //当下拉小于60后,就需要反向的执行动画.
-                if  self.topRefreshState == TopRefreshState.FINISH {
-                    topRefreshState = TopRefreshState.DOING
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.topRefreshImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                if  self.topRefreshState == TopRefreshState.finish {
+                    topRefreshState = TopRefreshState.doing
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        self.topRefreshImage.transform = CGAffineTransform(rotationAngle: CGFloat(0))
                         }, completion: { (finished) -> Void in
                             if  finished {
-                                self.topRefreshState = TopRefreshState.NONE
+                                self.topRefreshState = TopRefreshState.none
                             }else {
-                                self.topRefreshState = TopRefreshState.FINISH
+                                self.topRefreshState = TopRefreshState.finish
                             }
                     })
                 }
@@ -751,7 +780,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     *  是否修改他的 ContentInset
     */
-    func needContentInset(direction:RefreshDirection) -> Bool {
+    func needContentInset(_ direction:RefreshDirection) -> Bool {
         
         return false
     }
@@ -759,34 +788,34 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     开始刷新的动画
     */
-    func startRefreshing(direction:RefreshDirection) {
+    func startRefreshing(_ direction:RefreshDirection) {
         
     }
     
     /**
     结束刷新的动画
     */
-    func finishRefreshing(direction:RefreshDirection) {
-        self.topRefreshState = TopRefreshState.NONE
+    func finishRefreshing(_ direction:RefreshDirection) {
+        self.topRefreshState = TopRefreshState.none
     }
 
     //========================RefreshViewDelegate的实现================================================
     
     //========================UIWebViewDelegate的实现================================================
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         //在这里重新设置 下方 上拉刷新的组件的位置
-        bottomRefreshImage.frame = CGRectMake(self.view.bounds.width/2-60, webView.scrollView.contentSize.height+30, 15, 20)
+        bottomRefreshImage.frame = CGRect(x: self.view.bounds.width/2-60, y: webView.scrollView.contentSize.height+30, width: 15, height: 20)
         bottomRefreshLabel.frame = CGRect(origin: CGPoint(x: self.view.bounds.width/2-40,y: webView.scrollView.contentSize.height+30),size: CGSize(width: 95,height: 20))
     }
     
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if  navigationType == UIWebViewNavigationType.LinkClicked {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if  navigationType == UIWebViewNavigationType.linkClicked {
             //监听用户的点击, 如果是点击了 页面上的超链接. 那么就用一个 单独的webView的页面来做显示
-            if let url = request.URL {
+            if let url = request.url {
                 //这个地方做简化的实现了, 真正的知乎是做了一个简易的浏览器. 这里直接调用系统的safari就行了.
                 if url.scheme == "http" || url.scheme == "mailto" || url.scheme == "https" {
-                    UIApplication.sharedApplication().openURL(url)
+                    UIApplication.shared.openURL(url)
                     return false
                 }
             }
@@ -799,8 +828,8 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
     /**
     响应
     */
-    func showRecommendersViewAction(sender:AnyObject){
-        self.performSegueWithIdentifier("showRecommendersSegue", sender: self.recommandView)
+    func showRecommendersViewAction(_ sender:AnyObject){
+        self.performSegue(withIdentifier: "showRecommendersSegue", sender: self.recommandView)
     }
     
     
@@ -811,7 +840,7 @@ class NewsDetailViewController: UIViewController,UIWebViewDelegate,RefreshContro
 
 
 private enum TopRefreshState {
-    case NONE
-    case DOING
-    case FINISH
+    case none
+    case doing
+    case finish
 }

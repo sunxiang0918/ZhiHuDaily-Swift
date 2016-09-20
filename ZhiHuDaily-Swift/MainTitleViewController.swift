@@ -13,10 +13,10 @@ import UIKit
 */
 class MainTitleViewController: UIViewController,RefreshViewDelegate {
 
-    private let BACKGROUND_COLOR_1 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
-    private let BACKGROUND_COLOR_0 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 0)
+    fileprivate let BACKGROUND_COLOR_1 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 1)
+    fileprivate let BACKGROUND_COLOR_0 = UIColor(red: 0.098, green: 0.565, blue: 0.827, alpha: 0)
     
-    private var _refreshControl:RefreshControl?     //关联的刷新Control
+    fileprivate var _refreshControl:RefreshControl?     //关联的刷新Control
     
     //主页面上部Title上得 按键的事件委托
     var mainTitleViewDelegate:MainTitleViewDelegate?
@@ -48,7 +48,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     
     - parameter sender:
     */
-    @IBAction func leftButtonAction(sender: UIButton) {
+    @IBAction func leftButtonAction(_ sender: UIButton) {
         
         if let main = mainTitleViewDelegate {
             main.doLeftAction()
@@ -87,18 +87,18 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     松开可刷新的动画
     */
-    func canEngageRefresh(scrollView:UIScrollView,direction:RefreshDirection){
+    func canEngageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection){
         
     }
     
-    func needContentInset(direction:RefreshDirection) -> Bool {
+    func needContentInset(_ direction:RefreshDirection) -> Bool {
         return false
     }
     
     /**
     松开返回的动画
     */
-    func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection){
+    func didDisengageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection){
         if  scrollView is UITableView {
             
             //只有是在上下滑动TableView的时候进行处理
@@ -119,7 +119,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     - parameter offsetY:
     - parameter scrollView: 
     */
-    func changeTitleAndTableHeader(offsetY:Float,scrollView:UIScrollView) {
+    func changeTitleAndTableHeader(_ offsetY:Float,scrollView:UIScrollView) {
         
         let needY=IN_WINDOW_HEIGHT-SCROLL_HEIGHT-TITLE_HEIGHT
         
@@ -135,7 +135,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
             let tableView = scrollView as! UITableView
             
             //获取第一个section有多少行数据
-            let cellNumber = tableView.numberOfRowsInSection(0)
+            let cellNumber = tableView.numberOfRows(inSection: 0)
             
             //用于隐藏titleView的伐值, 算法是: (表格第一个section的行数-1)*每一个cell的高度+一个section的高度+上面的needY
             let hiddenHeight = Float(cellNumber-1) * TABLE_CELL_HEIGHT + SECTION_HEIGHT + needY
@@ -153,14 +153,14 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
             scrollView.contentInset = UIEdgeInsetsMake(CGFloat(100), 0, 0, 0)
         }else {
             //表明已经进入了图片轮播区了,恢复初始值
-            topHeaderView.backgroundColor = UIColor.clearColor()
+            topHeaderView.backgroundColor = UIColor.clear
             scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
     }
     
     //这部分是用来根据TableView的滑动来调整TitleView的透明度的
-    func changeTitleViewAlpha(offsetY:Float){
+    func changeTitleViewAlpha(_ offsetY:Float){
         //计算出最大上划大小. 当上划到此处后, title就全部显示
         let needY=IN_WINDOW_HEIGHT-SCROLL_HEIGHT-TITLE_HEIGHT
         
@@ -179,7 +179,7 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     
     - parameter offsetY:
     */
-    func showRefeshProgress(offsetY:Float){
+    func showRefeshProgress(_ offsetY:Float){
         
         //计算出透明度
         var result=(0-offsetY)/SCROLL_HEIGHT
@@ -194,10 +194,10 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     开始刷新的动画
     */
-    func startRefreshing(direction:RefreshDirection){
+    func startRefreshing(_ direction:RefreshDirection){
         
         //判断出是从上到下的刷新
-        if  direction == RefreshDirection.RefreshDirectionTop {
+        if  direction == RefreshDirection.refreshDirectionTop {
             circularProgress.alpha = 0
             activityIndicator.startAnimating()
             activityIndicator.alpha = 1
@@ -208,10 +208,10 @@ class MainTitleViewController: UIViewController,RefreshViewDelegate {
     /**
     结束刷新的动画
     */
-    func finishRefreshing(direction:RefreshDirection){
+    func finishRefreshing(_ direction:RefreshDirection){
         
         //判断出是从上到下的刷新
-        if direction == RefreshDirection.RefreshDirectionTop {
+        if direction == RefreshDirection.refreshDirectionTop {
             self.activityIndicator.stopAnimating()
             //这个地方需要调用progress两次,因为他源码里面progress的didset决定的
             circularProgress.progress = 0

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Haneke
+//import Haneke
 
 class LeftViewController: UIViewController {
 
@@ -19,7 +19,7 @@ class LeftViewController: UIViewController {
         super.viewDidLoad()
 
         let nib=UINib(nibName: "SideMenuTableViewCell", bundle: nil)
-        sideMenuTable.registerNib(nib, forCellReuseIdentifier: "sideMenuTableViewCell")
+        sideMenuTable.register(nib, forCellReuseIdentifier: "sideMenuTableViewCell")
         // Do any additional setup after loading the view.
         self.sideMenuTable.backgroundColor = UIColor(red: 0.102, green: 0.122, blue: 0.141, alpha: 1)
         self.sideMenuTable.delegate = self
@@ -32,7 +32,7 @@ class LeftViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
     }
 
@@ -49,18 +49,18 @@ class LeftViewController: UIViewController {
 
 extension LeftViewController:UITableViewDelegate,UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return themesListControl.themes.count + 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:SideMenuTableViewCell
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             //首页
             
-            let tmp = tableView.dequeueReusableCellWithIdentifier("sideMenuTableViewCell")
+            let tmp = tableView.dequeueReusableCell(withIdentifier: "sideMenuTableViewCell")
             if  tmp == nil {
-                cell = SideMenuTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "sideMenuTableViewCell")
+                cell = SideMenuTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "sideMenuTableViewCell")
             }else {
                 cell = tmp as! SideMenuTableViewCell
             }
@@ -75,23 +75,23 @@ extension LeftViewController:UITableViewDelegate,UITableViewDataSource {
         }
         
         //其他页
-        let tmp = tableView.dequeueReusableCellWithIdentifier("sideMenuTableViewCell")
+        let tmp = tableView.dequeueReusableCell(withIdentifier: "sideMenuTableViewCell")
         
         if  tmp == nil {
-            cell = SideMenuTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "sideMenuTableViewCell")
+            cell = SideMenuTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "sideMenuTableViewCell")
         }else {
             cell = tmp as! SideMenuTableViewCell
         }
         
-        cell.titleLabel.text = themesListControl.themes[indexPath.row-1].name
+        cell.titleLabel.text = themesListControl.themes[(indexPath as NSIndexPath).row-1].name
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
     
 }

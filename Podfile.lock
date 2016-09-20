@@ -1,16 +1,18 @@
 PODS:
-  - Alamofire (2.0.2)
-  - HanekeSwift (0.10.0.1)
-  - SwiftyJSON (2.3.0)
+  - Alamofire (4.0.0)
+  - Kingfisher (3.0.1)
+  - SwiftyJSON3 (3.0.0-beta.1)
 
 DEPENDENCIES:
   - Alamofire
-  - HanekeSwift
-  - SwiftyJSON
+  - Kingfisher (= 3.0.1)
+  - SwiftyJSON3 (~> 3.0.0-beta.1)
 
 SPEC CHECKSUMS:
-  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  HanekeSwift: b0e96be1d0fbeefb52455a893a2b5a056a77936b
-  SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
+  SwiftyJSON3: 4c41512a8b35fd58b2ec904f65aa7254e4a8abd4
 
-COCOAPODS: 0.38.2
+PODFILE CHECKSUM: 4cb8d03d5d7fd25561868c856cc7ea698c565549
+
+COCOAPODS: 1.1.0.beta.2

@@ -9,22 +9,22 @@
 import UIKit
 import CoreData
 import Alamofire
-import SwiftyJSON
-import Haneke
+import SwiftyJSON3
+//import Haneke
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         
-        let rightController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("rightViewController") as! ViewController
+        let rightController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "rightViewController") as! ViewController
         
         //从主的StoryBoard中获取名为leftViewController的视图 也就是左视图
-        let leftController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("leftViewController") as! LeftViewController
+        let leftController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "leftViewController") as! LeftViewController
         
         rightController.leftViewController = leftController
         
@@ -40,14 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let revealController = PKRevealController(frontViewController: rightController, leftViewController: leftController)
         
         //设置左边的宽度
-        revealController.setMinimumWidth((self.window?.frame.width)!*0.6, maximumWidth: (self.window?.frame.width)!*0.6, forViewController: leftController)
+        revealController?.setMinimumWidth((self.window?.frame.width)!*0.6, maximumWidth: (self.window?.frame.width)!*0.6, for: leftController)
         
         //放入rootView
-        navController?.pushViewController(revealController, animated: false)
+        navController?.pushViewController(revealController!, animated: false)
         
         // 增加3DTouch启动程序时的处理
         // 从启动项中获取是否是从3DTouch中启动的
-        let launchShortcutItem:UIApplicationShortcutItem? = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey as NSObject] as? UIApplicationShortcutItem
+        let launchShortcutItem:UIApplicationShortcutItem? = launchOptions?[(UIApplicationLaunchOptionsKey.shortcutItem as NSObject) as! UIApplicationLaunchOptionsKey] as? UIApplicationShortcutItem
         if  launchShortcutItem != nil{
             //说明是使用3DTouch启动的,那么当页面启动的时候就需要直接跳转到新闻详细中
             //这里的逻辑是这样的,在启动的时候设置一个标志,是否需要跳转,然后在LaunchImageViewController中会判断是否有这个标志.如果有
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //回调闭包
             //修改窗体的根视图的Controller为启动Image的Controller.
             //这里自定义了一个启动的ViewController, 他指定了消失后切换的视图的Controller.还有动画效果,以及显示的图片.
-            self.window?.rootViewController = LaunchImageViewController.addTransitionToViewController(navController!, modalTransitionStyle: UIModalTransitionStyle.CrossDissolve, withImageDate: image, withSourceName: name)
+            self.window?.rootViewController = LaunchImageViewController.addTransitionToViewController(navController!, modalTransitionStyle: UIModalTransitionStyle.crossDissolve, withImageDate: image, withSourceName: name)
             //UIModalTransitionStyle转场动画效果   CrossDissolve渐变  PartialCurl翻页  FlipHorizontal上下翻转  CoverVertical上下平移(默认值)
         })
         
@@ -68,11 +68,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //添加icon 3d Touch
         //先建立图标
-        let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Share)
+        let firstItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .share)
         //然后创建按钮项,通过Type可以确定是哪一个按钮,
         let firstItem = UIMutableApplicationShortcutItem(type: "1", localizedTitle: "最新日报", localizedSubtitle: nil, icon: firstItemIcon, userInfo: nil)
         
-        let secondItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .Compose)
+        let secondItemIcon:UIApplicationShortcutIcon = UIApplicationShortcutIcon(type: .compose)
         let secondItem = UIMutableApplicationShortcutItem(type: "2", localizedTitle: "每日瞎扯", localizedSubtitle: nil, icon: secondItemIcon, userInfo: nil)
         
         application.shortcutItems = [firstItem,secondItem]
@@ -81,11 +81,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //从网络上加载开始图片
-    func loadStartImage(url:String,onSuccess:(String,UIImage)->Void){
+    func loadStartImage(_ url:String,onSuccess:(String,UIImage)->Void){
         //同步调用URL,获取开始图片的JSON结果
-        var data: NSData?
+        
+        var data:Data?
         do {
-            data = try NSURLSession.sharedSession().sendSynchronousDataTaskWithURL(NSURL(string: url)!)
+            let (response_,data_) = try URLSession.shared.sendSynchronousDataTaskWithURL(URL(string: url)!)
+            data = data_
         } catch _ {
             data = nil
         }
@@ -101,17 +103,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if  let iu = imageUrl {
                 
                 //这个使用的是异步加载的,所以界面可能就会有闪烁
-                let imageCache=Shared.imageCache
+                //let imageCache=Shared.imageCache
                 
-                if  let image = imageCache.get(key: iu) {
+                //if  let image = imageCache.get(key: iu) {
                     //在缓存中找到了图片,直接返回
-                    onSuccess(name!,image)
-                }else{
+                //    onSuccess(name!,image)
+                //}else{
                     //在缓存中没有找到图片,那么就需要请求一次获取图片
                     //这个是同步加载的,所以界面不会有闪烁
                     //获取图片的NSData
                     do{
-                        data = try NSURLSession.sharedSession().sendSynchronousDataTaskWithURL(NSURL(string: iu)!)
+                        let (_,data_) = try URLSession.shared.sendSynchronousDataTaskWithURL(URL(string: iu)!)
+                        data = data_
                     }catch let e {
                         //TODO 报错
                         print(e)
@@ -120,36 +123,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //把NSData转换成必要的UIImage对象
                     if let d  = data, let image = UIImage(data: d) {
                         //把图片放入缓存
-                        imageCache.set(value: image, key: iu)
+                     //   imageCache.set(value: image, key: iu)
                         //调用成功的回调
                         onSuccess(name!,image)
                     }
 
-                }
+                //}
                 
             }
         }
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
@@ -157,34 +160,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "edu.cuit.sun.ZhiHuDaily_Swift" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.count-1] as URL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("ZhiHuDaily_Swift", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "ZhiHuDaily_Swift", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("ZhiHuDaily_Swift.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("ZhiHuDaily_Swift.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch var error1 as NSError {
             error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
             dict[NSUnderlyingErrorKey] = error
             error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
@@ -204,7 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
@@ -232,7 +235,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - 3D Touch的操作
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         //这个方法就是激活了3DTouch时触发的操作.
         
         let handledShortCutItem = handleShortCutItem(shortcutItem)
@@ -246,7 +249,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     - returns: 是否执行成功
     */
-    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+    func handleShortCutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         
         var handled = false
         
@@ -260,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if shortcutItem.type == "1" { //最新日报
             
             //然后打开最新的日报
-            rootViewController?.performSegueWithIdentifier("pushSegue", sender: "newNews")
+            rootViewController?.performSegue(withIdentifier: "pushSegue", sender: "newNews")
             
             handled = true
         }
@@ -268,7 +271,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if shortcutItem.type == "2" { //每日瞎扯
             
             //然后打开每日瞎扯
-            rootViewController?.performSegueWithIdentifier("pushSegue", sender: "xiacheNews")
+            rootViewController?.performSegue(withIdentifier: "pushSegue", sender: "xiacheNews")
             
             handled = true
             

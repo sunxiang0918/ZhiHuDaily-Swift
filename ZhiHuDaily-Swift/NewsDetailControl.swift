@@ -8,8 +8,8 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
-import Haneke
+import SwiftyJSON3
+//import Haneke
 
 class NewsDetailControl {
     
@@ -20,32 +20,33 @@ class NewsDetailControl {
     - parameter complate: 当加载完成后,调用的回调
     - parameter block: 当加载失败后,调用的回调
     */
-    func loadNewsDetail(id:Int,complate:(newsDetail:NewsDetailVO?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadNewsDetail(_ id:Int,complate:@escaping (_ newsDetail:NewsDetailVO?)->Void,block:((_ error:NSError)->Void)? = nil){
 
-        let cache = Shared.dataCache
+        //let cache = Shared.dataCache
         
-        if  let data = cache.get(key: "\(id)") {
+        //if  let data = cache.get(key: "\(id)") {
             //在缓存中找到了新闻的详细信息,直接返回
-            let json = JSON(data: data)
+          //  let json = JSON(data: data)
                 
-            let newsDetailVO=self.convertJSON2VO(json)
+           // let newsDetailVO=self.convertJSON2VO(json)
             //执行完成的方法回调
-            complate(newsDetail: newsDetailVO)
+           // complate(newsDetail: newsDetailVO)
             
-        }else{
+        //}else{
             //没有找到新闻的详细,从网络上读取
             //调用HTTP请求 获取新闻详细
-            Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_DETAIL_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseString(encoding: NSUTF8StringEncoding){ (_, _, data) -> Void in
-                if  let result = data.value {
-                    if let dataFromString = result.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            Alamofire.request(NEWS_DETAIL_URL+"\(id)").responseString(encoding: String.Encoding.utf8){ response -> Void in
+                
+                if  let result = response.result.value {
+                    if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                         let json = JSON(data: dataFromString)
                         
                         let newsDetailVO=self.convertJSON2VO(json)
                         //执行完成的方法回调
-                        complate(newsDetail: newsDetailVO)
+                        complate(newsDetailVO)
                         
                         //放入缓存中
-                        cache.set(value: dataFromString, key: "\(id)")
+            //            cache.set(value: dataFromString, key: "\(id)")
                     }
                 }else {
 //                    if let b = block {
@@ -53,7 +54,7 @@ class NewsDetailControl {
 //                    }
                 }
             
-            }
+          //  }
             
         }
     }
@@ -64,11 +65,11 @@ class NewsDetailControl {
     - parameter id:       新闻ID
     - parameter complate: 扩展信息
     */
-    func loadNewsExtraInfo(id:Int,complate:(newsExtra:NewsExtraVO?)->Void,block:((error:NSError)->Void)? = nil){
+    func loadNewsExtraInfo(_ id:Int,complate:@escaping (_ newsExtra:NewsExtraVO?)->Void,block:((_ error:NSError)->Void)? = nil){
         
         //由于新闻额外信息 是随时可能变的,所以不能做缓存
-        Alamofire.Manager.sharedInstance.request(Method.GET,NEWS_EXTRA_URL+"\(id)", parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if let result: AnyObject = data.value {
+        Alamofire.request(NEWS_EXTRA_URL+"\(id)").responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response -> Void in
+            if let result: Any = response.result.value {
                 //转换成JSON
                 let json = JSON(result)
                 
@@ -79,7 +80,7 @@ class NewsDetailControl {
                 
                 let newsExtra = NewsExtraVO(longComments: long_comments, popularity: popularity, shortComments: short_comments, comments: comments)
                 
-                complate(newsExtra: newsExtra)
+                complate(newsExtra)
             }
             
         }
@@ -92,7 +93,7 @@ class NewsDetailControl {
     
     - returns: VO对象
     */
-    private func convertJSON2VO(json:SwiftyJSON.JSON) -> NewsDetailVO {
+    fileprivate func convertJSON2VO(_ json:SwiftyJSON3.JSON) -> NewsDetailVO {
         let id = json["id"].int!
         
         let body = json["body"].string

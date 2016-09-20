@@ -28,16 +28,16 @@ class RecommenderDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         recommenderNameLabel.text = "\(recommenderName!) - 知乎"
         
-        recommenderWebView.loadRequest(NSURLRequest(URL: NSURL(string: PEOPLE_URL+recommenderToken!)!))
+        recommenderWebView.loadRequest(URLRequest(url: URL(string: PEOPLE_URL+recommenderToken!)!))
         
     }
     
-    @IBAction func doBackAction(sender: AnyObject) {
+    @IBAction func doBackAction(_ sender: AnyObject) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
     /*

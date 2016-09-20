@@ -19,11 +19,11 @@ let SCROLL_HEIGHT:Float = 80
 /// 400
 let IMAGE_HEIGHT:Float = IN_WINDOW_HEIGHT+200
 /// 200
-let IN_WINDOW_HEIGHT:Float = UIScreen.mainScreen().bounds.height > 1000 ? 300 : 200
+let IN_WINDOW_HEIGHT:Float = UIScreen.main.bounds.height > 1000 ? 300 : 200
 /// 44
 let TITLE_HEIGHT:Float = 44
 
-let FONT_SIZE:CGFloat = UIScreen.mainScreen().bounds.height > 1000 ? 20 : 16
+let FONT_SIZE:CGFloat = UIScreen.main.bounds.height > 1000 ? 20 : 16
 
 //知乎的各种网址
 /// http://news-at.zhihu.com/api/4/start-image/1080*1776
@@ -41,7 +41,7 @@ let THEME_URL = "http://news-at.zhihu.com/api/4/themes"
 var interactionController : UIPercentDrivenInteractiveTransition?
 
 enum PopActionState {
-    case NONE
-    case FINISH
-    case CANCEL
+    case none
+    case finish
+    case cancel
 }

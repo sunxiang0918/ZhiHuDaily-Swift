@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
+import SwiftyJSON3
 
 /*
 主页左边的主题获取控制器
@@ -22,8 +22,11 @@ class ThemesListControl {
      */
     func loadThemeList(){
         
-        Alamofire.Manager.sharedInstance.request(Method.GET, THEME_URL, parameters: nil, encoding: ParameterEncoding.URL).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, data) -> Void in
-            if  let result:AnyObject = data.value {
+        Alamofire.request(THEME_URL).responseJSON(options: JSONSerialization.ReadingOptions.mutableContainers) { response in
+            
+            debugPrint(response)
+            
+            if  let result:Any = response.result.value {
                 let json = JSON(result)
                 
                 //主题列表
@@ -44,7 +47,7 @@ class ThemesListControl {
      
      - returns:
      */
-    private func convertJSON2Theme(json:JSON) -> ThemeVO {
+    fileprivate func convertJSON2Theme(_ json:JSON) -> ThemeVO {
         let color = json["color"].intValue
         let thumbnail = json["thumbnail"].stringValue
         let description = json["description"].stringValue

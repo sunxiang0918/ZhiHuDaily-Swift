@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2664DA78F11016A2C191E455 /* Pods_ZhiHuDaily_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D48147A6062A69EBD4677B /* Pods_ZhiHuDaily_Swift.framework */; };
 		A4042BA71B1FFD5C00E1297E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */; };
 		A406B0411BE302210078BA34 /* ThemesListControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A406B0401BE302210078BA34 /* ThemesListControl.swift */; };
 		A406B0441BE303890078BA34 /* ThemeVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A406B0431BE303890078BA34 /* ThemeVO.swift */; };
@@ -71,8 +72,6 @@
 		A4D80C7B1B1EDC4B00247226 /* NormalPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D80C7A1B1EDC4B00247226 /* NormalPopAnimation.swift */; };
 		A4E7B6A41BE05C36009D399B /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E7B6A31BE05C36009D399B /* SideMenuTableViewCell.xib */; };
 		A4E7B6A71BE05F73009D399B /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7B6A61BE05F73009D399B /* SideMenuTableViewCell.swift */; };
-		A4FA82C11B45869000311088 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; };
-		A4FA82C21B45869000311088 /* Pods.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5D2F221E4BF07B6FE9EE619 /* Pods.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4FAFA4C1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA4A1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.swift */; };
 		A4FAFA4D1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FAFA4B1B2B13EB00CA9E66 /* EmptyCommentTableViewCell.xib */; };
 		A4FAFA521B2C835500CA9E66 /* CommentSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */; };
@@ -96,23 +95,11 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		A4FA82C31B45869000311088 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A4FA82C21B45869000311088 /* Pods.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
+
 
 /* Begin PBXFileReference section */
-		6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		6FB894871E29411B4B980961 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		0D91F4B71E82F4E5C28489AA /* Pods-ZhiHuDaily-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiHuDaily-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiHuDaily-Swift/Pods-ZhiHuDaily-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		65D48147A6062A69EBD4677B /* Pods_ZhiHuDaily_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhiHuDaily_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4042BA61B1FFD5C00E1297E /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		A406B0401BE302210078BA34 /* ThemesListControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemesListControl.swift; sourceTree = "<group>"; };
 		A406B0431BE303890078BA34 /* ThemeVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeVO.swift; sourceTree = "<group>"; };
@@ -200,7 +187,7 @@
 		A4FAFA511B2C835500CA9E66 /* CommentSectionTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSectionTitleView.swift; sourceTree = "<group>"; };
 		A4FAFA531B2C836200CA9E66 /* CommentSectionTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentSectionTitleView.xib; sourceTree = "<group>"; };
 		A4FB84431B147DE100603073 /* ObjectiveCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCBridge.h; sourceTree = "<group>"; };
-		A5D2F221E4BF07B6FE9EE619 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29DB305B7B6B3F68E88E14A /* Pods-ZhiHuDaily-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiHuDaily-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiHuDaily-Swift/Pods-ZhiHuDaily-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4FA82C11B45869000311088 /* Pods.framework in Frameworks */,
+				2664DA78F11016A2C191E455 /* Pods_ZhiHuDaily_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,11 +209,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		57E7504102B51052B017FAF8 /* Pods */ = {
+		7789D69DA5432EF95EAF1061 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6FB894871E29411B4B980961 /* Pods.debug.xcconfig */,
-				6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */,
+				F29DB305B7B6B3F68E88E14A /* Pods-ZhiHuDaily-Swift.debug.xcconfig */,
+				0D91F4B71E82F4E5C28489AA /* Pods-ZhiHuDaily-Swift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -234,7 +221,7 @@
 		A15D7D753B2DE6AC01DF60B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A5D2F221E4BF07B6FE9EE619 /* Pods.framework */,
+				65D48147A6062A69EBD4677B /* Pods_ZhiHuDaily_Swift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,8 +233,8 @@
 				A432D31C1B147B9F006D2B0E /* ZhiHuDaily-Swift */,
 				A432D3351B147B9F006D2B0E /* ZhiHuDaily-SwiftTests */,
 				A432D31B1B147B9F006D2B0E /* Products */,
-				57E7504102B51052B017FAF8 /* Pods */,
 				A15D7D753B2DE6AC01DF60B9 /* Frameworks */,
+				7789D69DA5432EF95EAF1061 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -525,13 +512,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A432D33C1B147B9F006D2B0E /* Build configuration list for PBXNativeTarget "ZhiHuDaily-Swift" */;
 			buildPhases = (
-				10ABD496A5F308F7786B7507 /* Check Pods Manifest.lock */,
+				263AED0362CBBFC6B4D81116 /* [CP] Check Pods Manifest.lock */,
 				A432D3161B147B9F006D2B0E /* Sources */,
 				A432D3171B147B9F006D2B0E /* Frameworks */,
 				A432D3181B147B9F006D2B0E /* Resources */,
-				EF5FBBD50872EDC89E1F0872 /* Embed Pods Frameworks */,
-				2A4C5A9306129A7CF0246D2C /* Copy Pods Resources */,
 				A4FA82C31B45869000311088 /* Embed Frameworks */,
+				23C52F2BA8919D3AA9E9BF67 /* [CP] Embed Pods Frameworks */,
+				9B5D2CD82C033D683E37ADA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -567,15 +554,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = SUN;
 				TargetAttributes = {
 					A432D3191B147B9F006D2B0E = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = H2WA38DNJF;
+						DevelopmentTeam = KY2PPGYFJ7;
+						LastSwiftMigration = 0800;
 					};
 					A432D3311B147B9F006D2B0E = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = A432D3191B147B9F006D2B0E;
 					};
 				};
@@ -644,49 +633,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		10ABD496A5F308F7786B7507 /* Check Pods Manifest.lock */ = {
+		23C52F2BA8919D3AA9E9BF67 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZhiHuDaily-Swift/Pods-ZhiHuDaily-Swift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2A4C5A9306129A7CF0246D2C /* Copy Pods Resources */ = {
+		263AED0362CBBFC6B4D81116 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		EF5FBBD50872EDC89E1F0872 /* Embed Pods Frameworks */ = {
+		9B5D2CD82C033D683E37ADA5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZhiHuDaily-Swift/Pods-ZhiHuDaily-Swift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -798,8 +787,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -844,8 +835,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -864,6 +857,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -871,8 +865,9 @@
 		};
 		A432D33D1B147B9F006D2B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FB894871E29411B4B980961 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = F29DB305B7B6B3F68E88E14A /* Pods-ZhiHuDaily-Swift.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -880,17 +875,19 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sunxiang0918.ZhiHuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiHuDaily-Swift/ObjectiveCBridge.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		A432D33E1B147B9F006D2B0E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C04F27F043F28A3FA8E777F /* Pods.release.xcconfig */;
+			baseConfigurationReference = 0D91F4B71E82F4E5C28489AA /* Pods-ZhiHuDaily-Swift.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -898,10 +895,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.sunxiang0918.ZhiHuDaily-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.sunxiang0918.ZhiHuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiHuDaily-Swift/ObjectiveCBridge.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -921,6 +919,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cuit.sun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiHuDaily-Swift.app/ZhiHuDaily-Swift";
 			};
 			name = Debug;
@@ -937,6 +936,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cuit.sun.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiHuDaily-Swift.app/ZhiHuDaily-Swift";
 			};
 			name = Release;

@@ -10,7 +10,7 @@ import Foundation
 
 class RefreshBottomView:UIView,RefreshViewDelegate {
     
-    private var _refreshControl:RefreshControl?     //关联的刷新Control
+    fileprivate var _refreshControl:RefreshControl?     //关联的刷新Control
     
     let activityIndicatorView:UIActivityIndicatorView
     
@@ -19,9 +19,9 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     let promptLabel:UILabel
     
     override init(frame: CGRect) {
-        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        loadingLabel = UILabel(frame: CGRectZero)
-        promptLabel = UILabel(frame: CGRectZero)
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+        loadingLabel = UILabel(frame: CGRect.zero)
+        promptLabel = UILabel(frame: CGRect.zero)
         
         super.init(frame: frame)
         
@@ -29,9 +29,9 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        loadingLabel = UILabel(frame: CGRectZero)
-        promptLabel = UILabel(frame: CGRectZero)
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+        loadingLabel = UILabel(frame: CGRect.zero)
+        promptLabel = UILabel(frame: CGRect.zero)
         
         super.init(coder: aDecoder)
         
@@ -47,15 +47,15 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicatorView)
         
-        loadingLabel.backgroundColor=UIColor.clearColor()
-        loadingLabel.font=UIFont.systemFontOfSize(13)
+        loadingLabel.backgroundColor=UIColor.clear
+        loadingLabel.font=UIFont.systemFont(ofSize: 13)
         loadingLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(loadingLabel)
         
-        promptLabel.backgroundColor=UIColor.clearColor()
-        promptLabel.font=UIFont.systemFontOfSize(13)
+        promptLabel.backgroundColor=UIColor.clear
+        promptLabel.font=UIFont.systemFont(ofSize: 13)
         promptLabel.translatesAutoresizingMaskIntoConstraints = false
-        promptLabel.textAlignment = NSTextAlignment.Center
+        promptLabel.textAlignment = NSTextAlignment.center
         self.addSubview(promptLabel)
         
         self.resetViews()
@@ -65,13 +65,13 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     
     func resetViews(){
         
-        promptLabel.hidden=false;
+        promptLabel.isHidden=false;
         promptLabel.text="上拉加载更多"
     
-        loadingLabel.hidden=true;
+        loadingLabel.isHidden=true;
         loadingLabel.text="正在加载...";
     
-        if  self.activityIndicatorView.isAnimating() {
+        if  self.activityIndicatorView.isAnimating {
             self.activityIndicatorView.stopAnimating()
         }
         
@@ -104,25 +104,25 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
             self.removeConstraints(tempContraint)
         }
         
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
-            let aTop = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 13)
-            let aRight = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: -5)
-            let aWidth = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Width, multiplier: 0, constant: 35)
-            let aHeight = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: 0, constant: 35)
+        UIView.animate(withDuration: 0.25, animations: { () -> Void in
+            let aTop = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 13)
+            let aRight = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: -5)
+            let aWidth = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 0, constant: 35)
+            let aHeight = NSLayoutConstraint(item: self.activityIndicatorView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.height, multiplier: 0, constant: 35)
         
             self.addConstraints([aTop,aRight,aWidth,aHeight])
             
-            let tLeft = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-            let tTop = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-            let tRight = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
-            let tHeight = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: 0, constant: 32)
+            let tLeft = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+            let tTop = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+            let tRight = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0)
+            let tHeight = NSLayoutConstraint(item: self.loadingLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.height, multiplier: 0, constant: 32)
 
             self.addConstraints([tLeft,tTop,tRight,tHeight])
             
             let viewsDictionary = ["promptLabel":self.promptLabel]
             
-            let pHList = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[promptLabel]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary as [String : AnyObject])
-            let pVList = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[promptLabel(==45)]", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary  as [String : AnyObject])
+            let pHList = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[promptLabel]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary as [String : AnyObject])
+            let pVList = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[promptLabel(==45)]", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary  as [String : AnyObject])
             
             self.addConstraints(pHList)
             self.addConstraints(pVList)
@@ -130,15 +130,15 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
         
     }
     
-    func needContentInset(direction:RefreshDirection) -> Bool{
+    func needContentInset(_ direction:RefreshDirection) -> Bool{
         return false
     }
     
     /**
     松开可刷新的动画
     */
-    func canEngageRefresh(scrollView:UIScrollView,direction:RefreshDirection){
-        if  direction == RefreshDirection.RefreshDirectionBottom{
+    func canEngageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection){
+        if  direction == RefreshDirection.refreshDirectionBottom{
             promptLabel.text="松开即可加载"
         }
     }
@@ -146,8 +146,8 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     /**
     松开返回的动画
     */
-    func didDisengageRefresh(scrollView:UIScrollView,direction:RefreshDirection){
-        if  direction == RefreshDirection.RefreshDirectionBottom{
+    func didDisengageRefresh(_ scrollView:UIScrollView,direction:RefreshDirection){
+        if  direction == RefreshDirection.refreshDirectionBottom{
             self.resetViews()
         }
     }
@@ -155,11 +155,11 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     /**
     开始刷新的动画
     */
-    func startRefreshing(direction:RefreshDirection){
+    func startRefreshing(_ direction:RefreshDirection){
         
-        if  direction == RefreshDirection.RefreshDirectionBottom{
-            promptLabel.hidden=true;
-            loadingLabel.hidden=false;
+        if  direction == RefreshDirection.refreshDirectionBottom{
+            promptLabel.isHidden=true;
+            loadingLabel.isHidden=false;
             self.activityIndicatorView.stopAnimating()
         }
         
@@ -168,8 +168,8 @@ class RefreshBottomView:UIView,RefreshViewDelegate {
     /**
     结束刷新的动画
     */
-    func finishRefreshing(direction:RefreshDirection){
-        if  direction == RefreshDirection.RefreshDirectionBottom{
+    func finishRefreshing(_ direction:RefreshDirection){
+        if  direction == RefreshDirection.refreshDirectionBottom{
             self.resetViews()
         }
     }
